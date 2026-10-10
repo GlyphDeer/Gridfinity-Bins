@@ -1,0 +1,149 @@
+{
+  "schemaVersion": 1,
+  "owner": "independent-reviewer",
+  "policy": "Only the reviewer changes lock state. Executor must preserve locked acceptance scope. Reopening requires new concrete evidence recorded here and in that round report.",
+  "features": [
+    {
+      "id": "F01",
+      "name": "Clearance semantics",
+      "status": "locked",
+      "acceptance": "Round 1 item 1",
+      "evidence": [
+        "Independent reviewer: node --test tools/generator.test.mjs tools/test.mjs \u2014 11/11 passing after scoop enum repair.",
+        "Source inspection of validation, foot clearance, immutable export serialization and shared fit policy.",
+        "Actual reference preset guard and measured STL bounds check; tray text disabled."
+      ],
+      "lockedRound": 1,
+      "limitations": [
+        "No slicer, physical fit or screen reader certification.",
+        "Locks cover listed acceptance criteria; no arbitrary-geometry self-intersection proof."
+      ]
+    },
+    {
+      "id": "F02",
+      "name": "Invalid geometry and export guard",
+      "status": "locked",
+      "acceptance": "Round 1 item 2",
+      "evidence": [
+        "Independent reviewer: node --test tools/generator.test.mjs tools/test.mjs \u2014 11/11 passing after scoop enum repair.",
+        "Source inspection of validation, foot clearance, immutable export serialization and shared fit policy.",
+        "Actual reference preset guard and measured STL bounds check; tray text disabled."
+      ],
+      "lockedRound": 1,
+      "limitations": [
+        "No slicer, physical fit or screen reader certification.",
+        "Locks cover listed acceptance criteria; no arbitrary-geometry self-intersection proof."
+      ]
+    },
+    {
+      "id": "F03",
+      "name": "Immutable export revision and honest download status",
+      "status": "locked",
+      "acceptance": "Round 1 item 3",
+      "evidence": [
+        "Independent reviewer: node --test tools/generator.test.mjs tools/test.mjs \u2014 11/11 passing after scoop enum repair.",
+        "Source inspection of validation, foot clearance, immutable export serialization and shared fit policy.",
+        "Actual reference preset guard and measured STL bounds check; tray text disabled."
+      ],
+      "lockedRound": 1,
+      "limitations": [
+        "No slicer, physical fit or screen reader certification.",
+        "Locks cover listed acceptance criteria; no arbitrary-geometry self-intersection proof."
+      ]
+    },
+    {
+      "id": "F04",
+      "name": "Wipe fit orientation",
+      "status": "locked",
+      "acceptance": "Round 1 item 4",
+      "evidence": [
+        "Independent reviewer: node --test tools/generator.test.mjs tools/test.mjs \u2014 11/11 passing after scoop enum repair.",
+        "Source inspection of validation, foot clearance, immutable export serialization and shared fit policy.",
+        "Actual reference preset guard and measured STL bounds check; tray text disabled."
+      ],
+      "lockedRound": 1,
+      "limitations": [
+        "No slicer, physical fit or screen reader certification.",
+        "Locks cover listed acceptance criteria; no arbitrary-geometry self-intersection proof."
+      ]
+    },
+    {
+      "id": "F05",
+      "name": "Integer sheet count",
+      "status": "locked",
+      "acceptance": "Round 1 item 5",
+      "evidence": [
+        "Independent reviewer: node --test tools/generator.test.mjs tools/test.mjs \u2014 11/11 passing after scoop enum repair.",
+        "Source inspection of validation, foot clearance, immutable export serialization and shared fit policy.",
+        "Actual reference preset guard and measured STL bounds check; tray text disabled."
+      ],
+      "lockedRound": 1,
+      "limitations": [
+        "No slicer, physical fit or screen reader certification.",
+        "Locks cover listed acceptance criteria; no arbitrary-geometry self-intersection proof."
+      ]
+    },
+    {
+      "id": "F06",
+      "name": "Independent mode configuration",
+      "status": "locked",
+      "acceptance": "Round 2 F06: complete independent in-memory mode snapshots restore edited parameters and available height; reset/reference/presets affect only active mode; preserve F01\u2013F05 contracts.",
+      "evidence": [
+        "Independent reviewer reran node --test tools/generator.test.mjs tools/test.mjs:17/17 passing.",
+        "Inspected complete mode snapshot transitions/reset, explicit missing-library/renderer-failure guards, static accessible names, focus styling, live status, snap gating and approximate copy."
+      ],
+      "lockedRound": 2,
+      "limitations": [
+        "Accessibility verified through static markup/DOM doubles; no real screen reader, rendered keyboard navigation or comprehensive WCAG audit.",
+        "Contrast checks cover secondary text on paper tokens, not every rendered overlay."
+      ]
+    },
+    {
+      "id": "F07",
+      "name": "Accessible controls and failure feedback",
+      "status": "locked",
+      "acceptance": "Round 2 F07: named numeric/checkbox controls, visible focus and pressed states, restrained live status, actionable CDN/WebGL startup errors, exact secondary-token contrast >=4.5, gated approximate snap/mass and qualified compatibility/body-tip copy; static/DOM verification scope.",
+      "evidence": [
+        "Independent reviewer reran node --test tools/generator.test.mjs tools/test.mjs:17/17 passing.",
+        "Inspected complete mode snapshot transitions/reset, explicit missing-library/renderer-failure guards, static accessible names, focus styling, live status, snap gating and approximate copy."
+      ],
+      "lockedRound": 2,
+      "limitations": [
+        "Accessibility verified through static markup/DOM doubles; no real screen reader, rendered keyboard navigation or comprehensive WCAG audit.",
+        "Contrast checks cover secondary text on paper tokens, not every rendered overlay."
+      ]
+    },
+    {
+      "id": "F08",
+      "name": "Documentation and reproducible review workflow",
+      "status": "locked",
+      "acceptance": "Round 3 F08 acceptance: canonical docs describe current mode/validation/clearance/fit/export behavior; historical findings distinguished from current disposition; runner distinguishes expected rejections from failures, records current source hash and preserves historical runs; tests pass, local links resolve, all defaults documented, and manual validation limits remain explicit.",
+      "evidence": [
+        "Independent reviewer:17/17 Node regression tests pass; documentation checker16files55local links70defaults pass.",
+        "Independent current source review exit0, SHA2567fad9ed651b568bde8fb85c35e8a86cfb05d078e3f621b440915726c2bce2421; run2026-10-10T15-55-18-856Z-7fad9ed651b5-9o5wAB.",
+        "Direct inspection of architecture/user guide/printing/parameters/current disposition and source printing comments; stale guide assertions found and corrected within Round3 before acceptance."
+      ],
+      "lockedRound": 3,
+      "limitations": [
+        "No browser/canvas/screen-reader, slicer or physical print validation.",
+        "Remaining aggregate tray topology and performance risks explicitly documented."
+      ]
+    },
+    {
+      "id": "F09",
+      "name": "Qualified printing and geometry comments",
+      "status": "locked",
+      "acceptance": "Round 3 F09: remove unverified absolute support, union, winding and universal-validity claims; describe design intent and required slicer/physical checks. Copy/comments only; preserve locked geometry/accessibility.",
+      "evidence": [
+        "Independent reviewer:17/17 Node regression tests pass; documentation checker16files55local links70defaults pass.",
+        "Independent current source review exit0, SHA2567fad9ed651b568bde8fb85c35e8a86cfb05d078e3f621b440915726c2bce2421; run2026-10-10T15-55-18-856Z-7fad9ed651b5-9o5wAB.",
+        "Direct inspection of architecture/user guide/printing/parameters/current disposition and source printing comments; stale guide assertions found and corrected within Round3 before acceptance."
+      ],
+      "lockedRound": 3,
+      "limitations": [
+        "No browser/canvas/screen-reader, slicer or physical print validation.",
+        "Remaining aggregate tray topology and performance risks explicitly documented."
+      ]
+    }
+  ]
+}

@@ -1,0 +1,15 @@
+# Independent documentation review — baseline cycle
+
+Lead review completed 2026-10-10 after dedicated documentation-agent drafting. The first agent drafted README, architecture, user guide, printing and troubleshooting; an interruption required a second dedicated documentation agent to finish the parameter reference. Lead independently checked behavior against executable source and probe evidence. The pre-correction draft is retained under `draft-before-review/`.
+
+Baseline reviewed SHA-256: `f5fe866df5e737c3d1d88da4f804652750f253419df869d93d3ddac60aad8c8b`. The preserved baseline is [here](../source/baseline/gridfinity_generator_4.html). New implementation work authorized afterward is tracked in [the review rounds](rounds/round-1.md).
+
+Corrections applied: exact “Size the box to this pack” button name; two core scripts rather than one; addTextSolid line 1266; clarify single/all-column shelf widths; explicitly explain that stackClear changed only estimated deflection; document cradle-height overflow and incompatible label geometry; explain delayed export state; establish defaults before the screw-bin example. All 70 DEFAULTS keys appear in the parameter draft. The 83.5×41.5 mm footprint and 42 mm body-height example were verified numerically; packet and pen presets were compared with source constants.
+
+Node commands were executed. Server command syntax and URL/path were checked, but local server startup was sandbox-blocked. Chrome automation was unavailable, and in-app file URL navigation was policy-blocked. No browser quick-start success, accessibility conformance, slicer compatibility or physical fit success is claimed.
+
+Remaining priorities: update current docs after code fixes (small, prevents stale workarounds, acceptance: every changed behavior maps to tests/source); complete browser/canvas/download/accessibility manual pass (medium, acceptance: recorded browser/version and reproducible observations); record slicer and physical fit checks (medium, acceptance: named slicer/baseplate/material and actual evidence). Final implementation documentation will be reviewed in round 3.
+
+## Current documentation cycle after fixes
+
+A dedicated documentation agent revised README and all five guide/reference files against the changed source. The independent reviewer reran the 17 tests, current-source review and documentation checks in Round 3. It found two obsolete user-guide assertions about invalid exports and delayed mutable exports; the executor corrected both, plus printing/disposition wording. Current implementation evidence uses SHA-256 `7fad9ed651b568bde8fb85c35e8a86cfb05d078e3f621b440915726c2bce2421`. See [Round 3](rounds/round-3.md) for final acceptance and score, and [publishable check evidence](final-checks.json) for 28 mesh results plus 3 expected validation rejections. All 70 parameter keys are documented. Historical findings remain tied to the preserved baseline; current behavior is mapped in [resolution](resolution.md). Browser, screen-reader, canvas, slicer and physical tests remain unperformed.
