@@ -1,0 +1,10 @@
+{
+  "schemaVersion": 1,
+  "results": [],
+  "method": "Offline X2D slicing benchmark; no print job.",
+  "fatalError": {
+    "type": "FileNotFoundError",
+    "message": "[Errno 2] No such file or directory: '/nonexistent-gridfinity-test/BambuStudio'"
+  },
+  "success": false
+}

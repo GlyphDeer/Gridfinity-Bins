@@ -1,0 +1,30 @@
+[
+  {
+    "case": "baseline",
+    "builder": "buildBin",
+    "currentSTLSHA256": "1f081524776cdb455cfdb13570e7c04a00dce1d675090947e0cfabec35cf63dc",
+    "archivedReferenceSTLSHA256": "1f081524776cdb455cfdb13570e7c04a00dce1d675090947e0cfabec35cf63dc",
+    "equal": true
+  },
+  {
+    "case": "baseline",
+    "builder": "buildLid",
+    "currentSTLSHA256": "af618f02462d67fb0b503826a90b9bc011ee2f931abdfa64db3f682646d18e39",
+    "archivedReferenceSTLSHA256": "af618f02462d67fb0b503826a90b9bc011ee2f931abdfa64db3f682646d18e39",
+    "equal": true
+  },
+  {
+    "case": "economy",
+    "builder": "buildBin",
+    "currentSTLSHA256": "0d87c8cffd1f6a2d329396b1bb42dcfdf697d0ecb036e1b5c119d4fc3d2b4bef",
+    "archivedReferenceSTLSHA256": "0d87c8cffd1f6a2d329396b1bb42dcfdf697d0ecb036e1b5c119d4fc3d2b4bef",
+    "equal": true
+  },
+  {
+    "case": "economy",
+    "builder": "buildLid",
+    "currentSTLSHA256": "af618f02462d67fb0b503826a90b9bc011ee2f931abdfa64db3f682646d18e39",
+    "archivedReferenceSTLSHA256": "af618f02462d67fb0b503826a90b9bc011ee2f931abdfa64db3f682646d18e39",
+    "equal": true
+  }
+]

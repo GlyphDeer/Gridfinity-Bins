@@ -1,19 +1,20 @@
 {
   "source": "source/gridfinity_generator_4.html",
-  "sha256": "7fad9ed651b568bde8fb85c35e8a86cfb05d078e3f621b440915726c2bce2421",
-  "reviewedAt": "2026-10-10T15:55:18.857Z",
+  "sha256": "1d350c214690a56ce75e58f6e0bf237438aca61964634bee367a59734dafde12",
+  "reviewedAt": "2026-10-10T23:30:54.148Z",
   "node": "v26.10.0",
   "status": "checks-completed",
   "limitations": [
     "Core VM has no DOM: canvas raised text is skipped.",
     "Edge counts use 1e-5 mm coordinate welding; not a self-intersection or Boolean-union test.",
-    "No slicer or physical print validation.",
+    "This runner does not invoke a slicer or perform physical print validation; separate benchmark evidence must be inspected.",
     "Node VM is not a security boundary. Review trusted local code only."
   ],
   "cases": [
     {
       "name": "default-bin",
       "patch": {},
+      "experimental": false,
       "rawTriangles": 28992,
       "removedTriangles": 404,
       "previewSTLPositionsMatch": true,
@@ -38,11 +39,12 @@
       "nonmanifoldEdges": 0,
       "inconsistentEdges": 0,
       "weldToleranceMm": 1e-05,
-      "elapsedMs": 87
+      "elapsedMs": 93
     },
     {
       "name": "default-lid",
       "patch": {},
+      "experimental": false,
       "rawTriangles": 28040,
       "removedTriangles": 0,
       "previewSTLPositionsMatch": true,
@@ -67,7 +69,7 @@
       "nonmanifoldEdges": 0,
       "inconsistentEdges": 0,
       "weldToleranceMm": 1e-05,
-      "elapsedMs": 65
+      "elapsedMs": 56
     },
     {
       "name": "tray-reference",
@@ -94,6 +96,7 @@
         "textD": 0.6,
         "labels": "4H, 3H, 2H, H, F, HB, B, 2B, 3B, 4B"
       },
+      "experimental": false,
       "rawTriangles": 33968,
       "removedTriangles": 0,
       "previewSTLPositionsMatch": true,
@@ -118,7 +121,7 @@
       "nonmanifoldEdges": 371,
       "inconsistentEdges": 0,
       "weldToleranceMm": 1e-05,
-      "elapsedMs": 67
+      "elapsedMs": 60
     },
     {
       "name": "pen-tray",
@@ -145,6 +148,7 @@
         "trayText": false,
         "labels": "Safari, Eco, Metro, Prera, Kakuno, VP, 146"
       },
+      "experimental": false,
       "rawTriangles": 79232,
       "removedTriangles": 288,
       "previewSTLPositionsMatch": true,
@@ -169,7 +173,7 @@
       "nonmanifoldEdges": 264,
       "inconsistentEdges": 0,
       "weldToleranceMm": 1e-05,
-      "elapsedMs": 173
+      "elapsedMs": 160
     },
     {
       "name": "wipe-reference",
@@ -203,6 +207,7 @@
         "lidBody": 2.6,
         "lidChamfer": 0.8
       },
+      "experimental": false,
       "rawTriangles": 35492,
       "removedTriangles": 1186,
       "previewSTLPositionsMatch": true,
@@ -227,7 +232,7 @@
       "nonmanifoldEdges": 0,
       "inconsistentEdges": 0,
       "weldToleranceMm": 1e-05,
-      "elapsedMs": 81
+      "elapsedMs": 77
     },
     {
       "name": "wipe-lid",
@@ -261,6 +266,7 @@
         "lidBody": 2.6,
         "lidChamfer": 0.8
       },
+      "experimental": false,
       "rawTriangles": 39956,
       "removedTriangles": 0,
       "previewSTLPositionsMatch": true,
@@ -285,7 +291,7 @@
       "nonmanifoldEdges": 0,
       "inconsistentEdges": 0,
       "weldToleranceMm": 1e-05,
-      "elapsedMs": 95
+      "elapsedMs": 79
     },
     {
       "name": "tray-rotated",
@@ -312,6 +318,7 @@
         "textD": 0.6,
         "labels": "4H, 3H, 2H, H, F, HB, B, 2B, 3B, 4B"
       },
+      "experimental": false,
       "rawTriangles": 33056,
       "removedTriangles": 0,
       "previewSTLPositionsMatch": true,
@@ -336,7 +343,7 @@
       "nonmanifoldEdges": 328,
       "inconsistentEdges": 0,
       "weldToleranceMm": 1e-05,
-      "elapsedMs": 70
+      "elapsedMs": 64
     },
     {
       "name": "bin-short-wide-label",
@@ -392,6 +399,7 @@
         "notchDrop": 80,
         "notchW": 200
       },
+      "experimental": false,
       "rawTriangles": 33312,
       "removedTriangles": 942,
       "previewSTLPositionsMatch": true,
@@ -416,7 +424,7 @@
       "nonmanifoldEdges": 0,
       "inconsistentEdges": 0,
       "weldToleranceMm": 1e-05,
-      "elapsedMs": 62
+      "elapsedMs": 59
     },
     {
       "name": "bin-fine",
@@ -424,6 +432,7 @@
         "seg": 0.2,
         "cornerSegs": 20
       },
+      "experimental": false,
       "rawTriangles": 95752,
       "removedTriangles": 1324,
       "previewSTLPositionsMatch": true,
@@ -448,7 +457,7 @@
       "nonmanifoldEdges": 0,
       "inconsistentEdges": 0,
       "weldToleranceMm": 1e-05,
-      "elapsedMs": 209
+      "elapsedMs": 195
     },
     {
       "name": "bin-large",
@@ -457,6 +466,7 @@
         "ny": 6,
         "hu": 20
       },
+      "experimental": false,
       "rawTriangles": 127312,
       "removedTriangles": 1664,
       "previewSTLPositionsMatch": true,
@@ -481,7 +491,7 @@
       "nonmanifoldEdges": 0,
       "inconsistentEdges": 0,
       "weldToleranceMm": 1e-05,
-      "elapsedMs": 247
+      "elapsedMs": 245
     },
     {
       "name": "bin-preset-0",
@@ -490,6 +500,7 @@
         "ny": 1,
         "hu": 6
       },
+      "experimental": false,
       "rawTriangles": 28992,
       "removedTriangles": 404,
       "previewSTLPositionsMatch": true,
@@ -514,7 +525,7 @@
       "nonmanifoldEdges": 0,
       "inconsistentEdges": 0,
       "weldToleranceMm": 1e-05,
-      "elapsedMs": 57
+      "elapsedMs": 66
     },
     {
       "name": "bin-preset-1",
@@ -523,6 +534,7 @@
         "ny": 1,
         "hu": 6
       },
+      "experimental": false,
       "rawTriangles": 18752,
       "removedTriangles": 264,
       "previewSTLPositionsMatch": true,
@@ -547,7 +559,7 @@
       "nonmanifoldEdges": 0,
       "inconsistentEdges": 0,
       "weldToleranceMm": 1e-05,
-      "elapsedMs": 32
+      "elapsedMs": 38
     },
     {
       "name": "bin-preset-2",
@@ -556,6 +568,7 @@
         "ny": 2,
         "hu": 6
       },
+      "experimental": false,
       "rawTriangles": 28992,
       "removedTriangles": 404,
       "previewSTLPositionsMatch": true,
@@ -580,7 +593,7 @@
       "nonmanifoldEdges": 0,
       "inconsistentEdges": 0,
       "weldToleranceMm": 1e-05,
-      "elapsedMs": 49
+      "elapsedMs": 55
     },
     {
       "name": "bin-preset-3",
@@ -589,6 +602,7 @@
         "ny": 2,
         "hu": 4
       },
+      "experimental": false,
       "rawTriangles": 39632,
       "removedTriangles": 544,
       "previewSTLPositionsMatch": true,
@@ -613,7 +627,7 @@
       "nonmanifoldEdges": 0,
       "inconsistentEdges": 0,
       "weldToleranceMm": 1e-05,
-      "elapsedMs": 67
+      "elapsedMs": 139
     },
     {
       "name": "bin-preset-4",
@@ -622,6 +636,7 @@
         "ny": 1,
         "hu": 3
       },
+      "experimental": false,
       "rawTriangles": 38512,
       "removedTriangles": 544,
       "previewSTLPositionsMatch": true,
@@ -646,7 +661,7 @@
       "nonmanifoldEdges": 0,
       "inconsistentEdges": 0,
       "weldToleranceMm": 1e-05,
-      "elapsedMs": 105
+      "elapsedMs": 62
     },
     {
       "name": "bin-preset-5",
@@ -655,6 +670,7 @@
         "ny": 1,
         "hu": 3
       },
+      "experimental": false,
       "rawTriangles": 18752,
       "removedTriangles": 264,
       "previewSTLPositionsMatch": true,
@@ -679,7 +695,7 @@
       "nonmanifoldEdges": 0,
       "inconsistentEdges": 0,
       "weldToleranceMm": 1e-05,
-      "elapsedMs": 34
+      "elapsedMs": 31
     },
     {
       "name": "tray-preset-0",
@@ -688,6 +704,7 @@
         "ny": 2,
         "hu": 3
       },
+      "experimental": false,
       "rawTriangles": 49360,
       "removedTriangles": 0,
       "previewSTLPositionsMatch": true,
@@ -712,7 +729,7 @@
       "nonmanifoldEdges": 371,
       "inconsistentEdges": 0,
       "weldToleranceMm": 1e-05,
-      "elapsedMs": 97
+      "elapsedMs": 84
     },
     {
       "name": "tray-preset-1",
@@ -721,6 +738,7 @@
         "ny": 2,
         "hu": 3
       },
+      "experimental": false,
       "rawTriangles": 23568,
       "removedTriangles": 0,
       "previewSTLPositionsMatch": true,
@@ -745,7 +763,7 @@
       "nonmanifoldEdges": 125,
       "inconsistentEdges": 0,
       "weldToleranceMm": 1e-05,
-      "elapsedMs": 49
+      "elapsedMs": 40
     },
     {
       "name": "tray-preset-2",
@@ -754,6 +772,7 @@
         "ny": 4,
         "hu": 3
       },
+      "experimental": false,
       "rawTriangles": 74320,
       "removedTriangles": 0,
       "previewSTLPositionsMatch": true,
@@ -778,7 +797,7 @@
       "nonmanifoldEdges": 371,
       "inconsistentEdges": 0,
       "weldToleranceMm": 1e-05,
-      "elapsedMs": 131
+      "elapsedMs": 129
     },
     {
       "name": "tray-preset-3",
@@ -787,6 +806,7 @@
         "ny": 4,
         "hu": 3
       },
+      "experimental": false,
       "rawTriangles": 58608,
       "removedTriangles": 0,
       "previewSTLPositionsMatch": true,
@@ -811,7 +831,7 @@
       "nonmanifoldEdges": 328,
       "inconsistentEdges": 0,
       "weldToleranceMm": 1e-05,
-      "elapsedMs": 103
+      "elapsedMs": 98
     },
     {
       "name": "tray-preset-4",
@@ -820,6 +840,7 @@
         "ny": 2,
         "hu": 4
       },
+      "experimental": false,
       "rawTriangles": 49360,
       "removedTriangles": 0,
       "previewSTLPositionsMatch": true,
@@ -844,7 +865,7 @@
       "nonmanifoldEdges": 371,
       "inconsistentEdges": 0,
       "weldToleranceMm": 1e-05,
-      "elapsedMs": 84
+      "elapsedMs": 82
     },
     {
       "name": "tray-preset-5",
@@ -853,6 +874,7 @@
         "ny": 1,
         "hu": 4
       },
+      "experimental": false,
       "rawTriangles": 15728,
       "removedTriangles": 0,
       "previewSTLPositionsMatch": true,
@@ -877,7 +899,7 @@
       "nonmanifoldEdges": 125,
       "inconsistentEdges": 0,
       "weldToleranceMm": 1e-05,
-      "elapsedMs": 27
+      "elapsedMs": 26
     },
     {
       "name": "wipe-preset-0",
@@ -886,6 +908,7 @@
         "wny": 1,
         "whu": 8
       },
+      "experimental": false,
       "rawTriangles": 35492,
       "removedTriangles": 1166,
       "previewSTLPositionsMatch": true,
@@ -910,7 +933,7 @@
       "nonmanifoldEdges": 0,
       "inconsistentEdges": 0,
       "weldToleranceMm": 1e-05,
-      "elapsedMs": 69
+      "elapsedMs": 59
     },
     {
       "name": "wipe-preset-1",
@@ -919,6 +942,7 @@
         "wny": 1,
         "whu": 8
       },
+      "experimental": false,
       "rawTriangles": 27872,
       "removedTriangles": 1136,
       "previewSTLPositionsMatch": true,
@@ -943,7 +967,7 @@
       "nonmanifoldEdges": 0,
       "inconsistentEdges": 0,
       "weldToleranceMm": 1e-05,
-      "elapsedMs": 47
+      "elapsedMs": 54
     },
     {
       "name": "wipe-preset-2",
@@ -952,6 +976,7 @@
         "wny": 1,
         "whu": 7
       },
+      "experimental": false,
       "rawTriangles": 24432,
       "removedTriangles": 934,
       "previewSTLPositionsMatch": true,
@@ -976,7 +1001,7 @@
       "nonmanifoldEdges": 0,
       "inconsistentEdges": 0,
       "weldToleranceMm": 1e-05,
-      "elapsedMs": 42
+      "elapsedMs": 45
     },
     {
       "name": "wipe-preset-3",
@@ -985,6 +1010,7 @@
         "wny": 1,
         "whu": 8
       },
+      "experimental": false,
       "rawTriangles": 37392,
       "removedTriangles": 1274,
       "previewSTLPositionsMatch": true,
@@ -1009,7 +1035,7 @@
       "nonmanifoldEdges": 0,
       "inconsistentEdges": 0,
       "weldToleranceMm": 1e-05,
-      "elapsedMs": 67
+      "elapsedMs": 59
     },
     {
       "name": "wipe-preset-4",
@@ -1018,6 +1044,7 @@
         "wny": 1,
         "whu": 6
       },
+      "experimental": false,
       "rawTriangles": 17632,
       "removedTriangles": 594,
       "previewSTLPositionsMatch": true,
@@ -1042,7 +1069,7 @@
       "nonmanifoldEdges": 0,
       "inconsistentEdges": 0,
       "weldToleranceMm": 1e-05,
-      "elapsedMs": 30
+      "elapsedMs": 32
     },
     {
       "name": "wipe-preset-5",
@@ -1051,6 +1078,7 @@
         "wny": 2,
         "whu": 6
       },
+      "experimental": false,
       "rawTriangles": 38512,
       "removedTriangles": 1276,
       "previewSTLPositionsMatch": true,
@@ -1075,7 +1103,160 @@
       "nonmanifoldEdges": 0,
       "inconsistentEdges": 0,
       "weldToleranceMm": 1e-05,
-      "elapsedMs": 65
+      "elapsedMs": 77
+    },
+    {
+      "name": "economy-bin",
+      "patch": {
+        "wall": 1.2,
+        "floorT": 1,
+        "scoop": 3
+      },
+      "experimental": false,
+      "rawTriangles": 28992,
+      "removedTriangles": 404,
+      "previewSTLPositionsMatch": true,
+      "triangles": 28588,
+      "nonfinite": 0,
+      "degenerate": 0,
+      "normalDisagreements": 0,
+      "bounds": {
+        "min": [
+          -41.75,
+          -20.75,
+          0
+        ],
+        "max": [
+          41.75,
+          20.75,
+          45.692893981933594
+        ]
+      },
+      "signedVolumeMm3": 37087.26115042343,
+      "boundaryEdges": 0,
+      "nonmanifoldEdges": 0,
+      "inconsistentEdges": 0,
+      "weldToleranceMm": 1e-05,
+      "elapsedMs": 49
+    },
+    {
+      "name": "experimental-bin",
+      "patch": {
+        "hollowFeet": true
+      },
+      "experimental": true,
+      "rawTriangles": 29504,
+      "removedTriangles": 404,
+      "previewSTLPositionsMatch": true,
+      "triangles": 29100,
+      "nonfinite": 0,
+      "degenerate": 0,
+      "normalDisagreements": 0,
+      "bounds": {
+        "min": [
+          -41.75,
+          -20.75,
+          0
+        ],
+        "max": [
+          41.75,
+          20.75,
+          45.692893981933594
+        ]
+      },
+      "signedVolumeMm3": 41001.81347732202,
+      "boundaryEdges": 0,
+      "nonmanifoldEdges": 0,
+      "inconsistentEdges": 0,
+      "weldToleranceMm": 1e-05,
+      "elapsedMs": 46
+    },
+    {
+      "name": "experimental-economy-bin",
+      "patch": {
+        "wall": 1.2,
+        "floorT": 1,
+        "scoop": 3,
+        "hollowFeet": true
+      },
+      "experimental": true,
+      "rawTriangles": 29504,
+      "removedTriangles": 404,
+      "previewSTLPositionsMatch": true,
+      "triangles": 29100,
+      "nonfinite": 0,
+      "degenerate": 0,
+      "normalDisagreements": 0,
+      "bounds": {
+        "min": [
+          -41.75,
+          -20.75,
+          0
+        ],
+        "max": [
+          41.75,
+          20.75,
+          45.692893981933594
+        ]
+      },
+      "signedVolumeMm3": 35651.33247111357,
+      "boundaryEdges": 0,
+      "nonmanifoldEdges": 0,
+      "inconsistentEdges": 0,
+      "weldToleranceMm": 1e-05,
+      "elapsedMs": 46
+    },
+    {
+      "name": "experimental-lid-unchanged",
+      "patch": {
+        "hollowFeet": true
+      },
+      "experimental": true,
+      "rawTriangles": 28040,
+      "removedTriangles": 0,
+      "previewSTLPositionsMatch": true,
+      "triangles": 28040,
+      "nonfinite": 0,
+      "degenerate": 0,
+      "normalDisagreements": 0,
+      "bounds": {
+        "min": [
+          -41.75,
+          -20.75,
+          0
+        ],
+        "max": [
+          41.75,
+          20.75,
+          11.042893409729004
+        ]
+      },
+      "signedVolumeMm3": 16428.335928414202,
+      "boundaryEdges": 0,
+      "nonmanifoldEdges": 0,
+      "inconsistentEdges": 0,
+      "weldToleranceMm": 1e-05,
+      "elapsedMs": 49
+    },
+    {
+      "name": "unsupported-hollow-tray",
+      "patch": {
+        "hollowFeet": true
+      },
+      "status": "expected-rejection",
+      "validationErrors": [
+        "Experimental hollow feet are supported only for bin bodies. Disable hollow feet or select bin mode."
+      ]
+    },
+    {
+      "name": "unsupported-hollow-wipe",
+      "patch": {
+        "hollowFeet": true
+      },
+      "status": "expected-rejection",
+      "validationErrors": [
+        "Experimental hollow feet are supported only for bin bodies. Disable hollow feet or select bin mode."
+      ]
     }
   ],
   "probes": {
@@ -1193,5 +1374,5 @@
       ]
     }
   },
-  "evidenceRole": "Independent round-3 reviewer run; generated STL samples remain local and are reproducible."
+  "evidenceRole": "Final filament-cycle current-source diagnostic; independently repeated by reviewer at the same source hash."
 }

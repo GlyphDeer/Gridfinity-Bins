@@ -1,0 +1,2945 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Gridfinity bin, tray and lens wipe box generator</title>
+<style>
+  :root{
+    --paper:#EDEAE4; --paper-2:#E3DFD7; --card:#F5F3EF;
+    --ink:#2A2D31; --ink-2:#62666C; --rule:#C9C4BA;
+    --lid:#7FB3D5; --lid-deep:#31708F;
+    --alert:#A8391E; --ok:#3B6E4F;
+    --bar-bg:rgba(237,234,228,.95); --chrome-bg:rgba(255,255,255,.75);
+    --alert-bg:rgba(168,57,30,.06);
+    --stage-1:#F7F5F1; --stage-2:#DAD5CB;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --paper:#16181A; --paper-2:#0F1112; --card:#1D2022;
+      --ink:#E8E5DE; --ink-2:#9AA0A4; --rule:#33383B;
+      --lid:#7FB3D5; --lid-deep:#8CC2E4;
+      --alert:#E28166; --ok:#7CBE99;
+      --bar-bg:rgba(22,24,26,.95); --chrome-bg:rgba(30,33,36,.8);
+      --alert-bg:rgba(226,129,102,.10);
+      --stage-1:#23262A; --stage-2:#101214;
+    }
+  }
+  :root[data-theme="dark"]{
+    --paper:#16181A; --paper-2:#0F1112; --card:#1D2022;
+    --ink:#E8E5DE; --ink-2:#9AA0A4; --rule:#33383B;
+    --lid:#7FB3D5; --lid-deep:#8CC2E4;
+    --alert:#E28166; --ok:#7CBE99;
+    --bar-bg:rgba(22,24,26,.95); --chrome-bg:rgba(30,33,36,.8);
+    --alert-bg:rgba(226,129,102,.10);
+    --stage-1:#23262A; --stage-2:#101214;
+  }
+  html{color-scheme:light dark}
+  :root[data-theme="dark"]{color-scheme:dark}
+  :root[data-theme="light"]{color-scheme:light}
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  body{
+    background:var(--paper); color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    font-size:15px; line-height:1.45; -webkit-text-size-adjust:100%;
+    font-variant-numeric:tabular-nums; padding-bottom:104px;
+  }
+  .wrap{max-width:720px;margin:0 auto;padding:0 16px}
+  header{padding:16px 0 10px}
+  .hrow{display:flex;justify-content:space-between;align-items:center;gap:12px}
+  h1{font-size:19px;font-weight:640;letter-spacing:-.01em;margin:0}
+  #theme{appearance:none;flex:0 0 auto;border:1px solid var(--rule);background:transparent;
+    color:var(--ink-2);font:inherit;font-size:12px;padding:6px 11px;border-radius:2px;cursor:pointer}
+  #theme:hover{color:var(--ink);border-color:var(--ink-2)}
+  header p{margin:3px 0 0;color:var(--ink-2);font-size:13px}
+
+  #stage{position:relative;height:42vh;min-height:250px;max-height:400px;
+    background:linear-gradient(180deg,var(--stage-1) 0%,var(--stage-2) 100%);
+    border:1px solid var(--rule);border-radius:3px;overflow:hidden;touch-action:none}
+  #stage canvas{display:block;width:100%;height:100%}
+  #views{position:absolute;left:8px;top:8px;display:flex;
+    border:1px solid var(--rule);border-radius:2px;overflow:hidden;background:var(--chrome-bg)}
+  #views button{appearance:none;border:0;background:transparent;color:var(--ink-2);
+    font:inherit;font-size:12px;padding:6px 10px;cursor:pointer;border-right:1px solid var(--rule)}
+  #views button:last-child{border-right:0}
+  #views button[aria-pressed="true"]{background:var(--ink);color:var(--card)}
+  #hint{position:absolute;right:8px;bottom:6px;color:var(--ink-2);font-size:11px;pointer-events:none}
+  #tri{position:absolute;left:8px;bottom:6px;color:var(--ink-2);font-size:11px;pointer-events:none}
+
+  #summary{margin:12px 0 0;padding:12px 0;border-top:1px solid var(--ink);border-bottom:1px solid var(--rule)}
+  #headline{font-size:15px;font-weight:600;margin:0}
+  #sub{margin:3px 0 0;color:var(--ink-2);font-size:13px}
+  .badges{display:flex;flex-wrap:wrap;gap:7px;margin-top:9px}
+  .badge{display:inline-flex;align-items:center;gap:7px;font-size:13px;
+    padding:5px 10px;border-radius:2px;border:1px solid var(--rule)}
+  .badge b{font-weight:600}
+  .badge.good{border-color:var(--ok);color:var(--ok)}
+  .badge.bad{border-color:var(--alert);color:var(--alert)}
+  #alerts{margin:10px 0 0;padding:0;list-style:none}
+  #alerts li{font-size:13px;color:var(--alert);padding:6px 0 6px 11px;
+    border-left:3px solid var(--alert);margin-bottom:5px;background:var(--alert-bg)}
+
+  section{margin-top:24px}
+  h2{font-size:14px;font-weight:640;margin:0;padding-bottom:7px;border-bottom:1px solid var(--ink)}
+  .hint{color:var(--ink-2);font-size:12.5px;margin:9px 0 0}
+  .ctl{padding:11px 0;border-bottom:1px solid var(--rule)}
+  .ctl:last-child{border-bottom:0}
+  .ctl.off{display:none}
+  .clabel{display:flex;justify-content:space-between;align-items:baseline;gap:10px}
+  .clabel .nm{font-size:14px}
+  .val{font-size:14px;font-weight:600;color:var(--lid-deep);white-space:nowrap}
+  .sub{color:var(--ink-2);font-size:12px;margin-top:3px}
+  input[type=range]{-webkit-appearance:none;appearance:none;width:100%;height:30px;background:transparent;margin:0}
+  input[type=range]::-webkit-slider-runnable-track{height:2px;background:var(--rule)}
+  input[type=range]::-moz-range-track{height:2px;background:var(--rule)}
+  input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:26px;height:26px;border-radius:50%;
+    background:var(--card);border:2px solid var(--ink);margin-top:-12px;cursor:pointer}
+  input[type=range]::-moz-range-thumb{width:24px;height:24px;border-radius:50%;
+    background:var(--card);border:2px solid var(--ink);cursor:pointer}
+  input[type=range]:focus-visible::-webkit-slider-thumb{border-color:var(--lid-deep);box-shadow:0 0 0 4px rgba(49,112,143,.25)}
+
+  .valwrap{display:inline-flex;align-items:baseline;gap:5px;white-space:nowrap}
+  .valwrap .unit{font-size:13px;color:var(--ink-2)}
+  .valnum{width:74px;font:inherit;font-size:14px;font-weight:600;color:var(--lid-deep);
+    text-align:right;background:transparent;border:0;border-bottom:1px solid var(--rule);
+    padding:0 2px 2px;font-variant-numeric:tabular-nums;appearance:textfield;-moz-appearance:textfield}
+  .valnum::-webkit-outer-spin-button,.valnum::-webkit-inner-spin-button{-webkit-appearance:none;margin:0}
+  .valnum:focus{outline:0;border-bottom-color:var(--lid-deep)}
+  input[type=text]{width:100%;font:inherit;font-size:14px;padding:9px 10px;margin-top:9px;
+    border:1px solid var(--rule);border-radius:2px;background:var(--card);color:var(--ink)}
+  input[type=text]:focus-visible{outline:0;border-color:var(--lid-deep);box-shadow:0 0 0 3px rgba(49,112,143,.25)}
+  .row{display:flex;justify-content:space-between;align-items:center;gap:14px;padding:12px 0;border-bottom:1px solid var(--rule)}
+  .row:last-child{border-bottom:0}
+  .row.off{display:none}
+  .row .nm{font-size:14px}
+  .sw{position:relative;flex:0 0 auto;width:48px;height:28px}
+  .sw input{position:absolute;inset:0;opacity:0;margin:0;width:100%;height:100%;cursor:pointer}
+  .sw span{position:absolute;inset:0;background:var(--rule);border-radius:14px;transition:background .15s;pointer-events:none}
+  .sw span::after{content:"";position:absolute;top:3px;left:3px;width:22px;height:22px;border-radius:50%;
+    background:var(--card);transition:transform .15s}
+  .sw input:checked + span{background:var(--lid-deep)}
+  .sw input:checked + span::after{transform:translateX(20px)}
+  .sw input:focus-visible + span{box-shadow:0 0 0 3px rgba(49,112,143,.3)}
+
+  .seg{display:flex;border:1px solid var(--ink);border-radius:2px;overflow:hidden;margin-top:9px}
+  .seg button{flex:1;appearance:none;border:0;border-right:1px solid var(--ink);background:transparent;
+    color:var(--ink);font:inherit;font-size:13px;padding:11px 4px;cursor:pointer}
+  .seg button:last-child{border-right:0}
+  .seg button[aria-pressed="true"]{background:var(--ink);color:var(--card)}
+
+  .chips{display:flex;gap:7px;flex-wrap:wrap;margin-top:11px}
+  .chips button{appearance:none;font:inherit;font-size:13px;padding:9px 13px;cursor:pointer;
+    background:transparent;border:1px solid var(--rule);border-radius:2px;color:var(--ink)}
+  .chips button[aria-pressed="true"]{border-color:var(--ink);background:var(--ink);color:var(--card)}
+
+  details{border-top:1px solid var(--ink);margin-top:24px}
+  summary{cursor:pointer;font-size:14px;font-weight:640;padding:12px 0;list-style:none}
+  summary::-webkit-details-marker{display:none}
+  summary::after{content:" +";color:var(--ink-2)}
+  details[open] summary::after{content:" \2013";color:var(--ink-2)}
+  .grouphead{font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-2);
+    margin:18px 0 0;padding-bottom:6px;border-bottom:1px solid var(--rule)}
+
+  #notes{margin-top:9px}
+  #notes div{font-size:13px;color:var(--ink-2);padding:7px 0;border-bottom:1px solid var(--rule)}
+  #notes div:last-child{border-bottom:0}
+
+  #bar{position:fixed;left:0;right:0;bottom:0;background:var(--bar-bg);
+    backdrop-filter:blur(8px);border-top:1px solid var(--ink);
+    padding:10px 16px calc(10px + env(safe-area-inset-bottom))}
+  #bar .wrap{display:flex;gap:8px;padding:0}
+  #bar button{appearance:none;font:inherit;font-size:14px;font-weight:600;padding:14px 8px;
+    cursor:pointer;border-radius:2px;border:1px solid var(--ink);background:transparent;color:var(--ink)}
+  #bar #dl_both{flex:2;background:var(--ink);color:var(--card);border-color:var(--ink)}
+  #bar #dl_bin,#bar #dl_lid{flex:1;font-weight:500}
+  #toast{position:fixed;left:50%;transform:translateX(-50%);bottom:84px;background:var(--ink);
+    color:var(--card);font-size:13px;padding:9px 15px;border-radius:2px;opacity:0;
+    transition:opacity .18s;pointer-events:none;max-width:88vw;text-align:center}
+  #toast.on{opacity:1}
+  button:focus-visible,input:focus-visible,textarea:focus-visible{outline:3px solid var(--lid-deep);outline-offset:3px}
+  #startup_error{padding:12px;border:2px solid var(--alert);background:var(--card);color:var(--ink)}
+  @media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="hrow"><h1>Gridfinity generator</h1><button id="theme" type="button">Theme: auto</button></div>
+    <p id="tagline"></p>
+  </header>
+
+  <div class="seg" id="model_seg" style="margin:0 0 14px">
+    <button data-model="bin">Lidded bin</button>
+    <button data-model="tray">Slotted tray</button>
+    <button data-model="wipe">Lens wipe box</button>
+  </div>
+
+  <div id="startup_error" role="alert" tabindex="0" hidden></div>
+<div id="stage">
+    <div id="views">
+      <button data-view="asm" aria-pressed="true">Apart</button>
+      <button data-view="closed" aria-pressed="false">Closed</button>
+      <button data-view="bin" aria-pressed="false">Bin</button>
+      <button data-view="lid" aria-pressed="false">Lid</button>
+    </div>
+    <div id="tri"></div>
+    <div id="hint">drag to turn, pinch to zoom</div>
+  </div>
+
+  <div id="summary">
+    <p id="headline"></p>
+    <p id="sub"></p>
+    <div class="badges"><div id="grip" class="badge"></div><div id="lipwall" class="badge"></div></div>
+  </div>
+  <ul id="alerts"></ul>
+
+  <section>
+    <h2>Size</h2>
+    <div class="chips" id="presets" data-for="bin"></div>
+    <div class="chips" id="tpresets" data-for="tray"></div>
+    <div class="chips" id="wpresets" data-for="wipe"></div>
+    <div data-for="bin tray">
+      <div class="ctl">
+        <label class="clabel" for="nx"><span class="nm">Cells across</span><span class="val" id="nx_v"></span></label>
+        <input type="range" id="nx" min="1" max="6" step="1">
+      </div>
+      <div class="ctl">
+        <label class="clabel" for="ny"><span class="nm">Cells deep</span><span class="val" id="ny_v"></span></label>
+        <input type="range" id="ny" min="1" max="6" step="1">
+      </div>
+      <div class="ctl">
+        <label class="clabel" for="hu"><span class="nm">Height</span><span class="val" id="hu_v"></span></label>
+        <input type="range" id="hu" min="2" max="20" step="1">
+      </div>
+    </div>
+    <div data-for="wipe">
+      <div class="ctl">
+        <label class="clabel" for="wnx"><span class="nm">Cells across</span><span class="val" id="wnx_v"></span></label>
+        <input type="range" id="wnx" min="1" max="6" step="0.5">
+        <div class="sub">Half steps allowed. Half cells use 21 mm feet designed to share a 42 mm pocket. Check a sample against your baseplate before printing a batch.</div>
+      </div>
+      <div class="ctl">
+        <label class="clabel" for="wny"><span class="nm">Cells deep</span><span class="val" id="wny_v"></span></label>
+        <input type="range" id="wny" min="1" max="6" step="0.5">
+      </div>
+      <div class="ctl">
+        <label class="clabel" for="whu"><span class="nm">Height</span><span class="val" id="whu_v"></span></label>
+        <input type="range" id="whu" min="3" max="20" step="1">
+      </div>
+    </div>
+    <div class="ctl">
+      <label class="clabel" for="avail"><span class="nm">Space you have</span><span class="val" id="avail_v"></span></label>
+      <input type="range" id="avail" min="20" max="200" step="1">
+      <div class="sub" id="fitnote"></div>
+    </div>
+  </section>
+
+  <section data-for="bin">
+    <h2>Label</h2>
+    <div class="seg" id="label_seg">
+      <button data-mode="off">None</button>
+      <button data-mode="one">One column</button>
+      <button data-mode="all">Every column</button>
+    </div>
+    <p class="hint">A sloped shelf inside the back wall with a recessed pad for the tape, and a window through the lid so it still reads with the lid on.</p>
+    <div class="ctl" id="c_labelCol">
+      <label class="clabel" for="labelCol"><span class="nm">Which column</span><span class="val" id="labelCol_v"></span></label>
+      <input type="range" id="labelCol" min="1" max="6" step="1">
+    </div>
+    <div class="ctl" id="c_tape">
+      <div class="clabel"><span class="nm">Tape width</span><span class="val" id="tape_v"></span></div>
+      <div class="chips" id="tape"></div>
+      <div class="sub">Brother P-touch TZe sizes. The pad is cut to the tape plus clearance on every side.</div>
+    </div>
+    <div class="ctl" id="c_labelH">
+      <label class="clabel" for="labelH"><span class="nm">Label height</span><span class="val" id="labelH_v"></span></label>
+      <input type="range" id="labelH" min="3.5" max="40" step="0.5">
+    </div>
+    <div class="ctl" id="c_labelW">
+      <label class="clabel" for="labelW"><span class="nm">Label length</span><span class="val" id="labelW_v"></span></label>
+      <input type="range" id="labelW" min="10" max="240" step="1">
+    </div>
+    <div class="row" id="c_window">
+      <span class="nm">Window in the lid<div class="sub">Straight for the first fraction of a millimetre, then flared, so it prints without support.</div></span>
+      <label class="sw"><input type="checkbox" id="window" aria-label="Lid label window"><span></span></label>
+    </div>
+  </section>
+
+  <section data-for="wipe">
+    <h2>The pack</h2>
+    <p class="hint">Measure one sheet flat and the stack you want to hold. Every number here can be typed as well as dragged, so a caliper reading goes in as it reads. Sizing from these picks the smallest footprint in half cell steps and the shortest height in units that still swallows the stack.</p>
+    <div class="ctl">
+      <label class="clabel" for="packL"><span class="nm">Sheet length</span>
+        <span class="valwrap"><input type="number" class="valnum" id="packL_n" aria-label="Sheet length in millimeters" step="0.1" min="20" max="240"><span class="unit">mm</span></span></label>
+      <input type="range" id="packL" min="20" max="240" step="0.5">
+    </div>
+    <div class="ctl">
+      <label class="clabel" for="packW"><span class="nm">Sheet width</span>
+        <span class="valwrap"><input type="number" class="valnum" id="packW_n" aria-label="Sheet width in millimeters" step="0.1" min="20" max="240"><span class="unit">mm</span></span></label>
+      <input type="range" id="packW" min="20" max="240" step="0.5">
+    </div>
+    <div class="seg" id="stack_seg">
+      <button data-mode="count">Count the sheets</button>
+      <button data-mode="height">Measure the stack</button>
+    </div>
+    <p class="hint">Either give one sheet's thickness and how many you want, or measure the whole stack once and give that height. Switching carries the number across, so you can set it one way and check it the other.</p>
+    <div class="ctl" id="c_sheetT">
+      <label class="clabel" for="sheetT"><span class="nm">Sheet thickness</span>
+        <span class="valwrap"><input type="number" class="valnum" id="sheetT_n" aria-label="Sheet thickness in millimeters" step="0.01" min="0.3" max="12"><span class="unit">mm</span></span></label>
+      <input type="range" id="sheetT" min="0.3" max="12" step="0.1">
+      <div class="sub">A folded foil sachet is thicker than it looks. Stack ten, measure, divide.</div>
+    </div>
+    <div class="ctl" id="c_sheetN">
+      <label class="clabel" for="sheetN"><span class="nm">Sheets to hold</span>
+        <span class="valwrap"><input type="number" class="valnum" id="sheetN_n" aria-label="Sheet count, rounded to nearest whole sheet" step="1" min="1" max="60"><span class="unit">sheets</span></span></label>
+      <input type="range" id="sheetN" min="1" max="60" step="1">
+    </div>
+    <div class="ctl" id="c_stackH">
+      <label class="clabel" for="stackH"><span class="nm">Stack height</span>
+        <span class="valwrap"><input type="number" class="valnum" id="stackH_n" aria-label="Measured stack height in millimeters" step="0.1" min="2" max="140"><span class="unit">mm</span></span></label>
+      <input type="range" id="stackH" min="2" max="140" step="0.5">
+      <div class="sub">The whole pack measured on the bench, squashed no harder than it will sit in the box.</div>
+    </div>
+    <div class="chips" style="margin-top:12px">
+      <button id="fit">Size the box to this pack</button>
+      <button id="zeiss">Zeiss two-wipe sheets</button>
+    </div>
+    <div class="sub" id="packnote" style="margin-top:9px"></div>
+  </section>
+
+  <section data-for="wipe">
+    <h2>Front scoop</h2>
+    <div class="row">
+      <span class="nm">Scoop the front wall<div class="sub">The top edge dips on a raised cosine that leaves the rim with no corner, so a thumb can push the stack up and the last few sheets are still reachable.</div></span>
+      <label class="sw"><input type="checkbox" id="notch" aria-label="Front scoop"><span></span></label>
+    </div>
+    <div class="ctl" id="c_notchW">
+      <label class="clabel" for="notchW"><span class="nm">Scoop width</span><span class="val" id="notchW_v"></span></label>
+      <input type="range" id="notchW" min="10" max="200" step="1">
+    </div>
+    <div class="ctl" id="c_notchFlat">
+      <label class="clabel" for="notchFlat"><span class="nm">Flat across the bottom</span><span class="val" id="notchFlat_v"></span></label>
+      <input type="range" id="notchFlat" min="0" max="120" step="1">
+      <div class="sub">0 gives a V that bottoms out at a point. A flat gives a trough wide enough to get a thumb into.</div>
+    </div>
+    <div class="ctl" id="c_notchDrop">
+      <label class="clabel" for="notchDrop"><span class="nm">Scoop depth</span><span class="val" id="notchDrop_v"></span></label>
+      <input type="range" id="notchDrop" min="0" max="80" step="0.5">
+      <div class="sub" id="notchnote"></div>
+    </div>
+    <div class="ctl" id="c_notchKeep">
+      <label class="clabel" for="notchKeep"><span class="nm">Wall kept above the floor</span><span class="val" id="notchKeep_v"></span></label>
+      <input type="range" id="notchKeep" min="2" max="40" step="0.5">
+      <div class="sub">How much front wall the scoop is not allowed to eat, so the bottom sheets cannot slide out.</div>
+    </div>
+  </section>
+
+  <section data-for="wipe">
+    <h2>Box</h2>
+    <div class="ctl">
+      <label class="clabel" for="wFillet"><span class="nm">Floor fillet</span><span class="val" id="wFillet_v"></span></label>
+      <input type="range" id="wFillet" min="0" max="12" step="0.1">
+      <div class="sub">A fillet all the way round where the floor meets the walls. Sweeps the corner so a thin sheet does not wedge into it. Set to 0 for a square floor.</div>
+    </div>
+  </section>
+
+  <section data-for="bin wipe">
+    <h2>How hard the lid clicks</h2>
+    <div class="seg" id="snap_seg">
+      <button data-r="0.65">Light</button>
+      <button data-r="0.80">Normal</button>
+      <button data-r="0.90">Firm</button>
+    </div>
+    <p class="hint">Sets how far the bead has to squeeze past the lip on the way in. Print one pair, try it, then move a step either way. This is the only setting a printer's dimensional error really moves.</p>
+  </section>
+
+  <section data-for="bin">
+    <h2>Bin</h2>
+    <div class="ctl">
+      <label class="clabel" for="scoop"><span class="nm">Scoop</span><span class="val" id="scoop_v"></span></label>
+      <input type="range" id="scoop" min="0" max="20" step="0.5">
+      <div class="sub">A fillet along the front wall that sweeps the floor up so small parts come out instead of hiding in the corner. Set to 0 for a square floor.</div>
+    </div>
+    <div class="row">
+      <span class="nm">Stacking lip<div class="sub">The rim at the top. Another bin nests into it, and it is what the lid grips.</div></span>
+      <label class="sw"><input type="checkbox" id="lip" aria-label="Tray stacking lip"><span></span></label>
+    </div>
+  </section>
+
+  <section data-for="tray">
+    <h2>Slots</h2>
+    <div class="seg" id="bottom_seg">
+      <button data-bottom="square">Square bottom</button>
+      <button data-bottom="round">Rounded cradle</button>
+    </div>
+    <p class="hint">A rounded bottom is a half round trough sitting on the floor, so a pen or any other round barrel beds into it instead of rattling in a square channel.</p>
+    <div class="ctl">
+      <label class="clabel" for="slotW"><span class="nm">Slot width</span><span class="val" id="slotW_v"></span></label>
+      <input type="range" id="slotW" min="1" max="40" step="0.1">
+      <div class="chips" id="bores"></div>
+      <div class="sub">Measure the barrel at its widest and add about 0.6 mm. The chips do that for you.</div>
+    </div>
+    <div class="ctl">
+      <label class="clabel" for="slots"><span class="nm">Number of slots</span><span class="val" id="slots_v"></span></label>
+      <input type="range" id="slots" min="1" max="40" step="1">
+      <div class="sub" id="ribnote"></div>
+    </div>
+    <div class="seg" id="dir_seg">
+      <button data-dir="y">Slots run front to back</button>
+      <button data-dir="x">Slots run left to right</button>
+    </div>
+    <div class="ctl">
+      <label class="clabel" for="sideBorder"><span class="nm">Side border</span><span class="val" id="sideBorder_v"></span></label>
+      <input type="range" id="sideBorder" min="1" max="20" step="0.25">
+    </div>
+    <div class="ctl">
+      <label class="clabel" for="frontBorder"><span class="nm">Front border</span><span class="val" id="frontBorder_v"></span></label>
+      <input type="range" id="frontBorder" min="1" max="25" step="0.25">
+      <div class="sub">The labels sit on this one, so give it room.</div>
+    </div>
+    <div class="ctl">
+      <label class="clabel" for="backBorder"><span class="nm">Back border</span><span class="val" id="backBorder_v"></span></label>
+      <input type="range" id="backBorder" min="1" max="25" step="0.25">
+    </div>
+    <div class="row">
+      <span class="nm">Stacking lip<div class="sub">Adds a full gridfinity lip so trays stack.</div></span>
+      <label class="sw"><input type="checkbox" id="lip2" aria-label="Bin stacking lip"><span></span></label>
+    </div>
+  </section>
+
+  <section data-for="tray">
+    <h2>Finger cut</h2>
+    <div class="row">
+      <span class="nm">Scallop across the ribs<div class="sub">A half round cut through the middle of every rib so you can get a finger under one piece and lift it out.</div></span>
+      <label class="sw"><input type="checkbox" id="cut" aria-label="Finger cut"><span></span></label>
+    </div>
+    <div class="ctl" id="c_cutR">
+      <label class="clabel" for="cutR"><span class="nm">Cut radius</span><span class="val" id="cutR_v"></span></label>
+      <input type="range" id="cutR" min="2" max="30" step="0.5">
+    </div>
+    <div class="ctl" id="c_cutWeb">
+      <label class="clabel" for="cutWeb"><span class="nm">Rib left under the cut</span><span class="val" id="cutWeb_v"></span></label>
+      <input type="range" id="cutWeb" min="0.4" max="8" step="0.1">
+    </div>
+    <div class="ctl" id="c_cutY">
+      <label class="clabel" for="cutY"><span class="nm">Cut position</span><span class="val" id="cutY_v"></span></label>
+      <input type="range" id="cutY" min="-60" max="60" step="0.5">
+      <div class="sub">Distance from the middle of the tray, along the slot.</div>
+    </div>
+  </section>
+
+  <section data-for="tray">
+    <h2>Slot labels</h2>
+    <div class="row">
+      <span class="nm">Raised labels on the front border<div class="sub">One per slot, printed straight into the part. Change filament at that layer for a two-colour label.</div></span>
+      <label class="sw"><input type="checkbox" id="trayText" aria-label="Tray text labels"><span></span></label>
+    </div>
+    <div class="ctl" id="c_labels">
+      <label class="clabel" for="labels"><span class="nm">Labels</span><span class="val" id="labels_n"></span></label>
+      <input type="text" id="labels" spellcheck="false">
+      <div class="sub">Comma separated, left to right. Leave one empty to skip that slot.</div>
+    </div>
+    <div class="ctl" id="c_textH">
+      <label class="clabel" for="textH"><span class="nm">Text height</span><span class="val" id="textH_v"></span></label>
+      <input type="range" id="textH" min="1.5" max="12" step="0.1">
+    </div>
+    <div class="ctl" id="c_textD">
+      <label class="clabel" for="textD"><span class="nm">Raised by</span><span class="val" id="textD_v"></span></label>
+      <input type="range" id="textD" min="0.2" max="2" step="0.05">
+    </div>
+  </section>
+</div>
+<div class="wrap">
+  <details>
+    <summary>Everything else</summary>
+
+    <div class="grouphead">Bin</div>
+    <div class="ctl">
+      <label class="clabel" for="wall"><span class="nm">Bin wall</span><span class="val" id="wall_v"></span></label>
+      <input type="range" id="wall" min="0.8" max="2.2" step="0.05">
+    </div>
+    <div class="ctl">
+      <label class="clabel" for="floorT"><span class="nm">Floor above the base</span><span class="val" id="floorT_v"></span></label>
+      <input type="range" id="floorT" min="0.8" max="6.0" step="0.05">
+    </div>
+    <div class="ctl">
+      <div class="clabel"><span class="nm">Body lip tip</span><span class="val" id="tip_v"></span></div>
+      <div class="sub">Applies to the bin, tray or wipe box body. The lid rim stays rounded.</div>
+      <div class="seg" id="tip_seg">
+        <button data-tip="round">Rounded</button>
+        <button data-tip="flat">Flat</button>
+        <button data-tip="sharp">Sharp</button>
+      </div>
+      <div class="sub">How the knife edge at the top of the lip is finished, on every part.</div>
+    </div>
+    <div class="ctl" id="c_lipRound">
+      <label class="clabel" for="lipRound"><span class="nm">Tip radius</span><span class="val" id="lipRound_v"></span></label>
+      <input type="range" id="lipRound" min="0.05" max="1.0" step="0.05">
+    </div>
+    <div class="ctl" id="c_lipTip">
+      <label class="clabel" for="lipTip"><span class="nm">Flat tip width</span><span class="val" id="lipTip_v"></span></label>
+      <input type="range" id="lipTip" min="0.2" max="2.0" step="0.05">
+    </div>
+    <div class="ctl" data-for="bin">
+      <div class="clabel"><span class="nm">Scoop walls</span><span class="val" id="scoopWalls_v"></span></div>
+      <div class="seg" id="scoop_seg">
+        <button data-sw="one">Front only</button>
+        <button data-sw="both">Front and back</button>
+        <button data-sw="four">All four</button>
+      </div>
+    </div>
+
+    <div data-for="bin">
+    <div class="grouphead">Label shelf</div>
+    <div class="ctl">
+      <label class="clabel" for="tabAngle"><span class="nm">Shelf underside angle</span><span class="val" id="tabAngle_v"></span></label>
+      <input type="range" id="tabAngle" min="35" max="70" step="1">
+      <div class="sub">From horizontal. 45 degrees is a starting point for support-free printing; performance depends on printer settings.</div>
+    </div>
+    <div class="ctl">
+      <label class="clabel" for="tabDrop"><span class="nm">Shelf below the rim</span><span class="val" id="tabDrop_v"></span></label>
+      <input type="range" id="tabDrop" min="0" max="8" step="0.1">
+    </div>
+    <div class="ctl">
+      <label class="clabel" for="tabFace"><span class="nm">Shelf front face</span><span class="val" id="tabFace_v"></span></label>
+      <input type="range" id="tabFace" min="0.6" max="6" step="0.1">
+    </div>
+    <div class="ctl">
+      <label class="clabel" for="labelBorder"><span class="nm">Border around the pad</span><span class="val" id="labelBorder_v"></span></label>
+      <input type="range" id="labelBorder" min="0.4" max="4" step="0.1">
+    </div>
+    <div class="ctl">
+      <label class="clabel" for="labelClear"><span class="nm">Clearance around the tape</span><span class="val" id="labelClear_v"></span></label>
+      <input type="range" id="labelClear" min="0" max="1.5" step="0.05">
+    </div>
+    <div class="ctl">
+      <label class="clabel" for="padDepth"><span class="nm">Pad recess</span><span class="val" id="padDepth_v"></span></label>
+      <input type="range" id="padDepth" min="0" max="1.2" step="0.05">
+      <div class="sub">TZe tape is about 0.16 mm thick. A recess a little deeper than that keeps the edges from catching.</div>
+    </div>
+    <div class="ctl">
+      <label class="clabel" for="padR"><span class="nm">Pad corner radius</span><span class="val" id="padR_v"></span></label>
+      <input type="range" id="padR" min="0.5" max="6" step="0.1">
+    </div>
+    <div class="ctl">
+      <label class="clabel" for="winLedge"><span class="nm">Window straight run</span><span class="val" id="winLedge_v"></span></label>
+      <input type="range" id="winLedge" min="0.2" max="2.0" step="0.1">
+      <div class="sub">How far the window stays the size of the pad before it flares out.</div>
+    </div>
+
+    </div>
+    <div data-for="bin wipe">
+    <div class="grouphead">Snap</div>
+    <div class="row">
+      <span class="nm">Bead on the lid feet</span>
+      <label class="sw"><input type="checkbox" id="snap" aria-label="Snap beads"><span></span></label>
+    </div>
+    <div class="row">
+      <span class="nm">Groove in the bin lip</span>
+      <label class="sw"><input type="checkbox" id="groove" aria-label="Snap groove"><span></span></label>
+    </div>
+    <div class="ctl">
+      <label class="clabel" for="beadR"><span class="nm">Bead radius</span><span class="val" id="beadR_v"></span></label>
+      <input type="range" id="beadR" min="0.3" max="0.9" step="0.05">
+    </div>
+    <div class="ctl">
+      <label class="clabel" for="beadLen"><span class="nm">Bead length</span><span class="val" id="beadLen_v"></span></label>
+      <input type="range" id="beadLen" min="6" max="28" step="0.5">
+      <div class="sub">One run centred on each flat of each foot. The corners are left alone so the flat panels bow instead of the whole loop stretching.</div>
+    </div>
+    <div class="ctl">
+      <label class="clabel" for="grooveLen"><span class="nm">Groove length</span><span class="val" id="grooveLen_v"></span></label>
+      <input type="range" id="grooveLen" min="8" max="32" step="0.5">
+    </div>
+    <div class="ctl">
+      <label class="clabel" for="grooveDepth"><span class="nm">Groove depth</span><span class="val" id="grooveDepth_v"></span></label>
+      <input type="range" id="grooveDepth" min="0.4" max="1.55" step="0.05">
+    </div>
+    <div class="ctl">
+      <label class="clabel" for="grooveClear"><span class="nm">Groove end play</span><span class="val" id="grooveClear_v"></span></label>
+      <input type="range" id="grooveClear" min="0" max="0.4" step="0.02">
+      <div class="sub">Extra height top and bottom so the bead sits in the groove without being pinched.</div>
+    </div>
+    <div class="ctl">
+      <label class="clabel" for="stackClear"><span class="nm">Lid foot radial clearance</span><span class="val" id="stackClear_v"></span></label>
+      <input type="range" id="stackClear" min="0" max="0.4" step="0.05">
+      <div class="sub">Shrinks the lid feet and snap beads radially by this amount; the outside footprint stays unchanged. Print a pair to check the fit.</div>
+    </div>
+
+    <div class="grouphead">Lid</div>
+    <div class="ctl">
+      <label class="clabel" for="lidBody"><span class="nm">Lid rim height</span><span class="val" id="lidBody_v"></span></label>
+      <input type="range" id="lidBody" min="2.6" max="10" step="0.1">
+      <div class="sub">Straight wall between the lid's floor and the start of its own lip pocket.</div>
+    </div>
+    <div class="ctl">
+      <label class="clabel" for="lidChamfer"><span class="nm">Lid pocket floor chamfer</span><span class="val" id="lidChamfer_v"></span></label>
+      <input type="range" id="lidChamfer" min="0" max="2.0" step="0.1">
+    </div>
+
+    </div>
+
+    <div class="grouphead" data-for="tray">Tray</div>
+    <div class="ctl" data-for="tray">
+      <label class="clabel" for="ribChamfer"><span class="nm">Rib top chamfer</span><span class="val" id="ribChamfer_v"></span></label>
+      <input type="range" id="ribChamfer" min="0" max="4" step="0.05">
+      <div class="sub">A 45 degree lead in on the top of every rib so a tube drops into the slot instead of catching.</div>
+    </div>
+    <div class="ctl" data-for="tray">
+      <label class="clabel" for="cradleR"><span class="nm">Cradle radius</span><span class="val" id="cradleR_v"></span></label>
+      <input type="range" id="cradleR" min="0" max="40" step="0.2">
+      <div class="sub">0 gives a true half circle, half the slot width. Larger makes a shallower dish that still centres a barrel but keeps more depth.</div>
+    </div>
+
+    <div class="grouphead">Printing and mesh</div>
+    <div class="ctl">
+      <label class="clabel" for="lineW"><span class="nm">Extrusion width</span><span class="val" id="lineW_v"></span></label>
+      <input type="range" id="lineW" min="0.2" max="0.9" step="0.02">
+    </div>
+    <div class="ctl">
+      <label class="clabel" for="seg"><span class="nm">Mesh resolution</span><span class="val" id="seg_v"></span></label>
+      <input type="range" id="seg" min="0.2" max="3" step="0.1">
+    </div>
+    <div class="ctl">
+      <label class="clabel" for="cornerSegs"><span class="nm">Corner segments</span><span class="val" id="cornerSegs_v"></span></label>
+      <input type="range" id="cornerSegs" min="3" max="20" step="1">
+    </div>
+    <div class="chips" style="margin:14px 0 4px">
+      <button id="reset">Reset everything</button>
+      <button id="ref">Match the reference model</button>
+      <button id="pen" data-for="tray">Pen tray</button>
+    </div>
+  </details>
+
+  <section>
+    <h2>Material experiments</h2>
+    <button id="economy">Apply economy candidate to this mode</button>
+    <div class="sub">Opt-in thinner walls and floor for light contents. No measured filament saving or strength guarantee; slice and trial-print before use.</div>
+    <div class="ctl">
+      <label for="hollowFeet">Experimental hollow underside feet (bin body only)</label>
+      <input type="checkbox" id="hollowFeet" aria-label="Experimental hollow underside bin body feet">
+      <div class="sub" id="hollownote">Small open-bottom cavities retain a sealed flat interior. Roofs need bridge inspection. Unverified strength and filament savings; standard solid feet remain the default.</div>
+    </div>
+  </section>
+  <section>
+    <h2>Printing</h2>
+    <div id="notes"></div>
+  </section>
+</div>
+
+<div id="bar"><div class="wrap">
+  <button id="dl_both">Download both</button>
+  <button id="dl_bin">Bin</button>
+  <button id="dl_lid">Lid</button>
+</div></div>
+<div id="toast" role="status" aria-live="polite" aria-atomic="true"></div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+// =====================================================================
+// Gridfinity parts bin with a stackable lid. Geometry core.
+// Pure functions, no DOM. Emits triangle soups ready for STL or WebGL.
+//
+// Architecture, taken from the reference model:
+//   Bin  an ordinary gridfinity bin. Scoop fillet on one wall, sloped
+//        label ramp on the opposite wall ending in a shelf with a
+//        recessed pad, stacking lip with a snap groove cut into its
+//        pocket wall and a rounded tip.
+//   Lid  a short gridfinity module. Feet underneath carry a half round
+//        snap bead and plug into the bin's lip pocket. A full lip
+//        pocket per cell on top, so the stack continues. An optional
+//        window over each label pad.
+// =====================================================================
+
+const GRID    = 42.0;   // cell pitch
+const CLEAR   = 0.5;    // total footprint clearance per cell
+const R_OUT   = 4.0;    // outer corner radius at the widest section
+const HU      = 7.0;    // height unit
+const H_BASE  = 4.75;   // 0.8 + 1.8 + 2.15
+const LIP_H   = 4.40;   // stacking lip, 1.9 + 1.8 + 0.7
+const POCKET0 = 2.60;   // lip pocket inset at the body top
+const POCKET1 = 1.90;   // lip pocket inset through its vertical band
+const LIP_A   = 0.70;   // lower chamfer of the lip pocket
+const LIP_B   = 1.80;   // vertical band of the lip pocket
+const SEAT    = 0.35;   // a foot sits this far below the body top it rests on
+
+const BASE_PROFILE = [
+  [0.00, 2.95],
+  [0.80, 2.15],
+  [2.60, 2.15],
+  [4.75, 0.00],
+];
+
+// ---------------------------------------------------------------------
+// Rounded rectangle rings.
+//
+// A ring is a rounded rectangle with independent bounds and independent
+// corner radii. Every ring at a different inset is an inward offset of
+// the same nominal rectangle, which keeps the corner arc centers fixed,
+// so rings correspond point for point and lofting between them is
+// exact. Two rings built with the same sample counts also correspond,
+// which is how annuli between unlike rectangles are stitched.
+// ---------------------------------------------------------------------
+
+// radii order: TR, TL, BL, BR
+function rrSpec(x0, x1, y0, y1, radii, step, cornerSegs, counts) {
+  const [rTR, rTL, rBL, rBR] = radii;
+  const s = [];
+  const edge = (axis, fix, a0, a1, n) => {
+    const len = Math.abs(a1 - a0);
+    for (let i = 0; i < n; i++) {
+      s.push({ t: 'e', axis, u: i / n, len, s: (i / n) * len, a0, a1 });
+    }
+  };
+  const corner = (cx, cy, r, deg0) => {
+    for (let j = 0; j < cornerSegs; j++) {
+      s.push({ t: 'c', cx, cy, r0: r, a: (deg0 + (j / cornerSegs) * 90) * Math.PI / 180 });
+    }
+  };
+  const eXp = [y0 + rBR, y1 - rTR];   // +X edge, varies in y
+  const eYp = [x1 - rTR, x0 + rTL];   // +Y edge, varies in x
+  const eXn = [y1 - rTL, y0 + rBL];   // -X edge, varies in y
+  const eYn = [x0 + rBL, x1 - rBR];   // -Y edge, varies in x
+  const nX = counts && counts.nX ? counts.nX : Math.max(4, Math.ceil(Math.abs(eXp[1] - eXp[0]) / step));
+  const nY = counts && counts.nY ? counts.nY : Math.max(4, Math.ceil(Math.abs(eYp[1] - eYp[0]) / step));
+
+  edge('+X', x1, eXp[0], eXp[1], nX); corner(x1 - rTR, y1 - rTR, rTR, 0);
+  edge('+Y', y1, eYp[0], eYp[1], nY); corner(x0 + rTL, y1 - rTL, rTL, 90);
+  edge('-X', x0, eXn[0], eXn[1], nX); corner(x0 + rBL, y0 + rBL, rBL, 180);
+  edge('-Y', y0, eYn[0], eYn[1], nY); corner(x1 - rBR, y0 + rBR, rBR, 270);
+  return { specs: s, x0, x1, y0, y1, radii, nX, nY };
+}
+
+function rectSpec(hx, hy, r, step, cornerSegs, counts) {
+  return rrSpec(-hx, hx, -hy, hy, [r, r, r, r], step, cornerSegs, counts);
+}
+
+function rrPoints(rs, inset, offFn) {
+  const sp0 = rs.specs, n = sp0.length, out = new Array(n);
+  for (let i = 0; i < n; i++) {
+    const sp = sp0[i];
+    const off = offFn ? offFn(sp) : 0;
+    if (sp.t === 'e') {
+      const d = inset - off;
+      const v = sp.a0 + sp.u * (sp.a1 - sp.a0);
+      if (sp.axis === '+X') out[i] = [rs.x1 - d, v];
+      else if (sp.axis === '-X') out[i] = [rs.x0 + d, v];
+      else if (sp.axis === '+Y') out[i] = [v, rs.y1 - d];
+      else out[i] = [v, rs.y0 + d];
+    } else {
+      const r = Math.max(0.01, sp.r0 - inset + off);
+      out[i] = [sp.cx + r * Math.cos(sp.a), sp.cy + r * Math.sin(sp.a)];
+    }
+  }
+  return out;
+}
+
+// Position along the ring's own flat, in world units, used by the run
+// functions. Corners report their centre so a run never spills into one.
+function spPos(sp) {
+  if (sp.t === 'e') {
+    const v = sp.a0 + sp.u * (sp.a1 - sp.a0);
+    return v;
+  }
+  return (sp.axis === '+X' || sp.axis === '-X') ? sp.cy : sp.cx;
+}
+function spAlong(sp) {
+  if (sp.t === 'e') return (sp.axis === '+X' || sp.axis === '-X') ? 'y' : 'x';
+  return null;
+}
+
+// ---------------------------------------------------------------------
+// Offset functions
+// ---------------------------------------------------------------------
+
+// A run of length `len` centred on every cell centre, on all four flats.
+// Corners are excluded outright, which is the relief that lets the flat
+// panels bow instead of the whole loop having to stretch.
+function runFn(centresX, centresY, len, ramp) {
+  return function (sp) {
+    if (sp.t !== 'e') return 0;
+    const along = (sp.axis === '+X' || sp.axis === '-X') ? 'y' : 'x';
+    const list = along === 'y' ? centresY : centresX;
+    const p = spPos(sp);
+    let best = 0;
+    for (let k = 0; k < list.length; k++) {
+      const d = len / 2 - Math.abs(p - list[k]);
+      if (d <= 0) continue;
+      const w = ramp > 0 ? Math.min(1, d / ramp) : 1;
+      if (w > best) best = w;
+    }
+    // stay clear of the corner arcs
+    const lo = Math.min(sp.a0, sp.a1), hi = Math.max(sp.a0, sp.a1);
+    const m = Math.min(p - lo, hi - p);
+    if (m < 0.6) best *= Math.max(0, m / 0.6);
+    return best;
+  };
+}
+
+// Weight that is 1 on the named flat and falls off through the corner
+// arcs by the arc's own normal, so a one wall fillet blends round the
+// corner instead of stopping dead.
+function facesFn(list) {
+  const fns = list.map(faceFn);
+  return function (sp) {
+    let m = 0;
+    for (let i = 0; i < fns.length; i++) { const v = fns[i](sp); if (v > m) m = v; }
+    return m > 1 ? 1 : m;
+  };
+}
+function scoopFaces(mode) {
+  if (mode === 'four') return ['-Y', '+Y', '-X', '+X'];
+  if (mode === 'both') return ['-Y', '+Y'];
+  return ['-Y'];
+}
+function faceFn(axis) {
+  const dir = { '+X': [1, 0], '-X': [-1, 0], '+Y': [0, 1], '-Y': [0, -1] }[axis];
+  return function (sp) {
+    if (sp.t === 'e') return sp.axis === axis ? 1 : 0;
+    const c = Math.cos(sp.a), s = Math.sin(sp.a);
+    const w = c * dir[0] + s * dir[1];
+    return w > 0 ? w : 0;
+  };
+}
+
+// ---------------------------------------------------------------------
+// Mesh assembly
+// ---------------------------------------------------------------------
+
+function Mesh() { return { tri: [] }; }
+function push3(m, a, b, c) { m.tri.push([a, b, c]); }
+
+function stitch(m, L, zL, U, zU, flip) {
+  const n = L.length;
+  for (let i = 0; i < n; i++) {
+    const j = (i + 1) % n;
+    const a = [L[i][0], L[i][1], zL], b = [L[j][0], L[j][1], zL];
+    const c = [U[j][0], U[j][1], zU], d = [U[i][0], U[i][1], zU];
+    if (!flip) { push3(m, a, b, c); push3(m, a, c, d); }
+    else { push3(m, a, c, b); push3(m, a, d, c); }
+  }
+}
+
+// Same as stitch but each ring carries its own per point height.
+function stitchZ(m, L, zL, U, zU, flip) {
+  const n = L.length;
+  for (let i = 0; i < n; i++) {
+    const j = (i + 1) % n;
+    const a = [L[i][0], L[i][1], zL[i]], b = [L[j][0], L[j][1], zL[j]];
+    const c = [U[j][0], U[j][1], zU[j]], d = [U[i][0], U[i][1], zU[i]];
+    if (!flip) { push3(m, a, b, c); push3(m, a, c, d); }
+    else { push3(m, a, c, b); push3(m, a, d, c); }
+  }
+}
+
+function capFan(m, R, z, up) {
+  let cx = 0, cy = 0;
+  for (let i = 0; i < R.length; i++) { cx += R[i][0]; cy += R[i][1]; }
+  cx /= R.length; cy /= R.length;
+  for (let i = 0; i < R.length; i++) {
+    const j = (i + 1) % R.length;
+    const c = [cx, cy, z];
+    const a = [R[i][0], R[i][1], z], b = [R[j][0], R[j][1], z];
+    if (up) push3(m, c, a, b); else push3(m, c, b, a);
+  }
+}
+
+// Fan cap onto a plane z = f(x, y). Only valid for convex rings.
+function capFanPlane(m, R, zf, up) {
+  let cx = 0, cy = 0;
+  for (let i = 0; i < R.length; i++) { cx += R[i][0]; cy += R[i][1]; }
+  cx /= R.length; cy /= R.length;
+  for (let i = 0; i < R.length; i++) {
+    const j = (i + 1) % R.length;
+    const c = [cx, cy, zf(cx, cy)];
+    const a = [R[i][0], R[i][1], zf(R[i][0], R[i][1])];
+    const b = [R[j][0], R[j][1], zf(R[j][0], R[j][1])];
+    if (up) push3(m, c, a, b); else push3(m, c, b, a);
+  }
+}
+
+function annulus(m, I, O, z, up) {
+  const n = I.length;
+  for (let i = 0; i < n; i++) {
+    const j = (i + 1) % n;
+    const i0 = [I[i][0], I[i][1], z], i1 = [I[j][0], I[j][1], z];
+    const o0 = [O[i][0], O[i][1], z], o1 = [O[j][0], O[j][1], z];
+    if (up) { push3(m, i0, o0, o1); push3(m, i0, o1, i1); }
+    else { push3(m, i0, o1, o0); push3(m, i0, i1, o1); }
+  }
+}
+
+function loft(m, rs, levels, flip, mkOff) {
+  for (let k = 0; k < levels.length - 1; k++) {
+    const A = levels[k], B = levels[k + 1];
+    const oA = (A.off||0)+(A.scoop||0), oB = (B.off||0)+(B.scoop||0);
+    if (Math.abs(B.z-A.z)<1e-9 && Math.abs(B.inset-A.inset)<1e-9 && Math.abs(oB-oA)<1e-9) continue;
+    stitch(m, rrPoints(rs, A.inset, mkOff ? mkOff(A) : null), A.z,
+              rrPoints(rs, B.inset, mkOff ? mkOff(B) : null), B.z, flip);
+  }
+}
+
+// ---------------------------------------------------------------------
+// Rounded lip tip
+//
+// The lip would run out to a knife edge at `apex`. A fillet of radius r
+// tangent to the outer vertical face and to the inner 45 degree face
+// blunts it. Centre sits at inset r and z = apex - r(1 + sqrt2), so the
+// top of the part lands at apex - r*sqrt2.
+// ---------------------------------------------------------------------
+
+function tipLevels(apex, r, segs) {
+  const zc = apex - r * (1 + Math.SQRT2);
+  const out = [];
+  segs = Math.max(3, Math.round(segs / 3) * 3);
+  for (let i = 0; i <= segs; i++) {
+    const th = (i / segs) * (Math.PI * 0.75);   // 0 to 135 degrees
+    out.push({ z: zc + r * Math.sin(th), inset: r - r * Math.cos(th) });
+  }
+  return out;   // starts at (inset 0, zc), ends at (inset r + r/sqrt2, ...)
+}
+function tipTop(apex, r) { return apex - r * Math.SQRT2; }
+
+// ---------------------------------------------------------------------
+// Derived dimensions clamp individual settings. requireValid checks known
+// incompatible combinations before builds; arbitrary geometry is not proven valid.
+// ---------------------------------------------------------------------
+
+function cellCentres(n) {
+  const a = [];
+  for (let i = 0; i < n; i++) a.push((i - (n - 1) / 2) * GRID);
+  return a;
+}
+
+function derive(p) {
+  const HX = (GRID * p.nx - CLEAR) / 2;
+  const HY = (GRID * p.ny - CLEAR) / 2;
+  const H  = HU * p.hu;                       // body height
+  const apex = H + LIP_H;                     // theoretical lip knife edge
+  const lipR = p.lip ? Math.max(0, Math.min(p.lipRound, 1.2)) : 0;
+  const lipT = p.lip ? Math.max(0.2, Math.min(p.lipTip, 2.0)) : 0;
+  const binTop = !p.lip ? H
+               : p.lipTipStyle === 'round' ? tipTop(apex, lipR)
+               : p.lipTipStyle === 'flat'  ? apex - lipT : apex;
+
+  const wall = Math.max(0.6, Math.min(p.wall, POCKET0 - 0.4));
+  const floorT = Math.max(0.6, p.floorT);
+  const floorTop = H_BASE + floorT;
+
+  // bore: straight wall, then a 45 degree flare out to the pocket inset
+  const flareEnd = H - wall;
+  const flareStart = H - POCKET0;
+
+  // snap. The lid seats SEAT below the body top, so the foot's vertical
+  // band lands at H - SEAT + 0.8 .. H - SEAT + 2.6 in bin coordinates.
+  const beadR = Math.max(0.2, Math.min(p.beadR, 0.9));
+  const beadC = 0.8 + (2.6 - 0.8) / 2;         // 1.7, centre of the foot band
+  const grooveZ0 = H - SEAT + (beadC - beadR) - p.grooveClear;
+  const grooveZ1 = H - SEAT + (beadC + beadR) + p.grooveClear;
+  const grooveInset = Math.max(0.35, POCKET1 - p.grooveDepth);
+  const lipWallMin = grooveInset;
+
+  // scoop
+  const openX = GRID * p.nx - CLEAR - 2 * wall;
+  const openY = GRID * p.ny - CLEAR - 2 * wall;
+  const scoop = p.scoop <= 0.05 ? 0 : Math.max(0, Math.min(p.scoop,
+      Math.min(openX, openY) - 2, flareStart - floorTop - 1));
+
+  // label
+  const padW = p.labelW + 2 * p.labelClear;
+  const padH = p.labelH + 2 * p.labelClear;
+  const padR = Math.max(0.5, Math.min(p.padR, Math.min(padW, padH) / 2 - 0.2));
+  const tabW0 = padW + 2 * p.labelBorder;
+  const tabD  = padH + 2 * p.labelBorder;
+  const tabW  = Math.min(tabW0, GRID - CLEAR - 2 * POCKET0 - 0.4);
+  const zTop  = H - p.tabDrop;                 // shelf top
+  const zFace = zTop - p.tabFace;              // bottom of the shelf front face
+  const yWallTop = HY - POCKET0;               // wall face at shelf height
+  const yInner = yWallTop - tabD;
+  const tabOut = HY - wall + 0.4;              // ramp buried this far into the wall
+  const drop = (tabOut - yInner);
+  let tabAngle = Math.max(30, Math.min(p.tabAngle, 80));
+  let zRampWall = zFace - drop * Math.tan(tabAngle * Math.PI / 180);
+  if (zRampWall < floorTop + 0.5) {            // steepen so it lands on the floor
+    tabAngle = Math.atan((zFace - floorTop - 0.5) / drop) * 180 / Math.PI;
+    zRampWall = floorTop + 0.5;
+  }
+
+  const labelOn = p.labelMode !== 'off' && p.nx >= 1;
+  const cols = [];
+  if (labelOn) {
+    if (p.labelMode === 'all') for (let i = 0; i < p.nx; i++) cols.push(i);
+    else cols.push(Math.max(0, Math.min(p.labelCol - 1, p.nx - 1)));
+  }
+  // an all columns run merges into one continuous ramp
+  const rampW = (p.labelMode === 'all' && p.nx > 1) ? GRID : tabW;
+
+  // lid
+  const lidBody = Math.max(POCKET0, p.lidBody);
+  const lidApex = H_BASE + lidBody + LIP_H;
+  const lidTop = tipTop(lidApex, lipR);
+  const lidBodyTop = H_BASE + lidBody;
+  const lidChamfer = Math.max(0, Math.min(p.lidChamfer, lidBody - LIP_A - 0.2));
+  const lidFloorInset = POCKET0 + lidChamfer;
+
+  // window
+  const winLedge = Math.max(0.2, Math.min(p.winLedge, H_BASE - 1.0));
+  const winGrow = H_BASE - winLedge;
+
+  return {
+    HX, HY, H, apex, binTop, lipR, lipT, wall, floorT, floorTop,
+    flareStart, flareEnd, openX, openY, scoop,
+    beadR, beadC, grooveZ0, grooveZ1, grooveInset, lipWallMin,
+    padW, padH, padR, tabW, tabD, rampW, zTop, zFace, yWallTop, yInner,
+    tabOut, tabAngle, zRampWall, labelOn, cols,
+    lidBody, lidApex, lidTop, lidBodyTop, lidChamfer, lidFloorInset,
+    winLedge, winGrow,
+    usableDepth: H - SEAT - floorTop,
+    rampDepth: (labelOn ? Math.min(H - SEAT, zRampWall) : H - SEAT) - floorTop,
+    footSeg: p.seg * Math.max(1, Math.sqrt(p.nx * p.ny) / 1.5),
+    snapDeflect: beadR - (2.15 - POCKET1) - p.stackClear,
+    grooveWall: grooveInset,
+    cx: cellCentres(p.nx), cy: cellCentres(p.ny),
+  };
+}
+
+// Solids overlap by design; no Boolean union is performed here. These
+// heuristic overlap corrections produce an approximate solid-material
+// estimate whose accuracy has not been calibrated against sliced mass.
+function rectArea(hx, hy, r) { return 4 * hx * hy - (4 - Math.PI) * r * r; }
+
+function overlapBin(p, d) {
+  const fh = (GRID - CLEAR) / 2;
+  let v = p.nx * p.ny * rectArea(fh - 0.2, fh - 0.2, R_OUT - 0.2) * 0.60;
+  if (d.labelOn) {
+    const ov = d.tabOut - (d.HY - d.wall);
+    const yMid = d.HY - d.wall + ov / 2;
+    const hMid = d.zTop - (d.zFace - (yMid - d.yInner) * Math.tan(d.tabAngle * Math.PI / 180));
+    v += d.cols.length * Math.max(0, ov) * d.rampW * Math.max(0, hMid);
+  }
+  return v;
+}
+
+function overlapLid(p, d) {
+  let v = (rectArea(d.HX - 0.35, d.HY - 0.35, R_OUT - 0.35)
+         - rectArea(d.HX - d.lidFloorInset, d.HY - d.lidFloorInset, Math.max(0.1, R_OUT - d.lidFloorInset))) * 0.30;
+  const rw = 0.5 + 2 * d.lidFloorInset;
+  let area = 0;
+  const prof = [[H_BASE - 0.30, 0.25 + d.lidFloorInset], [H_BASE, 0.25 + d.lidFloorInset],
+                [H_BASE + d.lidChamfer, 0.25 + POCKET0], [d.lidBodyTop, 0.25 + POCKET0],
+                [d.lidBodyTop + LIP_A, 0.25 + POCKET1], [d.lidBodyTop + LIP_A + LIP_B, 0.25 + POCKET1],
+                [d.lidTop, 0.25 + d.lipR * Math.SQRT2]];
+  for (let i = 0; i < prof.length - 1; i++) area += (prof[i][1] + prof[i + 1][1]) * (prof[i + 1][0] - prof[i][0]);
+  const nrib = (p.nx - 1) * (2 * d.HY - 0.4) + (p.ny - 1) * (2 * d.HX - 0.4);
+  v += nrib * rw * 0.30;
+  v += ((p.nx - 1) * 2 + (p.ny - 1) * 2) * area * (d.lidFloorInset + 0.2);
+  return v;
+}
+
+// ---------------------------------------------------------------------
+// Slotted tray. A gridfinity bin whose cavity is filled with a run of
+// parallel ribs, so it holds tubes, cartridges or blades on edge. The
+// slots run front to back and are distributed across the width; a
+// half round finger cut across the middle lets you get under one, and
+// each slot can carry a raised label on the front border.
+// ---------------------------------------------------------------------
+
+function deriveTray(p) {
+  const nx = p.trayDir === 'x' ? p.ny : p.nx;
+  const ny = p.trayDir === 'x' ? p.nx : p.ny;
+  const HX = (GRID * nx - CLEAR) / 2;
+  const HY = (GRID * ny - CLEAR) / 2;
+  const H = HU * p.hu;
+  const apex = H + LIP_H;
+  const lipR = p.lip ? Math.max(0, Math.min(p.lipRound, 1.2)) : 0;
+  const lipT = p.lip ? Math.max(0.2, Math.min(p.lipTip, 2.0)) : 0;
+  const binTop = !p.lip ? H
+               : p.lipTipStyle === 'round' ? tipTop(apex, lipR)
+               : p.lipTipStyle === 'flat'  ? apex - lipT : apex;
+
+  const wall = Math.max(0.6, Math.min(p.wall, POCKET0 - 0.4));
+  const floorTop = H_BASE + Math.max(0.6, p.floorT);
+
+  const side = Math.max(wall, Math.min(p.sideBorder, HX - 6));
+  const front = Math.max(wall, Math.min(p.frontBorder, HY - 6));
+  const back = Math.max(wall, Math.min(p.backBorder, HY - front - 4));
+  const xs0 = -HX + side, xs1 = HX - side;
+  const yFront = -HY + front, yBack = HY - back;
+  const avail = xs1 - xs0;
+
+  const slotW = Math.max(1.0, Math.min(p.slotW, avail));
+  const nMax = Math.max(1, Math.floor((avail + 0.001) / slotW));
+  const nSlots = Math.max(1, Math.min(Math.round(p.slots), nMax));
+  const ribW = nSlots > 1 ? (avail - nSlots * slotW) / (nSlots - 1) : 0;
+  const pitch = slotW + ribW;
+
+  const ribTop = H;
+  const chamfer = nSlots > 1
+    ? Math.max(0, Math.min(p.ribChamfer, (ribW - 0.4) / 2, ribTop - floorTop - 0.6))
+    : 0;
+  const chamferStart = ribTop - chamfer;
+
+  // cradle: a circular trough in the bottom of every slot, tangent to
+  // the floor, so a round barrel beds down instead of rattling in a
+  // square channel.
+  const round = p.slotBottom === 'round';
+  const cradR = round ? Math.max(slotW / 2, Math.min(p.cradleR > 0.01 ? p.cradleR : slotW / 2, 20 * slotW)) : 0;
+  const cradZ = floorTop + cradR;
+  const cradTop = round ? cradZ - Math.sqrt(Math.max(0, cradR * cradR - slotW * slotW / 4)) : floorTop;
+  const cradDepth = round ? cradTop - floorTop : 0;
+
+  const cutR = Math.max(0, Math.min(p.cutR, avail / 2, (yBack - yFront) / 2 - 0.5));
+  const cutY = Math.max(yFront + cutR + 0.5, Math.min(p.cutY, yBack - cutR - 0.5));
+  const cutWeb = Math.max(0.4, Math.min(p.cutWeb, ribTop - floorTop - 1.0));
+  const cutZ = floorTop + cutWeb + cutR;
+  const cutOn = p.cut && cutR > 0.5 && cutZ - cutR > floorTop + 0.2;
+
+  const slots = [];
+  for (let i = 0; i < nSlots; i++) slots.push({ x0: xs0 + i * pitch, x1: xs0 + i * pitch + slotW });
+
+  return {
+    nx, ny, HX, HY, H, apex, binTop, lipR, lipT, wall, floorTop,
+    side, front, back, xs0, xs1, yFront, yBack, avail,
+    slotW, nSlots, nMax, ribW, pitch, slots,
+    ribTop, chamfer, chamferStart,
+    round, cradR, cradZ, cradTop, cradDepth,
+    cutR, cutY, cutWeb, cutZ, cutOn,
+    depth: ribTop - floorTop,
+    cutDepth: cutOn ? ribTop - (cutZ - cutR) : 0,
+    cx: cellCentres(nx), cy: cellCentres(ny),
+  };
+}
+
+function overlapTray(p, d) {
+  const fh = (GRID - CLEAR) / 2;
+  let v = d.nx * d.ny * rectArea(fh - 0.2, fh - 0.2, R_OUT - 0.2) * 0.60;
+  const per = 2 * (2 * d.HX - 2 * (d.wall - 0.2)) + 2 * (2 * d.HY - 2 * (d.wall - 0.2));
+  v += per * 0.2 * (d.ribTop - d.floorTop);
+  v += (rectArea(d.HX - d.wall + 0.2, d.HY - d.wall + 0.2, R_OUT) - (d.xs1 - d.xs0) * (d.yBack - d.yFront)) * 0.2;
+  if (d.cutOn) v += Math.max(0, d.nSlots - 1) * d.ribW * (d.yBack - d.yFront) * (d.cutZ - d.cutR - d.floorTop + 0.2);
+  return v;
+}
+
+function warningsTray(p) {
+  const d = deriveTray(p);
+  const w = [];
+  if (d.nSlots > 1 && d.ribW < 2 * p.lineW) w.push('Ribs come out ' + d.ribW.toFixed(2) + ' mm, thinner than two extrusion widths. Use fewer slots or a narrower slot.');
+  if (d.nSlots > 1 && d.ribW > d.slotW) w.push('Ribs are wider than the slots. That is a lot of wasted width.');
+  if (p.slots > d.nMax) w.push('Only ' + d.nMax + ' slots of that width fit. The count has been trimmed.');
+  if (d.side < p.sideBorder - 0.01 || d.front < p.frontBorder - 0.01) w.push('Borders trimmed to fit the footprint.');
+  if (d.depth < 3) w.push('Slots are only ' + d.depth.toFixed(1) + ' mm deep. Add height units or thin the floor.');
+  if (p.trayText && d.front < p.textH + 0.4) w.push('Front border is too narrow for ' + p.textH.toFixed(1) + ' mm labels. Widen it or shrink the text.');
+  if (d.cutOn && d.cutR > (d.yBack - d.yFront) / 2 - 0.51) w.push('Finger cut trimmed to fit between the borders.');
+  if (d.round && d.cradDepth > d.depth - 1.0) w.push('Cradle is deeper than the slot. Add height units or use a larger cradle radius.');
+  if (d.round && p.cradleR > 0.01 && p.cradleR < d.slotW / 2 - 0.01) w.push('Cradle radius raised to ' + d.cradR.toFixed(1) + ' mm, half the slot width, since a smaller arc cannot span the slot.');
+  if (p.wall < 2 * p.lineW) w.push('Bin wall is thinner than two extrusion widths.');
+  return w;
+}
+
+function warnings(p) {
+  const d = derive(p);
+  const w = [];
+  if (d.flareStart <= d.floorTop + 2) w.push('Bin is too short for this floor thickness. Add height units.');
+  if (d.labelOn && d.yInner < -d.HY + POCKET0 + 2) w.push('Label is deeper than the bin. Reduce the label height or the border.');
+  if (d.labelOn && d.zRampWall <= d.floorTop + 0.6) w.push('Label ramp reaches the floor and has been steepened to ' + d.tabAngle.toFixed(0) + ' degrees.');
+  if (d.labelOn && d.tabW < d.padW + 2 * p.labelBorder - 0.01) w.push('Label is wider than one cell and has been trimmed.');
+  if (p.snap && d.snapDeflect <= 0.1) w.push('Snap deflection is only ' + d.snapDeflect.toFixed(2) + ' mm. The estimated grip is low; check a printed pair.');
+  if (p.snap && d.snapDeflect > 0.85) w.push('Snap deflection is ' + d.snapDeflect.toFixed(2) + ' mm. The estimated click may be stiff; check a printed pair.');
+  if (d.grooveWall < 1.2 * p.lineW) w.push('Groove leaves only ' + d.grooveWall.toFixed(2) + ' mm of lip wall, thinner than the nozzle prints cleanly.');
+  if (d.scoop < p.scoop - 0.01 && p.scoop > 0.05) w.push('Scoop radius reduced to ' + d.scoop.toFixed(1) + ' mm to fit the bin.');
+  if (p.wall < 2 * p.lineW) w.push('Bin wall is thinner than two extrusion widths.');
+  if (p.beadLen > GRID - CLEAR - 2 * R_OUT - 4) w.push('Snap bead is too long for the flat and has been shortened.');
+  if (p.grooveLen < p.beadLen + 1.5) w.push('Groove is barely longer than the bead. The lid may bind; check a printed pair.');
+  return w;
+}
+
+</script>
+<script>
+// =====================================================================
+// Builders assemble overlapping component shells. A slicer may merge or
+// repair them, but treatment must be checked in its layer preview. Signed
+// volume orients each component; it does not prove consistent winding,
+// manifold aggregate topology or absence of intersections.
+// =====================================================================
+
+function volumeOf(m) {
+  let v = 0;
+  for (let k = 0; k < m.tri.length; k++) {
+    const t = m.tri[k], a = t[0], b = t[1], c = t[2];
+    v += (a[0] * (b[1] * c[2] - b[2] * c[1])
+        - a[1] * (b[0] * c[2] - b[2] * c[0])
+        + a[2] * (b[0] * c[1] - b[1] * c[0])) / 6;
+  }
+  return v;
+}
+
+// Build a closed solid into its own mesh, orient it outward, append it.
+function solid(dst, fn, tag) {
+  const m = Mesh();
+  fn(m);
+  if (volumeOf(m) < 0) for (let i = 0; i < m.tri.length; i++) { const t = m.tri[i]; const s = t[1]; t[1] = t[2]; t[2] = s; }
+  for (let i = 0; i < m.tri.length; i++) dst.tri.push(m.tri[i]);
+  return m;
+}
+
+function offMaker(runs) {
+  // runs: [{key, fn, sign}] evaluated against the level's named amounts
+  return function (lv) {
+    let any = false;
+    for (let i = 0; i < runs.length; i++) if (lv[runs[i].key]) any = true;
+    if (!any) return null;
+    return function (sp) {
+      let v = 0;
+      for (let i = 0; i < runs.length; i++) {
+        const a = lv[runs[i].key];
+        if (a) v += runs[i].sign * a * runs[i].fn(sp);
+      }
+      return v;
+    };
+  };
+}
+
+// The three ways to finish the knife edge at the top of a stacking lip.
+function pushTip(L, apex, style, r, t) {
+  if (style === 'round' && r > 0.01) {
+    L.push({ z: apex - r * (1 + Math.SQRT2), inset: 0 });
+    const tl = tipLevels(apex, r, 9);
+    for (let i = 1; i < tl.length; i++) L.push(tl[i]);
+  } else if (style === 'flat') {
+    L.push({ z: apex - t, inset: 0 });
+    L.push({ z: apex - t, inset: t });
+  } else {
+    L.push({ z: apex, inset: 0 });
+  }
+}
+
+// 1 on the listed straight edges, 0 everywhere else including corners.
+function edgeFn(list) {
+  return function (sp) { return sp.t === 'e' && list.indexOf(sp.axis) >= 0 ? 1 : 0; };
+}
+
+// A plain rectangle ring, coarsely sampled, for box lofts.
+function boxRing(x0, x1, y0, y1) {
+  return rrPoints(rrSpec(x0, x1, y0, y1, [0.01, 0.01, 0.01, 0.01], 1e6, 1, { nX: 2, nY: 2 }), 0, null);
+}
+
+// ---------------------------------------------------------------------
+// Raised text. The string is rasterised on a canvas, the filled pixels
+// are packed into maximal rectangles, and each rectangle becomes a box.
+// Letter counters fall out for free, which a contour based approach
+// would have to triangulate around.
+// ---------------------------------------------------------------------
+
+const TEXT_FONT = '"Helvetica Neue",Helvetica,Arial,sans-serif';
+
+function textRects(str, capH) {
+  if (typeof document === 'undefined' || !str) return [];
+  const S = 72;
+  const c = document.createElement('canvas');
+  let g = c.getContext('2d');
+  g.font = '700 ' + S + 'px ' + TEXT_FONT;
+  c.width = Math.max(8, Math.ceil(g.measureText(str).width) + 60);
+  c.height = Math.ceil(S * 2.0);
+  g = c.getContext('2d');
+  g.font = '700 ' + S + 'px ' + TEXT_FONT;
+  g.textBaseline = 'alphabetic';
+  g.fillStyle = '#000';
+  g.fillText(str, 30, S * 1.4);
+  const W = c.width, Hh = c.height;
+  const img = g.getImageData(0, 0, W, Hh).data;
+  const on = new Uint8Array(W * Hh);
+  let x0 = W, x1 = -1, y0 = Hh, y1 = -1;
+  for (let y = 0; y < Hh; y++) for (let x = 0; x < W; x++) {
+    if (img[(y * W + x) * 4 + 3] > 128) {
+      on[y * W + x] = 1;
+      if (x < x0) x0 = x; if (x > x1) x1 = x;
+      if (y < y0) y0 = y; if (y > y1) y1 = y;
+    }
+  }
+  if (x1 < x0) return [];
+  const s = capH / (y1 - y0 + 1);
+  const cxp = (x0 + x1 + 1) / 2, cyp = (y0 + y1 + 1) / 2;
+  const rects = [];
+  for (let y = y0; y <= y1; y++) {
+    for (let x = x0; x <= x1; x++) {
+      if (!on[y * W + x]) continue;
+      let xe = x; while (xe + 1 <= x1 && on[y * W + xe + 1]) xe++;
+      let ye = y;
+      grow: while (ye + 1 <= y1) {
+        for (let k = x; k <= xe; k++) if (!on[(ye + 1) * W + k]) break grow;
+        ye++;
+      }
+      for (let j = y; j <= ye; j++) for (let k = x; k <= xe; k++) on[j * W + k] = 0;
+      rects.push([(x - cxp) * s, (xe + 1 - cxp) * s, (cyp - (ye + 1)) * s, (cyp - y) * s]);
+      x = xe;
+    }
+  }
+  return rects;
+}
+
+function addTextSolid(dst, rects, cx, cy, z0, z1, scale) {
+  const e = 0.004;
+  for (let i = 0; i < rects.length; i++) {
+    const r = rects[i];
+    const ax = cx + r[0] * scale - e, bx = cx + r[1] * scale + e;
+    const ay = cy + r[2] * scale - e, by = cy + r[3] * scale + e;
+    solid(dst, m => {
+      const lo = boxRing(ax, bx, ay, by);
+      stitch(m, lo, z0, lo, z1, false);
+      capFan(m, lo, z0, false);
+      capFan(m, lo, z1, true);
+    }, 'text');
+  }
+}
+
+// ---------------------------------------------------------------------
+// Slotted tray
+// ---------------------------------------------------------------------
+
+function buildTray(p) {
+  requireValid(p, "tray");
+  const d = deriveTray(p);
+  const out = Mesh();
+  const rs = rectSpec(d.HX, d.HY, R_OUT, p.seg, p.cornerSegs);
+
+  // shell: outer skin, lip, bore, floor
+  const L = [];
+  L.push({ z: H_BASE - 0.30, inset: 0.35 });
+  L.push({ z: H_BASE - 0.05, inset: 0 });
+  if (p.lip) {
+    pushTip(L, d.apex, p.lipTipStyle, d.lipR, d.lipT);
+    L.push({ z: d.H + LIP_A + LIP_B, inset: POCKET1 });
+    L.push({ z: d.H + LIP_A, inset: POCKET1 });
+    L.push({ z: d.H, inset: POCKET0 });
+    L.push({ z: d.H - d.wall, inset: POCKET0 });
+    L.push({ z: d.H - POCKET0, inset: d.wall });
+  } else {
+    L.push({ z: d.H, inset: 0 });
+    L.push({ z: d.H, inset: d.wall });
+  }
+  L.push({ z: d.floorTop, inset: d.wall });
+  solid(out, m => {
+    loft(m, rs, L, false, null);
+    capFan(m, rrPoints(rs, 0.35, null), H_BASE - 0.30, false);
+    capFan(m, rrPoints(rs, d.wall, null), d.floorTop, true);
+  }, 'tray-shell');
+
+  // feet
+  for (let ix = 0; ix < d.nx; ix++) for (let iy = 0; iy < d.ny; iy++) {
+    const fh = (GRID - CLEAR) / 2, fx = d.cx[ix], fy = d.cy[iy];
+    const frs = rrSpec(fx - fh, fx + fh, fy - fh, fy + fh, [R_OUT, R_OUT, R_OUT, R_OUT], d.footSeg || p.seg, p.cornerSegs);
+    const lv = BASE_PROFILE.map(q => ({ z: q[0], inset: q[1] }));
+    lv.push({ z: H_BASE + 0.30, inset: 0.30 });
+    solid(out, m => {
+      for (let k = 0; k < lv.length - 1; k++)
+        stitch(m, rrPoints(frs, lv[k].inset, null), lv[k].z, rrPoints(frs, lv[k + 1].inset, null), lv[k + 1].z, false);
+      capFan(m, rrPoints(frs, 2.95, null), 0, false);
+      capFan(m, rrPoints(frs, 0.30, null), H_BASE + 0.30, true);
+    }, 'tray-foot');
+  }
+
+  // border frame between the bore and the slot field
+  const inner = rrSpec(d.xs0, d.xs1, d.yFront, d.yBack, [0.01, 0.01, 0.01, 0.01], p.seg, p.cornerSegs, { nX: rs.nX, nY: rs.nY });
+  const xEdges = edgeFn(['-X', '+X']);
+  const ringAt = off => rrPoints(inner, 0, off ? (sp => off * xEdges(sp)) : null);
+  const zb = d.floorTop - 0.2;
+  const gzf = z => {
+    if (!d.round) return 0;
+    if (z >= d.cradZ) return 0;
+    const t = d.cradZ - z;
+    return d.slotW / 2 - Math.min(d.slotW / 2, Math.sqrt(Math.max(0, d.cradR * d.cradR - t * t)));
+  };
+  const fLev = [];
+  if (d.round) {
+    const NC = 14;
+    for (let i = 0; i <= NC; i++) {
+      const z = d.floorTop + (d.cradTop - d.floorTop) * (1 - Math.cos((i / NC) * Math.PI / 2));
+      fLev.push({ z, off: -gzf(z) });
+    }
+    fLev.unshift({ z: zb, off: -gzf(d.floorTop) });
+  } else {
+    fLev.push({ z: zb, off: 0 });
+  }
+  fLev.push({ z: d.chamferStart, off: 0 });
+  fLev.push({ z: d.ribTop, off: d.chamfer });
+  solid(out, m => {
+    const O = rrPoints(rs, d.wall - 0.2, null);
+    stitch(m, O, zb, O, d.ribTop, false);
+    for (let k = 0; k < fLev.length - 1; k++) {
+      const A = fLev[k], B = fLev[k + 1];
+      if (Math.abs(A.z - B.z) < 1e-9 && Math.abs(A.off - B.off) < 1e-9) continue;
+      stitch(m, ringAt(A.off), A.z, ringAt(B.off), B.z, true);
+    }
+    annulus(m, ringAt(fLev[0].off), O, zb, false);
+    annulus(m, ringAt(fLev[fLev.length - 1].off), O, d.ribTop, true);
+  }, 'tray-frame');
+
+  // ribs
+  const zs = [zb];
+  if (d.round) {
+    const NC = 14;
+    for (let i = 0; i <= NC; i++) zs.push(d.floorTop + (d.cradTop - d.floorTop) * (1 - Math.cos((i / NC) * Math.PI / 2)));
+  }
+  if (d.cutOn) {
+    const N = 14;
+    for (let i = 0; i <= N; i++) zs.push(d.cutZ - d.cutR * Math.cos((i / N) * Math.PI / 2));
+  }
+  zs.push(d.chamferStart, d.ribTop);
+  zs.sort((a, b2) => a - b2);
+  const fz = z => {
+    if (!d.cutOn || z <= d.cutZ - d.cutR) return 0;
+    if (z >= d.cutZ) return d.cutR;
+    const t = d.cutZ - z;
+    return Math.sqrt(Math.max(0, d.cutR * d.cutR - t * t));
+  };
+  const cz = z => Math.max(0, z - d.chamferStart);
+  // how far each slot wall is pushed in by the cradle at height z
+  const gz = z => {
+    if (!d.round) return 0;
+    if (z >= d.cradZ) return 0;
+    const t = d.cradZ - z;
+    const hw = Math.min(d.slotW / 2, Math.sqrt(Math.max(0, d.cradR * d.cradR - t * t)));
+    return d.slotW / 2 - hw;
+  };
+  for (let i = 0; i + 1 < d.nSlots; i++) {
+    const xr0 = d.slots[i].x1, xr1 = d.slots[i + 1].x0;
+    if (xr1 - xr0 < 0.05) continue;
+    const block = (side) => solid(out, m => {
+      let prev = null, pz = 0;
+      for (let k = 0; k < zs.length; k++) {
+        const z = zs[k], c = cz(z), f = fz(z), g = gz(z);
+        const ya = side < 0 ? d.yFront : d.cutY + f + (d.cutOn ? c : 0);
+        const yb2 = side < 0 ? d.cutY - f - (d.cutOn ? c : 0) : d.yBack;
+        const wid = (xr1 + g - c) - (xr0 - g + c);
+        const sh = wid < 0.2 ? (wid - 0.2) / 2 : 0;
+        const R = boxRing(xr0 - g + c - sh, xr1 + g - c + sh, ya, yb2);
+        if (prev) stitch(m, prev, pz, R, z, false); else capFan(m, R, z, false);
+        prev = R; pz = z;
+      }
+      capFan(m, prev, pz, true);
+    }, 'rib');
+    block(-1); block(+1);
+    if (d.cutOn) solid(out, m => {
+      const R = boxRing(xr0, xr1, d.yFront, d.yBack);
+      stitch(m, R, zb, R, d.cutZ - d.cutR, false);
+      capFan(m, R, zb, false); capFan(m, R, d.cutZ - d.cutR, true);
+    }, 'web');
+  }
+
+  // raised labels on the front border
+  if (p.trayText && p.textD > 0.01) {
+    const labels = String(p.labels || '').split(/[,;|]/).map(s => s.trim());
+    const cy = (-d.HY + d.yFront) / 2;
+    for (let i = 0; i < d.nSlots; i++) {
+      const s = labels[i] || '';
+      if (!s) continue;
+      const rects = textRects(s, p.textH);
+      if (!rects.length) continue;
+      let w = 0;
+      for (const r of rects) { if (r[1] > w) w = r[1]; if (-r[0] > w) w = -r[0]; }
+      const maxW = (d.pitch > 0 ? d.pitch : d.slotW) - 0.6;
+      const scale = 2 * w > maxW ? maxW / (2 * w) : 1;
+      addTextSolid(out, rects, (d.slots[i].x0 + d.slots[i].x1) / 2, cy, d.ribTop, d.ribTop + p.textD, scale);
+    }
+  }
+
+  if (p.trayDir === 'x') {
+    const seen = new Set();
+    for (const t of out.tri) for (const v of t) {
+      if (seen.has(v)) continue;
+      seen.add(v);
+      const x = v[0]; v[0] = -v[1]; v[1] = x;
+    }
+  }
+  return out;
+}
+
+// ---------------------------------------------------------------------
+// Label ramp: a sloped gusset off one wall ending in a shelf with a
+// recessed pad. Built as its own closed solid inside the bore.
+// ---------------------------------------------------------------------
+
+function labelRects(p, d, col) {
+  const cx = d.cx[col];
+  const halfR = d.rampW / 2;
+  const lim = d.HX - 0.3;
+  const rx0 = Math.max(cx - halfR, -lim);
+  const rx1 = Math.min(cx + halfR, lim);
+  const px0 = Math.max(cx - d.padW / 2, rx0 + p.labelBorder);
+  const px1 = Math.min(cx + d.padW / 2, rx1 - p.labelBorder);
+  return {
+    ramp: [rx0, rx1, d.yInner, d.tabOut],
+    pad:  [px0, px1, d.yInner + p.labelBorder, d.yWallTop - p.labelBorder],
+  };
+}
+
+function buildRamp(dst, p, d, col) {
+  const R = labelRects(p, d, col);
+  const rr = Math.max(0.4, d.padR + p.labelBorder);
+  const padSpec = rrSpec(R.pad[0], R.pad[1], R.pad[2], R.pad[3],
+                         [d.padR, d.padR, d.padR, d.padR], p.seg, p.cornerSegs);
+  const rampSpec = rrSpec(R.ramp[0], R.ramp[1], R.ramp[2], R.ramp[3],
+                          [0.02, 0.02, rr, rr], p.seg, p.cornerSegs,
+                          { nX: padSpec.nX, nY: padSpec.nY });
+  const padRing = rrPoints(padSpec, 0, null);
+  const rampRing = rrPoints(rampSpec, 0, null);
+  const tan = Math.tan(d.tabAngle * Math.PI / 180);
+  const zf = (x, y) => d.zFace - (y - d.yInner) * tan;
+  const zTopArr = rampRing.map(() => d.zTop);
+  const zBotArr = rampRing.map(q => zf(q[0], q[1]));
+  const padFloor = d.zTop - p.padDepth;
+
+  solid(dst, m => {
+    annulus(m, padRing, rampRing, d.zTop, true);
+    stitch(m, padRing, padFloor, padRing, d.zTop, true);
+    capFan(m, padRing, padFloor, true);
+    stitchZ(m, rampRing, zBotArr, rampRing, zTopArr, false);
+    capFanPlane(m, rampRing, zf, false);
+  }, 'ramp');
+}
+
+// ---------------------------------------------------------------------
+// Bin
+// ---------------------------------------------------------------------
+
+// Experimental bin-foot underside. One connected foot boundary contains
+// one tapered aperture; explicit annular tiles retain its support rim.
+function hollowFootBottom(m, frs, fx, fy) {
+  const rect=(x0,x1,y0,y1)=>[[x1,y0],[x1,y1],[x0,y1],[x0,y0]];
+  const centres = [0], mouthHalf = 7.8, roofHalf = 3.5, roofZ = 4.3;
+  const axis = [-16, ...centres.flatMap(c => [c-mouthHalf,c+mouthHalf]), 16].sort((a,b)=>a-b);
+  const boundary = [];
+  axis.slice(0,-1).forEach(y=>boundary.push([fx+16,fy+y]));
+  [...axis].reverse().slice(0,-1).forEach(x=>boundary.push([fx+x,fy+16]));
+  [...axis].reverse().slice(0,-1).forEach(y=>boundary.push([fx-16,fy+y]));
+  axis.slice(0,-1).forEach(x=>boundary.push([fx+x,fy-16]));
+  // Zip unlike convex rings without splitting existing exterior vertices.
+  const ordered = ring => ring.map(v=>({v,a:Math.atan2(v[1]-fy,v[0]-fx)})).sort((a,b)=>a.a-b.a);
+  const inner=ordered(boundary), outer=ordered(rrPoints(frs,2.95,null));
+  let i=0,j=0;
+  while(i<inner.length || j<outer.length) {
+    const I=inner[i%inner.length].v, O=outer[j%outer.length].v;
+    const ia=i+1<inner.length ? inner[i+1].a : inner[0].a+2*Math.PI;
+    const oa=j+1<outer.length ? outer[j+1].a : outer[0].a+2*Math.PI;
+    if(j<outer.length && (i===inner.length || oa<=ia)) {
+      const N=outer[(j+1)%outer.length].v;
+      push3(m,[...I,0],[...N,0],[...O,0]); j++;
+    } else {
+      const N=inner[(i+1)%inner.length].v;
+      push3(m,[...I,0],[...N,0],[...O,0]); i++;
+    }
+  }
+  for(let x=0;x<axis.length-1;x++) for(let y=0;y<axis.length-1;y++) {
+    // The odd-indexed intervals are holes; the remaining tiles are webs.
+    if(x%2===1 && y%2===1) continue;
+    const r=rect(fx+axis[x],fx+axis[x+1],fy+axis[y],fy+axis[y+1]);
+    push3(m,[...r[0],0],[...r[2],0],[...r[1],0]);
+    push3(m,[...r[0],0],[...r[3],0],[...r[2],0]);
+  }
+  for(const x of centres) for(const y of centres) {
+    const mouth=rect(fx+x-mouthHalf,fx+x+mouthHalf,fy+y-mouthHalf,fy+y+mouthHalf);
+    const roof=rect(fx+x-roofHalf,fx+x+roofHalf,fy+y-roofHalf,fy+y+roofHalf);
+    stitch(m,mouth,0,roof,roofZ,true);
+    capFan(m,roof,roofZ,false);
+  }
+}
+
+function buildBin(p) {
+  requireValid(p, "bin");
+  const d = derive(p);
+  const out = Mesh();
+  const rs = rectSpec(d.HX, d.HY, R_OUT, p.seg, p.cornerSegs);
+  const grooveRun = runFn(d.cx, d.cy, p.grooveLen, 0);
+  const scoopW = facesFn(scoopFaces(p.scoopWalls));
+  const mkOff = offMaker([
+    { key: 'off',   fn: grooveRun, sign: +1 },
+    { key: 'scoop', fn: scoopW,    sign: -1 },
+  ]);
+
+  const insetAt = z => {
+    if (z <= d.H) return POCKET0;
+    if (z <= d.H + LIP_A) return POCKET0 - (z - d.H) * (POCKET0 - POCKET1) / LIP_A;
+    return POCKET1;
+  };
+
+  const L = [];
+  L.push({ z: H_BASE - 0.30, inset: 0.35 });
+  L.push({ z: H_BASE - 0.05, inset: 0 });
+
+  if (p.lip) {
+    pushTip(L, d.apex, p.lipTipStyle, d.lipR, d.lipT);
+    L.push({ z: d.H + LIP_A + LIP_B, inset: POCKET1 });
+    const g0 = Math.max(d.H + 0.05, d.grooveZ0);
+    const g1 = Math.min(d.H + LIP_A + LIP_B - 0.05, d.grooveZ1);
+    if (p.groove && g1 > g0 + 0.1) {
+      L.push({ z: g1, inset: POCKET1, off: 0 });
+      L.push({ z: g1, inset: POCKET1, off: p.grooveDepth });
+      L.push({ z: g0, inset: POCKET1, off: p.grooveDepth });
+      L.push({ z: g0, inset: insetAt(g0), off: 0 });
+    }
+    if (d.H + LIP_A < g0 || !p.groove) L.push({ z: d.H + LIP_A, inset: POCKET1 });
+    L.push({ z: d.H, inset: POCKET0 });
+  } else {
+    L.push({ z: d.H, inset: 0 });
+    L.push({ z: d.H, inset: POCKET0 });
+  }
+
+  L.push({ z: d.flareEnd, inset: POCKET0 });
+  L.push({ z: d.flareStart, inset: d.wall });
+  if (d.scoop > 0.05) {
+    const N = 12;
+    for (let i = N; i >= 0; i--) {
+      const th = (i / N) * Math.PI / 2;
+      L.push({ z: d.floorTop + d.scoop * (1 - Math.cos(th)), inset: d.wall, scoop: d.scoop * (1 - Math.sin(th)) });
+    }
+  } else {
+    L.push({ z: d.floorTop, inset: d.wall });
+  }
+  const last = L[L.length - 1];
+
+  solid(out, m => {
+    loft(m, rs, L, false, mkOff);
+    capFan(m, rrPoints(rs, 0.35, null), H_BASE - 0.30, false);
+    capFan(m, rrPoints(rs, last.inset, mkOff(last)), d.floorTop, true);
+  }, 'bin-shell');
+
+  // feet
+  for (let ix = 0; ix < p.nx; ix++) {
+    for (let iy = 0; iy < p.ny; iy++) {
+      const fx = d.cx[ix], fy = d.cy[iy];
+      const fh = (GRID - CLEAR) / 2;
+      const frs = rrSpec(fx - fh, fx + fh, fy - fh, fy + fh, [R_OUT, R_OUT, R_OUT, R_OUT], d.footSeg, p.cornerSegs);
+      const lv = BASE_PROFILE.map(q => ({ z: q[0], inset: q[1] }));
+      lv.push({ z: H_BASE + 0.30, inset: 0.30 });
+      solid(out, m => {
+        for (let k = 0; k < lv.length - 1; k++) {
+          stitch(m, rrPoints(frs, lv[k].inset, null), lv[k].z,
+                    rrPoints(frs, lv[k + 1].inset, null), lv[k + 1].z, false);
+        }
+        if (p.hollowFeet) {
+          hollowFootBottom(m, frs, fx, fy);
+        } else {
+          capFan(m, rrPoints(frs, 2.95, null), 0, false);
+        }
+        capFan(m, rrPoints(frs, 0.30, null), H_BASE + 0.30, true);
+      }, 'bin-foot');
+    }
+  }
+
+  for (let i = 0; i < d.cols.length; i++) buildRamp(out, p, d, d.cols[i]);
+  return out;
+}
+
+// ---------------------------------------------------------------------
+// Lid
+// ---------------------------------------------------------------------
+
+function windowSpecs(p, d, col, counts) {
+  const R = labelRects(p, d, col);
+  const bot = rrSpec(R.pad[0], R.pad[1], R.pad[2], R.pad[3],
+                     [d.padR, d.padR, d.padR, d.padR], p.seg, p.cornerSegs, counts);
+  const g = d.winGrow;
+  const cx = d.cx[col];
+  const lo = cx - (GRID - CLEAR) / 2 + d.lidFloorInset;
+  const hi = cx + (GRID - CLEAR) / 2 - d.lidFloorInset;
+  const yl = -d.HY + d.lidFloorInset, yh = d.HY - d.lidFloorInset;
+  const tx0 = Math.max(R.pad[0] - g, lo), tx1 = Math.min(R.pad[1] + g, hi);
+  const ty0 = Math.max(R.pad[2] - g, yl), ty1 = Math.min(R.pad[3] + g, yh);
+  const tr = Math.max(0.4, d.padR + g);
+  const top = rrSpec(tx0, tx1, ty0, ty1, [tr, tr, tr, tr], p.seg, p.cornerSegs, counts);
+  return { bot, top };
+}
+
+function buildLid(p) {
+  requireValid(p, "bin");
+  const d = derive(p);
+  const out = Mesh();
+  const lipR = d.lipR;
+
+  // feet, one solid per cell, with the snap bead and an optional window
+  for (let ix = 0; ix < p.nx; ix++) {
+    for (let iy = 0; iy < p.ny; iy++) {
+      const fx = d.cx[ix], fy = d.cy[iy];
+      const fh = (GRID - CLEAR) / 2;
+      const frs = rrSpec(fx - fh, fx + fh, fy - fh, fy + fh, [R_OUT, R_OUT, R_OUT, R_OUT], d.footSeg, p.cornerSegs);
+      const bead = runFn([fx], [fy], p.beadLen, 0.5);
+      const mkOff = offMaker([{ key: 'bead', fn: bead, sign: +1 }]);
+      const lv = [{ z: 0, inset: 2.95 }, { z: 0.8, inset: 2.15 }];
+      if (p.snap && d.beadR > 0.05) {
+        const NB = 12;
+        lv.push({ z: d.beadC - d.beadR, inset: 2.15 });
+        for (let i = 0; i <= NB; i++) {
+          const th = -Math.PI / 2 + (i / NB) * Math.PI;
+          lv.push({ z: d.beadC + d.beadR * Math.sin(th), inset: 2.15, bead: d.beadR * Math.cos(th) });
+        }
+        lv.push({ z: d.beadC + d.beadR, inset: 2.15 });
+      }
+      lv.push({ z: 2.6, inset: 2.15 });
+      lv.push({ z: H_BASE, inset: 0 });
+  // Radial mating clearance tapers to zero at the foot shoulder.
+  lv.forEach(level => { if (level.z < H_BASE) level.inset += p.stackClear; });
+
+      const hasWin = p.window && d.labelOn && d.cols.indexOf(ix) >= 0 && iy === d.cy.length - 1;
+      let wb = null, wt = null;
+      if (hasWin) {
+        const ws = windowSpecs(p, d, ix, { nX: frs.nX, nY: frs.nY });
+        wb = rrPoints(ws.bot, 0, null);
+        wt = rrPoints(ws.top, 0, null);
+      }
+
+      solid(out, m => {
+        for (let k = 0; k < lv.length - 1; k++) {
+          const A = lv[k], B = lv[k + 1];
+          if (Math.abs(A.z - B.z) < 1e-9 && Math.abs(A.inset - B.inset) < 1e-9 && Math.abs((A.bead || 0) - (B.bead || 0)) < 1e-9) continue;
+          stitch(m, rrPoints(frs, A.inset, mkOff(A)), A.z,
+                    rrPoints(frs, B.inset, mkOff(B)), B.z, false);
+        }
+        if (hasWin) {
+          annulus(m, wb, rrPoints(frs, 2.95 + p.stackClear, null), 0, false);
+          annulus(m, wt, rrPoints(frs, 0, null), H_BASE, true);
+          stitch(m, wb, 0, wb, d.winLedge, true);
+          stitch(m, wb, d.winLedge, wt, H_BASE, true);
+        } else {
+          capFan(m, rrPoints(frs, 2.95 + p.stackClear, null), 0, false);
+          capFan(m, rrPoints(frs, 0, null), H_BASE, true);
+        }
+      }, 'lid-foot');
+    }
+  }
+
+  // perimeter frame
+  const rs = rectSpec(d.HX, d.HY, R_OUT, p.seg, p.cornerSegs);
+  const F = [];
+  F.push({ z: H_BASE - 0.30, inset: 0.35 });
+  F.push({ z: H_BASE - 0.05, inset: 0 });
+  const zc = d.lidApex - lipR * (1 + Math.SQRT2);
+  F.push({ z: zc, inset: 0 });
+  const tl = tipLevels(d.lidApex, lipR, 9);
+  for (let i = 1; i < tl.length; i++) F.push(tl[i]);
+  F.push({ z: d.lidBodyTop + LIP_A + LIP_B, inset: POCKET1 });
+  F.push({ z: d.lidBodyTop + LIP_A, inset: POCKET1 });
+  F.push({ z: d.lidBodyTop, inset: POCKET0 });
+  F.push({ z: H_BASE + d.lidChamfer, inset: POCKET0 });
+  F.push({ z: H_BASE, inset: d.lidFloorInset });
+  F.push({ z: H_BASE - 0.30, inset: d.lidFloorInset });
+  solid(out, m => {
+    loft(m, rs, F, false, null);
+    annulus(m, rrPoints(rs, d.lidFloorInset, null), rrPoints(rs, 0.35, null), H_BASE - 0.30, false);
+  }, 'lid-frame');
+
+  // ribs between cells
+  const prof = [
+    [H_BASE - 0.30, 0.25 + d.lidFloorInset],
+    [H_BASE,        0.25 + d.lidFloorInset],
+    [H_BASE + d.lidChamfer, 0.25 + POCKET0],
+    [d.lidBodyTop,  0.25 + POCKET0],
+    [d.lidBodyTop + LIP_A, 0.25 + POCKET1],
+    [d.lidBodyTop + LIP_A + LIP_B, 0.25 + POCKET1],
+    [d.lidTop,      0.25 + lipR * Math.SQRT2],
+  ];
+  const rib = (axis, c, a0, a1) => {
+    const poly = [];
+    for (let i = 0; i < prof.length; i++) poly.push([c - prof[i][1], prof[i][0]]);
+    for (let i = prof.length - 1; i >= 0; i--) poly.push([c + prof[i][1], prof[i][0]]);
+    solid(out, m => {
+      const P = (u, v) => axis === 'x' ? [u[0], v, u[1]] : [v, u[0], u[1]];
+      for (let i = 0; i < poly.length; i++) {
+        const j = (i + 1) % poly.length;
+        push3(m, P(poly[i], a0), P(poly[j], a0), P(poly[j], a1));
+        push3(m, P(poly[i], a0), P(poly[j], a1), P(poly[i], a1));
+      }
+      let mx = 0, mz = 0;
+      for (let i = 0; i < poly.length; i++) { mx += poly[i][0]; mz += poly[i][1]; }
+      mx /= poly.length; mz /= poly.length;
+      for (let i = 0; i < poly.length; i++) {
+        const j = (i + 1) % poly.length;
+        push3(m, P([mx, mz], a0), P(poly[j], a0), P(poly[i], a0));
+        push3(m, P([mx, mz], a1), P(poly[i], a1), P(poly[j], a1));
+      }
+    }, 'rib');
+  };
+  for (let i = 0; i < p.nx - 1; i++) rib('x', (d.cx[i] + d.cx[i + 1]) / 2, -d.HY + 0.2, d.HY - 0.2);
+  for (let i = 0; i < p.ny - 1; i++) rib('y', (d.cy[i] + d.cy[i + 1]) / 2, -d.HX + 0.2, d.HX - 0.2);
+
+  return out;
+}
+
+// ---------------------------------------------------------------------
+// Output
+// ---------------------------------------------------------------------
+
+function clean(m) {
+  const out = { tri: [] };
+  for (let i = 0; i < m.tri.length; i++) {
+    const t = m.tri[i], a = t[0], b = t[1], c = t[2];
+    const ux = b[0]-a[0], uy = b[1]-a[1], uz = b[2]-a[2];
+    const vx = c[0]-a[0], vy = c[1]-a[1], vz = c[2]-a[2];
+    const nx = uy*vz-uz*vy, ny = uz*vx-ux*vz, nz = ux*vy-uy*vx;
+    if (nx*nx + ny*ny + nz*nz > 1e-14) out.tri.push(t);
+  }
+  return out;
+}
+
+function toFloat32(m0) {
+  const m = clean(m0);
+  const a = new Float32Array(m.tri.length * 9);
+  let k = 0;
+  for (let i = 0; i < m.tri.length; i++) {
+    const t = m.tri[i];
+    for (let j = 0; j < 3; j++) { a[k++] = t[j][0]; a[k++] = t[j][1]; a[k++] = t[j][2]; }
+  }
+  return a;
+}
+
+function toSTL(m0, name) {
+  const m = clean(m0);
+  const n = m.tri.length;
+  const buf = new ArrayBuffer(84 + n * 50);
+  const dv = new DataView(buf);
+  const hdr = ('gridfinity lidded bin: ' + name).slice(0, 79);
+  for (let i = 0; i < hdr.length; i++) dv.setUint8(i, hdr.charCodeAt(i));
+  dv.setUint32(80, n, true);
+  let o = 84;
+  for (let i = 0; i < n; i++) {
+    const t = m.tri[i], a = t[0], b = t[1], c = t[2];
+    const ux = b[0] - a[0], uy = b[1] - a[1], uz = b[2] - a[2];
+    const vx = c[0] - a[0], vy = c[1] - a[1], vz = c[2] - a[2];
+    const nx = uy * vz - uz * vy, ny = uz * vx - ux * vz, nz = ux * vy - uy * vx;
+    const Ln = Math.sqrt(nx * nx + ny * ny + nz * nz) || 1;
+    dv.setFloat32(o, nx / Ln, true); dv.setFloat32(o + 4, ny / Ln, true); dv.setFloat32(o + 8, nz / Ln, true); o += 12;
+    for (let j = 0; j < 3; j++) {
+      dv.setFloat32(o, t[j][0], true); dv.setFloat32(o + 4, t[j][1], true); dv.setFloat32(o + 8, t[j][2], true); o += 12;
+    }
+    dv.setUint16(o, 0, true); o += 2;
+  }
+  return buf;
+}
+
+
+// =====================================================================
+// Lens wipe box. A gridfinity module sized around a stack of foil
+// sachet wipes, with a scooped front opening and the same snap on
+// stackable lid the parts bin uses.
+//
+// Two things the parts bin does not do:
+//   Half cells   the footprint moves in 0.5 U steps, so a pack that
+//                needs 2.5 cells does not have to round up to 3. A half
+//                cell rides on 21 mm feet, two of which fill one 42 mm
+//                baseplate pocket, which is how the reference model
+//                does it.
+//   Front scoop  the top edge of the front wall dips on a raised cosine
+//                that leaves the rim tangentially, so there is no corner
+//                to catch a finger and nothing in the cut overhangs.
+//                It is built by clamping every loft level's height per
+//                point, so the wall, the lip and the rim all stop
+//                together at the curve instead of being cut away after
+//                the fact.
+// =====================================================================
+
+// Feet for an axis that may be a half cell. A half step drops the whole
+// axis onto the 21 mm half grid, so the feet stay symmetric about the
+// centre and still seat two to a baseplate pocket.
+function footAxis(n) {
+  const k2 = Math.round(n * 2);
+  const half = (k2 % 2) === 1;
+  const pitch = half ? GRID / 2 : GRID;
+  const k = half ? k2 : k2 / 2;
+  const c = [];
+  for (let i = 0; i < k; i++) c.push((i - (k - 1) / 2) * pitch);
+  return { c, pitch, half, hf: (pitch - CLEAR) / 2 };
+}
+
+function deriveWipe(p) {
+  const nx = Math.max(1, Math.round(p.wnx * 2) / 2);
+  const ny = Math.max(1, Math.round(p.wny * 2) / 2);
+  const HX = (GRID * nx - CLEAR) / 2;
+  const HY = (GRID * ny - CLEAR) / 2;
+  const H  = HU * p.whu;
+  const apex = H + LIP_H;
+  const lipR = Math.max(0, Math.min(p.lipRound, 1.2));
+  const lipT = Math.max(0.2, Math.min(p.lipTip, 2.0));
+  const binTop = p.lipTipStyle === 'round' ? tipTop(apex, lipR)
+               : p.lipTipStyle === 'flat'  ? apex - lipT : apex;
+
+  const wall = Math.max(0.6, Math.min(p.wall, POCKET0 - 0.4));
+  const floorT = Math.max(0.6, p.floorT);
+  const floorTop = H_BASE + floorT;
+  const flareEnd = H - wall;
+  const flareStart = H - POCKET0;
+
+  // snap, identical to the parts bin so one lid recipe covers both
+  const beadR = Math.max(0.2, Math.min(p.beadR, 0.9));
+  const beadC = 0.8 + (2.6 - 0.8) / 2;
+  const grooveZ0 = H - SEAT + (beadC - beadR) - p.grooveClear;
+  const grooveZ1 = H - SEAT + (beadC + beadR) + p.grooveClear;
+  const grooveInset = Math.max(0.35, POCKET1 - p.grooveDepth);
+
+  const openX = GRID * nx - CLEAR - 2 * wall;
+  const openY = GRID * ny - CLEAR - 2 * wall;
+  const fillet = p.wFillet <= 0.05 ? 0 : Math.max(0, Math.min(p.wFillet,
+      Math.min(openX, openY) / 2 - 1, flareStart - floorTop - 1));
+
+  // front scoop
+  const fx = footAxis(nx), fy = footAxis(ny);
+  const minLip = 15;                          // total front lip the lid needs
+  const notchMaxW = Math.max(4, 2 * HX - 2 * R_OUT - minLip);
+  const notchW = Math.max(4, Math.min(p.notchW, notchMaxW));
+  // never cut below a retaining lip above the floor, and never so deep
+  // that the wall above the pack is gone
+  const notchFloor = floorTop + Math.max(1.0, p.notchKeep);
+  const notchDrop = Math.max(0, Math.min(p.notchDrop, binTop - notchFloor));
+  const notchFlat = Math.max(0, Math.min(p.notchFlat, notchW - 8));
+  const notchOn = p.notch && notchDrop > 0.3 && notchW > 4;
+  const notchZ = binTop - notchDrop;
+  // how much of the stacking lip survives on the front wall
+  const lipLeft = 2 * HX - 2 * R_OUT - notchW;
+
+  const lidBody = Math.max(POCKET0, p.lidBody);
+  const lidApex = H_BASE + lidBody + LIP_H;
+  const lidTop = tipTop(lidApex, lipR);
+  const lidBodyTop = H_BASE + lidBody;
+  const lidChamfer = Math.max(0, Math.min(p.lidChamfer, lidBody - LIP_A - 0.2));
+  const lidFloorInset = POCKET0 + lidChamfer;
+
+  const depth = H - SEAT - floorTop;
+  const sheetT = Math.max(0.2, p.sheetT);
+  const sheetN = Math.max(1, Math.round(p.sheetN));
+  // The stack can be given either way. Everything downstream reads
+  // stackNeed, so the two modes are interchangeable.
+  const byHeight = p.stackMode === 'height';
+  const stackNeed = byHeight ? Math.max(0.5, p.stackH) : sheetN * sheetT;
+  const packFits = Math.floor(depth / sheetT);
+
+  // bead cannot be longer than the flat it sits on
+  const flatX = 2 * fx.hf - 2 * R_OUT, flatY = 2 * fy.hf - 2 * R_OUT;
+  const beadLen = Math.max(3, Math.min(p.beadLen, flatX - 2, flatY - 2));
+  const grooveLen = Math.max(beadLen + 1.5, Math.min(p.grooveLen, Math.min(flatX, flatY) - 0.5));
+
+  return {
+    nx, ny, HX, HY, H, apex, binTop, lipR, lipT, wall, floorT, floorTop,
+    flareStart, flareEnd, openX, openY, fillet,
+    beadR, beadC, grooveZ0, grooveZ1, grooveInset, grooveWall: grooveInset,
+    beadLen, grooveLen,
+    notchOn, notchW, notchFlat, notchDrop, notchZ, notchFloor, notchMaxW, lipLeft,
+    lidBody, lidApex, lidTop, lidBodyTop, lidChamfer, lidFloorInset,
+    depth, sheetT, sheetN, byHeight, stackNeed, packFits,
+    snapDeflect: beadR - (2.15 - POCKET1) - p.stackClear,
+    fx, fy,
+    footSeg: p.seg * Math.max(1, Math.sqrt(nx * ny) / 1.5),
+  };
+}
+
+// Height clamp for the front scoop. Returns a function of a ring spec
+// sample that gives the ceiling for that point, or Infinity where the
+// wall runs full height. The curve is a raised cosine, so it meets the
+// rim with zero slope at both ends and bottoms out flat in the middle.
+function notchClampFn(d) {
+  if (!d.notchOn) return null;
+  const half = d.notchW / 2, flat = d.notchFlat / 2;
+  const span = Math.max(0.01, half - flat);
+  return function (sp) {
+    if (sp.t !== 'e' || sp.axis !== '-Y') return Infinity;
+    const a = Math.abs(spPos(sp));
+    if (a >= half) return Infinity;
+    const u = a <= flat ? 0 : (a - flat) / span;
+    return d.binTop - d.notchDrop * 0.5 * (1 + Math.cos(Math.PI * u));
+  };
+}
+
+// Loft with a per point ceiling. Levels above the ceiling collapse onto
+// it, which is what turns a stack of flat rings into a wall with a
+// curved top edge: the collapsed rings degenerate to zero height and
+// their annuli become the flat top of the wall.
+function loftClamped(m, rs, levels, flip, mkOff, clamp, capInset) {
+  const n = rs.specs.length;
+  const cz = clamp ? rs.specs.map(clamp) : null;
+  // A point held down by the ceiling also stops moving inward past the
+  // wall thickness. Without that cap the lip pocket levels, which run
+  // inward to 2.6 and then back out to the wall, would fold over each
+  // other once they all collapse onto the same height and leave a pair
+  // of coincident faces around nothing. Capped, the collapsed levels
+  // run 0 to wall and stop, which is just the wall in section: the flat
+  // top of the scooped edge.
+  const level = lv => {
+    const off = mkOff ? mkOff(lv) : null;
+    const R = rrPoints(rs, lv.inset, off);
+    if (!cz) return { R, z: R.map(() => lv.z) };
+    const cap = Math.min(lv.inset, capInset);
+    const Rc = cap < lv.inset - 1e-9 ? rrPoints(rs, cap, off) : R;
+    const P = new Array(n), Z = new Array(n);
+    for (let i = 0; i < n; i++) {
+      const held = lv.z > cz[i] + 1e-9;
+      P[i] = held ? Rc[i] : R[i];
+      Z[i] = held ? cz[i] : lv.z;
+    }
+    return { R: P, z: Z };
+  };
+  const same = (a, b) => {
+    for (let i = 0; i < n; i++) {
+      if (Math.abs(a.z[i] - b.z[i]) > 1e-9) return false;
+      if (Math.abs(a.R[i][0] - b.R[i][0]) > 1e-9 || Math.abs(a.R[i][1] - b.R[i][1]) > 1e-9) return false;
+    }
+    return true;
+  };
+  let A = level(levels[0]);
+  for (let k = 0; k < levels.length - 1; k++) {
+    const B = level(levels[k + 1]);
+    if (!same(A, B)) stitchZ(m, A.R, A.z, B.R, B.z, flip);
+    A = B;
+  }
+}
+
+function overlapWipe(p, d) {
+  let v = d.fx.c.length * d.fy.c.length *
+          rectArea(d.fx.hf - 0.2, d.fy.hf - 0.2, R_OUT - 0.2) * 0.60;
+  return v;
+}
+
+function warningsWipe(p) {
+  const d = deriveWipe(p);
+  const w = [];
+  if (d.flareStart <= d.floorTop + 2) w.push('Box is too short for this floor thickness. Add height units.');
+  if (p.snap && d.snapDeflect <= 0.1) w.push('Snap deflection is only ' + d.snapDeflect.toFixed(2) + ' mm. The estimated grip is low; check a printed pair.');
+  if (p.snap && d.snapDeflect > 0.85) w.push('Snap deflection is ' + d.snapDeflect.toFixed(2) + ' mm. The estimated click may be stiff; check a printed pair.');
+  if (d.grooveWall < 1.2 * p.lineW) w.push('Groove leaves only ' + d.grooveWall.toFixed(2) + ' mm of lip wall, thinner than the nozzle prints cleanly.');
+  if (d.notchOn && d.notchDrop < p.notchDrop - 0.01) w.push('Scoop depth trimmed to ' + d.notchDrop.toFixed(1) + ' mm so it keeps ' + p.notchKeep.toFixed(1) + ' mm of wall above the floor.');
+  if (d.notchOn && d.notchW < p.notchW - 0.01) w.push('Scoop width trimmed to ' + d.notchW.toFixed(1) + ' mm to stay off the corner radii.');
+  if (d.notchOn && d.lipLeft < 15 - 0.01) w.push('Only ' + d.lipLeft.toFixed(0) + ' mm of front lip left for the lid to grip.');
+  if (p.wall < 2 * p.lineW) w.push('Wall is thinner than two extrusion widths.');
+  if (!d.byHeight && d.packFits < 1) w.push('Not even one sheet fits. Add height units.');
+  if (d.stackNeed > d.depth) w.push('The stack is ' + (d.stackNeed - d.depth).toFixed(1) + ' mm taller than the box is deep. Add height units or thin the floor.');
+  if (!wipePackFits(p, {...d, depth: Infinity})) w.push('The sheet is bigger than the floor by ' + Math.max(packOrientation(p).length - Math.max(d.openX,d.openY), packOrientation(p).width - Math.min(d.openX,d.openY)).toFixed(1) + ' mm. Add a half cell or thin the wall.');
+  return w;
+}
+
+// ---------------------------------------------------------------------
+// Lens wipe box and its lid
+// ---------------------------------------------------------------------
+
+function wipeFeet(dst, p, d, prof, extra) {
+  for (let i = 0; i < d.fx.c.length; i++) {
+    for (let j = 0; j < d.fy.c.length; j++) {
+      const cx = d.fx.c[i], cy = d.fy.c[j];
+      const frs = rrSpec(cx - d.fx.hf, cx + d.fx.hf, cy - d.fy.hf, cy + d.fy.hf,
+                         [R_OUT, R_OUT, R_OUT, R_OUT], d.footSeg, p.cornerSegs);
+      const mkOff = extra ? extra(cx, cy) : null;
+      solid(dst, m => {
+        for (let k = 0; k < prof.length - 1; k++) {
+          const A = prof[k], B = prof[k + 1];
+          if (Math.abs(A.z - B.z) < 1e-9 && Math.abs(A.inset - B.inset) < 1e-9
+              && Math.abs((A.bead || 0) - (B.bead || 0)) < 1e-9) continue;
+          stitch(m, rrPoints(frs, A.inset, mkOff ? mkOff(A) : null), A.z,
+                    rrPoints(frs, B.inset, mkOff ? mkOff(B) : null), B.z, false);
+        }
+        capFan(m, rrPoints(frs, prof[0].inset, mkOff ? mkOff(prof[0]) : null), prof[0].z, false);
+        const L = prof[prof.length - 1];
+        capFan(m, rrPoints(frs, L.inset, mkOff ? mkOff(L) : null), L.z, true);
+      }, 'wipe-foot');
+    }
+  }
+}
+
+function buildWipeBox(p) {
+  requireValid(p, "wipe");
+  const d = deriveWipe(p);
+  const out = Mesh();
+  const rs = rectSpec(d.HX, d.HY, R_OUT, p.seg, p.cornerSegs);
+  const clamp = notchClampFn(d);
+  const grooveRun0 = runFn(d.fx.c, d.fy.c, d.grooveLen, 0);
+  // No groove where the scoop has already taken the lip away. Without
+  // this the collapsed lip levels double back on themselves and leave a
+  // pair of coincident faces enclosing nothing.
+  const gTop = d.grooveZ1;
+  const grooveRun = clamp ? (sp => clamp(sp) < gTop + 0.001 ? 0 : grooveRun0(sp)) : grooveRun0;
+  const filletW = facesFn(['-Y', '+Y', '-X', '+X']);
+  const mkOff = offMaker([
+    { key: 'off',    fn: grooveRun, sign: +1 },
+    { key: 'fillet', fn: filletW,   sign: -1 },
+  ]);
+
+  const insetAt = z => {
+    if (z <= d.H) return POCKET0;
+    if (z <= d.H + LIP_A) return POCKET0 - (z - d.H) * (POCKET0 - POCKET1) / LIP_A;
+    return POCKET1;
+  };
+
+  const L = [];
+  L.push({ z: H_BASE - 0.30, inset: 0.35 });
+  L.push({ z: H_BASE - 0.05, inset: 0 });
+  pushTip(L, d.apex, p.lipTipStyle, d.lipR, d.lipT);
+  L.push({ z: d.H + LIP_A + LIP_B, inset: POCKET1 });
+  const g0 = Math.max(d.H + 0.05, d.grooveZ0);
+  const g1 = Math.min(d.H + LIP_A + LIP_B - 0.05, d.grooveZ1);
+  if (p.groove && g1 > g0 + 0.1) {
+    L.push({ z: g1, inset: POCKET1, off: 0 });
+    L.push({ z: g1, inset: POCKET1, off: p.grooveDepth });
+    L.push({ z: g0, inset: POCKET1, off: p.grooveDepth });
+    L.push({ z: g0, inset: insetAt(g0), off: 0 });
+  }
+  if (d.H + LIP_A < g0 || !p.groove) L.push({ z: d.H + LIP_A, inset: POCKET1 });
+  L.push({ z: d.H, inset: POCKET0 });
+  L.push({ z: d.flareEnd, inset: POCKET0 });
+  L.push({ z: d.flareStart, inset: d.wall });
+  if (d.fillet > 0.05) {
+    const N = 12;
+    for (let i = N; i >= 0; i--) {
+      const th = (i / N) * Math.PI / 2;
+      L.push({ z: d.floorTop + d.fillet * (1 - Math.cos(th)), inset: d.wall, fillet: d.fillet * (1 - Math.sin(th)) });
+    }
+  } else {
+    L.push({ z: d.floorTop, inset: d.wall });
+  }
+  const last = L[L.length - 1];
+
+  solid(out, m => {
+    loftClamped(m, rs, L, false, mkOff, clamp, d.wall);
+    capFan(m, rrPoints(rs, 0.35, null), H_BASE - 0.30, false);
+    capFan(m, rrPoints(rs, last.inset, mkOff(last)), d.floorTop, true);
+  }, 'wipe-shell');
+
+  const base = BASE_PROFILE.map(q => ({ z: q[0], inset: q[1] }));
+  base.push({ z: H_BASE + 0.30, inset: 0.30 });
+  wipeFeet(out, p, d, base, null);
+  return out;
+}
+
+function buildWipeLid(p) {
+  requireValid(p, "wipe");
+  const d = deriveWipe(p);
+  const out = Mesh();
+  const lv = [{ z: 0, inset: 2.95 }, { z: 0.8, inset: 2.15 }];
+  if (p.snap && d.beadR > 0.05) {
+    const NB = 12;
+    lv.push({ z: d.beadC - d.beadR, inset: 2.15 });
+    for (let i = 0; i <= NB; i++) {
+      const th = -Math.PI / 2 + (i / NB) * Math.PI;
+      lv.push({ z: d.beadC + d.beadR * Math.sin(th), inset: 2.15, bead: d.beadR * Math.cos(th) });
+    }
+    lv.push({ z: d.beadC + d.beadR, inset: 2.15 });
+  }
+  lv.push({ z: 2.6, inset: 2.15 });
+  lv.push({ z: H_BASE, inset: 0 });
+  // Radial mating clearance tapers to zero at the foot shoulder.
+  lv.forEach(level => { if (level.z < H_BASE) level.inset += p.stackClear; });
+  wipeFeet(out, p, d, lv, (cx, cy) => offMaker([
+    { key: 'bead', fn: runFn([cx], [cy], d.beadLen, 0.5), sign: +1 },
+  ]));
+
+  const rs = rectSpec(d.HX, d.HY, R_OUT, p.seg, p.cornerSegs);
+  const F = [];
+  F.push({ z: H_BASE - 0.30, inset: 0.35 });
+  F.push({ z: H_BASE - 0.05, inset: 0 });
+  F.push({ z: d.lidApex - d.lipR * (1 + Math.SQRT2), inset: 0 });
+  const tl = tipLevels(d.lidApex, d.lipR, 9);
+  for (let i = 1; i < tl.length; i++) F.push(tl[i]);
+  F.push({ z: d.lidBodyTop + LIP_A + LIP_B, inset: POCKET1 });
+  F.push({ z: d.lidBodyTop + LIP_A, inset: POCKET1 });
+  F.push({ z: d.lidBodyTop, inset: POCKET0 });
+  F.push({ z: H_BASE + d.lidChamfer, inset: POCKET0 });
+  F.push({ z: H_BASE, inset: d.lidFloorInset });
+  F.push({ z: H_BASE - 0.30, inset: d.lidFloorInset });
+  solid(out, m => {
+    loft(m, rs, F, false, null);
+    annulus(m, rrPoints(rs, d.lidFloorInset, null), rrPoints(rs, 0.35, null), H_BASE - 0.30, false);
+  }, 'wipe-lid-frame');
+
+  const prof = [
+    [H_BASE - 0.30, 0.25 + d.lidFloorInset],
+    [H_BASE,        0.25 + d.lidFloorInset],
+    [H_BASE + d.lidChamfer, 0.25 + POCKET0],
+    [d.lidBodyTop,  0.25 + POCKET0],
+    [d.lidBodyTop + LIP_A, 0.25 + POCKET1],
+    [d.lidBodyTop + LIP_A + LIP_B, 0.25 + POCKET1],
+    [d.lidTop,      0.25 + d.lipR * Math.SQRT2],
+  ];
+  const rib = (axis, c, a0, a1) => {
+    const poly = [];
+    for (let i = 0; i < prof.length; i++) poly.push([c - prof[i][1], prof[i][0]]);
+    for (let i = prof.length - 1; i >= 0; i--) poly.push([c + prof[i][1], prof[i][0]]);
+    solid(out, m => {
+      const P = (u, v) => axis === 'x' ? [u[0], v, u[1]] : [v, u[0], u[1]];
+      for (let i = 0; i < poly.length; i++) {
+        const j = (i + 1) % poly.length;
+        push3(m, P(poly[i], a0), P(poly[j], a0), P(poly[j], a1));
+        push3(m, P(poly[i], a0), P(poly[j], a1), P(poly[i], a1));
+      }
+      let mx = 0, mz = 0;
+      for (let i = 0; i < poly.length; i++) { mx += poly[i][0]; mz += poly[i][1]; }
+      mx /= poly.length; mz /= poly.length;
+      for (let i = 0; i < poly.length; i++) {
+        const j = (i + 1) % poly.length;
+        push3(m, P([mx, mz], a0), P(poly[j], a0), P(poly[i], a0));
+        push3(m, P([mx, mz], a1), P(poly[i], a1), P(poly[j], a1));
+      }
+    }, 'wipe-lid-rib');
+  };
+  for (let i = 0; i < d.fx.c.length - 1; i++) rib('x', (d.fx.c[i] + d.fx.c[i + 1]) / 2, -d.HY + 0.2, d.HY - 0.2);
+  for (let i = 0; i < d.fy.c.length - 1; i++) rib('y', (d.fy.c[i] + d.fy.c[i + 1]) / 2, -d.HX + 0.2, d.HX - 0.2);
+  return out;
+}
+
+function overlapWipeLid(p, d) {
+  let v = (rectArea(d.HX - 0.35, d.HY - 0.35, R_OUT - 0.35)
+         - rectArea(d.HX - d.lidFloorInset, d.HY - d.lidFloorInset, Math.max(0.1, R_OUT - d.lidFloorInset))) * 0.30;
+  const rw = 0.5 + 2 * d.lidFloorInset;
+  const nrib = (d.fx.c.length - 1) * (2 * d.HY - 0.4) + (d.fy.c.length - 1) * (2 * d.HX - 0.4);
+  v += nrib * rw * 0.30;
+  return v;
+}
+
+// Guard user and direct API parameters before allocating geometry. This is
+// an envelope/order check, not a Boolean union or self-intersection proof.
+const PARAM_LIMITS = {"nx":[1.0,6.0],"ny":[1.0,6.0],"hu":[2.0,20.0],"wnx":[1.0,6.0],"wny":[1.0,6.0],"whu":[3.0,20.0],"labelCol":[1.0,6.0],"labelH":[3.5,40.0],"labelW":[10.0,240.0],"packL":[20.0,240.0],"packW":[20.0,240.0],"sheetT":[0.3,12.0],"sheetN":[1.0,60.0],"stackH":[2.0,140.0],"notchW":[10.0,200.0],"notchFlat":[0.0,120.0],"notchDrop":[0.0,80.0],"notchKeep":[2.0,40.0],"wFillet":[0.0,12.0],"scoop":[0.0,20.0],"slotW":[1.0,40.0],"slots":[1.0,40.0],"sideBorder":[1.0,20.0],"frontBorder":[1.0,25.0],"backBorder":[1.0,25.0],"cutR":[2.0,30.0],"cutWeb":[0.4,8.0],"cutY":[-60.0,60.0],"textH":[1.5,12.0],"textD":[0.2,2.0],"wall":[0.8,2.2],"floorT":[0.8,6.0],"lipRound":[0.05,1.0],"lipTip":[0.2,2.0],"tabAngle":[35.0,70.0],"tabDrop":[0.0,8.0],"tabFace":[0.6,6.0],"labelBorder":[0.4,4.0],"labelClear":[0.0,1.5],"padDepth":[0.0,1.2],"padR":[0.5,6.0],"winLedge":[0.2,2.0],"beadR":[0.3,0.9],"beadLen":[6.0,28.0],"grooveLen":[8.0,32.0],"grooveDepth":[0.4,1.55],"grooveClear":[0.0,0.4],"stackClear":[0.0,0.4],"lidBody":[2.6,10.0],"lidChamfer":[0.0,2.0],"ribChamfer":[0.0,4.0],"cradleR":[0.0,40.0],"lineW":[0.2,0.9],"seg":[0.2,3.0],"cornerSegs":[3.0,20.0]};
+function validateParams(p, mode) {
+  const errors = [];
+  if (!['bin','tray','wipe'].includes(mode)) errors.push('Unknown model.');
+  if (typeof p.hollowFeet !== 'boolean') errors.push('hollowFeet must be true or false.');
+  if (p.hollowFeet && mode !== 'bin') errors.push('Experimental hollow feet are supported only for bin bodies. Disable hollow feet or select bin mode.');
+  if (typeof p.labels !== 'string' || p.labels.length > 1000) errors.push('Labels must be text of at most 1000 characters.');
+  if (!Number.isFinite(p.layerH) || p.layerH < 0.05 || p.layerH > 1) errors.push('layerH must be from 0.05 to 1 mm.');
+  for (const [key, values] of Object.entries({labelMode:['off','one','all'], lipTipStyle:['round','flat','sharp'], trayDir:['x','y'], slotBottom:['square','round'], scoopWalls:['one','both','four'], stackMode:['count','height']})) {
+    if (!values.includes(p[key])) errors.push('Invalid ' + key + '.');
+  }
+  for (const [key, range] of Object.entries(PARAM_LIMITS)) {
+    if (!Number.isFinite(p[key]) || p[key] < range[0] || p[key] > range[1]) errors.push(key + ' must be a finite number from ' + range[0] + ' to ' + range[1] + '.');
+  }
+  for (const key of ['nx','ny','hu','whu','cornerSegs','slots','sheetN','labelCol']) {
+    if (!Number.isInteger(p[key])) errors.push(key + ' must be a whole number.');
+  }
+  for (const key of ['wnx','wny']) if (!Number.isInteger(p[key] * 2)) errors.push(key + ' must use half-cell steps.');
+  if (errors.length) return errors;
+  if (mode === 'tray') {
+    const d = deriveTray(p);
+    if (d.floorTop + 0.6 >= d.ribTop) errors.push('Tray floor leaves no usable rib height. Add height units or thin the floor.');
+    if (d.round && d.cradTop > d.ribTop - 1) errors.push('Round cradle rises above the slot. Add height units, narrow the slot or increase the cradle radius.');
+    if (d.nSlots > 1 && d.ribW < 0.4) errors.push('Slots leave less than 0.4 mm between ribs. Reduce the slot count or width.');
+  } else {
+    const d = mode === 'wipe' ? deriveWipe(p) : derive(p);
+    if (d.floorTop + 0.6 >= d.flareStart) errors.push('Floor reaches the lip flare. Add height units or thin the floor.');
+    if (mode === 'bin' && d.labelOn) {
+      if (d.yInner < -d.HY + POCKET0 || d.zFace <= d.floorTop + 0.5 || d.zRampWall >= d.zFace) errors.push('Label ramp lies outside the usable bin. Add height units or reduce label height, border, drop or face thickness.');
+      if (d.padW > d.tabW - 2 * p.labelBorder + 0.01) errors.push('Label pad is wider than its shelf. Reduce label width or border.');
+    }
+  }
+  return errors;
+}
+function requireValid(p, mode) {
+  const errors = validateParams(p, mode);
+  if (errors.length) throw new Error(errors.join(' '));
+}
+function packOrientation(p) { return {length: Math.max(p.packL, p.packW), width: Math.min(p.packL, p.packW)}; }
+function wipePackFits(p, d) {
+  const pack = packOrientation(p);
+  return Math.max(d.openX,d.openY) >= pack.length && Math.min(d.openX,d.openY) >= pack.width && d.depth >= d.stackNeed;
+}
+
+const DEFAULTS = {
+  nx: 2, ny: 1, hu: 6,
+  hollowFeet: false,
+  wall: 1.5, floorT: 1.5, scoop: 10.0,
+  lip: true, lipRound: 0.5, stackClear: 0.0,
+  labelMode: 'one', labelCol: 1,
+  labelW: 30, labelH: 12, labelClear: 0.3, labelBorder: 1.0, padR: 2.3, padDepth: 0.2,
+  tabDrop: 1.5, tabFace: 2.0, tabAngle: 45,
+  window: true, winLedge: 0.4,
+  snap: true, groove: true,
+  beadR: 0.9, beadLen: 14.0, grooveLen: 17.0, grooveDepth: 0.9, grooveClear: 0.10,
+  lidBody: 2.6, lidChamfer: 0.8,
+  scoopWalls: 'one', lipTipStyle: 'round', lipTip: 0.6,
+  trayDir: 'y', sideBorder: 4.0, frontBorder: 5.0, backBorder: 1.5,
+  slotBottom: 'square', cradleR: 0,
+  slotW: 8.0, slots: 10, ribChamfer: 1.0,
+  cut: true, cutR: 10.0, cutY: 0.0, cutWeb: 1.0,
+  trayText: true, textH: 4.4, textD: 0.6,
+  labels: '4H, 3H, 2H, H, F, HB, B, 2B, 3B, 4B',
+  lineW: 0.42, layerH: 0.2,
+  seg: 0.7, cornerSegs: 10,
+  wnx: 2.5, wny: 1, whu: 8,
+  wFillet: 2.6, notch: true, notchW: 48, notchFlat: 14, notchDrop: 26, notchKeep: 12,
+  packL: 100, packW: 38, sheetT: 2.9, sheetN: 15,
+  stackMode: 'count', stackH: 43.5,
+};
+
+</script>
+<script>
+(function(){
+"use strict";
+
+const P = Object.assign({}, DEFAULTS);
+let AVAIL = 60, VIEW = 'asm', MODEL = 'bin';
+
+const SLIDERS = ['nx','ny','hu','labelCol','labelH','labelW','scoop',
+  'wall','floorT','lipRound','lipTip','tabAngle','tabDrop','tabFace','labelBorder','labelClear',
+  'padDepth','padR','winLedge','beadR','beadLen','grooveLen','grooveDepth','grooveClear',
+  'stackClear','lidBody','lidChamfer','lineW','seg','cornerSegs',
+  'slotW','slots','sideBorder','frontBorder','backBorder','ribChamfer','cutR','cutWeb','cutY','textH','textD','cradleR',
+  'wnx','wny','whu','wFillet','notchW','notchFlat','notchDrop','notchKeep','packL','packW','sheetT','sheetN','stackH'];
+const NUMS = ['packL','packW','sheetT','sheetN','stackH'];
+const TOGGLES = ['lip','window','snap','groove','cut','trayText','notch','hollowFeet'];
+const UNIT = {nx:'',ny:'',hu:' units',labelCol:'',cornerSegs:'',tabAngle:' deg',slots:'',
+  wnx:'',wny:'',whu:' units',sheetN:''};
+const PRESETS = [[2,1,6],[1,1,6],[1,2,6],[2,2,4],[3,1,3],[1,1,3]];
+const TPRESETS = [[3,2,3],[1,2,3],[3,4,3],[2,4,3],[3,2,4],[1,1,4]];
+const BORES = [7,8,10,12,14,16,18];
+const PENTRAY = {nx:3,ny:4,hu:3,lip:false,wall:1.5,floorT:1.25,trayDir:'y',
+  sideBorder:4,frontBorder:4,backBorder:4,slotW:13.6,slots:7,slotBottom:'round',cradleR:0,
+  ribChamfer:1.0,cut:true,cutR:14,cutWeb:1,cutY:0,trayText:false,
+  labels:'Safari, Eco, Metro, Prera, Kakuno, VP, 146'};
+const TAPES = [3.5,6,9,12,18,24];
+const WPRESETS = [[2.5,1,8],[2,1,8],[1.5,1,7],[3,1,8],[1,1,6],[2,2,6]];
+const ZEISS = {packL:100, packW:38, sheetT:2.9, sheetN:15, stackMode:'count', stackH:43.5};
+const WREFERENCE = {wnx:2.5, wny:1, whu:8, wall:1.2, floorT:1.5, wFillet:2.6,
+  notch:true, notchW:47, notchFlat:16, notchDrop:39, notchKeep:12,
+  packL:100, packW:38, sheetT:2.9, sheetN:15, stackMode:'count', stackH:43.5,
+  lipTipStyle:'round', lipRound:0.5, snap:true, groove:true,
+  beadR:0.9, beadLen:12, grooveLen:15, grooveDepth:0.9, grooveClear:0.10,
+  lidBody:2.6, lidChamfer:0.8};
+const REFERENCE = {nx:2,ny:1,hu:6,wall:1.5,floorT:1.5,scoop:10,scoopWalls:'one',labelMode:'one',labelCol:1,
+  labelW:30,labelH:15,labelClear:0.3,labelBorder:1.0,padR:2.3,padDepth:0.2,
+  tabDrop:1.5,tabFace:2.0,tabAngle:44,window:true,winLedge:0.4,lipTipStyle:'round',lipRound:0.5,
+  beadR:0.9,beadLen:14,grooveLen:17,grooveDepth:1.4,lidBody:2.6,lidChamfer:0.8};
+const TREFERENCE = {nx:3,ny:2,hu:3,lip:false,wall:1.5,floorT:1.25,trayDir:'y',
+  sideBorder:4,frontBorder:5,backBorder:1.5,slotW:8,slots:10,ribChamfer:1.5,
+  cut:true,cutR:10,cutWeb:1,cutY:0,trayText:true,textH:4.4,textD:0.6,
+  labels:'4H, 3H, 2H, H, F, HB, B, 2B, 3B, 4B'};
+
+// Every mode owns a complete parameter snapshot, including shared controls.
+const MODE_DEFAULTS = {
+  bin: {...DEFAULTS},
+  tray: {...DEFAULTS, nx:3, ny:2, hu:3, lip:false, floorT:1.25, wall:1.5},
+  wipe: {...DEFAULTS, wall:1.2, floorT:1.5, lip:true, beadLen:12, grooveLen:15}
+};
+const modeStates = {bin:{params:{...P},avail:60}};
+const $ = id => document.getElementById(id);
+const fmt = v => (Math.abs(v - Math.round(v)) < 1e-9) ? String(Math.round(v)) : String(+v.toFixed(2));
+
+// ---------------- scene ----------------
+const stage = $('stage');
+function startupFailure(message) {
+  const panel = $('startup_error'); panel.hidden = false; panel.textContent = message;
+  $('headline').textContent = 'Preview and exports unavailable';
+  $('sub').textContent = message;
+  ['dl_bin','dl_lid','dl_both'].forEach(id => { $(id).disabled = true; });
+}
+if (typeof THREE === 'undefined') {
+  startupFailure('The Three.js library did not load. Check your internet connection or CDN blocking, then reload this file. Preview and exports are unavailable.'); return;
+}
+let renderer;
+try { renderer = new THREE.WebGLRenderer({antialias:true, alpha:true}); }
+catch (err) { startupFailure('WebGL could not start. Try enabling browser hardware acceleration or another browser, then reload. Preview and exports are unavailable.'); return; }
+renderer.setPixelRatio(Math.min(devicePixelRatio||1, 2));
+renderer.outputEncoding = THREE.sRGBEncoding;
+renderer.toneMapping = THREE.ACESFilmicToneMapping;
+renderer.toneMappingExposure = 0.92;
+stage.appendChild(renderer.domElement);
+const scene = new THREE.Scene();
+const camera = new THREE.PerspectiveCamera(34, 1, 1, 5000);
+
+// A strong sky to ground gradient is what makes a tangent continuous
+// surface like the scoop readable. With a near white ambient everywhere
+// the floor, the sweep and the wall all clip to the same white.
+const hemi = new THREE.HemisphereLight(0xFFFDF7, 0x0C0B09, 0.34); scene.add(hemi);
+// The key rakes in low from the front. A scoop sweeps its normal through
+// 90 degrees, so a raking light lays a bright band along it while the
+// flat floor stays mid grey. Overhead light does the opposite: it lights
+// the floor and the 45 degree part of the sweep almost equally, which is
+// why the scoop used to disappear.
+const k1 = new THREE.DirectionalLight(0xffffff, 1.05); k1.position.set(-0.25,-1.0,0.30); scene.add(k1);
+const k2 = new THREE.DirectionalLight(0xffffff, 0.14); k2.position.set(0.35,0.75,1.0); scene.add(k2);
+const k3 = new THREE.DirectionalLight(0xffffff, 0.34); k3.position.set(1.0,-0.2,0.35); scene.add(k3);
+const k4 = new THREE.DirectionalLight(0xffffff, 0.20); k4.position.set(-1.0,-0.15,0.3); scene.add(k4);
+const pivot = new THREE.Group(); scene.add(pivot);
+const matBin = new THREE.MeshStandardMaterial({color:0xC4BCAC, roughness:0.45, metalness:0.0, flatShading:true});
+const matLid = new THREE.MeshStandardMaterial({color:0x5891B8, roughness:0.42, metalness:0.0, flatShading:true});
+const meshBin = new THREE.Mesh(new THREE.BufferGeometry(), matBin);
+const meshLid = new THREE.Mesh(new THREE.BufferGeometry(), matLid);
+const edgeMat = new THREE.LineBasicMaterial({color:0x2A2D31, transparent:true, opacity:0.42});
+const edgeBin = new THREE.LineSegments(new THREE.BufferGeometry(), edgeMat);
+const edgeLid = new THREE.LineSegments(new THREE.BufferGeometry(), edgeMat);
+edgeBin.visible = edgeLid.visible = false;
+pivot.add(meshBin, meshLid, edgeBin, edgeLid);
+
+// Feature edges are rebuilt only once the sliders settle, so dragging
+// stays smooth. The 26 degree threshold keeps them off the tessellated
+// curves and puts them on the real creases.
+let edgeTimer = null;
+function scheduleEdges(){
+  edgeBin.visible = edgeLid.visible = false;
+  clearTimeout(edgeTimer);
+  edgeTimer = setTimeout(()=>{
+    try{
+      edgeBin.geometry.dispose(); edgeLid.geometry.dispose();
+      edgeBin.geometry = new THREE.EdgesGeometry(meshBin.geometry, 26);
+      edgeLid.geometry = new THREE.EdgesGeometry(meshLid.geometry, 26);
+      edgeBin.position.copy(meshBin.position); edgeLid.position.copy(meshLid.position);
+      edgeBin.visible = meshBin.visible; edgeLid.visible = meshLid.visible;
+    }catch(err){}
+  }, 160);
+}
+
+let yaw=-2.32, pitch=0.82, dist=200;
+const target = new THREE.Vector3();
+function place(){
+  const cp=Math.cos(pitch), sp=Math.sin(pitch);
+  camera.position.set(dist*cp*Math.sin(yaw), -dist*cp*Math.cos(yaw), dist*sp);
+  camera.up.set(0,0,1); camera.lookAt(target);
+}
+let drag=null, pinch=null;
+stage.addEventListener('pointerdown', e=>{ if(e.target.closest('#views'))return;
+  drag={x:e.clientX,y:e.clientY}; stage.setPointerCapture(e.pointerId); });
+stage.addEventListener('pointermove', e=>{ if(!drag)return;
+  yaw -= (e.clientX-drag.x)*0.008;
+  pitch = Math.max(-1.45, Math.min(1.45, pitch + (e.clientY-drag.y)*0.008));
+  drag={x:e.clientX,y:e.clientY}; place(); });
+['pointerup','pointercancel','pointerleave'].forEach(t=>stage.addEventListener(t,()=>{drag=null;}));
+stage.addEventListener('wheel', e=>{ e.preventDefault();
+  dist=Math.max(40,Math.min(1500,dist*(1+Math.sign(e.deltaY)*0.12))); place(); }, {passive:false});
+function dist2(e){const a=e.touches[0],b=e.touches[1];return Math.hypot(a.clientX-b.clientX,a.clientY-b.clientY);}
+stage.addEventListener('touchstart', e=>{ if(e.touches.length===2){pinch=dist2(e); drag=null;} },{passive:true});
+stage.addEventListener('touchmove', e=>{ if(e.touches.length===2&&pinch){
+  const d=dist2(e); dist=Math.max(40,Math.min(1500,dist*pinch/d)); pinch=d; place(); e.preventDefault(); } },{passive:false});
+stage.addEventListener('touchend', ()=>{pinch=null;});
+function resize(){ const w=stage.clientWidth,h=stage.clientHeight;
+  renderer.setSize(w,h,false); camera.aspect=w/h; camera.updateProjectionMatrix(); place(); }
+addEventListener('resize', resize);
+function tick(){ renderer.render(scene,camera); requestAnimationFrame(tick); }
+
+// ---------------- theme ----------------
+let THEME = 'auto';
+try { THEME = localStorage.getItem('gf-theme') || 'auto'; } catch(e) {}
+function darkNow(){
+  if (THEME === 'dark') return true;
+  if (THEME === 'light') return false;
+  return !!(window.matchMedia && matchMedia('(prefers-color-scheme: dark)').matches);
+}
+function applyTheme(){
+  const r = document.documentElement;
+  if (THEME === 'auto') r.removeAttribute('data-theme'); else r.setAttribute('data-theme', THEME);
+  $('theme').textContent = 'Theme: ' + THEME;
+  const dark = darkNow();
+  hemi.groundColor.setHex(dark ? 0x0D0F11 : 0x0C0B09);
+  hemi.intensity = dark ? 0.32 : 0.34;
+  // r128 does not convert material colours for you when the renderer
+  // writes sRGB, so a hex picked by eye lands far too bright.
+  matBin.color.setHex(dark ? 0xCFC7B6 : 0xC4BCAC).convertSRGBToLinear();
+  matLid.color.setHex(dark ? 0x63A0C8 : 0x5891B8).convertSRGBToLinear();
+  edgeMat.color.setHex(dark ? 0x0E1113 : 0x2A2D31).convertSRGBToLinear();
+  edgeMat.opacity = dark ? 0.55 : 0.42;
+  renderer.toneMappingExposure = dark ? 0.98 : 0.92;
+}
+$('theme').addEventListener('click', ()=>{
+  THEME = THEME === 'auto' ? 'light' : THEME === 'light' ? 'dark' : 'auto';
+  try { localStorage.setItem('gf-theme', THEME); } catch(e) {}
+  applyTheme();
+});
+if (window.matchMedia) {
+  const mq = matchMedia('(prefers-color-scheme: dark)');
+  const onChange = ()=>{ if (THEME === 'auto') applyTheme(); };
+  if (mq.addEventListener) mq.addEventListener('change', onChange); else if (mq.addListener) mq.addListener(onChange);
+}
+function toGeom(m){ const g=new THREE.BufferGeometry();
+  g.setAttribute('position', new THREE.BufferAttribute(toFloat32(m),3));
+  g.computeVertexNormals(); return g; }
+
+// ---------------- build ----------------
+let binMesh=null, lidMesh=null, trayMesh=null, queued=false;
+
+function rebuild(){
+  const errors = validateParams(P, MODEL);
+  if (errors.length) {
+    binMesh = lidMesh = trayMesh = null; meshBin.visible = meshLid.visible = false;
+    clearTimeout(edgeTimer); edgeBin.visible = edgeLid.visible = false;
+    $('headline').textContent = 'Settings need adjustment';
+    $('sub').textContent = errors.join(' ');
+    $('alerts').textContent = errors.join(' ');
+    $('tri').textContent = 'No current geometry';
+    toast('Cannot build: ' + errors[0]); return;
+  }
+  if (MODEL === 'tray') return rebuildTray();
+  if (MODEL === 'wipe') return rebuildWipe();
+  const d = derive(P);
+  binMesh = buildBin(P); lidMesh = buildLid(P);
+  meshBin.geometry.dispose(); meshLid.geometry.dispose();
+  meshBin.geometry = toGeom(binMesh); meshLid.geometry = toGeom(lidMesh);
+  meshBin.visible = VIEW!=='lid'; meshLid.visible = VIEW!=='bin';
+
+  const seatZ = d.H - 0.35;
+  if(VIEW==='bin') meshBin.position.set(0,0,-d.binTop/2);
+  else if(VIEW==='lid') meshLid.position.set(0,0,-d.lidTop/2);
+  else if(VIEW==='closed'){
+    const total = seatZ + d.lidTop;
+    meshBin.position.set(0,0,-total/2);
+    meshLid.position.set(0,0,-total/2 + seatZ);
+  } else {
+    const total = d.binTop + 16 + d.lidTop;
+    meshBin.position.set(0,0,-total/2);
+    meshLid.position.set(0,0,-total/2 + d.binTop + 16);
+  }
+  const stackH = VIEW==='closed' ? seatZ + d.lidTop
+               : VIEW==='lid' ? d.lidTop
+               : VIEW==='bin' ? d.binTop : d.binTop + d.lidTop + 16;
+  dist = Math.max(42*P.nx, 42*P.ny, stackH) * 2.25; place();
+  scheduleEdges();
+  paint(d);
+}
+
+function rebuildTray(){
+  const d = deriveTray(P);
+  trayMesh = buildTray(P);
+  meshBin.geometry.dispose();
+  meshBin.geometry = toGeom(trayMesh);
+  meshBin.visible = true; meshLid.visible = false;
+  meshBin.position.set(0,0,-d.binTop/2);
+  dist = Math.max(42*P.nx, 42*P.ny, d.binTop) * 2.25; place();
+  scheduleEdges();
+  paintTray(d);
+}
+function rebuildWipe(){
+  const d = deriveWipe(P);
+  binMesh = buildWipeBox(P); lidMesh = buildWipeLid(P);
+  meshBin.geometry.dispose(); meshLid.geometry.dispose();
+  meshBin.geometry = toGeom(binMesh); meshLid.geometry = toGeom(lidMesh);
+  meshBin.visible = VIEW!=='lid'; meshLid.visible = VIEW!=='bin';
+  const seatZ = d.H - 0.35;
+  if(VIEW==='bin') meshBin.position.set(0,0,-d.binTop/2);
+  else if(VIEW==='lid') meshLid.position.set(0,0,-d.lidTop/2);
+  else if(VIEW==='closed'){
+    const total = seatZ + d.lidTop;
+    meshBin.position.set(0,0,-total/2);
+    meshLid.position.set(0,0,-total/2 + seatZ);
+  } else {
+    const total = d.binTop + 16 + d.lidTop;
+    meshBin.position.set(0,0,-total/2);
+    meshLid.position.set(0,0,-total/2 + d.binTop + 16);
+  }
+  const stackH = VIEW==='closed' ? seatZ + d.lidTop
+               : VIEW==='lid' ? d.lidTop
+               : VIEW==='bin' ? d.binTop : d.binTop + d.lidTop + 16;
+  dist = Math.max(42*d.nx, 42*d.ny, stackH) * 2.25; place();
+  scheduleEdges();
+  paintWipe(d);
+}
+
+function paintWipe(d){
+  const gBox = (volumeOf(binMesh) - overlapWipe(P,d))/1000;
+  const gLid = (volumeOf(lidMesh) - overlapWipeLid(P,d))/1000;
+  const closed = d.H - 0.35 + d.lidTop;
+  const fitsL = Math.max(d.openX, d.openY), fitsW = Math.min(d.openX, d.openY);
+
+  $('headline').textContent =
+    `${fmt(d.nx)} x ${fmt(d.ny)} x ${d.whu||P.whu}U  ·  ${(42*d.nx-0.5).toFixed(1)} x ${(42*d.ny-0.5).toFixed(1)} x ${d.binTop.toFixed(1)} mm`;
+  const stack = d.byHeight
+    ? `a ${d.stackNeed.toFixed(1)} mm stack`
+    : `about ${d.packFits} sheets at ${d.sheetT.toFixed(1)} mm`;
+  $('sub').textContent =
+    `Holds ${d.openX.toFixed(0)} x ${d.openY.toFixed(0)} mm, ${d.depth.toFixed(0)} mm deep, room for ${stack}. ` +
+    `Closed height ${closed.toFixed(1)} mm, and a bin or another box still stacks on the lid. ` +
+    `Approximate solid PLA mass ${((gBox+gLid)*1.24).toFixed(0)} g of PLA for the pair.`;
+
+  const i = d.snapDeflect;
+  const el = $('grip'); el.style.display = P.snap ? '' : 'none';
+  el.className = 'badge ' + (i < 0.25 || i > 0.75 ? 'bad' : 'good');
+  el.innerHTML = `Estimated snap <b>${i.toFixed(2)} mm</b> &nbsp;${i < 0.25 ? 'too loose' : i > 0.75 ? 'very stiff' : 'good'}`;
+
+  const lw = $('lipwall'); lw.style.display = '';
+  const need = d.stackNeed;
+  const ok = wipePackFits(P, d);
+  lw.className = 'badge ' + (ok ? 'good' : 'bad');
+  lw.innerHTML = ok
+    ? `Pack fits <b>${(d.depth - need).toFixed(1)} mm</b> &nbsp;spare above the stack`
+    : `Pack does not fit &nbsp;<b>needs ${fmt(P.packL)} x ${fmt(P.packW)} x ${need.toFixed(1)} mm</b>`;
+
+  $('alerts').innerHTML = warningsWipe(P).map(x=>`<li>${x}</li>`).join('');
+  fitNote(closed, d.lidTop);
+  $('tri').textContent = `${(clean(binMesh).tri.length + clean(lidMesh).tri.length).toLocaleString()} triangles`;
+  $('packnote').textContent =
+    `The pack needs ${fmt(P.packL)} x ${fmt(P.packW)} mm of floor and ${need.toFixed(1)} mm of stack` +
+    (d.byHeight ? ' as measured' : `, which is ${d.sheetN} sheets at ${d.sheetT.toFixed(2)} mm`) +
+    `. This box gives ${d.openX.toFixed(1)} x ${d.openY.toFixed(1)} mm and ${d.depth.toFixed(1)} mm.`;
+  $('notchnote').textContent = d.notchOn
+    ? `Bottom of the scoop sits ${(d.notchZ - d.floorTop).toFixed(1)} mm above the floor` +
+      (d.notchDrop > d.binTop - d.H + 0.5
+        ? `. It cuts clean through the front stacking lip and ${(d.notchDrop - (d.binTop - d.H)).toFixed(1)} mm into the wall below it, leaving ${d.lipLeft.toFixed(0)} mm of front lip.`
+        : `, so the stacking lip is untouched.`)
+    : 'Scoop off.';
+
+  const n = [];
+  n.push('Start with the box upright. The floor fillet, lip flare and tangential scoop are intended to reduce support needs. Inspect sliced overhangs and layer continuity; support requirements depend on geometry and printer settings.');
+  n.push('Print the lid feet down on the plate, the same way up as it is modelled.');
+  n.push(`Walls come out ${(P.wall/P.lineW).toFixed(1)} extrusions thick at ${P.lineW} mm.`);
+  if (P.groove) n.push(`The lip is ${d.grooveWall.toFixed(2)} mm thick where the groove cuts it. That band is what flexes when the lid clicks on, so keep the top solid layers modest.`);
+  if (d.fx.half || d.fy.half) n.push(`This footprint uses 21 mm half cell feet, ${d.fx.c.length} by ${d.fy.c.length} of them. Two half feet are designed to share one 42 mm baseplate pocket; test against your baseplate before printing a batch.`);
+  if (d.notchOn && d.notchDrop > d.binTop - d.H + 0.5) n.push(`The scoop cuts through the front stacking lip, leaving ${d.lipLeft.toFixed(0)} mm of it plus the whole of the other three walls for the lid to grip. Stacking rides on the lid's own lip pocket, not on this rim, so whatever goes on top is unaffected.`);
+  n.push(`Snap beads run ${d.beadLen.toFixed(1)} mm on each flat of each foot, into a ${d.grooveLen.toFixed(1)} mm groove. Print one pair first and check the click before running a batch.`);
+  $('notes').innerHTML = n.map(x=>`<div>${x}</div>`).join('');
+  chips();
+}
+
+function queue(){ if(queued)return; queued=true; requestAnimationFrame(()=>{queued=false; rebuild();}); }
+
+function paint(d){
+  const gBin = (volumeOf(binMesh) - overlapBin(P,d))/1000;
+  const gLid = (volumeOf(lidMesh) - overlapLid(P,d))/1000;
+  const closed = d.H - 0.35 + d.lidTop;
+
+  $('headline').textContent =
+    `${P.nx} x ${P.ny} x ${P.hu}U  ·  ${(42*P.nx-0.5).toFixed(1)} x ${(42*P.ny-0.5).toFixed(1)} x ${d.binTop.toFixed(1)} mm`;
+  const depth = d.labelOn && d.rampDepth < d.usableDepth - 0.5
+    ? `${d.usableDepth.toFixed(0)} mm deep at the front, ${d.rampDepth.toFixed(0)} mm at the label end`
+    : `${d.usableDepth.toFixed(0)} mm deep`;
+  $('sub').textContent =
+    `Holds ${d.openX.toFixed(0)} x ${d.openY.toFixed(0)} mm, ${depth}. Closed height ${closed.toFixed(1)} mm, and a bin still stacks on top. Approximate solid PLA mass ${((gBin+gLid)*1.24).toFixed(0)} g of PLA for the pair.`;
+
+  const i = d.snapDeflect;
+  const el = $('grip');
+  el.style.display = P.snap ? '' : 'none';
+  el.className = 'badge ' + (i < 0.25 ? 'bad' : i > 0.75 ? 'bad' : 'good');
+  el.innerHTML = `Estimated snap <b>${i.toFixed(2)} mm</b> &nbsp;${i < 0.25 ? 'too loose' : i > 0.75 ? 'very stiff' : 'good'}`;
+
+  const lw = $('lipwall');
+  lw.style.display = '';
+  const wOK = d.grooveWall >= 1.5*P.lineW;
+  lw.className = 'badge ' + (P.groove ? (wOK ? 'good' : 'bad') : '');
+  lw.innerHTML = P.groove
+    ? `Lip wall at the groove <b>${d.grooveWall.toFixed(2)} mm</b> &nbsp;${(d.grooveWall/P.lineW).toFixed(1)} lines`
+    : 'No groove, the lid rests without locking';
+
+  $('alerts').innerHTML = warnings(P).map(x=>`<li>${x}</li>`).join('');
+  fitNote(closed, d.lidTop);
+  $('tri').textContent = `${(clean(binMesh).tri.length + clean(lidMesh).tri.length).toLocaleString()} triangles`;
+
+  const n = [];
+  n.push('Start with the bin upright. The scoop widens going up, the flare into the lip is 45 degrees, and the label shelf is held at ' + d.tabAngle.toFixed(0) + ' degrees from horizontal. These features are intended to reduce support needs; inspect sliced overhangs and layer continuity before printing.');
+  n.push('Print the lid the same way up as it is modelled, feet down on the plate. The window flares outward going up, so it needs no bridging either.');
+  n.push(`Walls come out ${(P.wall/P.lineW).toFixed(1)} extrusions thick at ${P.lineW} mm. Give the slicer enough wall loops that it fills them with perimeters instead of gap fill.`);
+  if (P.groove) n.push(`The lip is only ${d.grooveWall.toFixed(2)} mm thick where the groove cuts it. That band is the part that flexes, so keep the top solid layers modest and do not print it cold.`);
+  if (d.labelOn) n.push(`Pad is ${d.padW.toFixed(1)} x ${d.padH.toFixed(1)} mm, cut for ${P.labelW} x ${P.labelH} mm of tape and recessed ${P.padDepth} mm. Print the label, stick it in the pad, drop the lid on.`);
+  n.push('Print one pair first and check the click before running a batch.');
+  $('notes').innerHTML = n.map(x=>`<div>${x}</div>`).join('');
+  chips();
+}
+
+function paintTray(d){
+  const g = (volumeOf(trayMesh) - overlapTray(P,d))/1000;
+  $('headline').textContent =
+    `${P.nx} x ${P.ny} x ${P.hu}U  ·  ${(42*P.nx-0.5).toFixed(1)} x ${(42*P.ny-0.5).toFixed(1)} x ${d.binTop.toFixed(1)} mm`;
+  const bed = d.round
+    ? `cradled on a ${d.cradR.toFixed(1)} mm radius, ${(d.depth - d.cradDepth).toFixed(1)} mm of straight wall above it`
+    : `${d.depth.toFixed(1)} mm deep`;
+  $('sub').textContent =
+    `${d.nSlots} ${d.nSlots===1?'slot':'slots'} of ${d.slotW.toFixed(1)} x ${(d.yBack-d.yFront).toFixed(0)} mm, ${bed}. Approximate solid PLA mass ${(g*1.24).toFixed(0)} g of PLA.`;
+
+  const el = $('grip');
+  const thin = d.nSlots > 1 && d.ribW < 2*P.lineW;
+  el.style.display = d.nSlots > 1 ? '' : 'none';
+  el.className = 'badge ' + (thin ? 'bad' : 'good');
+  el.innerHTML = `Rib <b>${d.ribW.toFixed(2)} mm</b> &nbsp;${(d.ribW/P.lineW).toFixed(1)} lines`;
+  const lw = $('lipwall');
+  lw.style.display = d.cutOn ? '' : 'none';
+  lw.className = 'badge';
+  lw.innerHTML = `Finger cut <b>${d.cutDepth.toFixed(1)} mm</b> &nbsp;deep`;
+
+  $('ribnote').textContent = d.nSlots > 1
+    ? `Ribs come out ${d.ribW.toFixed(2)} mm, pitch ${d.pitch.toFixed(2)} mm. Up to ${d.nMax} fit at this slot width.`
+    : 'One slot the full width of the tray.';
+  $('alerts').innerHTML = warningsTray(P).map(x=>`<li>${x}</li>`).join('');
+  fitNote(d.binTop, 0);
+  $('tri').textContent = `${clean(trayMesh).tri.length.toLocaleString()} triangles`;
+
+  const n = [];
+  n.push(d.round
+    ? 'Start upright. The cradle widens going up, the rib tops are chamfered at 45 degrees and the finger cut is a half round. These features are intended to reduce support needs; inspect sliced overhangs and layer continuity.'
+    : 'Start upright. The rib tops are chamfered at 45 degrees and the finger cut is a half round. Support requirements depend on geometry and printer settings; inspect the slicer preview before printing.');
+  if (d.round) n.push(`Slots are ${d.slotW.toFixed(1)} mm across, so a barrel up to about ${(d.slotW-0.6).toFixed(1)} mm beds into the trough and sits ${(d.depth - d.cradDepth).toFixed(1)} mm below the rim at the widest point.`);
+  n.push(`Ribs are ${d.ribW.toFixed(2)} mm, about ${(d.ribW/P.lineW).toFixed(1)} extrusions. Set the wall count so the slicer fills them with perimeters rather than gap fill.`);
+  if (P.trayText) n.push(`Labels stand ${P.textD} mm proud of the front border. Add a filament change at ${(d.ribTop).toFixed(2)} mm in the slicer and they come out in a second colour.`);
+  if (P.lip) n.push('The lip is a full gridfinity stacking lip, so a bin or another tray sits on top.');
+  n.push('Print one and check a slot against the real thing before running the set.');
+  $('notes').innerHTML = n.map(x=>`<div>${x}</div>`).join('');
+  chips();
+}
+
+function fitNote(h, lidTop){
+  const fits = h <= AVAIL;
+  $('fitnote').innerHTML = fits
+    ? `Fits with ${(AVAIL-h).toFixed(1)} mm to spare.`
+    : `<span style="color:var(--alert)">${(h-AVAIL).toFixed(1)} mm too tall. Try ${Math.max(1, Math.floor((AVAIL - lidTop + 0.35)/7))} units.</span>`;
+}
+
+function chips(){
+  const press = (sel, test) => document.querySelectorAll(sel).forEach(b => b.setAttribute('aria-pressed', String(test(b))));
+  press('#snap_seg button', b => Math.abs(P.beadR - parseFloat(b.dataset.r)) < 0.005);
+  press('#label_seg button', b => P.labelMode === b.dataset.mode);
+  press('#tape button', b => Math.abs(P.labelH - parseFloat(b.dataset.t)) < 0.01);
+  press('#model_seg button', b => MODEL === b.dataset.model);
+  press('#dir_seg button', b => P.trayDir === b.dataset.dir);
+  press('#bottom_seg button', b => P.slotBottom === b.dataset.bottom);
+  press('#bores button', b => Math.abs(P.slotW - (parseFloat(b.dataset.d) + 0.6)) < 0.01);
+  press('#tip_seg button', b => P.lipTipStyle === b.dataset.tip);
+  press('#scoop_seg button', b => P.scoopWalls === b.dataset.sw);
+  press('#presets button', b => { const v=b.dataset.p.split(',').map(Number); return v[0]===P.nx&&v[1]===P.ny&&v[2]===P.hu; });
+  press('#tpresets button', b => { const v=b.dataset.p.split(',').map(Number); return v[0]===P.nx&&v[1]===P.ny&&v[2]===P.hu; });
+  press('#wpresets button', b => { const v=b.dataset.p.split(',').map(Number); return v[0]===P.wnx&&v[1]===P.wny&&v[2]===P.whu; });
+  press('#stack_seg button', b => P.stackMode === b.dataset.mode);
+  $('tape_v').textContent = TAPES.some(t=>Math.abs(t-P.labelH)<0.01) ? P.labelH + ' mm' : 'custom';
+  $('tip_v').textContent = P.lipTipStyle === 'round' ? 'rounded' : P.lipTipStyle;
+  $('scoopWalls_v').textContent = P.scoopWalls === 'one' ? 'front' : P.scoopWalls === 'both' ? 'front and back' : 'all four';
+  $('labels_n').textContent = String(P.labels||'').split(/[,;|]/).filter(s=>s.trim()).length + ' given';
+  visibility();
+}
+
+function visibility(){
+  $('hollowFeet').disabled = MODEL !== 'bin';
+  $('hollownote').textContent = MODEL === 'bin'
+    ? 'Experimental: one tapered cavity per foot, 15.6 mm mouth and 7 mm roof at 4.3 mm. The inner taper is 45 degrees; inspect actual bridge layers. Check bridge layers, floor sealing and loaded strength; filament savings are unverified.'
+    : 'Hollow feet are unavailable for this mode. Its standard feet remain solid.';
+  document.querySelectorAll('[data-for]').forEach(el=>{
+    el.style.display = el.dataset.for.split(' ').indexOf(MODEL) >= 0 ? '' : 'none';
+  });
+  ['c_notchW','c_notchFlat','c_notchDrop','c_notchKeep'].forEach(id=>$(id).classList.toggle('off', !P.notch));
+  const byH = P.stackMode === 'height';
+  $('c_sheetN').classList.toggle('off', byH);
+  $('c_stackH').classList.toggle('off', !byH);
+  const on = P.labelMode !== 'off';
+  ['c_tape','c_labelH','c_labelW','c_window'].forEach(id=>$(id).classList.toggle('off', !on));
+  $('c_labelCol').classList.toggle('off', !(on && P.labelMode==='one' && P.nx>1));
+  $('labelCol').max = P.nx;
+  if (P.labelCol > P.nx) { P.labelCol = P.nx; $('labelCol').value = P.nx; show('labelCol'); }
+  ['c_cutR','c_cutWeb','c_cutY'].forEach(id=>$(id).classList.toggle('off', !P.cut));
+  ['c_labels','c_textH','c_textD'].forEach(id=>$(id).classList.toggle('off', !P.trayText));
+  $('c_lipRound').classList.toggle('off', P.lipTipStyle !== 'round');
+  $('cradleR').parentElement.classList.toggle('off', P.slotBottom !== 'round');
+  $('ref').textContent = MODEL === 'tray' ? 'Match the lead tray'
+                      : MODEL === 'wipe' ? 'Match the reference box' : 'Match the reference bin';
+  $('c_lipTip').classList.toggle('off', P.lipTipStyle !== 'flat');
+  $('views').style.display = MODEL === 'tray' ? 'none' : '';
+  $('dl_bin').style.display = MODEL === 'tray' ? 'none' : '';
+  $('dl_lid').style.display = MODEL === 'tray' ? 'none' : '';
+  $('dl_both').textContent = MODEL === 'tray' ? 'Download tray' : 'Download both';
+  $('dl_bin').textContent = MODEL === 'wipe' ? 'Box' : 'Bin';
+  document.querySelectorAll('#views button').forEach(b=>{
+    if (b.dataset.view === 'bin') b.textContent = MODEL === 'wipe' ? 'Box' : 'Bin';
+  });
+  $('tagline').textContent = MODEL === 'tray'
+    ? 'A gridfinity bin filled with parallel slots, with a finger cut across the middle and a raised label per slot.'
+    : MODEL === 'wipe'
+    ? 'A box sized to a stack of lens wipes, on half cell steps so a 2.5 cell pack does not round up to 3. The same lid clicks on, so they stack.'
+    : "The lid is a short gridfinity module. Its feet click into the bin's stacking lip, and it carries a lip pocket of its own, so the stack keeps going.";
+}
+
+// ---------------- controls ----------------
+function show(id){
+  const n = $(id+'_n');
+  if (n && document.activeElement !== n) n.value = fmt(P[id]);
+  const el = $(id+'_v'); if(!el) return;
+  const u = UNIT[id]!==undefined ? UNIT[id] : ' mm';
+  el.textContent = fmt(P[id]) + u;
+}
+function syncAll(){
+  SLIDERS.forEach(id=>{ const el=$(id); if(el){ el.value = P[id]; show(id); } });
+  TOGGLES.forEach(id=>{ const el=$(id); if(el) el.checked = !!P[id]; });
+  $('lip2').checked = !!P.lip;
+  $('labels').value = P.labels;
+  $('avail').value = AVAIL; $('avail_v').textContent = AVAIL+' mm';
+}
+SLIDERS.forEach(id=>{
+  const el = $(id); if(!el) return;
+  el.addEventListener('input', ()=>{ P[id]=parseFloat(el.value); show(id); queue(); });
+});
+// Typed entry alongside the slider. The slider keeps its own step so it
+// snaps to the nearest notch, but the value kept is the one that was
+// typed: a caliper reading of 101.4 stays 101.4.
+NUMS.forEach(id=>{
+  const n = $(id+'_n'), s = $(id); if(!n || !s) return;
+  const lo = parseFloat(s.min), hi = parseFloat(s.max);
+  const apply = ()=>{
+    const v = parseFloat(n.value);
+    if(!isFinite(v)) return;
+    P[id] = Math.max(lo, Math.min(hi, id === "sheetN" ? Math.round(v) : v));
+    if (id === "sheetN") n.value = P[id];
+    s.value = P[id];
+    queue();
+  };
+  n.addEventListener('input', apply);
+  n.addEventListener('change', ()=>{ apply(); n.value = fmt(P[id]); });
+  n.addEventListener('blur', ()=>{ n.value = fmt(P[id]); });
+});
+TOGGLES.forEach(id=>{
+  const el = $(id); if(!el) return;
+  el.addEventListener('change', e=>{ P[id]=e.target.checked; if(id==='lip') $('lip2').checked=e.target.checked; queue(); });
+});
+$('lip2').addEventListener('change', e=>{ P.lip=e.target.checked; $('lip').checked=e.target.checked; queue(); });
+$('labels').addEventListener('input', e=>{ P.labels=e.target.value; queue(); });
+
+function chipRow(id, list, keys){
+  const K = keys || ['nx','ny','hu'];
+  $(id).innerHTML = list.map(p=>`<button data-p="${p.join(',')}">${p[0]}x${p[1]}x${p[2]}</button>`).join('');
+  $(id).addEventListener('click', e=>{
+    const b = e.target.closest('button'); if(!b) return;
+    const v = b.dataset.p.split(',').map(Number);
+    K.forEach((k,i)=>{ P[k]=v[i]; $(k).value=P[k]; show(k); });
+    queue();
+  });
+}
+chipRow('presets', PRESETS); chipRow('tpresets', TPRESETS);
+chipRow('wpresets', WPRESETS, ['wnx','wny','whu']);
+
+// Smallest footprint in half cell steps and the shortest height in units
+// that swallows the declared pack, with the wall and floor as they stand.
+function fitPack(){
+  const wall = Math.max(0.6, Math.min(P.wall, 2.6 - 0.4));
+  const cellsFor = mm => {
+    for (let k = 2; k <= 12; k++) {
+      const n = k / 2;
+      if (42 * n - 0.5 - 2 * wall >= mm + 1.0) return n;
+    }
+    return 6;
+  };
+  const L = Math.max(P.packL, P.packW), W = Math.min(P.packL, P.packW);
+  P.wnx = cellsFor(L); P.wny = cellsFor(W);
+  const need = deriveWipe(P).stackNeed + 1.0;
+  const floorTop = 4.75 + Math.max(0.6, P.floorT);
+  let u = 3;
+  while (u < 20 && (7 * u - 0.35 - floorTop) < need) u++;
+  P.whu = u;
+  ['wnx','wny','whu'].forEach(k=>{ $(k).value=P[k]; show(k); });
+  queue();
+  const d = deriveWipe(P);
+  const fits = wipePackFits(P, d);
+  toast(fits
+    ? `${fmt(P.wnx)} x ${fmt(P.wny)} x ${P.whu}U holds that pack`
+    : `Nothing up to 6 x 6 x 20U holds that pack. This is the closest.`);
+}
+$('fit').addEventListener('click', fitPack);
+$('zeiss').addEventListener('click', ()=>{
+  Object.assign(P, ZEISS);
+  ['packL','packW','sheetT','sheetN','stackH'].forEach(k=>{ $(k).value=P[k]; show(k); });
+  fitPack();
+});
+
+$('tape').innerHTML = TAPES.map(t=>`<button data-t="${t}">${t} mm</button>`).join('');
+$('tape').addEventListener('click', e=>{
+  const b = e.target.closest('button'); if(!b) return;
+  P.labelH = parseFloat(b.dataset.t); $('labelH').value = P.labelH; show('labelH'); queue();
+});
+function segClick(id, key, attr, num){
+  $(id).addEventListener('click', e=>{
+    const b = e.target.closest('button'); if(!b) return;
+    P[key] = num ? parseFloat(b.dataset[attr]) : b.dataset[attr];
+    if (num) { const s=$(key); if(s){ s.value=P[key]; show(key); } }
+    queue();
+  });
+}
+segClick('snap_seg','beadR','r',true);
+segClick('label_seg','labelMode','mode',false);
+segClick('dir_seg','trayDir','dir',false);
+segClick('bottom_seg','slotBottom','bottom',false);
+$('bores').innerHTML = BORES.map(d=>`<button data-d="${d}">${d} mm</button>`).join('');
+$('bores').addEventListener('click', e=>{
+  const b = e.target.closest('button'); if(!b) return;
+  P.slotW = +(parseFloat(b.dataset.d) + 0.6).toFixed(2);
+  $('slotW').value = P.slotW; show('slotW'); queue();
+});
+$('pen').addEventListener('click', ()=>{
+  Object.assign(P, DEFAULTS, PENTRAY); syncAll(); queue(); toast('Pen tray, 7 barrels up to 13 mm');
+});
+$('stack_seg').addEventListener('click', e=>{
+  const b = e.target.closest('button'); if(!b) return;
+  const m = b.dataset.mode;
+  if (m !== P.stackMode) {
+    if (m === 'height') P.stackH = +Math.max(2, Math.min(140, P.sheetN * P.sheetT)).toFixed(1);
+    else P.sheetN = Math.max(1, Math.min(60, Math.round(P.stackH / Math.max(0.2, P.sheetT))));
+    P.stackMode = m;
+    ['stackH','sheetN'].forEach(k=>{ $(k).value = P[k]; show(k); });
+  }
+  queue();
+});
+segClick('tip_seg','lipTipStyle','tip',false);
+segClick('scoop_seg','scoopWalls','sw',false);
+function switchModel(model) {
+  if (!Object.hasOwn(MODE_DEFAULTS, model) || model === MODEL) return;
+  modeStates[MODEL] = {params:{...P}, avail:AVAIL};
+  const state = modeStates[model] || {params:{...MODE_DEFAULTS[model]},avail:model==='wipe'?90:60};
+  Object.assign(P, state.params); AVAIL = state.avail; MODEL = model; VIEW = 'asm';
+  syncAll();
+  document.querySelectorAll('#views button').forEach(o=>o.setAttribute('aria-pressed', String(o.dataset.view==='asm')));
+  queue();
+}
+$('model_seg').addEventListener('click', e=>{
+  const b = e.target.closest('button'); if (!b) return;
+  switchModel(b.dataset.model);
+});
+$('avail').addEventListener('input', e=>{ AVAIL=parseFloat(e.target.value);
+  $('avail_v').textContent = AVAIL+' mm'; queue(); });
+function economyCandidate() {
+  P.wall = 1.2; P.floorT = 1.0;
+  if (MODEL === 'bin') P.scoop = 3.0;
+  if (MODEL === 'wipe') P.wFillet = Math.min(P.wFillet, 3.0);
+  syncAll(); queue();
+  toast('Economy candidate applied to this mode. Slice and trial-print; filament savings and strength are unverified.');
+}
+$('economy').addEventListener('click', economyCandidate);
+$('reset').addEventListener('click', ()=>{
+  Object.assign(P, MODE_DEFAULTS[MODEL]); syncAll(); queue(); toast('Back to defaults for this mode');
+});
+$('ref').addEventListener('click', ()=>{
+  Object.assign(P, DEFAULTS, MODEL==='tray' ? TREFERENCE : MODEL==='wipe' ? WREFERENCE : REFERENCE);
+  syncAll(); queue();
+  toast(MODEL==='tray' ? 'Set to the pencil lead tray'
+      : MODEL==='wipe' ? 'Set to the reference lens wipe box' : 'Set to the reference bin');
+});
+document.querySelectorAll('#views button').forEach(b=>{
+  b.addEventListener('click', ()=>{ VIEW=b.dataset.view;
+    document.querySelectorAll('#views button').forEach(o=>o.setAttribute('aria-pressed', String(o===b)));
+    queue(); });
+});
+
+// ---------------- export ----------------
+function toast(msg){
+  const t=$('toast'); t.textContent=msg; t.classList.add('on');
+  clearTimeout(t._h); t._h=setTimeout(()=>t.classList.remove('on'), 2400);
+}
+function exportRevision() {
+  const params = Object.freeze({...P});
+  const model = MODEL;
+  requireValid(params, model);
+  const dims = model === 'wipe' ? `${fmt(params.wnx)}x${fmt(params.wny)}x${params.whu}U` : `${params.nx}x${params.ny}x${params.hu}U`;
+  const parts = model === 'tray' ? [['tray', buildTray(params)]]
+    : model === 'wipe' ? [['wipebox', buildWipeBox(params)], ['wipelid', buildWipeLid(params)]]
+    : [['bin', buildBin(params)], ['lid', buildLid(params)]];
+  // Serialize the entire pair before requesting either download. A later
+  // mode change or animation-frame rebuild cannot change this revision.
+  return parts.map(([kind, mesh]) => {
+    const name = `${kind}_${dims}.stl`;
+    return Object.freeze({kind, name, bytes: toSTL(mesh, name)});
+  });
+}
+function save(file){
+  const url = URL.createObjectURL(new Blob([file.bytes], {type:'model/stl'}));
+  const a = document.createElement('a'); a.href=url; a.download=file.name;
+  document.body.appendChild(a);
+  try { a.click(); } finally { a.remove(); setTimeout(()=>URL.revokeObjectURL(url), 5000); }
+  return file.name;
+}
+function download(which) {
+  try {
+    const files = exportRevision();
+    const chosen = which === 'both' || files.length === 1 ? files : [files[which === 'lid' ? 1 : 0]];
+    save(chosen[0]);
+    if (chosen.length === 2) setTimeout(() => {
+      try { save(chosen[1]); toast('Download requested for both files. Check your browser downloads.'); }
+      catch (err) { toast('Second download failed: ' + err.message); }
+    }, 350);
+    toast('Download requested: ' + chosen[0].name);
+  } catch (err) { toast('Cannot export: ' + err.message); }
+}
+$('dl_bin').addEventListener('click', ()=>download('bin'));
+$('dl_lid').addEventListener('click', ()=>download('lid'));
+$('dl_both').addEventListener('click', ()=>download('both'));
+
+applyTheme(); syncAll(); resize(); rebuild(); tick();
+})();
+</script>
+</body>
+</html>

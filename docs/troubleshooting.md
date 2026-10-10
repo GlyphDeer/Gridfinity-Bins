@@ -15,14 +15,15 @@
 Run from the workspace:
 
 ```sh
-node --test tools/generator.test.mjs tools/test.mjs
+node --test tools/generator.test.mjs tools/test.mjs tools/filament.test.mjs
+python3 tools/slice_metadata_test.py
 node tools/review.mjs source/gridfinity_generator_4.html
 node tools/check-docs.mjs
 ```
 
 Pass another source path to the review script to review a revision; quote paths containing spaces. Inspect the timestamp/hash run under `reviews/runs/`, including source inventory, machine-readable checks, sample STLs, and documentation-agent handoff. This script does not run an agent itself. A compatible coding-agent session is required to complete the handoff: give it the source and evidence, then independently review its draft. Keep human-edited docs until changes are reviewed.
 
-The focused regression suite currently has 17 tests, including three independent binary-STL reader checks and one source-adapter check. The review harness exercises 31 geometry cases, including three expected validation rejections in the current source. Consult the particular run's hash and results rather than assuming old results apply to a revision. Original handler tests use DOM doubles; these are not browser tests.
+The focused regression suite currently has 27 tests, including three independent binary-STL reader checks and one source-adapter check. The review harness exercises 37 build cases, including five expected validation rejections in the current source. Consult the particular run's hash and results rather than assuming old results apply to a revision. Original handler tests use DOM doubles; these are not browser tests.
 
 For a manual pass, record source hash, browser and OS, exact settings, and observations:
 
@@ -33,4 +34,14 @@ For a manual pass, record source hash, browser and OS, exact settings, and obser
 - Cover tray text and startup failure paths in a real browser. Check repeated rebuilds for errors and memory growth; Node checks do not exercise WebGL resources or fonts.
 - Slice representative STLs, inspect layer continuity, and perform physical fit trials separately.
 
-No real browser, screen-reader, slicer, or physical-print checks have been performed during these rounds. Source/static and DOM-double evidence supports the implemented safeguards, not comprehensive accessibility, mesh validity, or print certification. Preserved [baseline findings](../reviews/code-review.md) describe the original source; [Round 1](../reviews/rounds/round-1.md) and [Round 2](../reviews/rounds/round-2.md) record subsequent fixes.
+Real browser, screen-reader, visual slicer-layer and physical-print checks remain unperformed. Offline CLI consumption comparisons were completed in the later filament cycles. Source/static and DOM-double evidence supports the implemented safeguards, not comprehensive accessibility, mesh validity, or print certification. Preserved [baseline findings](../reviews/code-review.md) describe the original source; [Round 1](../reviews/rounds/round-1.md) and [Round 2](../reviews/rounds/round-2.md) record subsequent fixes.
+
+Economy does nothing when values are already at or below its targets; this preserves thinner configurations and disabled features. Hollow-foot activation is intentionally unavailable because no additional saving was established. An injected prototype flag blocks consumer export; Reset clears it.
+
+Optional offline slicing benchmark (requires installed Bambu Studio with the bundled X2D profiles):
+
+```sh
+python3 tools/slice-benchmark.py
+```
+
+Use `--help` for alternate executable/profile paths or custom cases. Missing prerequisites and failed slices are recorded as failures, never simulated successes. The [historical prototype replay](../reviews/filament-prototypes/README.md) preserves three exact failed-candidate source snapshots; the first candidate survives by hash and measurements only. See [benchmark limitations](../reviews/filament-slicing/README.md).

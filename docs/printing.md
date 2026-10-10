@@ -18,4 +18,12 @@ Before a batch:
 
 The material display uses signed mesh volume minus heuristic overlap corrections, then a fixed PLA density of 1.24 g/cm³. No percent-level accuracy has been established. These are geometric estimates, not sliced filament consumption: infill, perimeter policy, supports, purge, and slicer treatment of overlaps affect consumption. Use the slicer's estimate for planning a print.
 
-The original shallow-tray overflow and oversized-label cases are now rejected by validation. Their original evidence remains in the [baseline code review](../reviews/code-review.md); [Round 1](../reviews/rounds/round-1.md) records the fixes. The material and fit displays are explicitly approximate. No browser, slicer, or physical-print verification has been performed in these review rounds.
+The original shallow-tray overflow and oversized-label cases are now rejected by validation. Their original evidence remains in the [baseline code review](../reviews/code-review.md); [Round 1](../reviews/rounds/round-1.md) records the fixes. The material and fit displays are explicitly approximate. The original source-fix rounds did not perform browser, slicer or physical-print verification. The later filament cycles completed offline CLI consumption estimates; visual layer/bridge and physical-print verification remain unperformed.
+
+## Economy and hollow-foot experiment
+
+Economy reduces selected body thicknesses, so inspect floor continuity, loaded stiffness and lid use in your material before a batch. The reference slicer measurements are in [the filament-saving guide](filament-saving.md); model-volume and actual filament consumption are different quantities.
+
+Four hollow-foot designs passed their specified software geometry checks but failed to show additional savings under the fixed X2D reference profiles. The final circular prototype added 0.05 g to the standard body in each material and tied economy at reported precision while taking longer. Its normal UI activation and export are withheld. The developer-only final shape preserves exterior mating surfaces and a flat interior, with measured minimum 1.15 mm floor cover in the checked extreme matrix. That measurement does not establish strength or clean bridging.
+
+The benchmark's official end macros produced Invalid T warnings, and 3MF packaging aborted on this installed macOS version. Successful local runs used slice-data export with validity checks retained. Their G-code is measurement evidence and has not been approved for physical printing. Re-slice the normal exported STL in your intended printer setup.

@@ -1,0 +1,3518 @@
+{
+  "schemaVersion": 1,
+  "runId": "20261010T163303207480Z",
+  "slicer": "Bambu Studio",
+  "version": "02.08.04.57",
+  "method": "Offline CLI estimates from generated STL, official bundled flattened X2D 0.4 mm/0.20 mm Standard/Generic PLA or PETG profiles. Upright/feet down, no auto orientation, arrange only. No physical validation.",
+  "bed": "Textured PEI Plate",
+  "cliDocumentation": "https://github.com/bambulab/BambuStudio/wiki/Command-Line-Usage",
+  "profiles": {
+    "machine": {
+      "type": "machine",
+      "name": "Bambu Lab X2D 0.4 nozzle",
+      "from": "system",
+      "instantiation": "true",
+      "nozzle_diameter": [
+        "0.4",
+        "0.4"
+      ],
+      "printer_variant": "0.4",
+      "auxiliary_fan": "1",
+      "best_object_pos": "0.3x0.5",
+      "default_filament_profile": [
+        "Bambu PLA Basic @BBL X2D 0.4 nozzle"
+      ],
+      "default_print_profile": "0.20mm Standard @BBL X2D",
+      "deretraction_speed": [
+        "30",
+        "30",
+        "30",
+        "20",
+        "20",
+        "20"
+      ],
+      "extruder_clearance_height_to_lid": "133",
+      "extruder_clearance_height_to_rod": "32.8",
+      "extruder_clearance_max_radius": "60",
+      "extruder_clearance_dist_to_rod": "33",
+      "extruder_colour": [
+        "#018001",
+        "#018001"
+      ],
+      "enable_long_retraction_when_cut": "2",
+      "enable_pre_heating": "1",
+      "extruder_height_gap": "7",
+      "extruder_offset": [
+        "0x0",
+        "0x0"
+      ],
+      "fan_direction": "both",
+      "gcode_flavor": "marlin",
+      "grab_length": [
+        "0",
+        "0"
+      ],
+      "group_algo_with_time": "1",
+      "extruder_max_nozzle_count": [
+        "1",
+        "1"
+      ],
+      "hotend_cooling_rate": [
+        "2",
+        "2",
+        "2",
+        "2",
+        "2",
+        "2"
+      ],
+      "hotend_heating_rate": [
+        "1.5",
+        "1.5",
+        "1.5",
+        "1.5",
+        "1.5",
+        "1.5"
+      ],
+      "long_retractions_when_cut": [
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0"
+      ],
+      "machine_load_filament_time": "29",
+      "machine_max_acceleration_e": [
+        "30000",
+        "5000",
+        "5000",
+        "30000",
+        "5000",
+        "5000",
+        "5000",
+        "5000",
+        "5000",
+        "5000",
+        "5000",
+        "5000"
+      ],
+      "machine_max_acceleration_extruding": [
+        "20000",
+        "20000",
+        "20000",
+        "20000",
+        "20000",
+        "20000",
+        "20000",
+        "20000",
+        "20000",
+        "20000",
+        "20000",
+        "20000"
+      ],
+      "machine_max_acceleration_retracting": [
+        "30000",
+        "5000",
+        "5000",
+        "30000",
+        "5000",
+        "5000",
+        "30000",
+        "5000",
+        "5000",
+        "30000",
+        "5000",
+        "5000"
+      ],
+      "machine_max_acceleration_x": [
+        "20000",
+        "20000",
+        "20000",
+        "20000",
+        "20000",
+        "20000",
+        "20000",
+        "20000",
+        "20000",
+        "20000",
+        "20000",
+        "20000"
+      ],
+      "machine_max_acceleration_y": [
+        "20000",
+        "20000",
+        "20000",
+        "20000",
+        "20000",
+        "20000",
+        "20000",
+        "20000",
+        "20000",
+        "20000",
+        "20000",
+        "20000"
+      ],
+      "machine_max_acceleration_z": [
+        "500",
+        "500",
+        "500",
+        "500",
+        "500",
+        "500",
+        "500",
+        "500",
+        "500",
+        "500",
+        "500",
+        "500"
+      ],
+      "machine_max_force_Y": "0",
+      "machine_bed_mass_Y": "0",
+      "machine_max_printed_mass": "0",
+      "machine_max_jerk_e": [
+        "2.5",
+        "2.5",
+        "2.5",
+        "2.5",
+        "2.5",
+        "2.5",
+        "2.5",
+        "2.5",
+        "2.5",
+        "2.5",
+        "2.5",
+        "2.5"
+      ],
+      "machine_max_jerk_x": [
+        "9",
+        "9",
+        "9",
+        "9",
+        "9",
+        "9",
+        "9",
+        "9",
+        "9",
+        "9",
+        "9",
+        "9"
+      ],
+      "machine_max_jerk_y": [
+        "9",
+        "9",
+        "9",
+        "9",
+        "9",
+        "9",
+        "9",
+        "9",
+        "9",
+        "9",
+        "9",
+        "9"
+      ],
+      "machine_max_jerk_z": [
+        "3",
+        "3",
+        "3",
+        "3",
+        "3",
+        "3",
+        "3",
+        "3",
+        "3",
+        "3",
+        "3",
+        "3"
+      ],
+      "machine_max_speed_e": [
+        "30",
+        "30",
+        "30",
+        "30",
+        "30",
+        "30",
+        "120",
+        "120",
+        "120",
+        "120",
+        "120",
+        "120"
+      ],
+      "machine_max_speed_x": [
+        "1000",
+        "1000",
+        "1000",
+        "1000",
+        "1000",
+        "1000",
+        "1000",
+        "1000",
+        "1000",
+        "1000",
+        "1000",
+        "1000"
+      ],
+      "machine_max_speed_y": [
+        "1000",
+        "1000",
+        "1000",
+        "1000",
+        "1000",
+        "1000",
+        "1000",
+        "1000",
+        "1000",
+        "1000",
+        "1000",
+        "1000"
+      ],
+      "machine_max_speed_z": [
+        "20",
+        "20",
+        "20",
+        "20",
+        "20",
+        "20",
+        "20",
+        "20",
+        "20",
+        "20",
+        "20",
+        "20"
+      ],
+      "machine_min_extruding_rate": [
+        "0",
+        "0"
+      ],
+      "machine_min_travel_rate": [
+        "0",
+        "0"
+      ],
+      "machine_prepare_compensation_time": "260",
+      "machine_switch_extruder_time": "5",
+      "machine_unload_filament_time": "29",
+      "machine_hotend_change_time": "0",
+      "master_extruder_id": "1",
+      "max_layer_height": [
+        "0.28",
+        "0.28"
+      ],
+      "min_layer_height": [
+        "0.08",
+        "0.08"
+      ],
+      "nozzle_height": "4",
+      "nozzle_flush_dataset": [
+        "1",
+        "2",
+        "2",
+        "1",
+        "2",
+        "2"
+      ],
+      "print_in_clockwise": "1",
+      "printable_height": "261",
+      "printer_settings_id": "",
+      "printer_structure": "corexy",
+      "printer_technology": "FFF",
+      "retract_before_wipe": [
+        "0%",
+        "0%",
+        "0%",
+        "0%",
+        "0%",
+        "0%"
+      ],
+      "retract_length_toolchange": [
+        "2",
+        "2",
+        "2",
+        "2",
+        "2",
+        "2"
+      ],
+      "retract_restart_extra": [
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0"
+      ],
+      "retract_restart_extra_toolchange": [
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0"
+      ],
+      "retract_when_changing_layer": [
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1"
+      ],
+      "retraction_distances_when_cut": [
+        "18",
+        "18",
+        "18",
+        "18",
+        "18",
+        "18"
+      ],
+      "retraction_length": [
+        "0.8",
+        "0.8",
+        "0.8",
+        "2",
+        "2",
+        "2"
+      ],
+      "retraction_minimum_travel": [
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1"
+      ],
+      "retraction_speed": [
+        "30",
+        "30",
+        "30",
+        "20",
+        "20",
+        "20"
+      ],
+      "scan_first_layer": "0",
+      "silent_mode": "0",
+      "single_extruder_multi_material": "1",
+      "support_air_filtration": "0",
+      "support_cooling_filter": "0",
+      "support_fast_purge_mode": "0",
+      "cooling_filter_enabled": "0",
+      "support_chamber_temp_control": "1",
+      "support_object_skip_flush": "0",
+      "wipe": [
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1"
+      ],
+      "wrapping_exclude_area": [],
+      "z_hop": [
+        "0.4",
+        "0.4",
+        "0.4",
+        "0.4",
+        "0.4",
+        "0.4"
+      ],
+      "upward_compatible_machine": [
+        "Bambu Lab A1 0.4 nozzle",
+        "Bambu Lab P2S 0.4 nozzle",
+        "Bambu Lab H2S 0.4 nozzle",
+        "Bambu Lab H2D 0.4 nozzle",
+        "Bambu Lab H2D Pro 0.4 nozzle",
+        "Bambu Lab H2C 0.4 nozzle",
+        "Bambu Lab A2L 0.4 nozzle"
+      ],
+      "machine_start_gcode": ";M1002 set_flag extrude_cali_flag=1\n;M1002 set_flag g29_before_print_flag=1\n;M1002 set_flag auto_cali_toolhead_offset_flag=1\n;M1002 set_flag build_plate_detect_flag=1\n\n;======== X2D start gcode==========\n;===== 2026/06/05 =====\n\n  M140 S[bed_temperature_initial_layer_single] ; heat heatbed first\n  M993 A0 B0 C0 ; nozzle cam detection not allowed.\n  M400\n  ;M73 P99\n\n;=====printer start sound ===================\nM17\nM400 S1\nM1006 S1\nM1006 A53 B9 L50 C53 D9 M50 E53 F9 N50\nM1006 A56 B9 L50 C56 D9 M50 E56 F9 N50\nM1006 A61 B9 L50 C61 D9 M50 E61 F9 N50\nM1006 A53 B9 L50 C53 D9 M50 E53 F9 N50\nM1006 A56 B9 L50 C56 D9 M50 E56 F9 N50\nM1006 A61 B18 L50 C61 D18 M50 E61 F18 N50\nM1006 W\n;=====printer start sound ===================\n\n  M1012.1 T1100\n  M620 M ;enable remap\n  M622.1 S0\n  G383.4\n\n;===== avoid end stop =================\n  G91\n  G380 S2 Z22 F1200\n  G380 S2 Z-12 F1200\n  G90\n;===== avoid end stop =================\n\n;===== reset machine status =================\n  M204 S10000\n  M630 S0 P1\n  G90\n  M17 D ; reset motor current to default\n  M960 S5 P1 ; turn on logo lamp\n  M220 S100 ;Reset Feedrate\n  M1002 set_gcode_claim_speed_level: 5\n  M221 S100 ;Reset Flowrate\n  M73.2   R1.0 ;Reset left time magnitude\n  G29.1 Z{+0.0} ; clear z-trim value first\n  M983.1 M1\n  M982.2 S1 ; turn on cog noise reduction\n;===== reset machine status =================\n\n;==== set airduct mode ====\n{if (overall_chamber_temperature >= 40)}\nM145 P1 ; set airduct mode to heating mode for heating\nM106 P2 S0 ; turn off auxiliary fan\nM106 P10 S255 ; turn on filter fan\n{else}\nM145 P0 ; set airduct mode to cooling mode for cooling\nM106 P2 S255 ; turn on auxiliary fan for cooling\nM106 P10 S255 ; turn on auxiliary fan for cooling\nM106 P3 S127 ; turn on chamber fan for cooling\n;M140 S0 ; stop heatbed from heating\nM1002 gcode_claim_action : 29\nM191 S0 ; wait for chamber temp\nM106 P2 S102 ; turn on auxiliary fan\nM106 P10 S102 ; turn on chamber fan\nM142 P6 R30 S40 U0.6 V0.8 ; set PLA/TPU/PETG exhaust chamber autocooling\n{endif}\n;==== set airduct mode ====\n\n;===== start to heat heatbed & hotend==========\n  M1002 gcode_claim_action : 2\n  M1002 set_filament_type:{filament_type[initial_no_support_filament_id]}\n\n  ;===== set chamber temperature ==========\n  {if (overall_chamber_temperature >= 40)}\n    M145 P1 ; set airduct mode to heating mode\n    M141 S[overall_chamber_temperature] ; Let Chamber begin to heat\n  {endif}\n;===== set chamber temperature ==========\n\n  G29.2 S0 ; avoid invalid abl data\n\n;===== first homing start =====\n  M1002 gcode_claim_action : 13\n  G28 X T300 R\n  G150.1 F8000 ; wipe mouth to avoid filament stick to heatbed\n  G150.3\n  M972 S24 P0\n  M1002 gcode_claim_action : 74 ; Heatbed surface foreign object detection\n  M972 S26 P0 C0\n  G90\n  M83\n  G1 Y128 F30000\n  G1 X128\n  G28 Z P0 T400\n  M400\n;===== first homign end =====\n\n;===== detection start =====\n  M1002 gcode_claim_action : 11\n\n      M104 S0 T0\n      M104 S0 T1\n      M562 P1 E0 B1\n      M562 P2 E0 B1\n      M18 E\n      M400 P200\n      M1028 S1\n      M972 S19 P0   ;heatbed detection\n      M972 S31 P0   ;toolhead camera dirt detection\n      M1002 gcode_claim_action : 73 ; Build plate alignment detection\n      M972 S34 P0   ;print plate deviation detection\n      M1028 S0\n      M562 P1 E1 B1\n      M562 P2 E1 B1\n      M17 D\n\n  ;M400\n  M104 S{nozzle_temperature_initial_layer[initial_no_support_filament_id]} T{filament_map[initial_no_support_filament_id] % 2} ; rise temp in advance\n\n  {if max_print_z >= 145}\n    G151 P{filament_map[initial_no_support_filament_id] % 2} M ; plug the heat nozzle\n    M1002 gcode_claim_action : 75 ;  Detect obstacles at the botton of the heated bed\n    G3811 Z{max_print_z}  ; Detect obstacles at the bottom of the heated bed\n  {endif}\n;===== detection end =====\n\n;===== prepare print temperature and material ==========\n  M104 S{nozzle_temperature_initial_layer[initial_no_support_filament_id]-40} A ; rise temp in advance\n  M400\n  M211 X0 Y0 Z0 ;turn off soft endstop\n  M975 S1 ; turn on input shaping\n\n  G29.2 S0 ; avoid invalid abl data\n  G150.3\n{if ((filament_type[initial_no_support_filament_id] == \"PLA\") || (filament_type[initial_no_support_filament_id] == \"PLA-CF\") || (filament_type[initial_no_support_filament_id] == \"PETG\")) && (nozzle_diameter_at_nozzle_id[initial_nozzle_id] == 0.2)}\nM620.10 A0 F74.8347 H{nozzle_diameter_at_nozzle_id[initial_nozzle_id]} T{flush_temperatures[initial_no_support_filament_id]} P{nozzle_temperature_initial_layer[initial_no_support_filament_id]} S1\nM620.10 A1 F74.8347 H{nozzle_diameter_at_nozzle_id[initial_nozzle_id]} T{flush_temperatures[initial_no_support_filament_id]} P{nozzle_temperature_initial_layer[initial_no_support_filament_id]} S1\n{else}\nM620.10 A0 F{flush_volumetric_speeds[initial_no_support_filament_id]/2.4053*60} H{nozzle_diameter_at_nozzle_id[initial_nozzle_id]} T{flush_temperatures[initial_no_support_filament_id]} P{nozzle_temperature_initial_layer[initial_no_support_filament_id]} S1\nM620.10 A1 F{flush_volumetric_speeds[initial_no_support_filament_id]/2.4053*60} H{nozzle_diameter_at_nozzle_id[initial_nozzle_id]} T{flush_temperatures[initial_no_support_filament_id]} P{nozzle_temperature_initial_layer[initial_no_support_filament_id]} S1\n{endif}\n\n M620.11 P0 L0 I[initial_no_support_filament_id] B[initial_no_support_hotend] E0\n M620.11 K0 I[initial_no_support_filament_id] B[initial_no_support_hotend] R0\n\n  M620 S[initial_no_support_filament_id]A H[initial_no_support_hotend] B   ; switch material if AMS exist\n  M620.22 I[initial_no_support_filament_id] P1    ; enable remote extruder runout auto purge.\n  M1002 gcode_claim_action : 4\n  M1002 set_filament_type:UNKNOWN\n  M400\n  T[initial_no_support_filament_id] H[initial_no_support_hotend]\n  M400\n  M628 S0\n  M629\n  M400\n  M1002 set_filament_type:{filament_type[initial_no_support_filament_id]}\n  M621 S[initial_no_support_filament_id]A B\n  M104 S{nozzle_temperature_initial_layer[initial_no_support_filament_id]}\n  M400\n  M106 P1 S0\n  M400\n  G29.2 S1\n;===== prepare print temperature and material ==========\n\n;===== auto extrude cali start =========================\n  M975 S1\n  M1002 judge_flag extrude_cali_flag\n  M622 J0\n    M983.3 F{filament_max_volumetric_speed[initial_no_support_filament_id]/2.4} A0.4 ; cali dynamic extrusion compensation\n  M623\n\n  M622 J1\n    M1002 set_filament_type:{filament_type[initial_no_support_filament_id]}\n    M1002 gcode_claim_action : 8\n    M109 S{nozzle_temperature[initial_no_support_filament_id]}\n    G90\n    M83\n    M983.3 F{filament_max_volumetric_speed[initial_no_support_filament_id]/2.4} A0.4 ; cali dynamic extrusion compensation\n    M400\n    M106 P1 S255\n    M400 S5\n    M106 P1 S0\n    G150.3\n  M623\n\n  M622 J2\n    M1002 set_filament_type:{filament_type[initial_no_support_filament_id]}\n    M1002 gcode_claim_action : 8\n    M109 S{nozzle_temperature[initial_no_support_filament_id]}\n    G90\n    M83\n    M983.3 F{filament_max_volumetric_speed[initial_no_support_filament_id]/2.4} A0.4 ; cali dynamic extrusion compensation\n    M400\n    M106 P1 S255\n    M400 S5\n    M106 P1 S0\n    G150.3\n  M623\n;===== auto extrude cali end =========================\n\n  {if hold_chamber_temp_for_flat_print}\n    G150.3\n    M1002 gcode_claim_action : 58\n    M104 S{first_layer_temperature[initial_no_support_filament_id]}\n    {if bed_temperature_initial_layer_single > 89}\n        {if overall_chamber_temperature < 40}\n            M1030 S1200\n            SYNC R0 T1200\n        {else}\n            M1030 S600\n            SYNC R0 T600\n        {endif}\n    {else}\n        M1030 S300\n        SYNC R0 T300\n    {endif}\n    M1030 C\n  {endif}\n\n  {if filament_type[initial_filament_id] == \"TPU\" || filament_type[initial_filament_id] == \"PVA\"}\n  {else}\n    M83\n    G1 E-3 F1800\n    M400 P500\n  {endif}\n  G150.2\n  G150.1 F8000\n  G150.2\n  G150.1 F8000\n\n  G91\n  G1 Y-16 F12000 ; move away from the trash bin\n  G90\n  M400\n\n  M104 S{nozzle_temperature_initial_layer[initial_no_support_filament_id]-80} A\n\n;===== wipe right nozzle start =====\n  M1002 gcode_claim_action : 14\n  G150 T{nozzle_temperature_initial_layer[initial_no_support_filament_id]}\n  M400\n;===== wipe left nozzle end =====\n\n{if filament_type[initial_filament_id] == \"PC\"}\n  M109 S170 A\n{else}\n  M109 S140 A\n{endif}\n  M106 S0 ; turn off fan , too noisy\n  G91\n  G1 Z5 F1200\n  G90\n  M400\n  G150.1\n\n{if (overall_chamber_temperature >= 40)}\nM1002 gcode_claim_action : 49\nM191 S[overall_chamber_temperature] ; wait for chamber temp\n{endif}\n\n;===== z ofst cali start =====\n  M190 S[bed_temperature_initial_layer_single]; ensure bed temp\n  G383 O0 M1 T140\n  M400\n;===== z ofst cali end =====\nG90\nM83\nG0 Y200 F18000\n\n;===== bed leveling ==================================\n  M1002 gcode_claim_action : 54\n  M190 S[bed_temperature_initial_layer_single]; ensure bed temp\n  M109 S140 A\n  M106 S0 ; turn off fan , too noisy\n  M1002 judge_flag g29_before_print_flag\n  M622 J1\n    M1002 gcode_claim_action : 1\n    {if hold_chamber_temp_for_flat_print}\n      G29 H R\n    {else}\n      G29 A1 X{first_layer_print_min[0]} Y{first_layer_print_min[1]} I{first_layer_print_size[0]} J{first_layer_print_size[1]} R\n    {endif}\n    M400\n  M623\n\n  M622 J2\n    M1002 gcode_claim_action : 1\n    {if hold_chamber_temp_for_flat_print}\n      G29 H R\n    {else}\n      G29 A2 X{first_layer_print_min[0]} Y{first_layer_print_min[1]} I{first_layer_print_size[0]} J{first_layer_print_size[1]} R\n    {endif}\n    M400\n  M623\n\n  M622 J0\n    G28 R\n  M623\n  G29.2 S1\n;===== bed leveling end ================================\n\n; cali eddy z pos\n;G383.13 T1 C1\n\nM104 S{nozzle_temperature_initial_layer[initial_no_support_filament_id]} A\n;===== mech mode sweep start =====\n  M1002 gcode_claim_action : 3\n  G90\n  G1 X128 Y128 F20000\n  G1 Z5 F1200\n  M400 P200\n  M970.3 Q1 A5 K0 O1\n  M974 Q1 S2 P0\n  M970.3 Q0 A7 K0 O1\n  M970.2 Q0 W73 K1 Z0.01\n  M974 Q0 S2 P0\n  M975 S1\n  M400\n;===== mech mode sweep end =====\n\nM104 S{nozzle_temperature_initial_layer[initial_filament_id]} A\nG150.3\n\n;===== xy ofst cali start =====\nM1002 judge_flag auto_cali_toolhead_offset_flag\n\nM622 J0\n    M1012.5 N1 R1\nM623\n\nM622 J1\n    M1002 gcode_claim_action : 39\n    M141 S0\n    M620.17 T0 S{nozzle_temperature_initial_layer[(first_non_support_filaments[0] != -1 ? first_non_support_filaments[0] : (first_filaments[0] != -1 ? first_filaments[0] : 0))]} L{(first_non_support_filaments[0] != -1 ? first_non_support_filaments[0] : (first_filaments[0] != -1 ? first_filaments[0] : 0))}\n    M620.17 T1 S{nozzle_temperature_initial_layer[(first_non_support_filaments[1] != -1 ? first_non_support_filaments[1] : (first_filaments[1] != -1 ? first_filaments[1] : 0))]} L{(first_non_support_filaments[1] != -1 ? first_non_support_filaments[1] : (first_filaments[1] != -1 ? first_filaments[1] : 0))}\n    M620 D[initial_no_support_hotend]\n    G383 O1 T{nozzle_temperature_initial_layer[initial_no_support_filament_id]} L{initial_no_support_filament_id}\n    M141 S[overall_chamber_temperature]\nM623\n\nM622 J2\n    M1002 gcode_claim_action : 39\n    M141 S0\n    M620.17 T0 S{nozzle_temperature_initial_layer[(first_non_support_filaments[0] != -1 ? first_non_support_filaments[0] : (first_filaments[0] != -1 ? first_filaments[0] : 0))]} L{(first_non_support_filaments[0] != -1 ? first_non_support_filaments[0] : (first_filaments[0] != -1 ? first_filaments[0] : 0))}\n    M620.17 T1 S{nozzle_temperature_initial_layer[(first_non_support_filaments[1] != -1 ? first_non_support_filaments[1] : (first_filaments[1] != -1 ? first_filaments[1] : 0))]} L{(first_non_support_filaments[1] != -1 ? first_non_support_filaments[1] : (first_filaments[1] != -1 ? first_filaments[1] : 0))}\n    M620 D[initial_no_support_hotend]\n    G383.3 T{nozzle_temperature_initial_layer[initial_no_support_filament_id]} L{initial_no_support_filament_id}\n    M141 S[overall_chamber_temperature]\nM623\n;===== xy ofst cali end =====\n\n  M104 S{nozzle_temperature_initial_layer[initial_filament_id]} A\n\n G150.3 ; move to garbage can to wait for temp\n\n;===== wait temperature reaching the reference value =======\n  M140 S[bed_temperature_initial_layer_single]\n  M190 S[bed_temperature_initial_layer_single]\n\n  ;========turn off light and fans =============\n  M960 S1 P0 ; turn off laser\n  M960 S2 P0 ; turn off laser\n  M106 S0 ; turn off cooling fan\n\n;===== wait temperature reaching the reference value =======\n\n  M1002 gcode_claim_action : 255\n  M400\n  M975 S1 ; turn on mech mode supression\n  M983.4 S0 ; turn off deformation compensation\n\n;============switch again==================\n  M211 X0 Y0 Z0 ;turn off soft endstop\n  G91\n  G1 Z6 F1200\n  G90\n  M1002 set_filament_type:{filament_type[initial_no_support_filament_id]}\n  M620 S[initial_no_support_filament_id]A H[initial_no_support_hotend] B\n  M620.22 I[initial_no_support_filament_id] P1    ; enable remote extruder runout auto purge.\n  M400\n  T[initial_no_support_filament_id] H[initial_no_support_hotend]\n  M400\n  M628 S0\n  M629\n  M400\n  M621 S[initial_no_support_filament_id]A B\n;============switch again==================\n\n;===== for Textured PEI Plate , lower the nozzle as the nozzle was touching topmost of the texture when homing ==\n  {if bed_temperature_initial_layer_single > 70}\n    {if curr_bed_type==\"Textured PEI Plate\"}\n      G29.1 Z{-0.003} ; for Textured PEI Plate\n    {else}\n      G29.1 Z{0.017}\n    {endif}\n  {else}\n    {if curr_bed_type==\"Textured PEI Plate\"}\n      G29.1 Z{0.002} ; for Textured PEI Plate\n    {else}\n      G29.1 Z{0.022}\n    {endif}\n  {endif}\n\n;===== nozzle load line ===============================\nM1002 gcode_claim_action : 51\n  G29.2 S1 ; ensure z comp turn on\n  G90\n  M83\n  M400 P50\n  M500 D1\n  M400 S3\n  M109 S{nozzle_temperature_initial_layer[initial_no_support_filament_id]}\n  G0 X100 Y0 F24000\n  M400\n  ;G130 O0 X100 Y-0.4 Z0.6 F{filament_max_volumetric_speed[initial_no_support_filament_id]/2/2.4053} L40 E20 D5\n  G130 O0 X100 Y-0.2 Z0.6 F{filament_max_volumetric_speed[initial_no_support_filament_id]/2/2.4053} L40 E12 D4\nG90\n  G90\n  M83\n  G1 Z1\n  M400\n;===== noozle load line end ===========================\nM1002 gcode_claim_action : 0\n  G29.99\n\n;M993 A1 B1 C1 ; nozzle cam detection allowed.\n\nM620.6 I[initial_no_support_filament_id] H[initial_no_support_hotend] W1 ;enable ams air printing detect\n\n\n{if (filament_type[initial_no_support_filament_id] == \"TPU\")}\nM1015.3 S1 H{nozzle_diameter_at_nozzle_id[initial_nozzle_id]};enable tpu clog detect\n{else}\nM1015.3 S0;disable tpu clog detect\n{endif}\n\n{if (filament_type[initial_no_support_filament_id] == \"PLA\") ||  (filament_type[initial_no_support_filament_id] == \"PETG\")\n ||  (filament_type[initial_no_support_filament_id] == \"PLA-CF\")  ||  (filament_type[initial_no_support_filament_id] == \"PETG-CF\")}\nM1015.4 S1 K1 H{nozzle_diameter_at_nozzle_id[initial_nozzle_id]} ;enable E air printing detect\n{else}\nM1015.4 S0 K0 H{nozzle_diameter_at_nozzle_id[initial_nozzle_id]} ;disable E air printing detect\n{endif}\n\n",
+      "machine_end_gcode": ";======== X2D end gcode ==========\n;===== 2026/05/18 =====\n\nM400 ; wait for buffer to clear\nG92 E0 ; zero the extruder\nM211 Z1\n\nG90\nG1 Z{max_layer_z + 0.4} F900 ; lower z a little\nM1002 judge_flag timelapse_record_flag\nM622 J1\n    G150.3\n    M400 ; wait all motion done\n    M991 S0 P-1 ;end smooth timelapse at safe pos\n    M400 S5 ;wait for last picture to be taken\nM623  ;end of \"timelapse_record_flag\"\n\nG90\nG1 Z{max_layer_z + 10} F900 ; lower z a little\n\nM140 S0 ; turn off bed\nM141 S0 ; turn off chamber heating\nM106 S0 ; turn off fan\nM106 P2 S0 ; turn off remote part cooling fan\nM106 P3 S0 ; turn off chamber cooling fan\nM106 P10 S0 ; turn off remote part1 cooling fan\n\n; pull back filament to AMS\nM620 S65279 B\n; M620.11 P1 L0 I65279 E-3\nT65279\nG150.1 F8000\nM621 S65279 B\n\nM620 S65535 B\n; M620.11 P1 L0 I65535 E-4\nT65535\nG150.1 F8000\nM621 S65535 B\n\nG150.3\n\nM104 S0 T0; turn off hotend\nM104 S0 T1; turn off hotend\n\nM400 ; wait all motion done\nM17 S\nM17 Z0.4 ; lower z motor current to reduce impact if there is something in the bottom\n{if (80.0 - max_layer_z/2) > 0}\n    {if (max_layer_z + 80.0 - max_layer_z/2) < 256}\n        G1 Z{max_layer_z + 80.0 - max_layer_z/2} F600\n        G1 Z{max_layer_z + 78.0 - max_layer_z/2}\n    {else}\n        G1 Z256 F600\n        G1 Z256\n    {endif}\n{else}\n    {if (max_layer_z + 4.0) < 256}\n        G1 Z{max_layer_z + 4.0} F600\n        G1 Z{max_layer_z + 2.0}\n    {else}\n        G1 Z256 F600\n        G1 Z256\n    {endif}\n{endif}\nM400 P100\nM17 R ; restore z current\n\nM220 S100  ; Reset feedrate magnitude\nM201.2 K1.0 ; Reset acc magnitude\nM73.2 R1.0 ;Reset left time magnitude\nM1002 set_gcode_claim_speed_level : 0\n\nM1015.3 S0 ;disable clog detect\nM1015.4 S0 K0 ;disable air printing detect\n\n;=====printer finish air purification=========\nM622.1 S0\nM1002 judge_flag print_finish_air_filt_flag\n\nM622 J1\nM1002 gcode_claim_action : 66\nM145 P1\nM106 P10 S255\nM400 S180\nM106 P10 S0\nM623\n\nM622 J2\nM1002 gcode_claim_action : 66\nM145 P0\nM106 P3 S255\nM400 S180\nM106 P3 S0\nM623\n;=====printer finish air purification=========\n\n;=====printer finish  sound=========\nM17\nM400 S1\nM1006 S1\nM1006 A53 B10 L50 C53 D10 M50 E53 F10 N50 \nM1006 A57 B10 L50 C57 D10 M50 E57 F10 N50 \nM1006 A0 B15 L0 C0 D15 M0 E0 F15 N0 \nM1006 A53 B10 L50 C53 D10 M50 E53 F10 N50 \nM1006 A57 B10 L50 C57 D10 M50 E57 F10 N50 \nM1006 A0 B15 L0 C0 D15 M0 E0 F15 N0 \nM1006 A48 B10 L50 C48 D10 M50 E48 F10 N50 \nM1006 A0 B15 L0 C0 D15 M0 E0 F15 N0 \nM1006 A60 B10 L50 C60 D10 M50 E60 F10 N50 \nM1006 W\n;=====printer finish  sound=========\nM400\nM18\n\n",
+      "time_lapse_gcode": ";======== X2D timelapse gcode ========\n;======== 2026/06/03 ========\n; SKIPPABLE_START\n; SKIPTYPE: timelapse\nM622.1 S1 ; for prev firware, default turned on\n\nM1002 judge_flag timelapse_record_flag\n\nM622 J1\n    {if !spiral_mode && !(has_timelapse_safe_pos) }\n        {if most_used_physical_extruder_id!= curr_physical_extruder_id || timelapse_type == 1}\n            M83\n            G1 Z{max_layer_z + 0.4} F1200\n            M400\n        {endif}\n    {endif}\n\n    {if timelapse_inline_photo}\n        M971 S11 C10 O0\n        M1004 S5 P1  ; external shutter\n    {elsif has_timelapse_safe_pos && !spiral_mode}\n        M9711 M{timelapse_type} E{most_used_physical_extruder_id} U{timelapse_pos_x} V{timelapse_pos_y} Z{layer_z + (farthest_point_timelapse_enabled ? 0.0 : 0.4)} S11 C10 O0 T3000\n    {else}\n        {if spiral_mode}\n            M971 S11 C10 O0\n            M1004 S5 P1  ; external shutter\n        {else}\n            M9711 M{timelapse_type} E{most_used_physical_extruder_id} Z{layer_z + (farthest_point_timelapse_enabled ? 0.0 : 0.4)} S11 C10 O0 T3000\n        {endif}\n    {endif}\n\n    {if !spiral_mode && !(has_timelapse_safe_pos) }\n        {if most_used_physical_extruder_id!= curr_physical_extruder_id || timelapse_type == 1}\n            G90\n            G1 Z{max_layer_z + 3.0} F1200\n            G91\n            G0 Y-20 F18000\n            G90\n            M83\n        {endif}\n    {endif}\nM623\n; SKIPPABLE_END\n",
+      "wrapping_detection_gcode": "",
+      "change_filament_gcode": ";======== X2D filament_change gcode ==========\n;===== 2026/07/01 =====\n\nM620 S[next_filament_id]A B H[next_hotend]\n;M204 S9000\n{if toolchange_count > 1 && (z_hop_types[current_filament_id] == 0 || z_hop_types[current_filament_id] == 3)}\nG17\nG2 Z{z_after_toolchange + 0.4} I0.86 J0.86 P1 F10000 ; spiral lift a little from second lift\n{endif}\n\n;nozzle_change_gcode\n\nG1 Z{max_layer_z + 3.0} F1200\n\nM400\nM106 P1 S0\n\n{if toolchange_count == 2}\n; get travel path for change filament\n;M620.1 X[travel_point_1_x] Y[travel_point_1_y] F21000 P0\n;M620.1 X[travel_point_2_x] Y[travel_point_2_y] F21000 P1\n;M620.1 X[travel_point_3_x] Y[travel_point_3_y] F21000 P2\n{endif}\n\n{if ((filament_type[current_filament_id] == \"PLA\") || (filament_type[current_filament_id] == \"PLA-CF\") || (filament_type[current_filament_id] == \"PETG\")) && (nozzle_diameter_at_nozzle_id[current_nozzle_id] == 0.2)}\nM620.10 A0 F74.8347 L[flush_length] H{nozzle_diameter_at_nozzle_id[current_nozzle_id]} T{flush_temperatures[current_filament_id]} P[old_filament_temp] S1\n{else}\nM620.10 A0 F{flush_volumetric_speeds[current_filament_id]/2.4053*60} L[flush_length] H{nozzle_diameter_at_nozzle_id[current_nozzle_id]} T{flush_temperatures[current_filament_id]} P[old_filament_temp] S1\n{endif}\n\n{if ((filament_type[next_filament_id] == \"PLA\") || (filament_type[next_filament_id] == \"PLA-CF\") || (filament_type[next_filament_id] == \"PETG\")) && (nozzle_diameter_at_nozzle_id[next_nozzle_id] == 0.2)}\nM620.10 A1 F74.8347 L[flush_length] H{nozzle_diameter_at_nozzle_id[next_nozzle_id]} T{flush_temperatures[next_filament_id]} P[new_filament_temp] S1\n{else}\nM620.10 A1 F{flush_volumetric_speeds[next_filament_id]/2.4053*60} L[flush_length] H{nozzle_diameter_at_nozzle_id[next_nozzle_id]} T{flush_temperatures[next_filament_id]} P[new_filament_temp] S1\n{endif}\n\nM620.15 C{new_filament_temp - filament_cooling_before_tower[next_filament_id]}\n\n{if long_retraction_when_cut}\nM620.11 P1 L0 I[current_filament_id] B[current_hotend] E-{retraction_distance_when_cut} F{max((flush_volumetric_speeds[current_filament_id]/2.4053*60), 200)}\n{else}\nM620.11 P0 L0 I[current_filament_id] B[current_hotend] E0\n{endif}\n\n{if long_retraction_when_ec}\nM620.11 K1 I[current_filament_id] B[current_hotend] R{retraction_distance_when_ec} F{max((flush_volumetric_speeds[current_filament_id]/2.4053*60), 200)}\n{else}\nM620.11 K0 I[current_filament_id] B[current_hotend] R0\n{endif}\n\nM620.22 I[next_filament_id] P1    ; enable remote extruder runout auto purge.\n\nT[next_filament_id] H[next_hotend]\n\n;deretract\n{if filament_type[next_filament_id] == \"TPU\"}\n{else}\n{if filament_type[next_filament_id] == \"PA\"}\n;VG1 E1 F{max(new_filament_e_feedrate, 200)}\n;VG1 E1 F{max(new_filament_e_feedrate/2, 100)}\n{else}\n;VG1 E4 F{max(new_filament_e_feedrate, 200)}\n;VG1 E4 F{max(new_filament_e_feedrate/2, 100)}\n{endif}\n{endif}\n\n; VFLUSH_START\n{if flush_length>41.5}\n;VG1 E41.5 F{min(old_filament_e_feedrate,new_filament_e_feedrate)}\n;VG1 E{flush_length-41.5} F{new_filament_e_feedrate}\n{else}\n;VG1 E{flush_length} F{min(old_filament_e_feedrate,new_filament_e_feedrate)}\n{endif}\nSYNC T{ceil(flush_length / 125) * 5}\n; VFLUSH_END\n\nM1002 set_filament_type:{filament_type[next_filament_id]}\n\nM400\nM83\n{if next_filament_id < 255}\nM620.10 R{retract_length_toolchange[filament_map[next_filament_id]-1]}\nM628 S0\n;VM109 S[new_filament_temp]\nM629\nM400\n\n;prime_tower_interface\n{if is_prime_tower_interface && filament_tower_interface_purge_volume !=0}\nG150.1\nM620.13 W0 L{filament_tower_interface_purge_volume} T{filament_tower_interface_print_temp} R0.0\n{endif}\n;prime_tower_interface\n\nM983.3 F{filament_max_volumetric_speed[next_filament_id]/2.4} A0.4 R{retract_length_toolchange[filament_map[next_filament_id]-1]}\n\nM400\n\nG1 Z{max_layer_z + 3.0} F3000\n\n{else}\nG1 X[x_after_toolchange] Y[y_after_toolchange] Z[z_after_toolchange] F12000\n{endif}\n\n\nM621 S[next_filament_id]A B\n\nM622.1 S0 ;for prev version, default skip\nM1002 judge_flag powerloss_resume_flag\nM622 J1\nM983.3 F{filament_max_volumetric_speed[next_filament_id]/2.4} A0.4 R{retract_length_toolchange[filament_map[next_filament_id]-1]}\nM400\nG1 Z{max_layer_z + 3.0} F3000\nM1002 set_flag powerloss_resume_flag=0\nM623\n\nM620.6 I[next_filament_id] H[next_hotend] W1 ;enable ams air printing detect\n\n{if (filament_type[next_filament_id] == \"TPU\")}\nM1015.3 S1 H{nozzle_diameter_at_nozzle_id[next_nozzle_id]};enable tpu clog detect\n{else}\nM1015.3 S0;disable tpu clog detect\n{endif}\n\n{if (filament_type[next_filament_id] == \"PLA\") ||  (filament_type[next_filament_id] == \"PETG\")\n ||  (filament_type[next_filament_id] == \"PLA-CF\")  ||  (filament_type[next_filament_id] == \"PETG-CF\")}\nM1015.4 S1 K1 H{nozzle_diameter_at_nozzle_id[next_nozzle_id]} ;enable E air printing detect\n{else}\nM1015.4 S0 K0 H{nozzle_diameter_at_nozzle_id[next_nozzle_id]} ;disable E air printing detect\n{endif}\n\n{if layer_z <= (initial_layer_print_height + 0.001)}\nM204 S[initial_layer_acceleration]\n{else}\nM204 S[travel_acceleration]\n{endif}\n\nG1 Y256 F18000\n\n\n{if (overall_chamber_temperature < 40)}\n{if (layer_num + 1 <= close_additional_fan_first_x_layers[next_filament_id])}\n    M106 P2 S{first_x_layer_fan_speed[next_filament_id]*255.0/100.0 };set first x_layer fan\n\tM106 P10 S{first_x_layer_fan_speed[next_filament_id]*255.0/100.0 };set first x_layer fan\n{elsif (layer_num + 1 < additional_fan_full_speed_layer[next_filament_id] && additional_fan_full_speed_layer[next_filament_id] > close_additional_fan_first_x_layers[next_filament_id])}\n    M106 P2 S{(first_x_layer_fan_speed[next_filament_id] + (additional_cooling_fan_speed[next_filament_id] - first_x_layer_fan_speed[next_filament_id]) * (layer_num + 1 - close_additional_fan_first_x_layers[next_filament_id]) / max(additional_fan_full_speed_layer[next_filament_id] - close_additional_fan_first_x_layers[next_filament_id], 1)) * 255.0/100.0}\n\tM106 P10 S{(first_x_layer_fan_speed[next_filament_id] + (additional_cooling_fan_speed[next_filament_id] - first_x_layer_fan_speed[next_filament_id]) * (layer_num + 1 - close_additional_fan_first_x_layers[next_filament_id]) / max(additional_fan_full_speed_layer[next_filament_id] - close_additional_fan_first_x_layers[next_filament_id], 1)) * 255.0/100.0}\n{else}\n    {if (min_vitrification_temperature <= 50)}\n        {if (nozzle_diameter_at_nozzle_id[current_nozzle_id] == 0.2)}\n            M142 P1 R30 S40 U{max_additional_fan/100.0} V1.0 O45; set PLA/TPU ND0.2 chamber autocooling\n        {else}\n            M142 P1 R30 S40 U{max_additional_fan/100.0} V1.0 O45; set PLA/TPU ND0.4 chamber autocooling\n        {endif}\n    {else}\n        {if (!is_all_bbl_filament)}\n            M142 P1 R40 S45 U{max_additional_fan/100.0} V0.5 O50; set third-party PETG chamber \n        {else}\n            {if (nozzle_diameter_at_nozzle_id[current_nozzle_id] == 0.2)}\n                M142 P1 R45 S50 U{max_additional_fan/100.0} V0.5 O50; set PETG ND0.2 chamber autocooling\n            {else}\n                M142 P1 R50 S55 U{max_additional_fan/100.0} V0.5 O55; set PETG ND0.4 chamber autocooling\n            {endif}\n        {endif}\n    {endif}\n{endif}\n{endif}\n;not set fan changing filament",
+      "bed_exclude_area": [],
+      "bed_temperature_formula": "by_highest_temp",
+      "default_nozzle_volume_type": [
+        "Standard",
+        "Standard"
+      ],
+      "extruder_clearance_radius": "13",
+      "extruder_printable_area": [
+        "0x0,256x0,256x256,0x256",
+        "20.5x0,256x0,256x256,20.5x256"
+      ],
+      "extruder_printable_height": [
+        "261",
+        "256"
+      ],
+      "extruder_type": [
+        "Direct Drive",
+        "Bowden"
+      ],
+      "extruder_variant_list": [
+        "Direct Drive Standard,Direct Drive High Flow,Direct Drive E3D High Flow",
+        "Bowden Standard,Bowden High Flow,Bowden E3D High Flow"
+      ],
+      "head_wrap_detect_zone": [],
+      "machine_max_acceleration_travel": [
+        "9000",
+        "9000",
+        "9000",
+        "9000",
+        "9000",
+        "9000",
+        "9000",
+        "9000",
+        "9000",
+        "9000",
+        "9000",
+        "9000"
+      ],
+      "nozzle_volume": [
+        "92",
+        "92",
+        "92",
+        "92",
+        "92",
+        "92"
+      ],
+      "physical_extruder_map": [
+        "1",
+        "0"
+      ],
+      "printable_area": [
+        "0x0",
+        "256x0",
+        "256x256",
+        "0x256 "
+      ],
+      "printer_extruder_id": [
+        "1",
+        "1",
+        "1",
+        "2",
+        "2",
+        "2"
+      ],
+      "printer_extruder_variant": [
+        "Direct Drive Standard",
+        "Direct Drive High Flow",
+        "Direct Drive E3D High Flow",
+        "Bowden Standard",
+        "Bowden High Flow",
+        "Bowden E3D High Flow"
+      ],
+      "retract_lift_above": [
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0"
+      ],
+      "retract_lift_below": [
+        "254",
+        "254",
+        "254",
+        "254",
+        "254",
+        "254"
+      ],
+      "wipe_distance": [
+        "2",
+        "2",
+        "2",
+        "2",
+        "2",
+        "2"
+      ],
+      "z_hop_types": [
+        "Auto Lift",
+        "Auto Lift",
+        "Auto Lift",
+        "Auto Lift",
+        "Auto Lift",
+        "Auto Lift"
+      ],
+      "layer_change_gcode": ";======== X2D layer_change gcode ==========\n;===== 2026/07/01 =====\n\n{if (layer_num + 1 == 1)}\n{if (overall_chamber_temperature >= 40)}\n    ;not reset filter fan in first layer\n    ;not reset fan\n{endif}\n{endif}\n\n{if (layer_num + 1 <= close_additional_fan_first_x_layers[current_filament_id])}\n{if (overall_chamber_temperature < 40)}\n    M106 P2 S{first_x_layer_fan_speed[current_filament_id]*255.0/100.0}\n\tM106 P10 S{first_x_layer_fan_speed[current_filament_id]*255.0/100.0}\n{endif}\n;not reset fan\n{elsif (layer_num + 1 < additional_fan_full_speed_layer[current_filament_id] && additional_fan_full_speed_layer[current_filament_id] > close_additional_fan_first_x_layers[current_filament_id])}\n{if (overall_chamber_temperature < 40)}\n    M106 P2 S{(first_x_layer_fan_speed[current_filament_id] + (additional_cooling_fan_speed[current_filament_id] - first_x_layer_fan_speed[current_filament_id]) * (layer_num + 1 - close_additional_fan_first_x_layers[current_filament_id]) / max(additional_fan_full_speed_layer[current_filament_id] - close_additional_fan_first_x_layers[current_filament_id], 1)) * 255.0/100.0}\n\tM106 P10 S{(first_x_layer_fan_speed[current_filament_id] + (additional_cooling_fan_speed[current_filament_id] - first_x_layer_fan_speed[current_filament_id]) * (layer_num + 1 - close_additional_fan_first_x_layers[current_filament_id]) / max(additional_fan_full_speed_layer[current_filament_id] - close_additional_fan_first_x_layers[current_filament_id], 1)) * 255.0/100.0}\n{endif}\n;not reset fan\n{elsif (layer_num + 1 == max(close_additional_fan_first_x_layers[current_filament_id] + 1, additional_fan_full_speed_layer[current_filament_id]))}\n{if (overall_chamber_temperature < 40)}\n    ;updata chamber autocooling in Xth layer\n    {if (min_vitrification_temperature <= 50)}\n        {if (nozzle_diameter_at_nozzle_id[current_nozzle_id] == 0.2)}\n            M142 P1 R30 S40 U{max_additional_fan/100.0} V1.0 O45; set PLA/TPU ND0.2 chamber autocooling\n        {else}\n            M142 P1 R30 S40 U{max_additional_fan/100.0} V1.0 O45; set PLA/TPU ND0.4 chamber autocooling\n        {endif}\n    {else}\n        {if (!is_all_bbl_filament)}\n            M142 P1 R40 S45 U{max_additional_fan/100.0} V0.5 O50; set third-party PETG chamber \n        {else}\n            {if (nozzle_diameter_at_nozzle_id[current_nozzle_id] == 0.2)}\n                M142 P1 R45 S50 U{max_additional_fan/100.0} V0.5 O50; set PETG ND0.2 chamber autocooling\n            {else}\n                M142 P1 R50 S55 U{max_additional_fan/100.0} V0.5 O55; set PETG ND0.4 chamber autocooling\n            {endif}\n        {endif}\n    {endif}\n{else}\n        ;not reset filter fan in Xth layer\n{endif}\n;not reset fan\n{endif}\n\n\n; update layer progress\nM73 L{layer_num+1}\nM991 S0 P{layer_num} ;notify layer change\n",
+      "machine_pause_gcode": "M400 U1",
+      "setting_id": "GM045",
+      "printer_model": "Bambu Lab X2D",
+      "farthest_point_timelapse": "1",
+      "deretract_speed_extruder_change": [
+        "30",
+        "30",
+        "30",
+        "90",
+        "90",
+        "90"
+      ]
+    },
+    "process": {
+      "type": "process",
+      "name": "0.20mm Standard @BBL X2D",
+      "from": "system",
+      "instantiation": "true",
+      "adaptive_layer_height": "0",
+      "bottom_shell_layers": "3",
+      "bottom_color_penetration_layers": "3",
+      "bottom_shell_thickness": "0",
+      "bottom_surface_pattern": "monotonic",
+      "bottom_surface_density": "100",
+      "bridge_flow": "1",
+      "bridge_no_support": "0",
+      "bridge_speed": [
+        "50",
+        "50",
+        "50",
+        "50",
+        "200",
+        "200"
+      ],
+      "brim_object_gap": "0.1",
+      "brim_width": "5",
+      "compatible_printers_condition": "",
+      "circle_compensation_manual_offset": "0",
+      "default_acceleration": [
+        "10000",
+        "10000",
+        "10000",
+        "1000",
+        "1000",
+        "1000"
+      ],
+      "detect_floating_vertical_shell": "1",
+      "detect_overhang_wall": "1",
+      "detect_thin_wall": "0",
+      "draft_shield": "disabled",
+      "elefant_foot_compensation": "0.15",
+      "enable_arc_fitting": "1",
+      "enable_prime_tower": "1",
+      "enable_support": "0",
+      "enable_circle_compensation": "0",
+      "enable_wrapping_detection": "0",
+      "filename_format": "{input_filename_base}_{filament_type[0]}_{print_time}.gcode",
+      "gap_infill_speed": [
+        "250",
+        "250",
+        "250",
+        "250",
+        "250",
+        "250"
+      ],
+      "infill_combination": "0",
+      "infill_direction": "45",
+      "infill_wall_overlap": "15%",
+      "monotonic_travel_into_wall": "45.0",
+      "initial_layer_line_width": "0.5",
+      "initial_layer_infill_line_width": "0.5",
+      "initial_layer_print_height": "0.2",
+      "initial_layer_speed": [
+        "50",
+        "50",
+        "50",
+        "50",
+        "50",
+        "50"
+      ],
+      "inner_wall_line_width": "0.45",
+      "inner_wall_speed": [
+        "300",
+        "600",
+        "600",
+        "200",
+        "200",
+        "200"
+      ],
+      "interface_shells": "0",
+      "internal_bridge_support_thickness": "0.8",
+      "internal_solid_infill_line_width": "0.42",
+      "internal_solid_infill_speed": [
+        "250",
+        "600",
+        "600",
+        "200",
+        "200",
+        "200"
+      ],
+      "ironing_flow": "10%",
+      "ironing_inset": "0.21",
+      "ironing_spacing": "0.15",
+      "ironing_speed": "30",
+      "ironing_type": "no ironing",
+      "infill_lock_depth": "1.0",
+      "initial_layer_travel_acceleration": [
+        "6000",
+        "6000",
+        "6000",
+        "6000",
+        "6000",
+        "6000"
+      ],
+      "infill_shift_step": "0.4",
+      "infill_rotate_step": "0",
+      "layer_height": "0.2",
+      "layer_time_smoothing": "0",
+      "layer_time_smoothing_threshold": "30",
+      "line_width": "0.42",
+      "locked_skin_infill_pattern": "crosszag",
+      "locked_skeleton_infill_pattern": "zigzag",
+      "max_bridge_length": "0",
+      "max_travel_detour_distance": "0",
+      "avoid_crossing_wall_includes_support": "0",
+      "minimum_sparse_infill_area": "15",
+      "only_one_wall_top": "1",
+      "outer_wall_line_width": "0.42",
+      "outer_wall_speed": [
+        "200",
+        "500",
+        "500",
+        "50",
+        "50",
+        "50"
+      ],
+      "overhang_totally_speed": [
+        "10",
+        "10",
+        "10",
+        "10",
+        "10",
+        "10"
+      ],
+      "override_filament_scarf_seam_setting": "0",
+      "pre_start_fan_time": [
+        "0"
+      ],
+      "prime_tower_width": "35",
+      "print_sequence": "by layer",
+      "print_settings_id": "",
+      "prime_tower_brim_width": "-1",
+      "prime_tower_enable_framework": "0",
+      "prime_tower_lift_speed": "90",
+      "prime_tower_lift_height": "-1",
+      "prime_tower_max_speed": "90",
+      "prime_tower_flat_ironing": "1",
+      "raft_layers": "0",
+      "reduce_crossing_wall": "0",
+      "reduce_infill_retraction_mode": "Auto",
+      "resolution": "0.012",
+      "scarf_angle_threshold": "155",
+      "seam_position": "aligned",
+      "seam_placement_away_from_overhangs": "0",
+      "skirt_distance": "2",
+      "skirt_per_object": "1",
+      "skirt_height": "1",
+      "skirt_loops": "0",
+      "smooth_coefficient": "4",
+      "sparse_infill_density": "15%",
+      "fill_multiline": "1",
+      "skeleton_infill_density": "15%",
+      "skin_infill_density": "15%",
+      "sparse_infill_line_width": "0.45",
+      "skin_infill_line_width": "0.45",
+      "skin_infill_depth": "2.0",
+      "skeleton_infill_line_width": "0.45",
+      "sparse_infill_pattern": "grid",
+      "sparse_infill_speed": [
+        "270",
+        "600",
+        "600",
+        "200",
+        "200",
+        "200"
+      ],
+      "spiral_mode": "0",
+      "standby_temperature_delta": "-5",
+      "support_base_pattern": "default",
+      "support_base_pattern_spacing": "2.5",
+      "support_bottom_z_distance": "0.2",
+      "support_expansion": "0",
+      "support_filament": "0",
+      "support_interface_bottom_layers": "2",
+      "support_interface_filament": "0",
+      "support_interface_loop_pattern": "0",
+      "support_interface_pattern": "auto",
+      "support_interface_spacing": "0.5",
+      "support_interface_speed": [
+        "80",
+        "80",
+        "80",
+        "80",
+        "80",
+        "80"
+      ],
+      "support_interface_top_layers": "2",
+      "support_line_width": "0.42",
+      "support_object_xy_distance": "0.35",
+      "support_on_build_plate_only": "0",
+      "support_speed": [
+        "150",
+        "150",
+        "150",
+        "150",
+        "150",
+        "150"
+      ],
+      "support_style": "default",
+      "support_threshold_angle": "30",
+      "support_top_z_distance": "0.2",
+      "support_type": "tree(auto)",
+      "enable_support_ironing": "0",
+      "support_ironing_pattern": "zig-zag",
+      "support_ironing_speed": "30",
+      "support_ironing_flow": "10%",
+      "support_ironing_spacing": "0.15",
+      "support_ironing_inset": "0.0",
+      "support_ironing_direction": "0",
+      "seam_slope_type": "none",
+      "seam_slope_start_height": "10%",
+      "seam_slope_gap": "0",
+      "seam_slope_min_length": "10",
+      "symmetric_infill_y_axis": "0",
+      "sparse_infill_lattice_angle_1": "-45",
+      "sparse_infill_lattice_angle_2": "45",
+      "top_shell_layers": "5",
+      "top_color_penetration_layers": "5",
+      "top_shell_thickness": "1.0",
+      "top_surface_line_width": "0.42",
+      "top_surface_pattern": "monotonicline",
+      "top_surface_density": "100",
+      "top_surface_speed": [
+        "200",
+        "200",
+        "200",
+        "200",
+        "200",
+        "200"
+      ],
+      "top_solid_infill_flow_ratio": [
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1"
+      ],
+      "travel_acceleration": [
+        "10000",
+        "10000",
+        "10000",
+        "10000",
+        "10000",
+        "10000"
+      ],
+      "travel_short_distance_acceleration": [
+        "250",
+        "250",
+        "250",
+        "250",
+        "250",
+        "250"
+      ],
+      "travel_speed": [
+        "1000",
+        "1000",
+        "1000",
+        "1000",
+        "1000",
+        "1000"
+      ],
+      "tree_support_branch_angle": "45",
+      "tree_support_branch_diameter": "2",
+      "tree_support_wall_count": "-1",
+      "wall_generator": "classic",
+      "wall_infill_order": "inner wall/outer wall/infill",
+      "wall_loops": "2",
+      "wipe_tower_no_sparse_layers": "0",
+      "xy_contour_compensation": "0",
+      "xy_hole_compensation": "0",
+      "z_direction_outwall_speed_continuous": "1",
+      "enable_tower_interface_features": "1",
+      "sparse_infill_filament": "0",
+      "wall_filament": "0",
+      "solid_infill_filament": "0",
+      "infill_instead_top_bottom_surfaces": "0",
+      "fuzzy_skin": "none",
+      "fuzzy_skin_thickness": "0.3",
+      "fuzzy_skin_point_distance": "0.8",
+      "fuzzy_skin_first_layer": "0",
+      "fuzzy_skin_noise_type": "classic",
+      "fuzzy_skin_mode": "displacement",
+      "fuzzy_skin_scale": "1.0",
+      "fuzzy_skin_octaves": "4",
+      "fuzzy_skin_persistence": "0.5",
+      "enable_overhang_speed": [
+        "1",
+        "1",
+        "1",
+        "1",
+        "0",
+        "0"
+      ],
+      "enable_height_slowdown": [
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0"
+      ],
+      "initial_layer_acceleration": [
+        "500",
+        "500",
+        "500",
+        "500",
+        "500",
+        "500"
+      ],
+      "initial_layer_infill_speed": [
+        "105",
+        "105",
+        "105",
+        "105",
+        "105",
+        "105"
+      ],
+      "inner_wall_acceleration": [
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0"
+      ],
+      "outer_wall_acceleration": [
+        "5000",
+        "5000",
+        "5000",
+        "1000",
+        "1000",
+        "1000"
+      ],
+      "overhang_1_4_speed": [
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0"
+      ],
+      "overhang_2_4_speed": [
+        "50",
+        "50",
+        "50",
+        "50",
+        "50",
+        "50"
+      ],
+      "overhang_3_4_speed": [
+        "30",
+        "20",
+        "20",
+        "30",
+        "20",
+        "20"
+      ],
+      "overhang_4_4_speed": [
+        "10",
+        "10",
+        "10",
+        "10",
+        "10",
+        "10"
+      ],
+      "print_extruder_id": [
+        "1",
+        "1",
+        "1",
+        "2",
+        "2",
+        "2"
+      ],
+      "print_extruder_variant": [
+        "Direct Drive Standard",
+        "Direct Drive High Flow",
+        "Direct Drive E3D High Flow",
+        "Bowden Standard",
+        "Bowden High Flow",
+        "Bowden E3D High Flow"
+      ],
+      "slowdown_start_height": [
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0"
+      ],
+      "slowdown_start_speed": [
+        "1000",
+        "1000",
+        "1000",
+        "1000",
+        "1000",
+        "1000"
+      ],
+      "slowdown_start_acc": [
+        "100000",
+        "100000",
+        "100000",
+        "100000",
+        "100000",
+        "100000"
+      ],
+      "slowdown_end_height": [
+        "400",
+        "400",
+        "400",
+        "400",
+        "400",
+        "400"
+      ],
+      "slowdown_end_speed": [
+        "1000",
+        "1000",
+        "1000",
+        "1000",
+        "1000",
+        "1000"
+      ],
+      "slowdown_end_acc": [
+        "100000",
+        "100000",
+        "100000",
+        "100000",
+        "100000",
+        "100000"
+      ],
+      "small_perimeter_speed": [
+        "50%",
+        "50%",
+        "50%",
+        "50%",
+        "50%",
+        "50%"
+      ],
+      "small_perimeter_threshold": [
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0"
+      ],
+      "sparse_infill_acceleration": [
+        "100%",
+        "100%",
+        "100%",
+        "100%",
+        "100%",
+        "100%"
+      ],
+      "top_surface_acceleration": [
+        "2000",
+        "2000",
+        "2000",
+        "1000",
+        "1000",
+        "1000"
+      ],
+      "travel_speed_z": [
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0"
+      ],
+      "vertical_shell_speed": [
+        "80%",
+        "80%",
+        "80%",
+        "80%",
+        "80%",
+        "80%"
+      ],
+      "setting_id": "GP151",
+      "description": "It has a general layer height, and results in general layer lines and printing quality. It is suitable for most general printing cases.",
+      "compatible_printers": [
+        "Bambu Lab X2D 0.4 nozzle"
+      ]
+    },
+    "PLA": {
+      "type": "filament",
+      "name": "Generic PLA @BBL X2D 0.4 nozzle",
+      "from": "system",
+      "instantiation": "true",
+      "activate_air_filtration": [
+        "0"
+      ],
+      "additional_cooling_fan_speed": [
+        "70"
+      ],
+      "chamber_temperatures": [
+        "0"
+      ],
+      "circle_compensation_speed": [
+        "200"
+      ],
+      "close_fan_the_first_x_layers": [
+        "1"
+      ],
+      "close_additional_fan_first_x_layers": [
+        "1"
+      ],
+      "complete_print_exhaust_fan_speed": [
+        "70"
+      ],
+      "cool_plate_temp": [
+        "35"
+      ],
+      "cool_plate_temp_initial_layer": [
+        "35"
+      ],
+      "counter_coef_1": [
+        "0"
+      ],
+      "counter_coef_2": [
+        "0.008"
+      ],
+      "counter_coef_3": [
+        "-0.041"
+      ],
+      "counter_limit_max": [
+        "0.033"
+      ],
+      "counter_limit_min": [
+        "-0.035"
+      ],
+      "diameter_limit": [
+        "50"
+      ],
+      "during_print_exhaust_fan_speed": [
+        "70"
+      ],
+      "eng_plate_temp": [
+        "55"
+      ],
+      "eng_plate_temp_initial_layer": [
+        "55"
+      ],
+      "fan_cooling_layer_time": [
+        "100"
+      ],
+      "fan_max_speed": [
+        "100"
+      ],
+      "fan_min_speed": [
+        "100"
+      ],
+      "filament_adaptive_volumetric_speed": [
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0"
+      ],
+      "filament_extruder_compatibility": [
+        "0"
+      ],
+      "filament_cooling_before_tower": [
+        "10",
+        "10",
+        "10",
+        "10",
+        "10",
+        "10"
+      ],
+      "filament_preheat_temperature_delta": [
+        "10",
+        "10",
+        "10",
+        "10",
+        "10",
+        "10"
+      ],
+      "filament_tower_interface_pre_extrusion_dist": [
+        "10"
+      ],
+      "filament_tower_interface_pre_extrusion_length": [
+        "0"
+      ],
+      "filament_tower_ironing_area": [
+        "4"
+      ],
+      "filament_tower_interface_purge_volume": [
+        "20"
+      ],
+      "filament_tower_interface_print_temp": [
+        "220"
+      ],
+      "filament_cost": [
+        "20"
+      ],
+      "filament_density": [
+        "1.24"
+      ],
+      "filament_deretraction_speed": [
+        "nil",
+        "nil",
+        "nil",
+        "nil",
+        "nil",
+        "nil"
+      ],
+      "filament_dev_ams_drying_ams_limitations": [
+        "1",
+        "0"
+      ],
+      "filament_dev_ams_drying_heat_distortion_temperature": [
+        "45"
+      ],
+      "filament_dev_ams_drying_temperature": [
+        "45",
+        "45",
+        "45",
+        "45"
+      ],
+      "filament_dev_ams_drying_time": [
+        "12",
+        "12",
+        "12",
+        "12"
+      ],
+      "filament_dev_chamber_drying_bed_temperature": [
+        "70"
+      ],
+      "filament_dev_chamber_drying_time": [
+        "12.0"
+      ],
+      "filament_dev_drying_cooling_temperature": [
+        "45"
+      ],
+      "filament_dev_drying_softening_temperature": [
+        "50"
+      ],
+      "filament_diameter": [
+        "1.75"
+      ],
+      "filament_extruder_variant": [
+        "Direct Drive Standard",
+        "Direct Drive High Flow",
+        "Direct Drive E3D High Flow",
+        "Bowden Standard",
+        "Bowden High Flow",
+        "Bowden E3D High Flow"
+      ],
+      "filament_flow_ratio": [
+        "0.98",
+        "0.98",
+        "0.98",
+        "0.98",
+        "0.98",
+        "0.98"
+      ],
+      "filament_flush_temp": [
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0"
+      ],
+      "filament_flush_temp_fast": [
+        "0"
+      ],
+      "filament_flush_volumetric_speed": [
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0"
+      ],
+      "filament_is_support": [
+        "0"
+      ],
+      "filament_long_retractions_when_cut": [
+        "nil",
+        "nil",
+        "nil",
+        "nil",
+        "nil",
+        "nil"
+      ],
+      "filament_long_retractions_when_ec": [
+        "nil"
+      ],
+      "filament_max_volumetric_speed": [
+        "12",
+        "12",
+        "12",
+        "12",
+        "12",
+        "12"
+      ],
+      "filament_metal_stickiness": [
+        "None"
+      ],
+      "filament_minimal_purge_on_wipe_tower": [
+        "15"
+      ],
+      "filament_pre_cooling_temperature": [
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0"
+      ],
+      "filament_pre_cooling_temperature_nc": [
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0"
+      ],
+      "filament_prime_volume": [
+        "45"
+      ],
+      "filament_prime_volume_nc": [
+        "60"
+      ],
+      "filament_printable": [
+        "3"
+      ],
+      "filament_ramming_travel_time_nc": [
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0"
+      ],
+      "filament_ramming_volumetric_speed": [
+        "-1",
+        "-1",
+        "-1",
+        "-1",
+        "-1",
+        "-1"
+      ],
+      "filament_ramming_volumetric_speed_nc": [
+        "-1",
+        "-1",
+        "-1",
+        "-1",
+        "-1",
+        "-1"
+      ],
+      "filament_retract_before_wipe": [
+        "nil",
+        "nil",
+        "nil",
+        "nil",
+        "nil",
+        "nil"
+      ],
+      "filament_retract_restart_extra": [
+        "nil",
+        "nil",
+        "nil",
+        "nil",
+        "nil",
+        "nil"
+      ],
+      "filament_retract_when_changing_layer": [
+        "nil",
+        "nil",
+        "nil",
+        "nil",
+        "nil",
+        "nil"
+      ],
+      "filament_retraction_distances_when_cut": [
+        "nil",
+        "nil",
+        "nil",
+        "nil",
+        "nil",
+        "nil"
+      ],
+      "filament_retraction_distances_when_ec": [
+        "nil"
+      ],
+      "filament_retraction_length": [
+        "nil",
+        "nil",
+        "nil",
+        "nil",
+        "nil",
+        "nil"
+      ],
+      "filament_retraction_minimum_travel": [
+        "nil",
+        "nil",
+        "nil",
+        "nil",
+        "nil",
+        "nil"
+      ],
+      "filament_retraction_speed": [
+        "nil",
+        "nil",
+        "nil",
+        "nil",
+        "nil",
+        "nil"
+      ],
+      "filament_scarf_seam_type": [
+        "none"
+      ],
+      "filament_settings_id": [
+        ""
+      ],
+      "filament_shrink": [
+        "100%"
+      ],
+      "filament_soluble": [
+        "0"
+      ],
+      "filament_type": [
+        "PLA"
+      ],
+      "filament_vendor": [
+        "Generic"
+      ],
+      "filament_wipe": [
+        "nil",
+        "nil",
+        "nil",
+        "nil",
+        "nil",
+        "nil"
+      ],
+      "filament_wipe_distance": [
+        "nil",
+        "nil",
+        "nil",
+        "nil",
+        "nil",
+        "nil"
+      ],
+      "filament_z_hop": [
+        "nil",
+        "nil",
+        "nil",
+        "nil",
+        "nil",
+        "nil"
+      ],
+      "filament_z_hop_types": [
+        "nil",
+        "nil",
+        "nil",
+        "nil",
+        "nil",
+        "nil"
+      ],
+      "full_fan_speed_layer": [
+        "0"
+      ],
+      "additional_fan_full_speed_layer": [
+        "0"
+      ],
+      "filament_scarf_height": [
+        "10%"
+      ],
+      "filament_scarf_gap": [
+        "15%"
+      ],
+      "filament_scarf_length": [
+        "10"
+      ],
+      "filament_ramming_travel_time": [
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0"
+      ],
+      "filament_retract_length_nc": [
+        "14",
+        "14",
+        "14",
+        "14",
+        "14",
+        "14"
+      ],
+      "filament_enable_overhang_speed": [
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1"
+      ],
+      "filament_overhang_1_4_speed": [
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0"
+      ],
+      "filament_overhang_2_4_speed": [
+        "50",
+        "50",
+        "50",
+        "50",
+        "50",
+        "50"
+      ],
+      "filament_overhang_3_4_speed": [
+        "30",
+        "30",
+        "30",
+        "30",
+        "30",
+        "30"
+      ],
+      "filament_overhang_4_4_speed": [
+        "10",
+        "10",
+        "10",
+        "10",
+        "10",
+        "10"
+      ],
+      "filament_overhang_totally_speed": [
+        "10",
+        "10",
+        "10",
+        "10",
+        "10",
+        "10"
+      ],
+      "filament_bridge_speed": [
+        "25",
+        "25",
+        "25",
+        "25",
+        "25",
+        "25"
+      ],
+      "filament_change_length": [
+        "10"
+      ],
+      "filament_velocity_adaptation_factor": [
+        "1"
+      ],
+      "hot_plate_temp": [
+        "55"
+      ],
+      "hot_plate_temp_initial_layer": [
+        "55"
+      ],
+      "filament_ingredients_safe": "1",
+      "filament_emission_safe": "1",
+      "filament_contact_safe": "1",
+      "hole_coef_1": [
+        "0"
+      ],
+      "hole_coef_2": [
+        "-0.008"
+      ],
+      "hole_coef_3": [
+        "0.23415"
+      ],
+      "hole_limit_max": [
+        "0.22"
+      ],
+      "hole_limit_min": [
+        "0.088"
+      ],
+      "impact_strength_z": [
+        "10.0"
+      ],
+      "long_retractions_when_ec": [
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1"
+      ],
+      "no_slow_down_for_cooling_on_outwalls": [
+        "0"
+      ],
+      "nozzle_temperature": [
+        "220",
+        "220",
+        "220",
+        "220",
+        "220",
+        "220"
+      ],
+      "nozzle_temperature_initial_layer": [
+        "220",
+        "220",
+        "220",
+        "220",
+        "220",
+        "220"
+      ],
+      "nozzle_temperature_range_high": [
+        "240"
+      ],
+      "nozzle_temperature_range_low": [
+        "190"
+      ],
+      "overhang_fan_speed": [
+        "100"
+      ],
+      "overhang_fan_threshold": [
+        "50%"
+      ],
+      "override_process_overhang_speed": [
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0"
+      ],
+      "reduce_fan_stop_start_freq": [
+        "1"
+      ],
+      "required_nozzle_HRC": [
+        "3"
+      ],
+      "retraction_distances_when_ec": [
+        "3",
+        "3",
+        "3",
+        "4",
+        "4",
+        "4"
+      ],
+      "slow_down_for_layer_cooling": [
+        "1"
+      ],
+      "cooling_slowdown_logic": [
+        "uniform_cooling"
+      ],
+      "cooling_perimeter_transition_distance": [
+        "10"
+      ],
+      "slow_down_layer_time": [
+        "8"
+      ],
+      "slow_down_min_speed": [
+        "20",
+        "20",
+        "20",
+        "20",
+        "20",
+        "20"
+      ],
+      "supertack_plate_temp": [
+        "45"
+      ],
+      "supertack_plate_temp_initial_layer": [
+        "45"
+      ],
+      "temperature_vitrification": [
+        "45"
+      ],
+      "textured_plate_temp": [
+        "55"
+      ],
+      "textured_plate_temp_initial_layer": [
+        "55"
+      ],
+      "volumetric_speed_coefficients": [
+        "0 0 0 0 0 0",
+        "0 0 0 0 0 0",
+        "0 0 0 0 0 0",
+        "0 0 0 0 0 0",
+        "0 0 0 0 0 0",
+        "0 0 0 0 0 0"
+      ],
+      "compatible_printers": [
+        "Bambu Lab X2D 0.4 nozzle"
+      ],
+      "filament_start_gcode": [
+        "; filament start gcode\n"
+      ],
+      "filament_end_gcode": [
+        "; filament end gcode \n\n"
+      ],
+      "filament_adhesiveness_category": [
+        "100"
+      ],
+      "filament_id": "GFL99",
+      "description": "The generic presets are conservatively tuned for compatibility with a wider range of filaments. For higher printing quality and speeds, please use Bambu filaments with Bambu presets.",
+      "setting_id": "GFSL99_17",
+      "first_x_layer_fan_speed": [
+        "40"
+      ]
+    },
+    "PETG": {
+      "type": "filament",
+      "name": "Generic PETG @BBL X2D 0.4 nozzle",
+      "from": "system",
+      "instantiation": "true",
+      "activate_air_filtration": [
+        "0"
+      ],
+      "additional_cooling_fan_speed": [
+        "0"
+      ],
+      "chamber_temperatures": [
+        "0"
+      ],
+      "circle_compensation_speed": [
+        "200"
+      ],
+      "close_fan_the_first_x_layers": [
+        "3"
+      ],
+      "close_additional_fan_first_x_layers": [
+        "3"
+      ],
+      "complete_print_exhaust_fan_speed": [
+        "70"
+      ],
+      "cool_plate_temp": [
+        "0"
+      ],
+      "cool_plate_temp_initial_layer": [
+        "0"
+      ],
+      "counter_coef_1": [
+        "0"
+      ],
+      "counter_coef_2": [
+        "0.008"
+      ],
+      "counter_coef_3": [
+        "-0.041"
+      ],
+      "counter_limit_max": [
+        "0.033"
+      ],
+      "counter_limit_min": [
+        "-0.035"
+      ],
+      "diameter_limit": [
+        "50"
+      ],
+      "during_print_exhaust_fan_speed": [
+        "70"
+      ],
+      "eng_plate_temp": [
+        "70"
+      ],
+      "eng_plate_temp_initial_layer": [
+        "70"
+      ],
+      "fan_cooling_layer_time": [
+        "30"
+      ],
+      "fan_max_speed": [
+        "90"
+      ],
+      "fan_min_speed": [
+        "40"
+      ],
+      "filament_adaptive_volumetric_speed": [
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0"
+      ],
+      "filament_extruder_compatibility": [
+        "0"
+      ],
+      "filament_cooling_before_tower": [
+        "10",
+        "10",
+        "10",
+        "10",
+        "10",
+        "10"
+      ],
+      "filament_preheat_temperature_delta": [
+        "10",
+        "10",
+        "10",
+        "10",
+        "10",
+        "10"
+      ],
+      "filament_tower_interface_pre_extrusion_dist": [
+        "10"
+      ],
+      "filament_tower_interface_pre_extrusion_length": [
+        "0"
+      ],
+      "filament_tower_ironing_area": [
+        "4"
+      ],
+      "filament_tower_interface_purge_volume": [
+        "20"
+      ],
+      "filament_tower_interface_print_temp": [
+        "255"
+      ],
+      "filament_cost": [
+        "30"
+      ],
+      "filament_density": [
+        "1.27"
+      ],
+      "filament_deretraction_speed": [
+        "nil",
+        "nil",
+        "nil",
+        "nil",
+        "nil",
+        "nil"
+      ],
+      "filament_dev_ams_drying_ams_limitations": [
+        "1",
+        "0"
+      ],
+      "filament_dev_ams_drying_heat_distortion_temperature": [
+        "75"
+      ],
+      "filament_dev_ams_drying_temperature": [
+        "65",
+        "65",
+        "55",
+        "55"
+      ],
+      "filament_dev_ams_drying_time": [
+        "12",
+        "12",
+        "12",
+        "12"
+      ],
+      "filament_dev_chamber_drying_bed_temperature": [
+        "80"
+      ],
+      "filament_dev_chamber_drying_time": [
+        "12.0"
+      ],
+      "filament_dev_drying_cooling_temperature": [
+        "55"
+      ],
+      "filament_dev_drying_softening_temperature": [
+        "60"
+      ],
+      "filament_diameter": [
+        "1.75"
+      ],
+      "filament_extruder_variant": [
+        "Direct Drive Standard",
+        "Direct Drive High Flow",
+        "Direct Drive E3D High Flow",
+        "Bowden Standard",
+        "Bowden High Flow",
+        "Bowden E3D High Flow"
+      ],
+      "filament_flow_ratio": [
+        "0.95",
+        "0.95",
+        "0.95",
+        "0.95",
+        "0.95",
+        "0.95"
+      ],
+      "filament_flush_temp": [
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0"
+      ],
+      "filament_flush_temp_fast": [
+        "0"
+      ],
+      "filament_flush_volumetric_speed": [
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0"
+      ],
+      "filament_is_support": [
+        "0"
+      ],
+      "filament_long_retractions_when_cut": [
+        "nil",
+        "nil",
+        "nil",
+        "nil",
+        "nil",
+        "nil"
+      ],
+      "filament_long_retractions_when_ec": [
+        "nil"
+      ],
+      "filament_max_volumetric_speed": [
+        "12",
+        "12",
+        "12",
+        "12",
+        "12",
+        "12"
+      ],
+      "filament_metal_stickiness": [
+        "High"
+      ],
+      "filament_minimal_purge_on_wipe_tower": [
+        "15"
+      ],
+      "filament_pre_cooling_temperature": [
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0"
+      ],
+      "filament_pre_cooling_temperature_nc": [
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0"
+      ],
+      "filament_prime_volume": [
+        "45"
+      ],
+      "filament_prime_volume_nc": [
+        "60"
+      ],
+      "filament_printable": [
+        "3"
+      ],
+      "filament_ramming_travel_time_nc": [
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0"
+      ],
+      "filament_ramming_volumetric_speed": [
+        "-1",
+        "-1",
+        "-1",
+        "-1",
+        "-1",
+        "-1"
+      ],
+      "filament_ramming_volumetric_speed_nc": [
+        "-1",
+        "-1",
+        "-1",
+        "-1",
+        "-1",
+        "-1"
+      ],
+      "filament_retract_before_wipe": [
+        "nil",
+        "nil",
+        "nil",
+        "nil",
+        "nil",
+        "nil"
+      ],
+      "filament_retract_restart_extra": [
+        "nil",
+        "nil",
+        "nil",
+        "nil",
+        "nil",
+        "nil"
+      ],
+      "filament_retract_when_changing_layer": [
+        "nil",
+        "nil",
+        "nil",
+        "nil",
+        "nil",
+        "nil"
+      ],
+      "filament_retraction_distances_when_cut": [
+        "nil",
+        "nil",
+        "nil",
+        "nil",
+        "nil",
+        "nil"
+      ],
+      "filament_retraction_distances_when_ec": [
+        "nil"
+      ],
+      "filament_retraction_length": [
+        "nil",
+        "nil",
+        "nil",
+        "nil",
+        "nil",
+        "nil"
+      ],
+      "filament_retraction_minimum_travel": [
+        "nil",
+        "nil",
+        "nil",
+        "nil",
+        "nil",
+        "nil"
+      ],
+      "filament_retraction_speed": [
+        "nil",
+        "nil",
+        "nil",
+        "nil",
+        "nil",
+        "nil"
+      ],
+      "filament_scarf_seam_type": [
+        "none"
+      ],
+      "filament_settings_id": [
+        ""
+      ],
+      "filament_shrink": [
+        "100%"
+      ],
+      "filament_soluble": [
+        "0"
+      ],
+      "filament_type": [
+        "PETG"
+      ],
+      "filament_vendor": [
+        "Generic"
+      ],
+      "filament_wipe": [
+        "nil",
+        "nil",
+        "nil",
+        "nil",
+        "nil",
+        "nil"
+      ],
+      "filament_wipe_distance": [
+        "nil",
+        "nil",
+        "nil",
+        "nil",
+        "nil",
+        "nil"
+      ],
+      "filament_z_hop": [
+        "nil",
+        "nil",
+        "nil",
+        "nil",
+        "nil",
+        "nil"
+      ],
+      "filament_z_hop_types": [
+        "nil",
+        "nil",
+        "nil",
+        "nil",
+        "nil",
+        "nil"
+      ],
+      "full_fan_speed_layer": [
+        "0"
+      ],
+      "additional_fan_full_speed_layer": [
+        "0"
+      ],
+      "filament_scarf_height": [
+        "10%"
+      ],
+      "filament_scarf_gap": [
+        "0%"
+      ],
+      "filament_scarf_length": [
+        "10"
+      ],
+      "filament_ramming_travel_time": [
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0"
+      ],
+      "filament_retract_length_nc": [
+        "14",
+        "14",
+        "14",
+        "14",
+        "14",
+        "14"
+      ],
+      "filament_enable_overhang_speed": [
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1"
+      ],
+      "filament_overhang_1_4_speed": [
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0"
+      ],
+      "filament_overhang_2_4_speed": [
+        "50",
+        "50",
+        "50",
+        "50",
+        "50",
+        "50"
+      ],
+      "filament_overhang_3_4_speed": [
+        "30",
+        "30",
+        "30",
+        "30",
+        "30",
+        "30"
+      ],
+      "filament_overhang_4_4_speed": [
+        "10",
+        "10",
+        "10",
+        "10",
+        "10",
+        "10"
+      ],
+      "filament_overhang_totally_speed": [
+        "10",
+        "10",
+        "10",
+        "10",
+        "10",
+        "10"
+      ],
+      "filament_bridge_speed": [
+        "25",
+        "25",
+        "25",
+        "25",
+        "25",
+        "25"
+      ],
+      "filament_change_length": [
+        "10"
+      ],
+      "filament_velocity_adaptation_factor": [
+        "1"
+      ],
+      "hot_plate_temp": [
+        "70"
+      ],
+      "hot_plate_temp_initial_layer": [
+        "70"
+      ],
+      "filament_ingredients_safe": "1",
+      "filament_emission_safe": "1",
+      "filament_contact_safe": "1",
+      "hole_coef_1": [
+        "0"
+      ],
+      "hole_coef_2": [
+        "-0.008"
+      ],
+      "hole_coef_3": [
+        "0.23415"
+      ],
+      "hole_limit_max": [
+        "0.22"
+      ],
+      "hole_limit_min": [
+        "0.088"
+      ],
+      "impact_strength_z": [
+        "10"
+      ],
+      "long_retractions_when_ec": [
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1"
+      ],
+      "no_slow_down_for_cooling_on_outwalls": [
+        "0"
+      ],
+      "nozzle_temperature": [
+        "255",
+        "255",
+        "255",
+        "255",
+        "255",
+        "255"
+      ],
+      "nozzle_temperature_initial_layer": [
+        "255",
+        "255",
+        "255",
+        "255",
+        "255",
+        "255"
+      ],
+      "nozzle_temperature_range_high": [
+        "270"
+      ],
+      "nozzle_temperature_range_low": [
+        "220"
+      ],
+      "overhang_fan_speed": [
+        "90"
+      ],
+      "overhang_fan_threshold": [
+        "10%"
+      ],
+      "override_process_overhang_speed": [
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0"
+      ],
+      "reduce_fan_stop_start_freq": [
+        "1"
+      ],
+      "required_nozzle_HRC": [
+        "3"
+      ],
+      "retraction_distances_when_ec": [
+        "3",
+        "3",
+        "3",
+        "4",
+        "4",
+        "4"
+      ],
+      "slow_down_for_layer_cooling": [
+        "1"
+      ],
+      "cooling_slowdown_logic": [
+        "uniform_cooling"
+      ],
+      "cooling_perimeter_transition_distance": [
+        "10"
+      ],
+      "slow_down_layer_time": [
+        "12"
+      ],
+      "slow_down_min_speed": [
+        "20",
+        "20",
+        "20",
+        "20",
+        "20",
+        "20"
+      ],
+      "supertack_plate_temp": [
+        "70"
+      ],
+      "supertack_plate_temp_initial_layer": [
+        "70"
+      ],
+      "temperature_vitrification": [
+        "70"
+      ],
+      "textured_plate_temp": [
+        "70"
+      ],
+      "textured_plate_temp_initial_layer": [
+        "70"
+      ],
+      "volumetric_speed_coefficients": [
+        "0 0 0 0 0 0",
+        "0 0 0 0 0 0",
+        "0 0 0 0 0 0",
+        "0 0 0 0 0 0",
+        "0 0 0 0 0 0",
+        "0 0 0 0 0 0"
+      ],
+      "compatible_printers": [
+        "Bambu Lab X2D 0.4 nozzle"
+      ],
+      "filament_start_gcode": [
+        "; filament start gcode\n"
+      ],
+      "filament_end_gcode": [
+        "; filament end gcode \n\n"
+      ],
+      "filament_adhesiveness_category": [
+        "300"
+      ],
+      "filament_id": "GFG99",
+      "setting_id": "GFSG99_15",
+      "first_x_layer_fan_speed": [
+        "40"
+      ]
+    }
+  },
+  "profileProvenance": {
+    "Bambu Lab X2D 0.4 nozzle": {
+      "file": "machine/Bambu Lab X2D 0.4 nozzle.json",
+      "sha256": "7bfa994c9e0233ffac9e7bb20ea65a45aacee2d6106db9af1ff58c06ae42eabb"
+    },
+    "fdm_bbl_3dp_002_common": {
+      "file": "machine/fdm_bbl_3dp_002_common.json",
+      "sha256": "98b41984e0edd3e3a80b65ff3bb7d3d8677c5e1fb265599966a2ea1d65538703"
+    },
+    "fdm_machine_common": {
+      "file": "machine/fdm_machine_common.json",
+      "sha256": "26ef8ee697849323e67d8e1a9026c175cebe3397e38c5091dddb5cd3fc52e94c"
+    },
+    "Bambu Lab X2D 0.4 nozzle template machine_start_gcode": {
+      "file": "machine/Bambu Lab X2D 0.4 nozzle template machine_start_gcode.json",
+      "sha256": "0f2a63c066aefde6dc4ee0c20bb1ebed29f0b85f07fd5203d56db2bcfb25052a"
+    },
+    "Bambu Lab X2D 0.4 nozzle template machine_end_gcode": {
+      "file": "machine/Bambu Lab X2D 0.4 nozzle template machine_end_gcode.json",
+      "sha256": "f53b22535ccbc639ffdd94c60306061513c98181d2098f9388a9b99644f294d5"
+    },
+    "Bambu Lab X2D 0.4 nozzle template layer_change_gcode": {
+      "file": "machine/Bambu Lab X2D 0.4 nozzle template layer_change_gcode.json",
+      "sha256": "f13bd5e29cdef156c4da6d26e9f1aab323cb053d9ab34875917c37d31fa74960"
+    },
+    "Bambu Lab X2D 0.4 nozzle template time_lapse_gcode": {
+      "file": "machine/Bambu Lab X2D 0.4 nozzle template time_lapse_gcode.json",
+      "sha256": "65b30d1bfb5f2d5043e7da71cade5c1e561fa596029d9fcd0a171835a5e6a542"
+    },
+    "Bambu Lab X2D 0.4 nozzle template change_filament_gcode": {
+      "file": "machine/Bambu Lab X2D 0.4 nozzle template change_filament_gcode.json",
+      "sha256": "8c8676851ed1ed815d35c40f18f711601d2a4eaaefee1809277bc3407c1ac095"
+    },
+    "0.20mm Standard @BBL X2D": {
+      "file": "process/0.20mm Standard @BBL X2D.json",
+      "sha256": "9ad86d36979d9d335fe123d0b20dee4ab1f6fedac34ef529a624323fb07d16db"
+    },
+    "fdm_process_dual_0.20_nozzle_0.4": {
+      "file": "process/fdm_process_dual_0.20_nozzle_0.4.json",
+      "sha256": "8015670b40629f69ec2a2bff47d549d778e95ee545350e5fa9f60f8d8cbf2adc"
+    },
+    "fdm_process_dual_common": {
+      "file": "process/fdm_process_dual_common.json",
+      "sha256": "743303a5c3c1962f8c8d178d21e23fc409027ea48574017db51230eac72bd063"
+    },
+    "fdm_process_common": {
+      "file": "process/fdm_process_common.json",
+      "sha256": "5c16ba3f17a36cc8f01743245e221426b3cdceac7cc367758d6f48d86b63d8ef"
+    },
+    "Generic PLA @BBL X2D 0.4 nozzle": {
+      "file": "filament/Generic PLA @BBL X2D 0.4 nozzle.json",
+      "sha256": "d115962859a026a3b9b2979e40ca134672d7bc47845886aa4f8ddce97b253c59"
+    },
+    "Generic PLA @base": {
+      "file": "filament/Generic PLA @base.json",
+      "sha256": "530b745e2062c4c577d7acce3601ac7586fc65de394726252354bec0ade3e4c5"
+    },
+    "fdm_filament_pla": {
+      "file": "filament/fdm_filament_pla.json",
+      "sha256": "670d21ea6bdf1cd4b0a2bfddc743612ffd896cd6e5dbe767c25d2c4165c49a30"
+    },
+    "fdm_filament_common": {
+      "file": "filament/fdm_filament_common.json",
+      "sha256": "8c7105b7d59a28f600c43a946f067b8b4d707b9711c0bf6b88e9166e48878548"
+    },
+    "fdm_filament_template_direct_bowden_e3d": {
+      "file": "filament/fdm_filament_template_direct_bowden_e3d.json",
+      "sha256": "cc518ebe128bf40be47e99030406b406f198764d6012a4689fbf2880784735df"
+    },
+    "Generic PETG @BBL X2D 0.4 nozzle": {
+      "file": "filament/Generic PETG @BBL X2D 0.4 nozzle.json",
+      "sha256": "f49e35a4a7f796cbae04d7db9eaf71afc595b03c741d2802600fc176b07c9b48"
+    },
+    "Generic PETG @base": {
+      "file": "filament/Generic PETG @base.json",
+      "sha256": "6f6c6f213537cf75ab87f5eae7454a876ca268208d70f6b241c5396224a95b1a"
+    },
+    "fdm_filament_pet": {
+      "file": "filament/fdm_filament_pet.json",
+      "sha256": "3ed1b36367fe6df800103a9deaaa036f9d79c7afda3f3a17514dff23aa96c7d8"
+    }
+  },
+  "results": [
+    {
+      "case": "baseline",
+      "part": "body",
+      "material": "PLA",
+      "source": "reviews/filament-baseline/generator.html",
+      "sourceSHA256": "7fad9ed651b568bde8fb85c35e8a86cfb05d078e3f621b440915726c2bce2421",
+      "patch": {},
+      "stlSHA256": "1f081524776cdb455cfdb13570e7c04a00dce1d675090947e0cfabec35cf63dc",
+      "profileSHA256": {
+        "machine": "0fe204129ca1c1d5917ed9e6e2b7ebb1349bec6573d944e16612f4cfd6470678",
+        "process": "a65428943b73cf60af3fa1a7239c500ab89f97d834a6cf70f7d55618a983c81b",
+        "PLA": "2339d5a9f83c71eb07e1d287f0bb741ec3a579bd233f382daca48fa95d19adc5"
+      },
+      "exitCode": 0,
+      "artifacts": "reviews/filament-slicing/runs/20261010T163303207480Z/baseline-body-PLA",
+      "gcodeSHA256": "a9d60c0c53418a46659bbede4758231ed72899597dfb2aa3f20be7419a5a7a18",
+      "header": [
+        "; HEADER_BLOCK_START",
+        "; BambuStudio 02.08.04.57",
+        "; model printing time: 55m 40s; total estimated time: 1h 0m 49s",
+        "; total layer number: 228",
+        "; total filament length [mm] : 10483.64",
+        "; total filament volume [cm^3] : 25216.10",
+        "; total filament weight [g] : 31.27",
+        "; filament_density: 1.24",
+        "; filament_diameter: 1.75",
+        "; max_z_height: 45.60",
+        "; filament: 1",
+        "; support_material_on_wipe_tower: 0",
+        "; Legal and Compliance Notice"
+      ],
+      "grams": 31.27,
+      "time": "55m 40s; total estimated time: 1h 0m 49s",
+      "supportToolpathsPresent": false,
+      "settings": {
+        "bottom_shell_layers": "3",
+        "bottom_shell_thickness": "0",
+        "brim_type": "auto_brim",
+        "brim_width": "5",
+        "enable_support": "0",
+        "filament_density": "1.24",
+        "filament_type": "PLA",
+        "inner_wall_line_width": "0.45",
+        "layer_height": "0.2",
+        "line_width": "0.42",
+        "outer_wall_line_width": "0.42",
+        "printer_model": "Bambu Lab X2D",
+        "printer_variant": "0.4",
+        "skirt_loops": "0",
+        "sparse_infill_density": "15%",
+        "sparse_infill_pattern": "grid",
+        "top_shell_layers": "5",
+        "top_shell_thickness": "1",
+        "wall_generator": "classic",
+        "wall_loops": "2"
+      },
+      "success": true,
+      "warnings": [
+        "[2026-10-10 12:33:03.738917] [0x00000001fe20bf80] [warning] cli mode, Current BambuStudio Version 02.08.04.57",
+        "[2026-10-10 12:33:03.756492] [0x00000001fe20bf80] [warning] no filament colors found in projects",
+        "[2026-10-10 12:33:03.900942] [0x00000001fe20bf80] [warning] tree support default to organic support",
+        "[2026-10-10 12:33:04.571961] [0x00000001fe20bf80] [error]   Invalid T command (T65279).",
+        "[2026-10-10 12:33:04.572172] [0x00000001fe20bf80] [error]   Invalid T command (T65535)."
+      ],
+      "effectiveSettingsSHA256": "c014c4911b1353b00d74a109c3a1e2e7b9e63c0d6c700c549e6a88c247faf5f3"
+    },
+    {
+      "case": "baseline",
+      "part": "body",
+      "material": "PETG",
+      "source": "reviews/filament-baseline/generator.html",
+      "sourceSHA256": "7fad9ed651b568bde8fb85c35e8a86cfb05d078e3f621b440915726c2bce2421",
+      "patch": {},
+      "stlSHA256": "1f081524776cdb455cfdb13570e7c04a00dce1d675090947e0cfabec35cf63dc",
+      "profileSHA256": {
+        "machine": "0fe204129ca1c1d5917ed9e6e2b7ebb1349bec6573d944e16612f4cfd6470678",
+        "process": "a65428943b73cf60af3fa1a7239c500ab89f97d834a6cf70f7d55618a983c81b",
+        "PETG": "a763b7a062de417d96f4b79c2b1d23e56930bcacd21e27c01a7450c9ba896ac3"
+      },
+      "exitCode": 0,
+      "artifacts": "reviews/filament-slicing/runs/20261010T163303207480Z/baseline-body-PETG",
+      "gcodeSHA256": "bed63996c54ac599379f8f65f21e3ba8af6d8f532bd1e73a4f218f4f5c9a337f",
+      "header": [
+        "; HEADER_BLOCK_START",
+        "; BambuStudio 02.08.04.57",
+        "; model printing time: 1h 6m 25s; total estimated time: 1h 11m 33s",
+        "; total layer number: 228",
+        "; total filament length [mm] : 10162.70",
+        "; total filament volume [cm^3] : 24444.17",
+        "; total filament weight [g] : 31.04",
+        "; filament_density: 1.27",
+        "; filament_diameter: 1.75",
+        "; max_z_height: 45.60",
+        "; filament: 1",
+        "; support_material_on_wipe_tower: 0",
+        "; Legal and Compliance Notice"
+      ],
+      "grams": 31.04,
+      "time": "1h 6m 25s; total estimated time: 1h 11m 33s",
+      "supportToolpathsPresent": false,
+      "settings": {
+        "bottom_shell_layers": "3",
+        "bottom_shell_thickness": "0",
+        "brim_type": "auto_brim",
+        "brim_width": "5",
+        "enable_support": "0",
+        "filament_density": "1.27",
+        "filament_type": "PETG",
+        "inner_wall_line_width": "0.45",
+        "layer_height": "0.2",
+        "line_width": "0.42",
+        "outer_wall_line_width": "0.42",
+        "printer_model": "Bambu Lab X2D",
+        "printer_variant": "0.4",
+        "skirt_loops": "0",
+        "sparse_infill_density": "15%",
+        "sparse_infill_pattern": "grid",
+        "top_shell_layers": "5",
+        "top_shell_thickness": "1",
+        "wall_generator": "classic",
+        "wall_loops": "2"
+      },
+      "success": true,
+      "warnings": [
+        "[2026-10-10 12:33:04.669120] [0x00000001fe20bf80] [warning] cli mode, Current BambuStudio Version 02.08.04.57",
+        "[2026-10-10 12:33:04.682737] [0x00000001fe20bf80] [warning] no filament colors found in projects",
+        "[2026-10-10 12:33:04.814339] [0x00000001fe20bf80] [warning] tree support default to organic support",
+        "[2026-10-10 12:33:05.438234] [0x00000001fe20bf80] [error]   Invalid T command (T65279).",
+        "[2026-10-10 12:33:05.438446] [0x00000001fe20bf80] [error]   Invalid T command (T65535)."
+      ],
+      "effectiveSettingsSHA256": "26a145d654e4c0aecab6d8d9eb666b366c9884f4f94caf4d59d053949ef7941c"
+    },
+    {
+      "case": "baseline",
+      "part": "lid",
+      "material": "PLA",
+      "source": "reviews/filament-baseline/generator.html",
+      "sourceSHA256": "7fad9ed651b568bde8fb85c35e8a86cfb05d078e3f621b440915726c2bce2421",
+      "patch": {},
+      "stlSHA256": "af618f02462d67fb0b503826a90b9bc011ee2f931abdfa64db3f682646d18e39",
+      "profileSHA256": {
+        "machine": "0fe204129ca1c1d5917ed9e6e2b7ebb1349bec6573d944e16612f4cfd6470678",
+        "process": "a65428943b73cf60af3fa1a7239c500ab89f97d834a6cf70f7d55618a983c81b",
+        "PLA": "2339d5a9f83c71eb07e1d287f0bb741ec3a579bd233f382daca48fa95d19adc5"
+      },
+      "exitCode": 0,
+      "artifacts": "reviews/filament-slicing/runs/20261010T163303207480Z/baseline-lid-PLA",
+      "gcodeSHA256": "54b15bad8d21e11355289bb6639db0b6874d8284a5bf0d1cf8a765305d433d33",
+      "header": [
+        "; HEADER_BLOCK_START",
+        "; BambuStudio 02.08.04.57",
+        "; model printing time: 22m 26s; total estimated time: 27m 35s",
+        "; total layer number: 55",
+        "; total filament length [mm] : 4104.17",
+        "; total filament volume [cm^3] : 9871.70",
+        "; total filament weight [g] : 12.24",
+        "; filament_density: 1.24",
+        "; filament_diameter: 1.75",
+        "; max_z_height: 11.00",
+        "; filament: 1",
+        "; support_material_on_wipe_tower: 0",
+        "; Legal and Compliance Notice"
+      ],
+      "grams": 12.24,
+      "time": "22m 26s; total estimated time: 27m 35s",
+      "supportToolpathsPresent": false,
+      "settings": {
+        "bottom_shell_layers": "3",
+        "bottom_shell_thickness": "0",
+        "brim_type": "auto_brim",
+        "brim_width": "5",
+        "enable_support": "0",
+        "filament_density": "1.24",
+        "filament_type": "PLA",
+        "inner_wall_line_width": "0.45",
+        "layer_height": "0.2",
+        "line_width": "0.42",
+        "outer_wall_line_width": "0.42",
+        "printer_model": "Bambu Lab X2D",
+        "printer_variant": "0.4",
+        "skirt_loops": "0",
+        "sparse_infill_density": "15%",
+        "sparse_infill_pattern": "grid",
+        "top_shell_layers": "5",
+        "top_shell_thickness": "1",
+        "wall_generator": "classic",
+        "wall_loops": "2"
+      },
+      "success": true,
+      "warnings": [
+        "[2026-10-10 12:33:05.654001] [0x00000001fe20bf80] [warning] cli mode, Current BambuStudio Version 02.08.04.57",
+        "[2026-10-10 12:33:05.667948] [0x00000001fe20bf80] [warning] no filament colors found in projects",
+        "[2026-10-10 12:33:05.754389] [0x00000001fe20bf80] [warning] tree support default to organic support",
+        "[2026-10-10 12:33:06.056701] [0x00000001fe20bf80] [error]   Invalid T command (T65279).",
+        "[2026-10-10 12:33:06.056907] [0x00000001fe20bf80] [error]   Invalid T command (T65535)."
+      ],
+      "effectiveSettingsSHA256": "c014c4911b1353b00d74a109c3a1e2e7b9e63c0d6c700c549e6a88c247faf5f3"
+    },
+    {
+      "case": "baseline",
+      "part": "lid",
+      "material": "PETG",
+      "source": "reviews/filament-baseline/generator.html",
+      "sourceSHA256": "7fad9ed651b568bde8fb85c35e8a86cfb05d078e3f621b440915726c2bce2421",
+      "patch": {},
+      "stlSHA256": "af618f02462d67fb0b503826a90b9bc011ee2f931abdfa64db3f682646d18e39",
+      "profileSHA256": {
+        "machine": "0fe204129ca1c1d5917ed9e6e2b7ebb1349bec6573d944e16612f4cfd6470678",
+        "process": "a65428943b73cf60af3fa1a7239c500ab89f97d834a6cf70f7d55618a983c81b",
+        "PETG": "a763b7a062de417d96f4b79c2b1d23e56930bcacd21e27c01a7450c9ba896ac3"
+      },
+      "exitCode": 0,
+      "artifacts": "reviews/filament-slicing/runs/20261010T163303207480Z/baseline-lid-PETG",
+      "gcodeSHA256": "a5d95c0a89209ff9d90ea5e58eaafaa823e3a8d50a9461f705cef41be7c8ce8f",
+      "header": [
+        "; HEADER_BLOCK_START",
+        "; BambuStudio 02.08.04.57",
+        "; model printing time: 24m 3s; total estimated time: 29m 11s",
+        "; total layer number: 55",
+        "; total filament length [mm] : 3978.53",
+        "; total filament volume [cm^3] : 9569.49",
+        "; total filament weight [g] : 12.15",
+        "; filament_density: 1.27",
+        "; filament_diameter: 1.75",
+        "; max_z_height: 11.00",
+        "; filament: 1",
+        "; support_material_on_wipe_tower: 0",
+        "; Legal and Compliance Notice"
+      ],
+      "grams": 12.15,
+      "time": "24m 3s; total estimated time: 29m 11s",
+      "supportToolpathsPresent": false,
+      "settings": {
+        "bottom_shell_layers": "3",
+        "bottom_shell_thickness": "0",
+        "brim_type": "auto_brim",
+        "brim_width": "5",
+        "enable_support": "0",
+        "filament_density": "1.27",
+        "filament_type": "PETG",
+        "inner_wall_line_width": "0.45",
+        "layer_height": "0.2",
+        "line_width": "0.42",
+        "outer_wall_line_width": "0.42",
+        "printer_model": "Bambu Lab X2D",
+        "printer_variant": "0.4",
+        "skirt_loops": "0",
+        "sparse_infill_density": "15%",
+        "sparse_infill_pattern": "grid",
+        "top_shell_layers": "5",
+        "top_shell_thickness": "1",
+        "wall_generator": "classic",
+        "wall_loops": "2"
+      },
+      "success": true,
+      "warnings": [
+        "[2026-10-10 12:33:06.142640] [0x00000001fe20bf80] [warning] cli mode, Current BambuStudio Version 02.08.04.57",
+        "[2026-10-10 12:33:06.156555] [0x00000001fe20bf80] [warning] no filament colors found in projects",
+        "[2026-10-10 12:33:06.258517] [0x00000001fe20bf80] [warning] tree support default to organic support",
+        "[2026-10-10 12:33:06.549834] [0x00000001fe20bf80] [error]   Invalid T command (T65279).",
+        "[2026-10-10 12:33:06.550024] [0x00000001fe20bf80] [error]   Invalid T command (T65535)."
+      ],
+      "effectiveSettingsSHA256": "26a145d654e4c0aecab6d8d9eb666b366c9884f4f94caf4d59d053949ef7941c"
+    },
+    {
+      "case": "current_economy",
+      "part": "body",
+      "material": "PLA",
+      "source": "source/gridfinity_generator_4.html",
+      "sourceSHA256": "2b021e6fe9ccb9be6bd900ca61f0a646af114dd87d0f8ab475022885b7cde518",
+      "patch": {
+        "wall": 1.2,
+        "floorT": 1,
+        "scoop": 3
+      },
+      "stlSHA256": "0d87c8cffd1f6a2d329396b1bb42dcfdf697d0ecb036e1b5c119d4fc3d2b4bef",
+      "profileSHA256": {
+        "machine": "0fe204129ca1c1d5917ed9e6e2b7ebb1349bec6573d944e16612f4cfd6470678",
+        "process": "a65428943b73cf60af3fa1a7239c500ab89f97d834a6cf70f7d55618a983c81b",
+        "PLA": "2339d5a9f83c71eb07e1d287f0bb741ec3a579bd233f382daca48fa95d19adc5"
+      },
+      "exitCode": 0,
+      "artifacts": "reviews/filament-slicing/runs/20261010T163303207480Z/current_economy-body-PLA",
+      "gcodeSHA256": "6496acfef2c2a2d4a56b6306b22b3ef882e24b95f9dfde0b927c2053fd20615b",
+      "header": [
+        "; HEADER_BLOCK_START",
+        "; BambuStudio 02.08.04.57",
+        "; model printing time: 52m 49s; total estimated time: 57m 58s",
+        "; total layer number: 228",
+        "; total filament length [mm] : 8995.62",
+        "; total filament volume [cm^3] : 21636.99",
+        "; total filament weight [g] : 26.83",
+        "; filament_density: 1.24",
+        "; filament_diameter: 1.75",
+        "; max_z_height: 45.60",
+        "; filament: 1",
+        "; support_material_on_wipe_tower: 0",
+        "; Legal and Compliance Notice"
+      ],
+      "grams": 26.83,
+      "time": "52m 49s; total estimated time: 57m 58s",
+      "supportToolpathsPresent": false,
+      "settings": {
+        "bottom_shell_layers": "3",
+        "bottom_shell_thickness": "0",
+        "brim_type": "auto_brim",
+        "brim_width": "5",
+        "enable_support": "0",
+        "filament_density": "1.24",
+        "filament_type": "PLA",
+        "inner_wall_line_width": "0.45",
+        "layer_height": "0.2",
+        "line_width": "0.42",
+        "outer_wall_line_width": "0.42",
+        "printer_model": "Bambu Lab X2D",
+        "printer_variant": "0.4",
+        "skirt_loops": "0",
+        "sparse_infill_density": "15%",
+        "sparse_infill_pattern": "grid",
+        "top_shell_layers": "5",
+        "top_shell_thickness": "1",
+        "wall_generator": "classic",
+        "wall_loops": "2"
+      },
+      "success": true,
+      "warnings": [
+        "[2026-10-10 12:33:06.753212] [0x00000001fe20bf80] [warning] cli mode, Current BambuStudio Version 02.08.04.57",
+        "[2026-10-10 12:33:06.766994] [0x00000001fe20bf80] [warning] no filament colors found in projects",
+        "[2026-10-10 12:33:06.928120] [0x00000001fe20bf80] [warning] tree support default to organic support",
+        "[2026-10-10 12:33:07.477563] [0x00000001fe20bf80] [error]   Invalid T command (T65279).",
+        "[2026-10-10 12:33:07.477853] [0x00000001fe20bf80] [error]   Invalid T command (T65535)."
+      ],
+      "effectiveSettingsSHA256": "c014c4911b1353b00d74a109c3a1e2e7b9e63c0d6c700c549e6a88c247faf5f3"
+    },
+    {
+      "case": "current_economy",
+      "part": "body",
+      "material": "PETG",
+      "source": "source/gridfinity_generator_4.html",
+      "sourceSHA256": "2b021e6fe9ccb9be6bd900ca61f0a646af114dd87d0f8ab475022885b7cde518",
+      "patch": {
+        "wall": 1.2,
+        "floorT": 1,
+        "scoop": 3
+      },
+      "stlSHA256": "0d87c8cffd1f6a2d329396b1bb42dcfdf697d0ecb036e1b5c119d4fc3d2b4bef",
+      "profileSHA256": {
+        "machine": "0fe204129ca1c1d5917ed9e6e2b7ebb1349bec6573d944e16612f4cfd6470678",
+        "process": "a65428943b73cf60af3fa1a7239c500ab89f97d834a6cf70f7d55618a983c81b",
+        "PETG": "a763b7a062de417d96f4b79c2b1d23e56930bcacd21e27c01a7450c9ba896ac3"
+      },
+      "exitCode": 0,
+      "artifacts": "reviews/filament-slicing/runs/20261010T163303207480Z/current_economy-body-PETG",
+      "gcodeSHA256": "e6968a0581c7dd34890ebc8cb35c27a6a9cf4be5b87200863338dee8cfafd151",
+      "header": [
+        "; HEADER_BLOCK_START",
+        "; BambuStudio 02.08.04.57",
+        "; model printing time: 1h 4m 36s; total estimated time: 1h 9m 45s",
+        "; total layer number: 228",
+        "; total filament length [mm] : 8720.24",
+        "; total filament volume [cm^3] : 20974.63",
+        "; total filament weight [g] : 26.64",
+        "; filament_density: 1.27",
+        "; filament_diameter: 1.75",
+        "; max_z_height: 45.60",
+        "; filament: 1",
+        "; support_material_on_wipe_tower: 0",
+        "; Legal and Compliance Notice"
+      ],
+      "grams": 26.64,
+      "time": "1h 4m 36s; total estimated time: 1h 9m 45s",
+      "supportToolpathsPresent": false,
+      "settings": {
+        "bottom_shell_layers": "3",
+        "bottom_shell_thickness": "0",
+        "brim_type": "auto_brim",
+        "brim_width": "5",
+        "enable_support": "0",
+        "filament_density": "1.27",
+        "filament_type": "PETG",
+        "inner_wall_line_width": "0.45",
+        "layer_height": "0.2",
+        "line_width": "0.42",
+        "outer_wall_line_width": "0.42",
+        "printer_model": "Bambu Lab X2D",
+        "printer_variant": "0.4",
+        "skirt_loops": "0",
+        "sparse_infill_density": "15%",
+        "sparse_infill_pattern": "grid",
+        "top_shell_layers": "5",
+        "top_shell_thickness": "1",
+        "wall_generator": "classic",
+        "wall_loops": "2"
+      },
+      "success": true,
+      "warnings": [
+        "[2026-10-10 12:33:07.656068] [0x00000001fe20bf80] [warning] cli mode, Current BambuStudio Version 02.08.04.57",
+        "[2026-10-10 12:33:07.669942] [0x00000001fe20bf80] [warning] no filament colors found in projects",
+        "[2026-10-10 12:33:07.814478] [0x00000001fe20bf80] [warning] tree support default to organic support",
+        "[2026-10-10 12:33:08.346180] [0x00000001fe20bf80] [error]   Invalid T command (T65279).",
+        "[2026-10-10 12:33:08.346385] [0x00000001fe20bf80] [error]   Invalid T command (T65535)."
+      ],
+      "effectiveSettingsSHA256": "26a145d654e4c0aecab6d8d9eb666b366c9884f4f94caf4d59d053949ef7941c"
+    },
+    {
+      "case": "current_economy",
+      "part": "lid",
+      "material": "PLA",
+      "source": "source/gridfinity_generator_4.html",
+      "sourceSHA256": "2b021e6fe9ccb9be6bd900ca61f0a646af114dd87d0f8ab475022885b7cde518",
+      "patch": {
+        "wall": 1.2,
+        "floorT": 1,
+        "scoop": 3
+      },
+      "stlSHA256": "af618f02462d67fb0b503826a90b9bc011ee2f931abdfa64db3f682646d18e39",
+      "profileSHA256": {
+        "machine": "0fe204129ca1c1d5917ed9e6e2b7ebb1349bec6573d944e16612f4cfd6470678",
+        "process": "a65428943b73cf60af3fa1a7239c500ab89f97d834a6cf70f7d55618a983c81b",
+        "PLA": "2339d5a9f83c71eb07e1d287f0bb741ec3a579bd233f382daca48fa95d19adc5"
+      },
+      "exitCode": 0,
+      "artifacts": "reviews/filament-slicing/runs/20261010T163303207480Z/current_economy-lid-PLA",
+      "gcodeSHA256": "54b15bad8d21e11355289bb6639db0b6874d8284a5bf0d1cf8a765305d433d33",
+      "header": [
+        "; HEADER_BLOCK_START",
+        "; BambuStudio 02.08.04.57",
+        "; model printing time: 22m 26s; total estimated time: 27m 35s",
+        "; total layer number: 55",
+        "; total filament length [mm] : 4104.17",
+        "; total filament volume [cm^3] : 9871.70",
+        "; total filament weight [g] : 12.24",
+        "; filament_density: 1.24",
+        "; filament_diameter: 1.75",
+        "; max_z_height: 11.00",
+        "; filament: 1",
+        "; support_material_on_wipe_tower: 0",
+        "; Legal and Compliance Notice"
+      ],
+      "grams": 12.24,
+      "time": "22m 26s; total estimated time: 27m 35s",
+      "supportToolpathsPresent": false,
+      "settings": {
+        "bottom_shell_layers": "3",
+        "bottom_shell_thickness": "0",
+        "brim_type": "auto_brim",
+        "brim_width": "5",
+        "enable_support": "0",
+        "filament_density": "1.24",
+        "filament_type": "PLA",
+        "inner_wall_line_width": "0.45",
+        "layer_height": "0.2",
+        "line_width": "0.42",
+        "outer_wall_line_width": "0.42",
+        "printer_model": "Bambu Lab X2D",
+        "printer_variant": "0.4",
+        "skirt_loops": "0",
+        "sparse_infill_density": "15%",
+        "sparse_infill_pattern": "grid",
+        "top_shell_layers": "5",
+        "top_shell_thickness": "1",
+        "wall_generator": "classic",
+        "wall_loops": "2"
+      },
+      "success": true,
+      "warnings": [
+        "[2026-10-10 12:33:08.559182] [0x00000001fe20bf80] [warning] cli mode, Current BambuStudio Version 02.08.04.57",
+        "[2026-10-10 12:33:08.572724] [0x00000001fe20bf80] [warning] no filament colors found in projects",
+        "[2026-10-10 12:33:08.660291] [0x00000001fe20bf80] [warning] tree support default to organic support",
+        "[2026-10-10 12:33:08.955308] [0x00000001fe20bf80] [error]   Invalid T command (T65279).",
+        "[2026-10-10 12:33:08.955487] [0x00000001fe20bf80] [error]   Invalid T command (T65535)."
+      ],
+      "effectiveSettingsSHA256": "c014c4911b1353b00d74a109c3a1e2e7b9e63c0d6c700c549e6a88c247faf5f3"
+    },
+    {
+      "case": "current_economy",
+      "part": "lid",
+      "material": "PETG",
+      "source": "source/gridfinity_generator_4.html",
+      "sourceSHA256": "2b021e6fe9ccb9be6bd900ca61f0a646af114dd87d0f8ab475022885b7cde518",
+      "patch": {
+        "wall": 1.2,
+        "floorT": 1,
+        "scoop": 3
+      },
+      "stlSHA256": "af618f02462d67fb0b503826a90b9bc011ee2f931abdfa64db3f682646d18e39",
+      "profileSHA256": {
+        "machine": "0fe204129ca1c1d5917ed9e6e2b7ebb1349bec6573d944e16612f4cfd6470678",
+        "process": "a65428943b73cf60af3fa1a7239c500ab89f97d834a6cf70f7d55618a983c81b",
+        "PETG": "a763b7a062de417d96f4b79c2b1d23e56930bcacd21e27c01a7450c9ba896ac3"
+      },
+      "exitCode": 0,
+      "artifacts": "reviews/filament-slicing/runs/20261010T163303207480Z/current_economy-lid-PETG",
+      "gcodeSHA256": "a5d95c0a89209ff9d90ea5e58eaafaa823e3a8d50a9461f705cef41be7c8ce8f",
+      "header": [
+        "; HEADER_BLOCK_START",
+        "; BambuStudio 02.08.04.57",
+        "; model printing time: 24m 3s; total estimated time: 29m 11s",
+        "; total layer number: 55",
+        "; total filament length [mm] : 3978.53",
+        "; total filament volume [cm^3] : 9569.49",
+        "; total filament weight [g] : 12.15",
+        "; filament_density: 1.27",
+        "; filament_diameter: 1.75",
+        "; max_z_height: 11.00",
+        "; filament: 1",
+        "; support_material_on_wipe_tower: 0",
+        "; Legal and Compliance Notice"
+      ],
+      "grams": 12.15,
+      "time": "24m 3s; total estimated time: 29m 11s",
+      "supportToolpathsPresent": false,
+      "settings": {
+        "bottom_shell_layers": "3",
+        "bottom_shell_thickness": "0",
+        "brim_type": "auto_brim",
+        "brim_width": "5",
+        "enable_support": "0",
+        "filament_density": "1.27",
+        "filament_type": "PETG",
+        "inner_wall_line_width": "0.45",
+        "layer_height": "0.2",
+        "line_width": "0.42",
+        "outer_wall_line_width": "0.42",
+        "printer_model": "Bambu Lab X2D",
+        "printer_variant": "0.4",
+        "skirt_loops": "0",
+        "sparse_infill_density": "15%",
+        "sparse_infill_pattern": "grid",
+        "top_shell_layers": "5",
+        "top_shell_thickness": "1",
+        "wall_generator": "classic",
+        "wall_loops": "2"
+      },
+      "success": true,
+      "warnings": [
+        "[2026-10-10 12:33:09.039189] [0x00000001fe20bf80] [warning] cli mode, Current BambuStudio Version 02.08.04.57",
+        "[2026-10-10 12:33:09.053133] [0x00000001fe20bf80] [warning] no filament colors found in projects",
+        "[2026-10-10 12:33:09.133060] [0x00000001fe20bf80] [warning] tree support default to organic support",
+        "[2026-10-10 12:33:09.401336] [0x00000001fe20bf80] [error]   Invalid T command (T65279).",
+        "[2026-10-10 12:33:09.401542] [0x00000001fe20bf80] [error]   Invalid T command (T65535)."
+      ],
+      "effectiveSettingsSHA256": "26a145d654e4c0aecab6d8d9eb666b366c9884f4f94caf4d59d053949ef7941c"
+    },
+    {
+      "case": "current_hollow",
+      "part": "body",
+      "material": "PLA",
+      "source": "source/gridfinity_generator_4.html",
+      "sourceSHA256": "2b021e6fe9ccb9be6bd900ca61f0a646af114dd87d0f8ab475022885b7cde518",
+      "patch": {
+        "hollowFeet": true
+      },
+      "stlSHA256": "baddf737c68c7dc83cb69f958f49bc8994bdc3e5c6881d93496e717ea22b17c1",
+      "profileSHA256": {
+        "machine": "0fe204129ca1c1d5917ed9e6e2b7ebb1349bec6573d944e16612f4cfd6470678",
+        "process": "a65428943b73cf60af3fa1a7239c500ab89f97d834a6cf70f7d55618a983c81b",
+        "PLA": "2339d5a9f83c71eb07e1d287f0bb741ec3a579bd233f382daca48fa95d19adc5"
+      },
+      "exitCode": 0,
+      "artifacts": "reviews/filament-slicing/runs/20261010T163303207480Z/current_hollow-body-PLA",
+      "gcodeSHA256": "71b0584fe3a6686d1f688de6b5f733a85872b8d40d008807e0de4c8cae29f0a0",
+      "header": [
+        "; HEADER_BLOCK_START",
+        "; BambuStudio 02.08.04.57",
+        "; model printing time: 56m 8s; total estimated time: 1h 1m 17s",
+        "; total layer number: 228",
+        "; total filament length [mm] : 10523.09",
+        "; total filament volume [cm^3] : 25311.00",
+        "; total filament weight [g] : 31.39",
+        "; filament_density: 1.24",
+        "; filament_diameter: 1.75",
+        "; max_z_height: 45.60",
+        "; filament: 1",
+        "; support_material_on_wipe_tower: 0",
+        "; Legal and Compliance Notice"
+      ],
+      "grams": 31.39,
+      "time": "56m 8s; total estimated time: 1h 1m 17s",
+      "supportToolpathsPresent": false,
+      "settings": {
+        "bottom_shell_layers": "3",
+        "bottom_shell_thickness": "0",
+        "brim_type": "auto_brim",
+        "brim_width": "5",
+        "enable_support": "0",
+        "filament_density": "1.24",
+        "filament_type": "PLA",
+        "inner_wall_line_width": "0.45",
+        "layer_height": "0.2",
+        "line_width": "0.42",
+        "outer_wall_line_width": "0.42",
+        "printer_model": "Bambu Lab X2D",
+        "printer_variant": "0.4",
+        "skirt_loops": "0",
+        "sparse_infill_density": "15%",
+        "sparse_infill_pattern": "grid",
+        "top_shell_layers": "5",
+        "top_shell_thickness": "1",
+        "wall_generator": "classic",
+        "wall_loops": "2"
+      },
+      "success": true,
+      "warnings": [
+        "[2026-10-10 12:33:09.608472] [0x00000001fe20bf80] [warning] cli mode, Current BambuStudio Version 02.08.04.57",
+        "[2026-10-10 12:33:09.622996] [0x00000001fe20bf80] [warning] no filament colors found in projects",
+        "[2026-10-10 12:33:09.763925] [0x00000001fe20bf80] [warning] tree support default to organic support",
+        "[2026-10-10 12:33:10.426950] [0x00000001fe20bf80] [error]   Invalid T command (T65279).",
+        "[2026-10-10 12:33:10.427158] [0x00000001fe20bf80] [error]   Invalid T command (T65535)."
+      ],
+      "effectiveSettingsSHA256": "c014c4911b1353b00d74a109c3a1e2e7b9e63c0d6c700c549e6a88c247faf5f3"
+    },
+    {
+      "case": "current_hollow",
+      "part": "body",
+      "material": "PETG",
+      "source": "source/gridfinity_generator_4.html",
+      "sourceSHA256": "2b021e6fe9ccb9be6bd900ca61f0a646af114dd87d0f8ab475022885b7cde518",
+      "patch": {
+        "hollowFeet": true
+      },
+      "stlSHA256": "baddf737c68c7dc83cb69f958f49bc8994bdc3e5c6881d93496e717ea22b17c1",
+      "profileSHA256": {
+        "machine": "0fe204129ca1c1d5917ed9e6e2b7ebb1349bec6573d944e16612f4cfd6470678",
+        "process": "a65428943b73cf60af3fa1a7239c500ab89f97d834a6cf70f7d55618a983c81b",
+        "PETG": "a763b7a062de417d96f4b79c2b1d23e56930bcacd21e27c01a7450c9ba896ac3"
+      },
+      "exitCode": 0,
+      "artifacts": "reviews/filament-slicing/runs/20261010T163303207480Z/current_hollow-body-PETG",
+      "gcodeSHA256": "f52604c10bd33d3aeb651dc905ac32a8a5b61a8f4f907210a161b0fc0ea83bfe",
+      "header": [
+        "; HEADER_BLOCK_START",
+        "; BambuStudio 02.08.04.57",
+        "; model printing time: 1h 7m 1s; total estimated time: 1h 12m 10s",
+        "; total layer number: 228",
+        "; total filament length [mm] : 10200.95",
+        "; total filament volume [cm^3] : 24536.16",
+        "; total filament weight [g] : 31.16",
+        "; filament_density: 1.27",
+        "; filament_diameter: 1.75",
+        "; max_z_height: 45.60",
+        "; filament: 1",
+        "; support_material_on_wipe_tower: 0",
+        "; Legal and Compliance Notice"
+      ],
+      "grams": 31.16,
+      "time": "1h 7m 1s; total estimated time: 1h 12m 10s",
+      "supportToolpathsPresent": false,
+      "settings": {
+        "bottom_shell_layers": "3",
+        "bottom_shell_thickness": "0",
+        "brim_type": "auto_brim",
+        "brim_width": "5",
+        "enable_support": "0",
+        "filament_density": "1.27",
+        "filament_type": "PETG",
+        "inner_wall_line_width": "0.45",
+        "layer_height": "0.2",
+        "line_width": "0.42",
+        "outer_wall_line_width": "0.42",
+        "printer_model": "Bambu Lab X2D",
+        "printer_variant": "0.4",
+        "skirt_loops": "0",
+        "sparse_infill_density": "15%",
+        "sparse_infill_pattern": "grid",
+        "top_shell_layers": "5",
+        "top_shell_thickness": "1",
+        "wall_generator": "classic",
+        "wall_loops": "2"
+      },
+      "success": true,
+      "warnings": [
+        "[2026-10-10 12:33:10.528686] [0x00000001fe20bf80] [warning] cli mode, Current BambuStudio Version 02.08.04.57",
+        "[2026-10-10 12:33:10.543523] [0x00000001fe20bf80] [warning] no filament colors found in projects",
+        "[2026-10-10 12:33:10.687888] [0x00000001fe20bf80] [warning] tree support default to organic support",
+        "[2026-10-10 12:33:11.313611] [0x00000001fe20bf80] [error]   Invalid T command (T65279).",
+        "[2026-10-10 12:33:11.313812] [0x00000001fe20bf80] [error]   Invalid T command (T65535)."
+      ],
+      "effectiveSettingsSHA256": "26a145d654e4c0aecab6d8d9eb666b366c9884f4f94caf4d59d053949ef7941c"
+    },
+    {
+      "case": "current_hollow",
+      "part": "lid",
+      "material": "PLA",
+      "source": "source/gridfinity_generator_4.html",
+      "sourceSHA256": "2b021e6fe9ccb9be6bd900ca61f0a646af114dd87d0f8ab475022885b7cde518",
+      "patch": {
+        "hollowFeet": true
+      },
+      "stlSHA256": "af618f02462d67fb0b503826a90b9bc011ee2f931abdfa64db3f682646d18e39",
+      "profileSHA256": {
+        "machine": "0fe204129ca1c1d5917ed9e6e2b7ebb1349bec6573d944e16612f4cfd6470678",
+        "process": "a65428943b73cf60af3fa1a7239c500ab89f97d834a6cf70f7d55618a983c81b",
+        "PLA": "2339d5a9f83c71eb07e1d287f0bb741ec3a579bd233f382daca48fa95d19adc5"
+      },
+      "exitCode": 0,
+      "artifacts": "reviews/filament-slicing/runs/20261010T163303207480Z/current_hollow-lid-PLA",
+      "gcodeSHA256": "54b15bad8d21e11355289bb6639db0b6874d8284a5bf0d1cf8a765305d433d33",
+      "header": [
+        "; HEADER_BLOCK_START",
+        "; BambuStudio 02.08.04.57",
+        "; model printing time: 22m 26s; total estimated time: 27m 35s",
+        "; total layer number: 55",
+        "; total filament length [mm] : 4104.17",
+        "; total filament volume [cm^3] : 9871.70",
+        "; total filament weight [g] : 12.24",
+        "; filament_density: 1.24",
+        "; filament_diameter: 1.75",
+        "; max_z_height: 11.00",
+        "; filament: 1",
+        "; support_material_on_wipe_tower: 0",
+        "; Legal and Compliance Notice"
+      ],
+      "grams": 12.24,
+      "time": "22m 26s; total estimated time: 27m 35s",
+      "supportToolpathsPresent": false,
+      "settings": {
+        "bottom_shell_layers": "3",
+        "bottom_shell_thickness": "0",
+        "brim_type": "auto_brim",
+        "brim_width": "5",
+        "enable_support": "0",
+        "filament_density": "1.24",
+        "filament_type": "PLA",
+        "inner_wall_line_width": "0.45",
+        "layer_height": "0.2",
+        "line_width": "0.42",
+        "outer_wall_line_width": "0.42",
+        "printer_model": "Bambu Lab X2D",
+        "printer_variant": "0.4",
+        "skirt_loops": "0",
+        "sparse_infill_density": "15%",
+        "sparse_infill_pattern": "grid",
+        "top_shell_layers": "5",
+        "top_shell_thickness": "1",
+        "wall_generator": "classic",
+        "wall_loops": "2"
+      },
+      "success": true,
+      "warnings": [
+        "[2026-10-10 12:33:11.530450] [0x00000001fe20bf80] [warning] cli mode, Current BambuStudio Version 02.08.04.57",
+        "[2026-10-10 12:33:11.544335] [0x00000001fe20bf80] [warning] no filament colors found in projects",
+        "[2026-10-10 12:33:11.629597] [0x00000001fe20bf80] [warning] tree support default to organic support",
+        "[2026-10-10 12:33:11.929569] [0x00000001fe20bf80] [error]   Invalid T command (T65279).",
+        "[2026-10-10 12:33:11.929749] [0x00000001fe20bf80] [error]   Invalid T command (T65535)."
+      ],
+      "effectiveSettingsSHA256": "c014c4911b1353b00d74a109c3a1e2e7b9e63c0d6c700c549e6a88c247faf5f3"
+    },
+    {
+      "case": "current_hollow",
+      "part": "lid",
+      "material": "PETG",
+      "source": "source/gridfinity_generator_4.html",
+      "sourceSHA256": "2b021e6fe9ccb9be6bd900ca61f0a646af114dd87d0f8ab475022885b7cde518",
+      "patch": {
+        "hollowFeet": true
+      },
+      "stlSHA256": "af618f02462d67fb0b503826a90b9bc011ee2f931abdfa64db3f682646d18e39",
+      "profileSHA256": {
+        "machine": "0fe204129ca1c1d5917ed9e6e2b7ebb1349bec6573d944e16612f4cfd6470678",
+        "process": "a65428943b73cf60af3fa1a7239c500ab89f97d834a6cf70f7d55618a983c81b",
+        "PETG": "a763b7a062de417d96f4b79c2b1d23e56930bcacd21e27c01a7450c9ba896ac3"
+      },
+      "exitCode": 0,
+      "artifacts": "reviews/filament-slicing/runs/20261010T163303207480Z/current_hollow-lid-PETG",
+      "gcodeSHA256": "a5d95c0a89209ff9d90ea5e58eaafaa823e3a8d50a9461f705cef41be7c8ce8f",
+      "header": [
+        "; HEADER_BLOCK_START",
+        "; BambuStudio 02.08.04.57",
+        "; model printing time: 24m 3s; total estimated time: 29m 11s",
+        "; total layer number: 55",
+        "; total filament length [mm] : 3978.53",
+        "; total filament volume [cm^3] : 9569.49",
+        "; total filament weight [g] : 12.15",
+        "; filament_density: 1.27",
+        "; filament_diameter: 1.75",
+        "; max_z_height: 11.00",
+        "; filament: 1",
+        "; support_material_on_wipe_tower: 0",
+        "; Legal and Compliance Notice"
+      ],
+      "grams": 12.15,
+      "time": "24m 3s; total estimated time: 29m 11s",
+      "supportToolpathsPresent": false,
+      "settings": {
+        "bottom_shell_layers": "3",
+        "bottom_shell_thickness": "0",
+        "brim_type": "auto_brim",
+        "brim_width": "5",
+        "enable_support": "0",
+        "filament_density": "1.27",
+        "filament_type": "PETG",
+        "inner_wall_line_width": "0.45",
+        "layer_height": "0.2",
+        "line_width": "0.42",
+        "outer_wall_line_width": "0.42",
+        "printer_model": "Bambu Lab X2D",
+        "printer_variant": "0.4",
+        "skirt_loops": "0",
+        "sparse_infill_density": "15%",
+        "sparse_infill_pattern": "grid",
+        "top_shell_layers": "5",
+        "top_shell_thickness": "1",
+        "wall_generator": "classic",
+        "wall_loops": "2"
+      },
+      "success": true,
+      "warnings": [
+        "[2026-10-10 12:33:12.013406] [0x00000001fe20bf80] [warning] cli mode, Current BambuStudio Version 02.08.04.57",
+        "[2026-10-10 12:33:12.027272] [0x00000001fe20bf80] [warning] no filament colors found in projects",
+        "[2026-10-10 12:33:12.111063] [0x00000001fe20bf80] [warning] tree support default to organic support",
+        "[2026-10-10 12:33:12.380913] [0x00000001fe20bf80] [error]   Invalid T command (T65279).",
+        "[2026-10-10 12:33:12.381106] [0x00000001fe20bf80] [error]   Invalid T command (T65535)."
+      ],
+      "effectiveSettingsSHA256": "26a145d654e4c0aecab6d8d9eb666b366c9884f4f94caf4d59d053949ef7941c"
+    },
+    {
+      "case": "current_economy_hollow",
+      "part": "body",
+      "material": "PLA",
+      "source": "source/gridfinity_generator_4.html",
+      "sourceSHA256": "2b021e6fe9ccb9be6bd900ca61f0a646af114dd87d0f8ab475022885b7cde518",
+      "patch": {
+        "wall": 1.2,
+        "floorT": 1,
+        "scoop": 3,
+        "hollowFeet": true
+      },
+      "stlSHA256": "8392b602b3c37e9a7636a14408d556dceb482a7bb843ef14b9701dccf9bfc8be",
+      "profileSHA256": {
+        "machine": "0fe204129ca1c1d5917ed9e6e2b7ebb1349bec6573d944e16612f4cfd6470678",
+        "process": "a65428943b73cf60af3fa1a7239c500ab89f97d834a6cf70f7d55618a983c81b",
+        "PLA": "2339d5a9f83c71eb07e1d287f0bb741ec3a579bd233f382daca48fa95d19adc5"
+      },
+      "exitCode": 0,
+      "artifacts": "reviews/filament-slicing/runs/20261010T163303207480Z/current_economy_hollow-body-PLA",
+      "gcodeSHA256": "9dbca61fb4bb0bc5e7fb6960e3f12a07c7bf45a8b8f1e39afeb0f6ca3ff7f9f4",
+      "header": [
+        "; HEADER_BLOCK_START",
+        "; BambuStudio 02.08.04.57",
+        "; model printing time: 53m 16s; total estimated time: 58m 24s",
+        "; total layer number: 228",
+        "; total filament length [mm] : 9035.06",
+        "; total filament volume [cm^3] : 21731.87",
+        "; total filament weight [g] : 26.95",
+        "; filament_density: 1.24",
+        "; filament_diameter: 1.75",
+        "; max_z_height: 45.60",
+        "; filament: 1",
+        "; support_material_on_wipe_tower: 0",
+        "; Legal and Compliance Notice"
+      ],
+      "grams": 26.95,
+      "time": "53m 16s; total estimated time: 58m 24s",
+      "supportToolpathsPresent": false,
+      "settings": {
+        "bottom_shell_layers": "3",
+        "bottom_shell_thickness": "0",
+        "brim_type": "auto_brim",
+        "brim_width": "5",
+        "enable_support": "0",
+        "filament_density": "1.24",
+        "filament_type": "PLA",
+        "inner_wall_line_width": "0.45",
+        "layer_height": "0.2",
+        "line_width": "0.42",
+        "outer_wall_line_width": "0.42",
+        "printer_model": "Bambu Lab X2D",
+        "printer_variant": "0.4",
+        "skirt_loops": "0",
+        "sparse_infill_density": "15%",
+        "sparse_infill_pattern": "grid",
+        "top_shell_layers": "5",
+        "top_shell_thickness": "1",
+        "wall_generator": "classic",
+        "wall_loops": "2"
+      },
+      "success": true,
+      "warnings": [
+        "[2026-10-10 12:33:12.581721] [0x00000001fe20bf80] [warning] cli mode, Current BambuStudio Version 02.08.04.57",
+        "[2026-10-10 12:33:12.596100] [0x00000001fe20bf80] [warning] no filament colors found in projects",
+        "[2026-10-10 12:33:12.753590] [0x00000001fe20bf80] [warning] tree support default to organic support",
+        "[2026-10-10 12:33:13.338118] [0x00000001fe20bf80] [error]   Invalid T command (T65279).",
+        "[2026-10-10 12:33:13.338315] [0x00000001fe20bf80] [error]   Invalid T command (T65535)."
+      ],
+      "effectiveSettingsSHA256": "c014c4911b1353b00d74a109c3a1e2e7b9e63c0d6c700c549e6a88c247faf5f3"
+    },
+    {
+      "case": "current_economy_hollow",
+      "part": "body",
+      "material": "PETG",
+      "source": "source/gridfinity_generator_4.html",
+      "sourceSHA256": "2b021e6fe9ccb9be6bd900ca61f0a646af114dd87d0f8ab475022885b7cde518",
+      "patch": {
+        "wall": 1.2,
+        "floorT": 1,
+        "scoop": 3,
+        "hollowFeet": true
+      },
+      "stlSHA256": "8392b602b3c37e9a7636a14408d556dceb482a7bb843ef14b9701dccf9bfc8be",
+      "profileSHA256": {
+        "machine": "0fe204129ca1c1d5917ed9e6e2b7ebb1349bec6573d944e16612f4cfd6470678",
+        "process": "a65428943b73cf60af3fa1a7239c500ab89f97d834a6cf70f7d55618a983c81b",
+        "PETG": "a763b7a062de417d96f4b79c2b1d23e56930bcacd21e27c01a7450c9ba896ac3"
+      },
+      "exitCode": 0,
+      "artifacts": "reviews/filament-slicing/runs/20261010T163303207480Z/current_economy_hollow-body-PETG",
+      "gcodeSHA256": "815e346a0b66e2feb07a7be3b43bc1ebdd3f38ac5209c1eee78b184c13eaa952",
+      "header": [
+        "; HEADER_BLOCK_START",
+        "; BambuStudio 02.08.04.57",
+        "; model printing time: 1h 5m 2s; total estimated time: 1h 10m 11s",
+        "; total layer number: 228",
+        "; total filament length [mm] : 8758.48",
+        "; total filament volume [cm^3] : 21066.60",
+        "; total filament weight [g] : 26.75",
+        "; filament_density: 1.27",
+        "; filament_diameter: 1.75",
+        "; max_z_height: 45.60",
+        "; filament: 1",
+        "; support_material_on_wipe_tower: 0",
+        "; Legal and Compliance Notice"
+      ],
+      "grams": 26.75,
+      "time": "1h 5m 2s; total estimated time: 1h 10m 11s",
+      "supportToolpathsPresent": false,
+      "settings": {
+        "bottom_shell_layers": "3",
+        "bottom_shell_thickness": "0",
+        "brim_type": "auto_brim",
+        "brim_width": "5",
+        "enable_support": "0",
+        "filament_density": "1.27",
+        "filament_type": "PETG",
+        "inner_wall_line_width": "0.45",
+        "layer_height": "0.2",
+        "line_width": "0.42",
+        "outer_wall_line_width": "0.42",
+        "printer_model": "Bambu Lab X2D",
+        "printer_variant": "0.4",
+        "skirt_loops": "0",
+        "sparse_infill_density": "15%",
+        "sparse_infill_pattern": "grid",
+        "top_shell_layers": "5",
+        "top_shell_thickness": "1",
+        "wall_generator": "classic",
+        "wall_loops": "2"
+      },
+      "success": true,
+      "warnings": [
+        "[2026-10-10 12:33:13.431924] [0x00000001fe20bf80] [warning] cli mode, Current BambuStudio Version 02.08.04.57",
+        "[2026-10-10 12:33:13.446277] [0x00000001fe20bf80] [warning] no filament colors found in projects",
+        "[2026-10-10 12:33:13.602145] [0x00000001fe20bf80] [warning] tree support default to organic support",
+        "[2026-10-10 12:33:14.160442] [0x00000001fe20bf80] [error]   Invalid T command (T65279).",
+        "[2026-10-10 12:33:14.160653] [0x00000001fe20bf80] [error]   Invalid T command (T65535)."
+      ],
+      "effectiveSettingsSHA256": "26a145d654e4c0aecab6d8d9eb666b366c9884f4f94caf4d59d053949ef7941c"
+    },
+    {
+      "case": "current_economy_hollow",
+      "part": "lid",
+      "material": "PLA",
+      "source": "source/gridfinity_generator_4.html",
+      "sourceSHA256": "2b021e6fe9ccb9be6bd900ca61f0a646af114dd87d0f8ab475022885b7cde518",
+      "patch": {
+        "wall": 1.2,
+        "floorT": 1,
+        "scoop": 3,
+        "hollowFeet": true
+      },
+      "stlSHA256": "af618f02462d67fb0b503826a90b9bc011ee2f931abdfa64db3f682646d18e39",
+      "profileSHA256": {
+        "machine": "0fe204129ca1c1d5917ed9e6e2b7ebb1349bec6573d944e16612f4cfd6470678",
+        "process": "a65428943b73cf60af3fa1a7239c500ab89f97d834a6cf70f7d55618a983c81b",
+        "PLA": "2339d5a9f83c71eb07e1d287f0bb741ec3a579bd233f382daca48fa95d19adc5"
+      },
+      "exitCode": 0,
+      "artifacts": "reviews/filament-slicing/runs/20261010T163303207480Z/current_economy_hollow-lid-PLA",
+      "gcodeSHA256": "54b15bad8d21e11355289bb6639db0b6874d8284a5bf0d1cf8a765305d433d33",
+      "header": [
+        "; HEADER_BLOCK_START",
+        "; BambuStudio 02.08.04.57",
+        "; model printing time: 22m 26s; total estimated time: 27m 35s",
+        "; total layer number: 55",
+        "; total filament length [mm] : 4104.17",
+        "; total filament volume [cm^3] : 9871.70",
+        "; total filament weight [g] : 12.24",
+        "; filament_density: 1.24",
+        "; filament_diameter: 1.75",
+        "; max_z_height: 11.00",
+        "; filament: 1",
+        "; support_material_on_wipe_tower: 0",
+        "; Legal and Compliance Notice"
+      ],
+      "grams": 12.24,
+      "time": "22m 26s; total estimated time: 27m 35s",
+      "supportToolpathsPresent": false,
+      "settings": {
+        "bottom_shell_layers": "3",
+        "bottom_shell_thickness": "0",
+        "brim_type": "auto_brim",
+        "brim_width": "5",
+        "enable_support": "0",
+        "filament_density": "1.24",
+        "filament_type": "PLA",
+        "inner_wall_line_width": "0.45",
+        "layer_height": "0.2",
+        "line_width": "0.42",
+        "outer_wall_line_width": "0.42",
+        "printer_model": "Bambu Lab X2D",
+        "printer_variant": "0.4",
+        "skirt_loops": "0",
+        "sparse_infill_density": "15%",
+        "sparse_infill_pattern": "grid",
+        "top_shell_layers": "5",
+        "top_shell_thickness": "1",
+        "wall_generator": "classic",
+        "wall_loops": "2"
+      },
+      "success": true,
+      "warnings": [
+        "[2026-10-10 12:33:14.372951] [0x00000001fe20bf80] [warning] cli mode, Current BambuStudio Version 02.08.04.57",
+        "[2026-10-10 12:33:14.387030] [0x00000001fe20bf80] [warning] no filament colors found in projects",
+        "[2026-10-10 12:33:14.469122] [0x00000001fe20bf80] [warning] tree support default to organic support",
+        "[2026-10-10 12:33:14.770720] [0x00000001fe20bf80] [error]   Invalid T command (T65279).",
+        "[2026-10-10 12:33:14.770914] [0x00000001fe20bf80] [error]   Invalid T command (T65535)."
+      ],
+      "effectiveSettingsSHA256": "c014c4911b1353b00d74a109c3a1e2e7b9e63c0d6c700c549e6a88c247faf5f3"
+    },
+    {
+      "case": "current_economy_hollow",
+      "part": "lid",
+      "material": "PETG",
+      "source": "source/gridfinity_generator_4.html",
+      "sourceSHA256": "2b021e6fe9ccb9be6bd900ca61f0a646af114dd87d0f8ab475022885b7cde518",
+      "patch": {
+        "wall": 1.2,
+        "floorT": 1,
+        "scoop": 3,
+        "hollowFeet": true
+      },
+      "stlSHA256": "af618f02462d67fb0b503826a90b9bc011ee2f931abdfa64db3f682646d18e39",
+      "profileSHA256": {
+        "machine": "0fe204129ca1c1d5917ed9e6e2b7ebb1349bec6573d944e16612f4cfd6470678",
+        "process": "a65428943b73cf60af3fa1a7239c500ab89f97d834a6cf70f7d55618a983c81b",
+        "PETG": "a763b7a062de417d96f4b79c2b1d23e56930bcacd21e27c01a7450c9ba896ac3"
+      },
+      "exitCode": 0,
+      "artifacts": "reviews/filament-slicing/runs/20261010T163303207480Z/current_economy_hollow-lid-PETG",
+      "gcodeSHA256": "a5d95c0a89209ff9d90ea5e58eaafaa823e3a8d50a9461f705cef41be7c8ce8f",
+      "header": [
+        "; HEADER_BLOCK_START",
+        "; BambuStudio 02.08.04.57",
+        "; model printing time: 24m 3s; total estimated time: 29m 11s",
+        "; total layer number: 55",
+        "; total filament length [mm] : 3978.53",
+        "; total filament volume [cm^3] : 9569.49",
+        "; total filament weight [g] : 12.15",
+        "; filament_density: 1.27",
+        "; filament_diameter: 1.75",
+        "; max_z_height: 11.00",
+        "; filament: 1",
+        "; support_material_on_wipe_tower: 0",
+        "; Legal and Compliance Notice"
+      ],
+      "grams": 12.15,
+      "time": "24m 3s; total estimated time: 29m 11s",
+      "supportToolpathsPresent": false,
+      "settings": {
+        "bottom_shell_layers": "3",
+        "bottom_shell_thickness": "0",
+        "brim_type": "auto_brim",
+        "brim_width": "5",
+        "enable_support": "0",
+        "filament_density": "1.27",
+        "filament_type": "PETG",
+        "inner_wall_line_width": "0.45",
+        "layer_height": "0.2",
+        "line_width": "0.42",
+        "outer_wall_line_width": "0.42",
+        "printer_model": "Bambu Lab X2D",
+        "printer_variant": "0.4",
+        "skirt_loops": "0",
+        "sparse_infill_density": "15%",
+        "sparse_infill_pattern": "grid",
+        "top_shell_layers": "5",
+        "top_shell_thickness": "1",
+        "wall_generator": "classic",
+        "wall_loops": "2"
+      },
+      "success": true,
+      "warnings": [
+        "[2026-10-10 12:33:14.853820] [0x00000001fe20bf80] [warning] cli mode, Current BambuStudio Version 02.08.04.57",
+        "[2026-10-10 12:33:14.867463] [0x00000001fe20bf80] [warning] no filament colors found in projects",
+        "[2026-10-10 12:33:14.972990] [0x00000001fe20bf80] [warning] tree support default to organic support",
+        "[2026-10-10 12:33:15.246037] [0x00000001fe20bf80] [error]   Invalid T command (T65279).",
+        "[2026-10-10 12:33:15.246235] [0x00000001fe20bf80] [error]   Invalid T command (T65535)."
+      ],
+      "effectiveSettingsSHA256": "26a145d654e4c0aecab6d8d9eb666b366c9884f4f94caf4d59d053949ef7941c"
+    }
+  ],
+  "pairComparisons": [
+    {
+      "case": "current_economy",
+      "material": "PLA",
+      "baselinePairGrams": 43.51,
+      "candidatePairGrams": 39.07,
+      "slicerEstimatedReductionPercent": 10.204550678005052,
+      "lidReusedFromBaseline": false
+    },
+    {
+      "case": "current_hollow",
+      "material": "PLA",
+      "baselinePairGrams": 43.51,
+      "candidatePairGrams": 43.63,
+      "slicerEstimatedReductionPercent": -0.2757986669731201,
+      "lidReusedFromBaseline": false
+    },
+    {
+      "case": "current_economy_hollow",
+      "material": "PLA",
+      "baselinePairGrams": 43.51,
+      "candidatePairGrams": 39.19,
+      "slicerEstimatedReductionPercent": 9.928752011031946,
+      "lidReusedFromBaseline": false
+    },
+    {
+      "case": "current_economy",
+      "material": "PETG",
+      "baselinePairGrams": 43.19,
+      "candidatePairGrams": 38.79,
+      "slicerEstimatedReductionPercent": 10.187543412827042,
+      "lidReusedFromBaseline": false
+    },
+    {
+      "case": "current_hollow",
+      "material": "PETG",
+      "baselinePairGrams": 43.19,
+      "candidatePairGrams": 43.31,
+      "slicerEstimatedReductionPercent": -0.2778420930771117,
+      "lidReusedFromBaseline": false
+    },
+    {
+      "case": "current_economy_hollow",
+      "material": "PETG",
+      "baselinePairGrams": 43.19,
+      "candidatePairGrams": 38.9,
+      "slicerEstimatedReductionPercent": 9.932854827506365,
+      "lidReusedFromBaseline": false
+    }
+  ]
+}

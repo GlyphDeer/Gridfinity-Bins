@@ -1,0 +1,49 @@
+[
+  {
+    "name": "baseline",
+    "source": "reviews/filament-baseline/generator.html",
+    "patch": {},
+    "parts": [
+      "body",
+      "lid"
+    ]
+  },
+  {
+    "name": "current_economy",
+    "source": "reviews/filament-slicing/runs/candidate-9e3373ce77ed/generator.html",
+    "patch": {
+      "wall": 1.2,
+      "floorT": 1,
+      "scoop": 3
+    },
+    "parts": [
+      "body",
+      "lid"
+    ]
+  },
+  {
+    "name": "current_hollow",
+    "source": "reviews/filament-slicing/runs/candidate-9e3373ce77ed/generator.html",
+    "patch": {
+      "hollowFeet": true
+    },
+    "parts": [
+      "body",
+      "lid"
+    ]
+  },
+  {
+    "name": "current_economy_hollow",
+    "source": "reviews/filament-slicing/runs/candidate-9e3373ce77ed/generator.html",
+    "patch": {
+      "wall": 1.2,
+      "floorT": 1,
+      "scoop": 3,
+      "hollowFeet": true
+    },
+    "parts": [
+      "body",
+      "lid"
+    ]
+  }
+]

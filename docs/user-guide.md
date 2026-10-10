@@ -40,3 +40,9 @@ Invalid settings show an adjustment message and cannot export. Floor/flare order
 Export builds fresh geometry from a snapshot of the current settings and prepares both files before requesting a pair download. There is no need to wait for the preview frame to avoid an old mesh. Check the browser download list to confirm both files arrived.
 
 See [parameters](parameters.md) for hidden clamps and [printing](printing.md) before a batch print.
+
+## Use less filament
+
+After configuring the active model, choose **Apply economy candidate to this mode**. It reduces walls/floor to the candidate targets, preserves thinner values and leaves disabled scoops or fillets off. Check dimensions, validation and the preview, then slice a trial. Reset restores that mode's standard defaults. The benchmark measured an estimated 10.2% pair reduction for one 2×1×6U bin using the documented X2D reference profiles; your configuration may differ.
+
+The experimental hollow-foot checkbox is deliberately disabled. Four cavity candidates did not establish additional filament savings, so normal downloads retain solid feet. The [filament-saving guide](filament-saving.md) explains the measurements, tradeoffs and developer-only experiment.

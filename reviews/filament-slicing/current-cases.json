@@ -1,0 +1,36 @@
+[
+  {
+    "name": "baseline",
+    "source": "source/gridfinity_generator_4.html",
+    "patch": {
+      "nx": 2,
+      "ny": 1,
+      "hu": 6,
+      "wall": 1.5,
+      "floorT": 1.5,
+      "scoop": 10,
+      "hollowFeet": false
+    },
+    "parts": [
+      "body",
+      "lid"
+    ]
+  },
+  {
+    "name": "economy",
+    "source": "source/gridfinity_generator_4.html",
+    "patch": {
+      "nx": 2,
+      "ny": 1,
+      "hu": 6,
+      "wall": 1.2,
+      "floorT": 1,
+      "scoop": 3,
+      "hollowFeet": false
+    },
+    "parts": [
+      "body",
+      "lid"
+    ]
+  }
+]

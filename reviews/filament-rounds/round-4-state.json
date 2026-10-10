@@ -1,0 +1,69 @@
+{
+  "sourceSha256": "34258848f30adeb0d48972c93859ecf502f68102fb9b2ce280268ee342c14b8c",
+  "command": "node --test tools/generator.test.mjs tools/test.mjs tools/filament.test.mjs",
+  "result": "27/27 passing",
+  "releaseGate": "withheld: consumer toggle disabled and consumer export rejects hollowFeet:true; direct research builders retained",
+  "geometryComparison": "Ten matrix body hashes exactly match accepted final circular geometry artifact despite source UI changes.",
+  "matrix": [
+    {
+      "name": "small-min-floor-coarse",
+      "hollowFeet": false,
+      "sha256": "d81a894dddb31ad4819ba9103706eb56d95d4cb315a9fbf3b3c26914e7f3428e",
+      "unchanged": true
+    },
+    {
+      "name": "small-min-floor-coarse",
+      "hollowFeet": true,
+      "sha256": "2c76a590cafdc5dcb7ec50c77afff3ce72c1af85d9a5f4116507bddc94ae9c9a",
+      "unchanged": true
+    },
+    {
+      "name": "small-fine",
+      "hollowFeet": false,
+      "sha256": "2f459c4788be3c4b507cae07cb3ec217f33e9b770f05a65498bc391a7f02ab3c",
+      "unchanged": true
+    },
+    {
+      "name": "small-fine",
+      "hollowFeet": true,
+      "sha256": "771bf638a984e7cce34ab7c3befba9f693505d1e326cbe9317cf4b25d8ace4a6",
+      "unchanged": true
+    },
+    {
+      "name": "wide-max-floor",
+      "hollowFeet": false,
+      "sha256": "3e4cbe7e7ebfe3257c0d122c033958a89fa519902902d41489b60ccd8dcbc80d",
+      "unchanged": true
+    },
+    {
+      "name": "wide-max-floor",
+      "hollowFeet": true,
+      "sha256": "c3b177a421228ea410ba9afd3b7e20faf594977aaf950f2d6b419b9afb9338b8",
+      "unchanged": true
+    },
+    {
+      "name": "large-coarse",
+      "hollowFeet": false,
+      "sha256": "6bd8c214f0ea6e98adb94bd9f91f2cf7267c1a833527344454aa08e08ddb5734",
+      "unchanged": true
+    },
+    {
+      "name": "large-coarse",
+      "hollowFeet": true,
+      "sha256": "e38a5be577fed8d7e204562f7648a03c1504c4d034a2c600d711cb5b50bd010b",
+      "unchanged": true
+    },
+    {
+      "name": "large-fine",
+      "hollowFeet": false,
+      "sha256": "81df91f5fa70d0d303ccbb51f81fbaac4cf06f5e2c05318494d68152f7c5c57e",
+      "unchanged": true
+    },
+    {
+      "name": "large-fine",
+      "hollowFeet": true,
+      "sha256": "03a7147699f513e09c0eefd64d1230439f1ff675de274a01fae530750e41b738",
+      "unchanged": true
+    }
+  ]
+}

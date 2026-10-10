@@ -1,0 +1,124 @@
+{
+  "schemaVersion": 1,
+  "owner": "independent-reviewer",
+  "policy": "Reviewer alone locks/reopens scopes after evidence. Prior reviews/rounds/feature-locks.json remains immutable. New evidence is required before modifying locked scope. Scores reflect evidence, not a promised perfect rating.",
+  "features": [
+    {
+      "id": "E01",
+      "name": "Opt-in economy preset",
+      "status": "locked",
+      "acceptance": "Reduction-onlyeconomy usesmin(current,target) forcurrentmoderelevant fields, preserveszero/thinner/unrelatedvalues andmodeisolation; originaldefaults remainunchanged.",
+      "evidence": [
+        "Independent rerun:22/22 tests pass including5filament tests and17preservedcontracts.",
+        "Pre-filament snapshot comparison:allfive defaultbuilderSTLbytes unchanged.",
+        "Source inspection:explicit annulus/innerwall/downwardroof replacesfootbottomcap; exportedrayoccupancy and componentedge diagnostics pass.",
+        "Independent27/27Node tests pass; inspectedminhandlers andnochange/reducedstatus; testscover.8/.8/zero andallmodes."
+      ],
+      "lockedRound": 4,
+      "limitations": [
+        "Foundation only:one7x7mm rounded cavity perfoot,3.4mmdepth; no material-saving or production approval.",
+        "Zero/negative actual B sliced savings explicitly permits reviewer reopeningE02 geometry for optimization; structural/interface contracts remain required."
+      ],
+      "reopenedRound": 4,
+      "reopeningEvidence": {
+        "reproduction": "P.wall=.8;P.floorT=.8;P.scoop=0; economyCandidate() currently sets1.2/1/3, increasingmaterial andreenablingdisabledscoop.",
+        "authorizedScope": "Use min(current,target) for mode-relevant wall/floor/scoop/fillet; preservedisabledfeatures/currentlower values; documentreductiononlybehavior. Keepallunrelatedfields/interface/modeisolation unchanged."
+      }
+    },
+    {
+      "id": "E02",
+      "name": "Experimental bin underside cavity construction",
+      "status": "locked",
+      "acceptance": "Round 1 E02 and structural acceptance",
+      "evidence": [
+        "Independent rerun:22/22 tests pass including5filament tests and17preservedcontracts.",
+        "Pre-filament snapshot comparison:allfive defaultbuilderSTLbytes unchanged.",
+        "Source inspection:explicit annulus/innerwall/downwardroof replacesfootbottomcap; exportedrayoccupancy and componentedge diagnostics pass.",
+        "Independent23/23tests on finalcirclecandidatec2f75a59193df0f5b021f92bfdda2d4d4dcdd54a1b2303b3dc9c7ebb074a8e99; all76footmatrixcontractspass.",
+        "comparison-v4-quick.json eightexitzero slices: B adds0.05g tobaselinePLA/PETG; A+B equalsAatroundedprecision, withlongertime."
+      ],
+      "lockedRound": 3,
+      "limitations": [
+        "Researchprototype only; consumeractivation/materialclaim withheld.",
+        "No moregeometry/profile optimization authorized in this fivecycle task.",
+        "No physicalstrength/fit or visualbridgevalidation."
+      ],
+      "reopenedRound": 3,
+      "reopeningHistory": [
+        {
+          "sourceSha256": "2b021e6fe9ccb9be6bd900ca61f0a646af114dd87d0f8ab475022885b7cde518",
+          "artifact": "reviews/filament-slicing/comparison-round3.json",
+          "finding": "All16official-profile slicesexit0; B raisesPLA/PETG baselinebody31.27/31.04g to31.39/31.16g. Economybody26.83/26.64g to26.95/26.75g. Single cavity failsmaterialobjective despite reducedsolidvolume.",
+          "authorizedScope": "Round2 redesign actual cavity array/partitioned underside surfaces and associated tests; exact exterior/lid/interiorfloor/roofwallbudgets remain mandatory. No changing slicerprofile to manufacture benefit."
+        }
+      ],
+      "reopeningEvidence": {
+        "sourceSha256": "9e3373ce77ed8fad60ccf3294115ffd8cd1a2f227a769e562d00a0376ad47334",
+        "artifact": "reviews/filament-slicing/comparison-v2.json",
+        "finding": "16successful slices:array increases baseline mass0.81g PLA/PETG and A mass0.81/0.80g; fails materialobjective.",
+        "authorizedScope": "Round3 singlewide tapered cavity optimization, measuredcontract updates and unchangedprofile benchmarks; preserve exactexterior/shell/lid/interiorfloor."
+      },
+      "releaseGate": "withheld-no-proven-marginal-filament-benefit"
+    },
+    {
+      "id": "E03",
+      "name": "Cavity boundary and geometry validation",
+      "status": "locked",
+      "acceptance": "Round2 geometric boundary contract:boundedextreme matrix, every modifiedfoot section/roof/exteriorwall/web/topology comparisons and defaultbytes. Cavity count/layout are candidate-specific, not locked; fixtures may adapt under reviewer-authorized E02optimization without weakening roofspan/exterior/floor constraints.",
+      "evidence": [
+        "Independent23/23 tests pass8.57seconds.",
+        "Inspected actualtrianglegroup roofdiameters, exteriorsegmentdistances, componentrayoccupancy and perfootedge diagnostics.",
+        "round-2-geometry.json source9e3373ce77ed8fad60ccf3294115ffd8cd1a2f227a769e562d00a0376ad47334."
+      ],
+      "lockedRound": 2,
+      "limitations": [
+        "Largecoarsebody aggregate65nonmanifoldedges also occurs withBoff; componentfeet clean.",
+        "Structuralcontract success doesnot satisfy netmaterial gate."
+      ]
+    },
+    {
+      "id": "E04",
+      "name": "Actual slicer material evidence",
+      "status": "locked",
+      "acceptance": "Actualmeasurement evidence contract:unchangedofficialX2Dprofiles, exactsource/STL/Gcodehashes, strictpositivefiniteheaderparser and failure/prerequisite reporting. Bpositivebenefit gateFAILED; lock certifies evidence integrity, not materialsuccess.",
+      "evidence": [
+        "Independent7Pythonparser tests pass; inspected actualcomparison-v4-quick.json 8exit0 rows/profileprovenance/headers.",
+        "Independent missingCLI invocation returns1 andfatalFileNotFoundErrorJSONwithnoresults; no simulated estimates."
+      ],
+      "lockedRound": 3
+    },
+    {
+      "id": "E05",
+      "name": "Opt-in UI/state integration",
+      "status": "locked",
+      "acceptance": "Consumerprototypeactivation withheldallmodes; nameddisabledcontrol, rejectedprogrammatictoggle andexportguard; researchbuildersretained. ScopedAestimateandBfailedgatecopyaccurate.",
+      "evidence": [
+        "Independent27/27Node tests andsourceinspection atSHA34258848f30adeb0d48972c93859ecf502f68102fb9b2ce280268ee342c14b8c.",
+        "Reviewer inspectedboth finalHTMLanchors target=_blank rel=noopener; final27tests pass. E05navigation reopened/relockedwithoutgeometrychange."
+      ],
+      "lockedRound": 5,
+      "reopenedRound": 5,
+      "reopeningEvidence": {
+        "reproduction": "Evidence anchors navigate same tab away from generator; page-only parameter/mode snapshots are lost when returning/reloading.",
+        "authorizedScope": "Only the two evidenceanchors add target=_blank andrel=noopener to preserve currentgeneratorpage; no geometry/gate/state changes. Staticinspection sufficient; rerunexisting finalcontracts."
+      }
+    },
+    {
+      "id": "E06",
+      "name": "Documentation and final regression closure",
+      "status": "locked",
+      "acceptance": "Round5 final canonicaldocs distinguish releasedreduction-onlyA, actualscopedCLIestimates, withheldBconsumeractivation anddeveloperresearch; preservehistoricalevidence/sourceavailability. All71defaultsdocumented/local linksresolve; Node27/Python7/current37caseevidence passes and expectedrejections separated; knownmanual/geometrylimits explicit.",
+      "evidence": [
+        "Independent27/27Node tests onfinalSHA1d350c214690a56ce75e58f6e0bf237438aca61964634bee367a59734dafde12.",
+        "Independent7/7Pythonparser tests; missingCLI recordedfatalJSONwithoutsimulation.",
+        "Independentdocscheck31files97links71defaults; currentreview37cases32meshes5expectedrejections exit0:reviews/runs/2026-10-10T23-31-10-376Z-1d350c214690-74Y55K.",
+        "Independentinspectionoflead-authoreddocs foundstaleslicer-unperformedclaims; leadcorrectedandreviewerverified. Dedicateddocagentunavailabilitydisclosed; independentreviewerresumedandsucceeded."
+      ],
+      "lockedRound": 5,
+      "limitations": [
+        "Bmaterial-savingobjective failed andconsumerreleasewithheld.",
+        "No realbrowser/visualslicerlayer/physicalstrength/fit/weighedprintvalidation; aggregategeometryrisksremain."
+      ]
+    }
+  ]
+}

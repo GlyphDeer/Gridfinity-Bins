@@ -1,0 +1,106 @@
+[
+  {
+    "name": "baseline",
+    "source": "reviews/filament-baseline/generator.html",
+    "patch": {},
+    "parts": [
+      "body",
+      "lid"
+    ],
+    "expectedSourceSHA256": "7fad9ed651b568bde8fb85c35e8a86cfb05d078e3f621b440915726c2bce2421"
+  },
+  {
+    "name": "economy",
+    "source": "reviews/filament-baseline/generator.html",
+    "patch": {
+      "wall": 1.2,
+      "floorT": 1,
+      "scoop": 3
+    },
+    "parts": [
+      "body",
+      "lid"
+    ]
+  },
+  {
+    "name": "v3_square_funnel_standard_hollow",
+    "source": "reviews/filament-prototypes/v3-square-funnel.html",
+    "patch": {
+      "hollowFeet": true
+    },
+    "parts": [
+      "body",
+      "lid"
+    ],
+    "expectedSourceSHA256": "de5b8ae3dcc49c533ff64e1d4a67545bdf1b8fa924e208e1fd57365f8fd2e474"
+  },
+  {
+    "name": "v3_square_funnel_economy_hollow",
+    "source": "reviews/filament-prototypes/v3-square-funnel.html",
+    "patch": {
+      "wall": 1.2,
+      "floorT": 1,
+      "scoop": 3,
+      "hollowFeet": true
+    },
+    "parts": [
+      "body",
+      "lid"
+    ],
+    "expectedSourceSHA256": "de5b8ae3dcc49c533ff64e1d4a67545bdf1b8fa924e208e1fd57365f8fd2e474"
+  },
+  {
+    "name": "v2_cavity_array_standard_hollow",
+    "source": "reviews/filament-prototypes/v2-cavity-array.html",
+    "patch": {
+      "hollowFeet": true
+    },
+    "parts": [
+      "body",
+      "lid"
+    ],
+    "expectedSourceSHA256": "9e3373ce77ed8fad60ccf3294115ffd8cd1a2f227a769e562d00a0376ad47334"
+  },
+  {
+    "name": "v2_cavity_array_economy_hollow",
+    "source": "reviews/filament-prototypes/v2-cavity-array.html",
+    "patch": {
+      "wall": 1.2,
+      "floorT": 1,
+      "scoop": 3,
+      "hollowFeet": true
+    },
+    "parts": [
+      "body",
+      "lid"
+    ],
+    "expectedSourceSHA256": "9e3373ce77ed8fad60ccf3294115ffd8cd1a2f227a769e562d00a0376ad47334"
+  },
+  {
+    "name": "v4_circular_funnel_standard_hollow",
+    "source": "reviews/filament-prototypes/v4-circular-funnel.html",
+    "patch": {
+      "hollowFeet": true
+    },
+    "parts": [
+      "body",
+      "lid"
+    ],
+    "expectedSourceSHA256": "c2f75a59193df0f5b021f92bfdda2d4d4dcdd54a1b2303b3dc9c7ebb074a8e99"
+  },
+  {
+    "name": "v4_circular_funnel_economy_hollow",
+    "source": "reviews/filament-prototypes/v4-circular-funnel.html",
+    "patch": {
+      "wall": 1.2,
+      "floorT": 1,
+      "scoop": 3,
+      "hollowFeet": true
+    },
+    "parts": [
+      "body",
+      "lid"
+    ],
+    "expectedSourceSHA256": "c2f75a59193df0f5b021f92bfdda2d4d4dcdd54a1b2303b3dc9c7ebb074a8e99"
+  }
+]

@@ -613,6 +613,17 @@
   </details>
 
   <section>
+    <h2>Material experiments</h2>
+    <button id="economy">Apply economy candidate to this mode</button>
+    <div class="sub">Opt-in reduction-only walls/floor for light contents; already thinner values stay unchanged. The verified 2 x 1 x 6U bin/lid pair used about 10.2% less estimated filament with the official X2D 0.4 mm / 0.20 mm Generic PLA and PETG profiles; other settings and strength need a trial print. <a href="../reviews/filament-slicing/round3-findings.md" target="_blank" rel="noopener">Measured reference evidence</a>.</div>
+    <div class="ctl">
+      <label for="hollowFeet">Experimental hollow underside feet (bin body only)</label>
+      <input type="checkbox" id="hollowFeet" aria-label="Experimental hollow underside bin body feet" aria-describedby="hollownote" disabled>
+      <div class="sub" id="hollownote">Research only: activation withheld. The final cavity benchmark added 0.05 g to the standard body in both materials and showed no measurable benefit over economy alone. Standard solid feet remain active. See the final benchmark evidence.</div>
+      <a href="../reviews/filament-slicing/v4-quick-findings.md" target="_blank" rel="noopener">Final cavity benchmark</a>
+    </div>
+  </section>
+  <section>
     <h2>Printing</h2>
     <div id="notes"></div>
   </section>
@@ -1493,6 +1504,36 @@ function buildRamp(dst, p, d, col) {
 // Bin
 // ---------------------------------------------------------------------
 
+// Final bounded experiment: one conical underside cavity per bin foot.
+// Original exterior sides remain untouched; annulus, inward cone and
+// downward ceiling cap form the actual connected cavity boundary.
+function hollowFootBottom(m, frs, fx, fy) {
+  const N=64, mouthRadius=9.3, roofRadius=4.9, roofZ=4.4;
+  const circle=radius=>Array.from({length:N},(_,i)=>{
+    const angle=2*Math.PI*i/N;
+    return [fx+radius*Math.cos(angle),fy+radius*Math.sin(angle)];
+  });
+  const mouth=circle(mouthRadius), roof=circle(roofRadius);
+  // Zip unlike convex rings without splitting existing exterior vertices.
+  const ordered=ring=>ring.map(v=>({v,a:Math.atan2(v[1]-fy,v[0]-fx)})).sort((a,b)=>a.a-b.a);
+  const inner=ordered(mouth), outer=ordered(rrPoints(frs,2.95,null));
+  let i=0,j=0;
+  while(i<inner.length || j<outer.length) {
+    const I=inner[i%inner.length].v, O=outer[j%outer.length].v;
+    const ia=i+1<inner.length ? inner[i+1].a : inner[0].a+2*Math.PI;
+    const oa=j+1<outer.length ? outer[j+1].a : outer[0].a+2*Math.PI;
+    if(j<outer.length && (i===inner.length || oa<=ia)) {
+      const next=outer[(j+1)%outer.length].v;
+      push3(m,[...I,0],[...next,0],[...O,0]); j++;
+    } else {
+      const next=inner[(i+1)%inner.length].v;
+      push3(m,[...I,0],[...next,0],[...O,0]); i++;
+    }
+  }
+  stitch(m,mouth,0,roof,roofZ,true);
+  capFan(m,roof,roofZ,false);
+}
+
 function buildBin(p) {
   requireValid(p, "bin");
   const d = derive(p);
@@ -1565,7 +1606,11 @@ function buildBin(p) {
           stitch(m, rrPoints(frs, lv[k].inset, null), lv[k].z,
                     rrPoints(frs, lv[k + 1].inset, null), lv[k + 1].z, false);
         }
-        capFan(m, rrPoints(frs, 2.95, null), 0, false);
+        if (p.hollowFeet) {
+          hollowFootBottom(m, frs, fx, fy);
+        } else {
+          capFan(m, rrPoints(frs, 2.95, null), 0, false);
+        }
         capFan(m, rrPoints(frs, 0.30, null), H_BASE + 0.30, true);
       }, 'bin-foot');
     }
@@ -2138,6 +2183,8 @@ const PARAM_LIMITS = {"nx":[1.0,6.0],"ny":[1.0,6.0],"hu":[2.0,20.0],"wnx":[1.0,6
 function validateParams(p, mode) {
   const errors = [];
   if (!['bin','tray','wipe'].includes(mode)) errors.push('Unknown model.');
+  if (typeof p.hollowFeet !== 'boolean') errors.push('hollowFeet must be true or false.');
+  if (p.hollowFeet && mode !== 'bin') errors.push('Experimental hollow feet are supported only for bin bodies. Disable hollow feet or select bin mode.');
   if (typeof p.labels !== 'string' || p.labels.length > 1000) errors.push('Labels must be text of at most 1000 characters.');
   if (!Number.isFinite(p.layerH) || p.layerH < 0.05 || p.layerH > 1) errors.push('layerH must be from 0.05 to 1 mm.');
   for (const [key, values] of Object.entries({labelMode:['off','one','all'], lipTipStyle:['round','flat','sharp'], trayDir:['x','y'], slotBottom:['square','round'], scoopWalls:['one','both','four'], stackMode:['count','height']})) {
@@ -2178,6 +2225,7 @@ function wipePackFits(p, d) {
 
 const DEFAULTS = {
   nx: 2, ny: 1, hu: 6,
+  hollowFeet: false,
   wall: 1.5, floorT: 1.5, scoop: 10.0,
   lip: true, lipRound: 0.5, stackClear: 0.0,
   labelMode: 'one', labelCol: 1,
@@ -2209,6 +2257,7 @@ const DEFAULTS = {
 
 const P = Object.assign({}, DEFAULTS);
 let AVAIL = 60, VIEW = 'asm', MODEL = 'bin';
+const HOLLOW_SAVINGS_VALIDATED = false;
 
 const SLIDERS = ['nx','ny','hu','labelCol','labelH','labelW','scoop',
   'wall','floorT','lipRound','lipTip','tabAngle','tabDrop','tabFace','labelBorder','labelClear',
@@ -2217,7 +2266,7 @@ const SLIDERS = ['nx','ny','hu','labelCol','labelH','labelW','scoop',
   'slotW','slots','sideBorder','frontBorder','backBorder','ribChamfer','cutR','cutWeb','cutY','textH','textD','cradleR',
   'wnx','wny','whu','wFillet','notchW','notchFlat','notchDrop','notchKeep','packL','packW','sheetT','sheetN','stackH'];
 const NUMS = ['packL','packW','sheetT','sheetN','stackH'];
-const TOGGLES = ['lip','window','snap','groove','cut','trayText','notch'];
+const TOGGLES = ['lip','window','snap','groove','cut','trayText','notch','hollowFeet'];
 const UNIT = {nx:'',ny:'',hu:' units',labelCol:'',cornerSegs:'',tabAngle:' deg',slots:'',
   wnx:'',wny:'',whu:' units',sheetN:''};
 const PRESETS = [[2,1,6],[1,1,6],[1,2,6],[2,2,4],[3,1,3],[1,1,3]];
@@ -2631,6 +2680,8 @@ function chips(){
 }
 
 function visibility(){
+  $('hollowFeet').disabled = !HOLLOW_SAVINGS_VALIDATED || MODEL !== 'bin';
+  $('hollownote').textContent = 'Research only: hollow-foot activation is withheld in all modes. The final benchmark added 0.05 g to the standard body in PLA and PETG; economy plus hollow tied economy at reported precision with longer model time. No filament benefit was established. Standard solid feet remain available.';
   document.querySelectorAll('[data-for]').forEach(el=>{
     el.style.display = el.dataset.for.split(' ').indexOf(MODEL) >= 0 ? '' : 'none';
   });
@@ -2704,7 +2755,9 @@ NUMS.forEach(id=>{
 });
 TOGGLES.forEach(id=>{
   const el = $(id); if(!el) return;
-  el.addEventListener('change', e=>{ P[id]=e.target.checked; if(id==='lip') $('lip2').checked=e.target.checked; queue(); });
+  el.addEventListener('change', e=>{
+    if(id==='hollowFeet' && !HOLLOW_SAVINGS_VALIDATED) { P.hollowFeet=false; e.target.checked=false; toast('Hollow feet are research only: measured filament savings were not established.'); return; }
+    P[id]=e.target.checked; if(id==='lip') $('lip2').checked=e.target.checked; queue(); });
 });
 $('lip2').addEventListener('change', e=>{ P.lip=e.target.checked; $('lip').checked=e.target.checked; queue(); });
 $('labels').addEventListener('input', e=>{ P.labels=e.target.value; queue(); });
@@ -2809,6 +2862,17 @@ $('model_seg').addEventListener('click', e=>{
 });
 $('avail').addEventListener('input', e=>{ AVAIL=parseFloat(e.target.value);
   $('avail_v').textContent = AVAIL+' mm'; queue(); });
+function economyCandidate() {
+  const before = {wall:P.wall, floorT:P.floorT, scoop:P.scoop, wFillet:P.wFillet};
+  P.wall = Math.min(P.wall, 1.2); P.floorT = Math.min(P.floorT, 1.0);
+  if (MODEL === 'bin') P.scoop = Math.min(P.scoop, 3.0);
+  if (MODEL === 'wipe') P.wFillet = Math.min(P.wFillet, 3.0);
+  syncAll(); queue();
+  const keys = ['wall','floorT',MODEL==='bin'?'scoop':MODEL==='wipe'?'wFillet':null].filter(Boolean);
+  const changed = keys.filter(key=>P[key]!==before[key]);
+  toast(changed.length ? 'Economy reduced '+changed.join(', ')+'. Slice and trial-print; the reference saving may differ for these settings.' : 'Economy made no changes: these settings are already at or below its targets.');
+}
+$('economy').addEventListener('click', economyCandidate);
 $('reset').addEventListener('click', ()=>{
   Object.assign(P, MODE_DEFAULTS[MODEL]); syncAll(); queue(); toast('Back to defaults for this mode');
 });
@@ -2832,6 +2896,7 @@ function toast(msg){
 function exportRevision() {
   const params = Object.freeze({...P});
   const model = MODEL;
+  if(params.hollowFeet && !HOLLOW_SAVINGS_VALIDATED) throw new Error('Hollow feet are research only and cannot be exported from this UI: measured filament savings were not established. Disable hollow feet or reset this mode.');
   requireValid(params, model);
   const dims = model === 'wipe' ? `${fmt(params.wnx)}x${fmt(params.wny)}x${params.whu}U` : `${params.nx}x${params.ny}x${params.hu}U`;
   const parts = model === 'tray' ? [['tray', buildTray(params)]]

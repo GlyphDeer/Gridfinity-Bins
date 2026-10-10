@@ -3,8 +3,13 @@ import path from 'node:path';
 import {fileURLToPath} from 'node:url';
 import {loadSource} from './core.mjs';
 const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..');
-const files=['README.md',...['docs','reviews','tools'].flatMap(d=>fs.readdirSync(path.join(root,d)).filter(f=>f.endsWith('.md')).map(f=>d+'/'+f))];
-files.push(...fs.readdirSync(path.join(root,'reviews','rounds')).filter(f=>f.endsWith('.md')).map(f=>'reviews/rounds/'+f));
+function markdownFiles(directory) {
+  return fs.readdirSync(path.join(root,directory),{withFileTypes:true}).flatMap(entry=>{
+    if(entry.isDirectory())return ['runs','draft-before-review'].includes(entry.name)?[]:markdownFiles(directory+'/'+entry.name);
+    return entry.name.endsWith('.md')?[directory+'/'+entry.name]:[];
+  });
+}
+const files=['README.md',...['docs','reviews','tools'].flatMap(markdownFiles)];
 let failures=[];let count=0;
 const {run}=loadSource(fs.readFileSync(path.join(root,'source','gridfinity_generator_4.html'),'utf8'));
 const parameterText=fs.readFileSync(path.join(root,'docs','parameters.md'),'utf8');

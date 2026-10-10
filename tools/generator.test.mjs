@@ -117,7 +117,10 @@ test('missing CDN library and renderer failure show actionable fallback and disa
 });
 test('number and checkbox controls have static accessible names; focus and restrained live feedback exist',()=>{
  const fields=[...html.matchAll(/<input\b[^>]*type="(?:number|checkbox)"[^>]*>/g)].map(x=>x[0]);
- assert.equal(fields.length,13);
+ assert.equal(fields.length,14);
+ const originalNames={packL_n:'Sheet length in millimeters',packW_n:'Sheet width in millimeters',sheetT_n:'Sheet thickness in millimeters',sheetN_n:'Sheet count, rounded to nearest whole sheet',stackH_n:'Measured stack height in millimeters',window:'Lid label window',notch:'Front scoop',lip:'Tray stacking lip',lip2:'Bin stacking lip',cut:'Finger cut',trayText:'Tray text labels',snap:'Snap beads',groove:'Snap groove'};
+ for(const [id,name] of Object.entries(originalNames))assert.ok(fields.some(tag=>tag.includes(`id="${id}"`)&&tag.includes(`aria-label="${name}"`)),id);
+ assert.ok(fields.some(tag=>tag.includes('id="hollowFeet"')&&tag.includes('aria-label="Experimental hollow underside bin body feet"')));
  for(const tag of fields)assert.match(tag,/aria-label="[^"\s][^"]+"/);
  assert.match(html,/button:focus-visible,input:focus-visible/);
  assert.match(html,/<div id="toast" role="status" aria-live="polite" aria-atomic="true">/);

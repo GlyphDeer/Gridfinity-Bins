@@ -1,3 +1,5 @@
 .DS_Store
 reviews/runs/
 reviews/draft-before-review/
+__pycache__/
+*.py[cod]

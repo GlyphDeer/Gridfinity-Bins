@@ -1,0 +1,325 @@
+{
+  "sourceSha256": "de5b8ae3dcc49c533ff64e1d4a67545bdf1b8fa924e208e1fd57365f8fd2e474",
+  "command": "node --test tools/generator.test.mjs tools/test.mjs tools/filament.test.mjs",
+  "result": "23/23 passing",
+  "candidate": "One square funnel per foot, mouth15.6mm, roof7mm atZ4.3mm. No filament-saving or physical-load claim.",
+  "method": "Actual individual exported foot sections/topology; separately classified shell and foot component union and actual upward-horizontal interior floor measure. Whole-body diagnostics compared to standard. Previous candidate artifacts preserved.",
+  "matrix": [
+    {
+      "name": "small-min-floor-coarse",
+      "patch": {
+        "nx": 1,
+        "ny": 1,
+        "hu": 6,
+        "floorT": 0.8,
+        "seg": 3,
+        "cornerSegs": 3,
+        "labelMode": "off",
+        "lip": false
+      },
+      "outputs": [
+        {
+          "hollowFeet": false,
+          "sha256": "d81a894dddb31ad4819ba9103706eb56d95d4cb315a9fbf3b3c26914e7f3428e",
+          "triangles": 2880,
+          "nonfinite": 0,
+          "degenerate": 0,
+          "normalDisagreements": 0,
+          "bounds": {
+            "min": [
+              -20.75,
+              -20.75,
+              0
+            ],
+            "max": [
+              20.75,
+              20.75,
+              42
+            ]
+          },
+          "signedVolumeMm3": 18716.945096948497,
+          "boundaryEdges": 0,
+          "nonmanifoldEdges": 0,
+          "inconsistentEdges": 0,
+          "weldToleranceMm": 0.00001
+        },
+        {
+          "hollowFeet": true,
+          "sha256": "e08695927eaaba8f18f5c25957d03412696669189333972094cd35930dacdbec",
+          "triangles": 2920,
+          "nonfinite": 0,
+          "degenerate": 0,
+          "normalDisagreements": 0,
+          "bounds": {
+            "min": [
+              -20.75,
+              -20.75,
+              0
+            ],
+            "max": [
+              20.75,
+              20.75,
+              42
+            ]
+          },
+          "signedVolumeMm3": 18141.375717197927,
+          "boundaryEdges": 0,
+          "nonmanifoldEdges": 0,
+          "inconsistentEdges": 0,
+          "weldToleranceMm": 0.00001
+        }
+      ]
+    },
+    {
+      "name": "small-fine",
+      "patch": {
+        "nx": 1,
+        "ny": 1,
+        "hu": 6,
+        "seg": 0.2,
+        "cornerSegs": 20,
+        "labelMode": "off"
+      },
+      "outputs": [
+        {
+          "hollowFeet": false,
+          "sha256": "2f459c4788be3c4b507cae07cb3ec217f33e9b770f05a65498bc391a7f02ab3c",
+          "triangles": 56328,
+          "nonfinite": 0,
+          "degenerate": 0,
+          "normalDisagreements": 0,
+          "bounds": {
+            "min": [
+              -20.75,
+              -20.75,
+              0
+            ],
+            "max": [
+              20.75,
+              20.75,
+              45.692893981933594
+            ]
+          },
+          "signedVolumeMm3": 20681.82461982185,
+          "boundaryEdges": 0,
+          "nonmanifoldEdges": 0,
+          "inconsistentEdges": 0,
+          "weldToleranceMm": 0.00001
+        },
+        {
+          "hollowFeet": true,
+          "sha256": "bc8f7eb8d42676acac32b83a9a6e0f34f71ccb85dd707dbb73a8926f710fedb6",
+          "triangles": 56368,
+          "nonfinite": 0,
+          "degenerate": 0,
+          "normalDisagreements": 0,
+          "bounds": {
+            "min": [
+              -20.75,
+              -20.75,
+              0
+            ],
+            "max": [
+              20.75,
+              20.75,
+              45.692893981933594
+            ]
+          },
+          "signedVolumeMm3": 20106.25524007127,
+          "boundaryEdges": 0,
+          "nonmanifoldEdges": 0,
+          "inconsistentEdges": 0,
+          "weldToleranceMm": 0.00001
+        }
+      ]
+    },
+    {
+      "name": "wide-max-floor",
+      "patch": {
+        "nx": 2,
+        "ny": 1,
+        "hu": 8,
+        "floorT": 6,
+        "lip": false
+      },
+      "outputs": [
+        {
+          "hollowFeet": false,
+          "sha256": "3e4cbe7e7ebfe3257c0d122c033958a89fa519902902d41489b60ccd8dcbc80d",
+          "triangles": 19136,
+          "nonfinite": 0,
+          "degenerate": 0,
+          "normalDisagreements": 0,
+          "bounds": {
+            "min": [
+              -41.75,
+              -20.75,
+              0
+            ],
+            "max": [
+              41.75,
+              20.75,
+              56
+            ]
+          },
+          "signedVolumeMm3": 60029.226488782566,
+          "boundaryEdges": 0,
+          "nonmanifoldEdges": 0,
+          "inconsistentEdges": 0,
+          "weldToleranceMm": 0.00001
+        },
+        {
+          "hollowFeet": true,
+          "sha256": "b58807e4f20fe1006074a38e091db945ba873f4b206fa41f5b7f3dad281a66b0",
+          "triangles": 19216,
+          "nonfinite": 0,
+          "degenerate": 0,
+          "normalDisagreements": 0,
+          "bounds": {
+            "min": [
+              -41.75,
+              -20.75,
+              0
+            ],
+            "max": [
+              41.75,
+              20.75,
+              56
+            ]
+          },
+          "signedVolumeMm3": 58878.087781498165,
+          "boundaryEdges": 0,
+          "nonmanifoldEdges": 0,
+          "inconsistentEdges": 0,
+          "weldToleranceMm": 0.00001
+        }
+      ]
+    },
+    {
+      "name": "large-coarse",
+      "patch": {
+        "nx": 6,
+        "ny": 6,
+        "hu": 6,
+        "seg": 3,
+        "cornerSegs": 3,
+        "labelMode": "all"
+      },
+      "outputs": [
+        {
+          "hollowFeet": false,
+          "sha256": "6bd8c214f0ea6e98adb94bd9f91f2cf7267c1a833527344454aa08e08ddb5734",
+          "triangles": 33936,
+          "nonfinite": 0,
+          "degenerate": 0,
+          "normalDisagreements": 0,
+          "bounds": {
+            "min": [
+              -125.75,
+              -125.75,
+              0
+            ],
+            "max": [
+              125.75,
+              125.75,
+              45.692893981933594
+            ]
+          },
+          "signedVolumeMm3": 485299.5392053529,
+          "boundaryEdges": 0,
+          "nonmanifoldEdges": 65,
+          "inconsistentEdges": 0,
+          "weldToleranceMm": 0.00001
+        },
+        {
+          "hollowFeet": true,
+          "sha256": "af383f29a405ded9903f85ce46378cf2d42c1286248393f557b386d34e611fbc",
+          "triangles": 35376,
+          "nonfinite": 0,
+          "degenerate": 0,
+          "normalDisagreements": 0,
+          "bounds": {
+            "min": [
+              -125.75,
+              -125.75,
+              0
+            ],
+            "max": [
+              125.75,
+              125.75,
+              45.692893981933594
+            ]
+          },
+          "signedVolumeMm3": 464579.03714811604,
+          "boundaryEdges": 0,
+          "nonmanifoldEdges": 65,
+          "inconsistentEdges": 0,
+          "weldToleranceMm": 0.00001
+        }
+      ]
+    },
+    {
+      "name": "large-fine",
+      "patch": {
+        "nx": 6,
+        "ny": 6,
+        "hu": 6,
+        "seg": 0.2,
+        "cornerSegs": 20,
+        "labelMode": "off"
+      },
+      "outputs": [
+        {
+          "hollowFeet": false,
+          "sha256": "81df91f5fa70d0d303ccbb51f81fbaac4cf06f5e2c05318494d68152f7c5c57e",
+          "triangles": 410288,
+          "nonfinite": 0,
+          "degenerate": 0,
+          "normalDisagreements": 0,
+          "bounds": {
+            "min": [
+              -125.75,
+              -125.75,
+              0
+            ],
+            "max": [
+              125.75,
+              125.75,
+              45.692893981933594
+            ]
+          },
+          "signedVolumeMm3": 445471.3415295286,
+          "boundaryEdges": 0,
+          "nonmanifoldEdges": 0,
+          "inconsistentEdges": 0,
+          "weldToleranceMm": 0.00001
+        },
+        {
+          "hollowFeet": true,
+          "sha256": "5b3c1a0e3f07ff391314d2713829744d8bdef5dff136860f4f8fb961f33003fa",
+          "triangles": 411728,
+          "nonfinite": 0,
+          "degenerate": 0,
+          "normalDisagreements": 0,
+          "bounds": {
+            "min": [
+              -125.75,
+              -125.75,
+              0
+            ],
+            "max": [
+              125.75,
+              125.75,
+              45.692893981933594
+            ]
+          },
+          "signedVolumeMm3": 424750.8394722893,
+          "boundaryEdges": 0,
+          "nonmanifoldEdges": 0,
+          "inconsistentEdges": 0,
+          "weldToleranceMm": 0.00001
+        }
+      ]
+    }
+  ]
+}

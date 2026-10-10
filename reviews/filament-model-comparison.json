@@ -1,0 +1,324 @@
+{
+  "sourceSHA256": "7fad9ed651b568bde8fb85c35e8a86cfb05d078e3f621b440915726c2bce2421",
+  "method": "Existing volumeOf minus existing heuristic overlap corrections, from unchanged generator; no slicing, infill or physical-print comparison. Component volumes are pre-union and double-count overlaps.",
+  "results": [
+    {
+      "name": "Default 2x1x6 bin",
+      "patch": {},
+      "binCm3": 40.192147823885676,
+      "lidCm3": 15.891945403666604,
+      "binComponents": [
+        {
+          "tag": "bin-shell",
+          "mm3": 22521.676050663744
+        },
+        {
+          "tag": "bin-foot",
+          "mm3": 7365.216917903453
+        },
+        {
+          "tag": "bin-foot",
+          "mm3": 7365.216917903459
+        },
+        {
+          "tag": "ramp",
+          "mm3": 5185.63145491607
+        }
+      ],
+      "lidComponents": [
+        {
+          "tag": "lid-foot",
+          "mm3": 4736.940049220839
+        },
+        {
+          "tag": "lid-foot",
+          "mm3": 6926.864026981207
+        },
+        {
+          "tag": "lid-frame",
+          "mm3": 3424.817655837412
+        },
+        {
+          "tag": "rib",
+          "mm3": 1339.7139556466166
+        }
+      ],
+      "pairCm3": 56.08409322755228,
+      "changeVsDefaultPercent": 0
+    },
+    {
+      "name": "Wall 1.2 mm",
+      "patch": {
+        "wall": 1.2
+      },
+      "binCm3": 37.957531613083,
+      "lidCm3": 15.891945403666604,
+      "binComponents": [
+        {
+          "tag": "bin-shell",
+          "mm3": 20112.486892138935
+        },
+        {
+          "tag": "bin-foot",
+          "mm3": 7365.216917903453
+        },
+        {
+          "tag": "bin-foot",
+          "mm3": 7365.216917903459
+        },
+        {
+          "tag": "ramp",
+          "mm3": 5364.116402637439
+        }
+      ],
+      "lidComponents": [
+        {
+          "tag": "lid-foot",
+          "mm3": 4736.940049220839
+        },
+        {
+          "tag": "lid-foot",
+          "mm3": 6926.864026981207
+        },
+        {
+          "tag": "lid-frame",
+          "mm3": 3424.817655837412
+        },
+        {
+          "tag": "rib",
+          "mm3": 1339.7139556466166
+        }
+      ],
+      "pairCm3": 53.8494770167496,
+      "changeVsDefaultPercent": 3.984402853294031
+    },
+    {
+      "name": "Floor 1.0 mm",
+      "patch": {
+        "floorT": 1
+      },
+      "binCm3": 38.645245669820476,
+      "lidCm3": 15.891945403666604,
+      "binComponents": [
+        {
+          "tag": "bin-shell",
+          "mm3": 20974.773896597733
+        },
+        {
+          "tag": "bin-foot",
+          "mm3": 7365.216917903453
+        },
+        {
+          "tag": "bin-foot",
+          "mm3": 7365.216917903459
+        },
+        {
+          "tag": "ramp",
+          "mm3": 5185.63145491607
+        }
+      ],
+      "lidComponents": [
+        {
+          "tag": "lid-foot",
+          "mm3": 4736.940049220839
+        },
+        {
+          "tag": "lid-foot",
+          "mm3": 6926.864026981207
+        },
+        {
+          "tag": "lid-frame",
+          "mm3": 3424.817655837412
+        },
+        {
+          "tag": "rib",
+          "mm3": 1339.7139556466166
+        }
+      ],
+      "pairCm3": 54.53719107348708,
+      "changeVsDefaultPercent": 2.7581834082417838
+    },
+    {
+      "name": "Scoop 3 mm",
+      "patch": {
+        "scoop": 3
+      },
+      "binCm3": 38.66352527619919,
+      "lidCm3": 15.891945403666604,
+      "binComponents": [
+        {
+          "tag": "bin-shell",
+          "mm3": 20993.053502976385
+        },
+        {
+          "tag": "bin-foot",
+          "mm3": 7365.216917903453
+        },
+        {
+          "tag": "bin-foot",
+          "mm3": 7365.216917903459
+        },
+        {
+          "tag": "ramp",
+          "mm3": 5185.63145491607
+        }
+      ],
+      "lidComponents": [
+        {
+          "tag": "lid-foot",
+          "mm3": 4736.940049220839
+        },
+        {
+          "tag": "lid-foot",
+          "mm3": 6926.864026981207
+        },
+        {
+          "tag": "lid-frame",
+          "mm3": 3424.817655837412
+        },
+        {
+          "tag": "rib",
+          "mm3": 1339.7139556466166
+        }
+      ],
+      "pairCm3": 54.55547067986579,
+      "changeVsDefaultPercent": 2.725590198069791
+    },
+    {
+      "name": "No label shelf",
+      "patch": {
+        "labelMode": "off"
+      },
+      "binCm3": 35.23993236896935,
+      "lidCm3": 18.081869381427175,
+      "binComponents": [
+        {
+          "tag": "bin-shell",
+          "mm3": 22521.676050663744
+        },
+        {
+          "tag": "bin-foot",
+          "mm3": 7365.216917903453
+        },
+        {
+          "tag": "bin-foot",
+          "mm3": 7365.216917903459
+        }
+      ],
+      "lidComponents": [
+        {
+          "tag": "lid-foot",
+          "mm3": 6926.864026981194
+        },
+        {
+          "tag": "lid-foot",
+          "mm3": 6926.864026981207
+        },
+        {
+          "tag": "lid-frame",
+          "mm3": 3424.817655837412
+        },
+        {
+          "tag": "rib",
+          "mm3": 1339.7139556466166
+        }
+      ],
+      "pairCm3": 53.321801750396524,
+      "changeVsDefaultPercent": 4.925267251711102
+    },
+    {
+      "name": "Wall 1.2 + floor 1.0 + scoop 3",
+      "patch": {
+        "wall": 1.2,
+        "floorT": 1,
+        "scoop": 3
+      },
+      "binCm3": 34.837748965498285,
+      "lidCm3": 15.891945403666604,
+      "binComponents": [
+        {
+          "tag": "bin-shell",
+          "mm3": 16992.704244554097
+        },
+        {
+          "tag": "bin-foot",
+          "mm3": 7365.216917903453
+        },
+        {
+          "tag": "bin-foot",
+          "mm3": 7365.216917903459
+        },
+        {
+          "tag": "ramp",
+          "mm3": 5364.116402637439
+        }
+      ],
+      "lidComponents": [
+        {
+          "tag": "lid-foot",
+          "mm3": 4736.940049220839
+        },
+        {
+          "tag": "lid-foot",
+          "mm3": 6926.864026981207
+        },
+        {
+          "tag": "lid-frame",
+          "mm3": 3424.817655837412
+        },
+        {
+          "tag": "rib",
+          "mm3": 1339.7139556466166
+        }
+      ],
+      "pairCm3": 50.72969436916489,
+      "changeVsDefaultPercent": 9.547090004045835
+    },
+    {
+      "name": "Same footprint, 4U high",
+      "patch": {
+        "hu": 4
+      },
+      "binCm3": 35.18708173434465,
+      "lidCm3": 15.891945403666604,
+      "binComponents": [
+        {
+          "tag": "bin-shell",
+          "mm3": 17516.60996112159
+        },
+        {
+          "tag": "bin-foot",
+          "mm3": 7365.216917903453
+        },
+        {
+          "tag": "bin-foot",
+          "mm3": 7365.216917903459
+        },
+        {
+          "tag": "ramp",
+          "mm3": 5185.631454916132
+        }
+      ],
+      "lidComponents": [
+        {
+          "tag": "lid-foot",
+          "mm3": 4736.940049220839
+        },
+        {
+          "tag": "lid-foot",
+          "mm3": 6926.864026981207
+        },
+        {
+          "tag": "lid-frame",
+          "mm3": 3424.817655837412
+        },
+        {
+          "tag": "rib",
+          "mm3": 1339.7139556466166
+        }
+      ],
+      "pairCm3": 51.079027138011256,
+      "changeVsDefaultPercent": 8.924216834947774
+    }
+  ]
+}

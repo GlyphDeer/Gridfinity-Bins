@@ -112,3 +112,12 @@ Typed packet inputs clamp to the matching slider's min/max without quantizing to
 ## UI state outside DEFAULTS
 
 `AVAIL` starts at 60 mm for bin/tray and 90 mm on first wipe visit; its slider is 20–200 / 1. Each mode retains its own value in memory. Reset leaves its current available height intact. It affects the available-height check, not geometry. `MODEL` initially selects bin; `VIEW` initially selects assembly (`asm`). Theme is stored separately as `gf-theme`. These are not missing parameter keys. `switchModel` saves/restores complete parameter and available-height snapshots per mode and returns the view to assembly. Snapshots last only until reload; only theme persists. There is no saved user-configuration format in this version.
+
+## Filament reduction and research gate
+
+| Key / action | Default | Units / limits | Affected modes and behavior | Source symbols |
+| --- | --- | --- | --- | --- |
+| `hollowFeet` | false | Boolean, strictly validated | Research bin-body geometry only; tray/wipe requests reject. The released UI disables activation in all modes and blocks consumer exports with an injected true state because slicing did not establish additional savings. Direct research builders can still generate it. | `validateParams`, `hollowFootBottom`, `buildBin`, `HOLLOW_SAVINGS_VALIDATED`, `exportRevision` |
+| Economy button | No automatic application | Targets: wall 1.2 mm, floor 1.0 mm, bin scoop 3 mm, wipe fillet 3 mm | Uses the smaller of current value and target. Preserves dimensions, already thinner values, disabled scoops/fillets, labels, lip/snap settings and prototype state. Applies only to the active mode; tray has no scoop/fillet mutation. | `economyCandidate`, `modeStates` |
+
+There are 71 DEFAULTS keys. `HOLLOW_SAVINGS_VALIDATED` is a UI release gate, not a dimensional parameter or proof of printability. The final circular research cavity has an 18.6 mm mouth, a 9.8 mm roof and 4.4 mm ceiling; it is unavailable through normal exports. See [the filament guide](filament-saving.md) for evidence and research access.

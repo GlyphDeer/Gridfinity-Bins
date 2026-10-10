@@ -1,0 +1,57 @@
+{
+  "sourceSha256": "2b021e6fe9ccb9be6bd900ca61f0a646af114dd87d0f8ab475022885b7cde518",
+  "command": "node --test tools/filament.test.mjs",
+  "method": "Actual exported STL binary measurements and vertical-ray occupancy in executable regression suite; no slicer or physical validation.",
+  "cases": [
+    {
+      "hollowFeet": false,
+      "stlSha256": "334e285cccc7b28dc8be9277fd95455e8a5c123aaef69e815f9df62e2763e65c",
+      "triangles": 28588,
+      "nonfinite": 0,
+      "degenerate": 0,
+      "normalDisagreements": 0,
+      "bounds": {
+        "min": [
+          -41.75,
+          -20.75,
+          0
+        ],
+        "max": [
+          41.75,
+          20.75,
+          45.692893981933594
+        ]
+      },
+      "signedVolumeMm3": 42437.742156631895,
+      "boundaryEdges": 0,
+      "nonmanifoldEdges": 0,
+      "inconsistentEdges": 0,
+      "weldToleranceMm": 0.00001
+    },
+    {
+      "hollowFeet": true,
+      "stlSha256": "c23ff921042da089a72d4f40b095948de4370037ae548d33893f1129182cd3c4",
+      "triangles": 30444,
+      "nonfinite": 0,
+      "degenerate": 0,
+      "normalDisagreements": 0,
+      "bounds": {
+        "min": [
+          -41.75,
+          -20.75,
+          0
+        ],
+        "max": [
+          41.75,
+          20.75,
+          45.692893981933594
+        ]
+      },
+      "signedVolumeMm3": 42110.46705295688,
+      "boundaryEdges": 0,
+      "nonmanifoldEdges": 0,
+      "inconsistentEdges": 0,
+      "weldToleranceMm": 0.00001
+    }
+  ]
+}

@@ -13,7 +13,7 @@ fs.mkdirSync(path.join(root,'reviews','runs'),{recursive:true});
 const out=fs.mkdtempSync(path.join(root,'reviews','runs',new Date().toISOString().replace(/[:.]/g,'-')+'-'+hash.slice(0,12)+'-'));
 const write=(name,data)=>fs.writeFileSync(path.join(out,name),typeof data==='string'?data:JSON.stringify(data,null,2)+'\n');
 write('source.html',bytes.toString('utf8'));fs.mkdirSync(path.join(out,'draft'));fs.mkdirSync(path.join(out,'stl'));
-const report={source,sha256:hash,reviewedAt:new Date().toISOString(),node:process.version,status:'running',limitations:['Core VM has no DOM: canvas raised text is skipped.','Edge counts use 1e-5 mm coordinate welding; not a self-intersection or Boolean-union test.','No slicer or physical print validation.','Node VM is not a security boundary. Review trusted local code only.'],cases:[],probes:{}};
+const report={source,sha256:hash,reviewedAt:new Date().toISOString(),node:process.version,status:'running',limitations:['Core VM has no DOM: canvas raised text is skipped.','Edge counts use 1e-5 mm coordinate welding; not a self-intersection or Boolean-union test.','This runner does not invoke a slicer or perform physical print validation; separate benchmark evidence must be inspected.','Node VM is not a security boundary. Review trusted local code only.'],cases:[],probes:{}};
 try{
 const {run,blocks}=loadSource(html);
 const defaults=run('JSON.parse(JSON.stringify(DEFAULTS))');
@@ -26,16 +26,24 @@ const presets=blocks[2].slice(blocks[2].indexOf('const PRESETS'),presetEnd);
 run(presets);
 const cases=[['default-bin','buildBin',{}],['default-lid','buildLid',{}],['tray-reference','buildTray',run('TREFERENCE')],['pen-tray','buildTray',run('PENTRAY')],['wipe-reference','buildWipeBox',run('WREFERENCE')],['wipe-lid','buildWipeLid',run('WREFERENCE')],['tray-rotated','buildTray',{...run('TREFERENCE'),trayDir:'x'}],['bin-short-wide-label','buildBin',{nx:1,ny:1,hu:2,floorT:6,labelH:40,labelW:240}],['lid-wide-window','buildLid',{nx:1,ny:1,labelH:40,labelW:240}],['tray-max-slot','buildTray',{nx:1,ny:1,hu:2,floorT:6,slots:40,slotW:40,slotBottom:'round'}],['wipe-half-both','buildWipeBox',{wnx:1.5,wny:1.5,notchDrop:80,notchW:200}],['bin-fine','buildBin',{seg:0.2,cornerSegs:20}],['bin-large','buildBin',{nx:6,ny:6,hu:20}]];
 for(const [prefix,fn,expr] of [['bin-preset','buildBin','PRESETS'],['tray-preset','buildTray','TPRESETS'],['wipe-preset','buildWipeBox','WPRESETS']])run(expr).forEach((p,i)=>cases.push([prefix+'-'+i,fn,Object.fromEntries((fn==='buildWipeBox'?['wnx','wny','whu']:['nx','ny','hu']).map((k,j)=>[k,p[j]]))]));
+if(run('Object.prototype.hasOwnProperty.call(DEFAULTS,"hollowFeet")'))cases.push(
+ ['economy-bin','buildBin',{wall:1.2,floorT:1,scoop:3}],
+ ['experimental-bin','buildBin',{hollowFeet:true}],
+ ['experimental-economy-bin','buildBin',{wall:1.2,floorT:1,scoop:3,hollowFeet:true}],
+ ['experimental-lid-unchanged','buildLid',{hollowFeet:true}],
+ ['unsupported-hollow-tray','buildTray',{hollowFeet:true}],
+ ['unsupported-hollow-wipe','buildWipeBox',{hollowFeet:true}]
+);
 for(const [name,fn,patch] of cases){
 const start=performance.now();
 const paramsCode=`Object.assign({},DEFAULTS,${JSON.stringify(patch)})`;
-const expectedInvalid=['bin-short-wide-label','lid-wide-window','tray-max-slot'].includes(name);
+const expectedInvalid=['bin-short-wide-label','lid-wide-window','tray-max-slot','unsupported-hollow-tray','unsupported-hollow-wipe'].includes(name);
 if(run('typeof validateParams')==='function'){const mode=fn==='buildTray'?'tray':fn.startsWith('buildWipe')?'wipe':'bin';const errors=run(`validateParams(${paramsCode},${JSON.stringify(mode)})`);if(errors.length){report.cases.push({name,patch,status:expectedInvalid?'expected-rejection':'unexpected-rejection',validationErrors:errors});continue;}if(expectedInvalid){report.cases.push({name,patch,status:'missing-rejection'});continue;}}
 run(`globalThis.testP=${paramsCode};globalThis.testMesh=${fn}(testP)`);
 const raw=run('testMesh.tri.length'),stl=run('toSTL(testMesh,"review")'), stats=inspectSTL(stl),positions=run('toFloat32(testMesh)');
 const b=Buffer.from(stl);let matches=positions.length===stats.triangles*9;
 for(let i=0;i<stats.triangles&&matches;i++)for(let j=0;j<9;j++)if(positions[i*9+j]!==b.readFloatLE(84+50*i+12+4*j))matches=false;
-report.cases.push({name,patch,rawTriangles:raw,removedTriangles:raw-stats.triangles,previewSTLPositionsMatch:matches,...stats,elapsedMs:Math.round(performance.now()-start)});
+report.cases.push({name,patch,experimental:name.startsWith('experimental'),rawTriangles:raw,removedTriangles:raw-stats.triangles,previewSTLPositionsMatch:matches,...stats,elapsedMs:Math.round(performance.now()-start)});
 if(['default-bin','default-lid','tray-reference','wipe-reference','wipe-lid'].includes(name))fs.writeFileSync(path.join(out,'stl',name+'.stl'),b);
 }
 // Execute original fitPack with only its UI side effects stubbed, no rewritten sizing logic.
