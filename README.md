@@ -12,6 +12,7 @@ Open [the generator](http://127.0.0.1:8000/source/gridfinity_generator_4.html). 
 
 Choose a model, configure its dimensions, inspect the preview and warnings, then download STL. Verify millimetres and inspect the result in your slicer before printing. Each mode retains its own settings and available height during the page session. Only theme persists across reloads; record your parameter choices before closing the page. Blocking validation errors must be resolved before export. Export rebuilds a fresh snapshot and prepares a complete pair before requesting downloads.
 
+- [Convoy optics inserts](docs/optics-inserts.md): separate reflector/TIR, glass, and centering-gasket pockets for a 1 × 1 bin.
 - [User guide](docs/user-guide.md): three desk-organizer examples and exports.
 - [Parameter reference](docs/parameters.md): defaults, controls, and effective dimensions.
 - [Architecture](docs/architecture.md): how state becomes meshes and downloads.
@@ -21,7 +22,7 @@ Choose a model, configure its dimensions, inspect the preview and warnings, then
 Rerun the review after changing the source:
 
 ```sh
-node --test tools/generator.test.mjs tools/test.mjs tools/filament.test.mjs
+node --test tools/*.test.mjs tools/test.mjs
 python3 tools/slice_metadata_test.py
 node tools/review.mjs source/gridfinity_generator_4.html
 node tools/check-docs.mjs
