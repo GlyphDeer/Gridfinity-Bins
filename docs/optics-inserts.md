@@ -2,7 +2,9 @@
 
 Open [Optics inserts](../source/optics-inserts.html) from the bin generator header. Serve the repository over HTTP as described in the [README](../README.md); ES modules do not work reliably from a file URL.
 
-Each downloadable insert is one connected solid with three separate pockets: an upright reflector or TIR, glass held on edge, and an LED centering gasket in a shallow recess. Smooth and orange-peel finishes share the envelope in the relevant Convoy listing. The preview shows cylindrical part envelopes, not exact optical geometry. Only the insert is exported.
+Use **Include glass pocket** and **Include spacer pocket (centering gasket)** to choose either accessory, both, or neither. Both are enabled initially. Disabled pockets are filled in the STL, their dimensions are hidden and ignored, and the required bin height updates for the remaining parts. Pocket positions stay stable when toggled.
+
+Each downloadable insert is one connected solid with up to three separate pockets: an upright reflector or TIR, glass held on edge, and an LED centering gasket in a shallow recess. Smooth and orange-peel finishes share the envelope in the relevant Convoy listing. The preview shows cylindrical part envelopes, not exact optical geometry. Only the insert is exported.
 
 ## Presets and evidence
 

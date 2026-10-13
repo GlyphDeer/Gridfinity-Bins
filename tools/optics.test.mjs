@@ -10,3 +10,19 @@ test('height accounts for upright glass, exposed optic and a closed lid',()=>{co
 test('fit adjustments preserve walls and change physical pocket sizes',()=>{const a=build(DEFAULTS),b=build({...DEFAULTS,clearance:.5,binClear:.5});assert.ok(b.d.r>a.d.r);assert.ok(b.d.width<a.d.width);assert.ok(b.d.holes[1].ring[1][0]>a.d.holes[1].ring[1][0]);const s=inspectSTL(toSTL(b));assert.equal(s.nonmanifoldEdges,0);assert.equal(s.boundaryEdges,0);});
 
 test('small glass remains graspable and a tall gasket cannot consume the floor',()=>{const p={...DEFAULTS,glassD:8},d=derive(p);assert.ok(d.holes[1].floor+p.glassD>=d.top+3);assert.throws(()=>derive({...DEFAULTS,height:5,expose:3,gasketH:3}),/Gasket/);});
+
+test('all four pocket combinations export watertight geometry with disabled recesses filled',()=>{
+ const original=derive(DEFAULTS);
+ for(const includeGlass of [true,false])for(const includeGasket of [true,false]){
+  const m=build({...DEFAULTS,includeGlass,includeGasket}),s=inspectSTL(toSTL(m));
+  assert.equal(m.d.holes.length,1+Number(includeGlass)+Number(includeGasket));
+  for(const k of ['nonfinite','degenerate','boundaryEdges','nonmanifoldEdges','inconsistentEdges'])assert.equal(s[k],0);
+  assert.equal(materialAt(m,.117,original.ly+.073,m.d.top-.1),!includeGlass);
+  assert.equal(materialAt(m,original.gx+.117,original.gy+.073,m.d.top-.1),!includeGasket);
+ }
+});
+test('omitted pockets ignore invalid saved dimensions and no longer require their height',()=>{
+ const d=derive({...DEFAULTS,includeGlass:false,includeGasket:false,glassD:NaN,glassT:0,gasketD:Infinity,gasketH:99,binU:4});
+ assert.equal(d.loaded,15.1);assert.equal(d.minU,4);
+ assert.throws(()=>derive({...DEFAULTS,includeGlass:'false'}),/true or false/);
+});

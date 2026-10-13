@@ -9,3 +9,5 @@ Built from GitHub main da172ba. This branch adds the insert generator independen
 - Documentation links and the existing parameter reference pass. New parameters are documented separately in the optics guide.
 
 The browser run supplied a local copy of the same pinned Three.js r128 library, so it verifies UI behavior but not live CDN availability. Physical prints, slicer layer inspection, coated-surface contact and exact stock-part fit have not been verified. Default gasket and S21/TIR glass measurements are explicitly placeholders. The private order PDF was not copied into the repository.
+
+Optional-pocket update: all four glass/spacer combinations pass independent closed-mesh and material checks. Disabled dimensions are ignored and missing glass no longer imposes its loaded height. Eight insert tests pass.
