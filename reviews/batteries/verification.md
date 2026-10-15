@@ -1,14 +1,12 @@
-# Horizontal battery tray verification — 2026-10-13
+# Horizontal battery tray verification — 2026-10-15
 
-Final geometry follows the supplied photos: flat-bottom horizontal compartments and 1.2 mm dividers, five compartments in one column by default. Private reference photos are not included in the repository.
+The photos establish a flat compartment layout and thin dividers. The user identified the reference cells as an 18650 and an AA-sized Vapcell. Measurements are unavailable, so this is a proportion-based adaptation with Gridfinity feet and lid, not an exact dimensional replica. Private photos are excluded.
 
-- All 40 JavaScript tests pass, including five battery-specific geometry tests. Existing Python checks were unaffected.
-- Both battery presets, 1/5/24 cells, partial rows and blank/recessed lids pass independent STL closure, winding, finite-coordinate and nondegenerate-facet checks.
-- Point-in-material tests confirm actual empty compartments, solid floors and recessed label pads. The lid is now built from the normal bin lid geometry: tests compare the mating feet and stacking surfaces against that builder and verify they are unchanged by recessed label pads. The body uses the normal lip and groove profile.
-- Headless Chrome: exact count/layout, both presets, label toggle, lid toggle, invalid count, real box/lid downloads, 375 px mobile layout and missing-CDN fallback pass without page errors. Default five-cell preview was visually inspected against the reference layout.
-- Downloaded five-cell 21700 / three-column box and lid: no boundary, nonmanifold, inconsistent or degenerate edges/facets. Lid export is feet-down, matching the normal bin lid.
-- Documentation checks and git diff whitespace checks pass.
+- Finger access adds at least 4 mm side clearance and approximately 24 × 10 mm scoops in shared dividers. Single compartments receive side clearance only. A compact mode restores straight dividers.
+- The lid has a flat label deck and 1.2 mm perimeter guide. Labels can be centered above each battery or offset toward one end. The underside reuses the normal lid's mating feet and snap beads; the former tall top ribs are removed. The guide locates a matching-footprint bin, not each smaller bin independently.
+- 41 JavaScript tests pass, including six battery tests covering both presets, counts 1/5/18/24, partial rows, label options, real empty scoop regions, solid floors, preserved mating feet, shallow guide clearance and invalid inputs. The 24-cell case uses compact mode.
+- An additional layout sweep checks 17 valid count/column combinations with independent STL closure, winding and degeneracy checks.
+- Headless Chrome verifies options, mobile layout, missing-CDN fallback, and actual box/lid downloads. The exported meshes are independently checked for boundary/nonmanifold edges and degenerate triangles.
+- Documentation links resolve.
 
-The lid has the same overlapping component-shell construction as the normal lid; closed-edge checks alone do not prove a Boolean-unioned aggregate.
-
-The browser test used a local copy of the pinned Three.js r128 library. Physical print, baseplate fit, lid fit/retention and slicer layer inspection remain unperformed. Preset dimension sources and print limitations are in the battery guide.
+The browser test uses a local copy of the pinned Three.js r128 library. Physical print, baseplate fit, lid retention and slicer layer inspection remain unperformed.
