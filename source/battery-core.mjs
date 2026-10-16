@@ -3,14 +3,14 @@ import {toSTL} from './optics-core.mjs';
 import {DEFAULTS as BIN_DEFAULTS,buildLid as normalLid,derive as normalDerive,clean,tipLevels,rrSpec,rrPoints,runFn} from './bin-geometry.mjs';
 export {toSTL};
 export const PRESETS={'18650':{diameter:18.6,length:65.2},'21700':{diameter:21.7,length:70.2}};
-export const DEFAULTS={type:'18650',count:5,columns:1,diameter:18.6,length:65.2,clearance:.4,lidClear:.3,lid:true,labels:true,fingerAccess:true,centerLabels:true};
+export const DEFAULTS={type:'18650',count:5,columns:1,diameter:18.6,length:65.2,clearance:.4,lidClear:.3,lid:true,labels:true,fingerAccess:true,centerLabels:true,rocker:true};
 // CCW rounded rectangle, matching sample counts for all lofts.
 export function ring(w,h,radii=4,x=0,y=0){const rr=Array.isArray(radii)?radii:[radii,radii,radii,radii],out=[];for(let q=0;q<4;q++){const r=rr[q],cx=x+(q===0||q===3?1:-1)*(w/2-r),cy=y+(q<2?1:-1)*(h/2-r);for(let j=0;j<=12;j++){const a=q*Math.PI/2+j*Math.PI/24;out.push([cx+r*Math.cos(a),cy+r*Math.sin(a)]);}}return out;}
 export function derive(p){
  if(!Object.hasOwn(PRESETS,p.type))throw Error('Choose 18650 or 21700.');
  for(const [key,lo,hi] of [['count',1,24],['columns',1,3],['diameter',16,24],['length',60,80],['clearance',.15,.8],['lidClear',.15,.5]])if(!Number.isFinite(p[key])||p[key]<lo||p[key]>hi)throw Error(`${key} must be between ${lo} and ${hi}.`);
  if(!Number.isInteger(p.count)||!Number.isInteger(p.columns))throw Error('Count and columns must be whole numbers.');
- if(typeof p.lid!=='boolean'||typeof p.labels!=='boolean'||typeof p.fingerAccess!=='boolean'||typeof p.centerLabels!=='boolean')throw Error('Lid, label and finger access options must be true or false.');
+ if(typeof p.lid!=='boolean'||typeof p.labels!=='boolean'||typeof p.fingerAccess!=='boolean'||typeof p.centerLabels!=='boolean'||typeof p.rocker!=='boolean')throw Error('Lid, label and finger access options must be true or false.');
  const cols=Math.min(p.count,p.columns),rows=Math.ceil(p.count/cols),cellUnits=Math.ceil((p.length+2*p.clearance+8)/42),pitchX=42*cellUnits,w=pitchX*cols-.5;
  const compartmentW=(w-6.4-1.2*(cols-1))/cols;
  // Rounded compartment ends must clear the entire horizontal cell envelope.
@@ -20,13 +20,17 @@ export function derive(p){
  const compartmentH=(h-6.4-1.2*(rows-1))/rows;
  if(cols*cellUnits>6||gridRows>6)throw Error('Layout exceeds the normal 6 × 6 bin limit. Use more columns for a long tray, fewer columns for a wide tray, or fewer batteries.');
  const centers=Array.from({length:p.count},(_,i)=>({x:(compartmentW+1.2)*(i%cols-(cols-1)/2),y:(compartmentH+1.2)*(Math.floor(i/cols)-(rows-1)/2),index:i+1}));
- const floor=6.75,hu=Math.ceil((floor+p.diameter+1)/7),bodyH=hu*7,top=bodyH+4.4-.5*Math.SQRT2,dividerTop=bodyH-2.6;
+ const floor=6.75,rockerHeight=p.rocker?5:0,rockerHalf=4,rockerEnd=p.length/2-1;
+ const hu=Math.ceil((floor+rockerHeight+p.diameter+1)/7),bodyH=hu*7,top=bodyH+4.4-.5*Math.SQRT2;
+ const dividerTop=p.fingerAccess?Math.min(bodyH-2.6,floor+rockerHeight+p.diameter*.65):bodyH-2.6;
+ const notchHalf=16,notchDepth=dividerTop-(floor+rockerHeight+3);
+ const tiltAngle=p.rocker?Math.atan(rockerHeight/(rockerEnd-rockerHalf)):0;
  const normal={...BIN_DEFAULTS,nx:cols*cellUnits,ny:gridRows,hu,wall:1.5,floorT:2,scoop:0,labelMode:'off',window:false,stackClear:p.lidClear};
  const lidZ=bodyH-.35;
  const pads=centers.map(c=>({x:p.centerLabels?c.x:c.x-p.length/2+15,y:c.y}));
  const lidDeck=7,lidGuide=1.2,lidTop=lidDeck+lidGuide;
  const shellSpec=rrSpec(-w/2,w/2,-h/2,h/2,[4,4,4,4],normal.seg,normal.cornerSegs),outer=rrPoints(shellSpec,0,null);
- return {cols,rows,gridRows,compartmentW,compartmentH,cellUnits,pitchX,w,h,centers,floor,top,bodyH,dividerTop,hu,normal,lidZ,pads,outer,shellSpec,lidDeck,lidGuide,lidTop,totalHeight:lidZ+lidTop,pocketR:p.diameter/2+p.clearance};
+ return {rockerHeight,rockerHalf,rockerEnd,notchHalf,notchDepth,tiltAngle,cols,rows,gridRows,compartmentW,compartmentH,cellUnits,pitchX,w,h,centers,floor,top,bodyH,dividerTop,hu,normal,lidZ,pads,outer,shellSpec,lidDeck,lidGuide,lidTop,totalHeight:lidZ+lidTop,pocketR:p.diameter/2+p.clearance};
 }
 function builder(){const tri=[];return {tri,
  face(rings,z,up){const v=rings.flat(),holes=[];let n=rings[0].length;for(const r of rings.slice(1)){holes.push(n);n+=r.length;}const ids=earcut(v.flat(),holes);for(let i=0;i<ids.length;i+=3){const t=ids.slice(i,i+3).map(j=>[...v[j],z]),[a,b,c]=t;if((((b[0]-a[0])*(c[1]-a[1])-(b[1]-a[1])*(c[0]-a[0]))>0)!==up)t.reverse();
@@ -80,16 +84,18 @@ function splitPocketRing(r,points){const out=[];for(let i=0;i<r.length;i++){cons
  }return out;}
 function fingerNotches(mesh,d){
  const notches=d.centers.filter(c=>c.index+d.cols<=d.centers.length).map(c=>({x:c.x,y:c.y+(d.compartmentH+1.2)/2}));
- const depth=Math.min(10,d.dividerTop-d.floor-3);
- const move=v=>{if(v[2]<=d.floor||v[2]>d.dividerTop+1e-8)return v;
-  const n=notches.find(n=>Math.abs(v[0]-n.x)<12&&Math.abs(v[1]-n.y)<.61);if(!n)return v;
-  const u=(v[0]-n.x+12)/24*16,i=Math.min(15,Math.floor(u));
+ const depth=d.notchDepth;
+ const move=v=>{if(Math.abs(v[2]-d.dividerTop)>1e-8)return v;
+  const n=notches.find(n=>Math.abs(v[0]-n.x)<d.notchHalf&&Math.abs(v[1]-n.y)<.61);if(!n)return v;
+  const u=(v[0]-n.x+d.notchHalf)/(2*d.notchHalf)*16,i=Math.min(15,Math.floor(u));
   const drop=depth*(Math.sin(Math.PI*i/16)+(Math.sin(Math.PI*(i+1)/16)-Math.sin(Math.PI*i/16))*(u-i));
-  return [v[0],v[1],v[2]-drop*(v[2]-d.floor)/(d.dividerTop-d.floor)];
+  return [v[0],v[1],v[2]-drop];
  };
  return {tri:mesh.tri.map(t=>t.map(move))};
 }
 function stockFootRing(x,y,p){const d=normalDerive(p),fh=20.75;return rrPoints(rrSpec(x-fh,x+fh,y-fh,y+fh,[4,4,4,4],d.footSeg,p.cornerSegs),0,null);}
+export function rockerRise(d,x){return d.rockerHeight*Math.max(0,Math.min(1,(d.rockerEnd-Math.abs(x))/(d.rockerEnd-d.rockerHalf)));}
+export function cellPose(p,d,lifted=false){const angle=lifted?d.tiltAngle:0;return {angle,z:d.floor+d.rockerHeight+p.diameter/(2*Math.cos(angle))+d.rockerHalf*Math.tan(angle)};}
 export function buildBox(p){const d=derive(p),m=builder(),feet=[];
  // Slightly narrower than nominal root to leave a continuous underside web.
  for(let row=0;row<d.gridRows;row++)for(let col=0;col<d.cols*d.cellUnits;col++){
@@ -105,11 +111,21 @@ export function buildBox(p){const d=derive(p),m=builder(),feet=[];
  const pockets=d.centers.map(c=>ring(d.compartmentW,d.compartmentH,5,c.x,c.y));
  m.loft(innerTop.r,innerTop.z,wallRing,d.dividerTop,false);
  const cap=builder();cap.face([wallRing,...pockets],d.dividerTop,true);
- const planes=[...new Set(d.centers.map(c=>c.x))].flatMap(x=>Array.from({length:17},(_,i)=>x-12+24*i/16));
- const capTri=p.fingerAccess?scoopCap([wallRing,...pockets],planes,d.dividerTop):cap.tri;
+ const planes=[...new Set(d.centers.map(c=>c.x))].flatMap(x=>Array.from({length:17},(_,i)=>x-d.notchHalf+2*d.notchHalf*i/16));
+ const detailed=p.fingerAccess||p.rocker;
+ if(p.rocker)for(const c of d.centers)planes.push(c.x-d.rockerEnd,c.x-d.rockerHalf,c.x+d.rockerHalf,c.x+d.rockerEnd);
+ const capTri=detailed?scoopCap([wallRing,...pockets],planes,d.dividerTop):cap.tri;
  const capPoints=[...new Map(capTri.flat().map(v=>[v.map(n=>n.toFixed(8)).join(','),v])).values()];
- for(const pocket of pockets){const r=p.fingerAccess?splitPocketRing(pocket,capPoints):pocket;const center=[r.reduce((sum,v)=>sum+v[0],0)/r.length,r.reduce((sum,v)=>sum+v[1],0)/r.length,d.floor];for(let i=0;i<r.length;i++)m.tri.push([center,[...r[i],d.floor],[...r[(i+1)%r.length],d.floor]]);m.loft(r,d.floor,r,d.dividerTop,true);}
- const combined={tri:[...(p.fingerAccess?conformCapEdges(m.tri,capTri,d.dividerTop):m.tri),...capTri]};
+ for(let index=0;index<pockets.length;index++){
+  const pocket=pockets[index],c=d.centers[index],r=detailed?splitPocketRing(pocket,capPoints):pocket,local=builder();
+  if(p.rocker)local.tri.push(...scoopCap([r],planes,d.floor));
+  else{const center=[c.x,c.y,d.floor];for(let i=0;i<r.length;i++)local.tri.push([center,[...r[i],d.floor],[...r[(i+1)%r.length],d.floor]]);}
+  local.loft(r,d.floor,r,d.dividerTop,true);
+  // Raise only the pocket floor and its wall boundary. The underside stays
+  // continuous; no push-through holes or separate moving parts are required.
+  for(const t of local.tri)m.tri.push(t.map(v=>Math.abs(v[2]-d.floor)<1e-8?[v[0],v[1],d.floor+rockerRise(d,v[0]-c.x)]:v));
+ }
+ const combined={tri:[...(detailed?conformCapEdges(m.tri,capTri,d.dividerTop):m.tri),...capTri]};
  return {tri:clean(p.fingerAccess?fingerNotches(clean(combined),d):combined).tri,d};}
 
 export function buildLid(p){const d=derive(p);if(!p.lid)return null;const m=builder();

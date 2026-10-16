@@ -12,3 +12,11 @@ The photos establish a flat compartment layout and thin dividers. The user ident
 The browser test uses a local copy of the pinned Three.js r128 library. Physical print, baseplate fit, lid retention and slicer layer inspection remain unperformed.
 
 Dark/light verification: all three generator pages default to dark in a fresh browser context, support light mode, and retain the preference across reloads and navigation. All six page/theme combinations and 375 px layouts passed browser checks without page errors. A blocked 3D CDN leaves theme switching functional.
+
+## 2026-10-16: removal revision after the 21700 print
+
+The supplied photos show 21700 cells sitting below tall shoulders with limited grip. The revision adds a switchable 5 mm press-to-lift support, lowers divider shoulders and widens scoops to 32 mm. The 21700 outside footprint/height and lid interface remain unchanged for the same count/layout. The 18650 press-to-lift option adds one height unit.
+
+Validation now includes real support/end recess checks, independent rocker/finger-access toggles, sampled resting/tipped cell envelopes, lid clearance, and 18 additional layout checks. Browser checks cover the lift preview, its reset when closing the lid, disabled lift preview with a flat floor, dark/light rendering, mobile layout, missing-CDN fallback and actual downloads. The new geometry has not yet been physically printed. Private photos are excluded.
+
+For this revision, all 51 local JavaScript tests pass (including eight tests for the separately developed adjustable box); 43 tests apply to the files currently in this pull request. The downloaded four-cell 21700 box and lid pass the independent STL inspector. A one-cell trial STL is generated locally for checking the removal action before a full reprint.
