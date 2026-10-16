@@ -1002,7 +1002,7 @@ function windowSpecs(p, d, col, counts) {
   return { bot, top };
 }
 
-function buildLid(p) {
+function buildLid(p, { feetOnly = false } = {}) {
   requireValid(p, "bin");
   const d = derive(p);
   const out = Mesh();
@@ -1058,6 +1058,8 @@ function buildLid(p) {
       }, 'lid-foot');
     }
   }
+
+  if (feetOnly) return out;
 
   // perimeter frame
   const rs = rectSpec(d.HX, d.HY, R_OUT, p.seg, p.cornerSegs);
