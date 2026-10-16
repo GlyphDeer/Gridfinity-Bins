@@ -15,7 +15,7 @@ export function derive(p){
  const compartmentW=(w-6.4-1.2*(cols-1))/cols;
  // Rounded compartment ends must clear the entire horizontal cell envelope.
  const endGap=(compartmentW-p.length)/2,cornerGap=5-Math.sqrt(25-Math.max(0,5-endGap)**2);
- const minCompartmentH=p.diameter+2*Math.max(p.fingerAccess?4:p.clearance,p.clearance,cornerGap+.1);
+ const minCompartmentH=p.diameter+2*Math.max(p.fingerAccess?2:p.clearance,p.clearance,cornerGap+.1);
  const gridRows=Math.ceil((rows*minCompartmentH+1.2*(rows-1)+6.4)/42),h=42*gridRows-.5;
  const compartmentH=(h-6.4-1.2*(rows-1))/rows;
  if(cols*cellUnits>6||gridRows>6)throw Error('Layout exceeds the normal 6 × 6 bin limit. Use more columns for a long tray, fewer columns for a wide tray, or fewer batteries.');

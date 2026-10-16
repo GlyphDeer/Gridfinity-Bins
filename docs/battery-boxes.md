@@ -6,11 +6,15 @@ The standard presets use two 42 mm grid units along each column of batteries. Co
 
 Enable **Include stackable lid**, then **Label pad above every battery**, for one 26 × 8 mm, 0.4 mm-deep recess for each occupied position, centered above that battery by default. Disable **Center labels above cells** to move pads toward one end. These are blank sticker/handwriting pads; the numbered layout is a preview aid, not embossed text in the STL. Label pads can be disabled independently. Lid export is disabled when no lid is selected.
 
-**Finger access** is enabled by default. It reserves at least 4 mm beside each cell and adds approximately 24 mm-wide, 10 mm-deep curved scoops in dividers shared by two occupied compartments. At least 3 mm of divider remains above the floor. A single compartment has the extra side clearance without a divider scoop. Turn it off for straight dividers and a more compact footprint. Extra clearance may increase the number of grid units; 24 large cells with finger access can exceed the 6 × 6 limit.
+**Finger access** is enabled by default. It reserves at least 2 mm beside each cell and adds approximately 24 mm-wide, 10 mm-deep curved scoops in dividers shared by two occupied compartments. At least 3 mm of divider remains above the floor. A single compartment has the extra side clearance without a divider scoop. Turn it off for straight dividers and a more compact footprint. Extra clearance may increase the number of grid units; 24 large cells with finger access can exceed the 6 × 6 limit.
 
 The initial preview shows the empty tray. **Show batteries**, **Show lid** and **Close lid** let you inspect the contents and assembled box without changing exports.
 
-The reference photos contain an 18650 and an AA-sized Vapcell cell, as identified by the user. They establish the layout and proportions, not exact dimensions. This generator remains for 18650/21700 cells; it does not infer an AA preset from the photo. The default five-cell tray with finger access is 83.5 × 167.5 mm (the lid extends 0.2 mm beyond each side), with a normal Gridfinity rim and lid rather than an exact dimensional replica of the photographed tray.
+The additional ruler photos suggest approximately 125 mm across the five compartments and 31 mm overall height. Perspective and ruler alignment limit precision. The default 18650 box now uses a 2 × 3 grid (83.5 × 125.5 mm body, approximately 31.7 mm open height), with 2 mm minimum side clearance and finger scoops. The short outside dimension is not confirmed by the ruler photos.
+
+All three generators start in dark mode and provide a light-mode control. The preference is saved across pages.
+
+The reference photos contain an 18650 and an AA-sized Vapcell cell, as identified by the user. They establish the layout and proportions, not exact dimensions. This generator remains for 18650/21700 cells; it does not infer an AA preset from the photo. The default five-cell tray with finger access is 83.5 × 125.5 mm (the lid extends 0.2 mm beyond each side), with a normal Gridfinity rim and lid rather than an exact dimensional replica of the photographed tray.
 
 ## Dimensions
 

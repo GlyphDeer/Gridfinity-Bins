@@ -25,7 +25,7 @@ test('shallow lid preserves normal mating feet and centers labels clear of the g
 test('finger access opens shared dividers while keeping floors and the outer rim solid',()=>{
  for(const type of Object.keys(PRESETS)){
   const p={...DEFAULTS,...PRESETS[type],type},m=buildBox(p),d=m.d;
-  assert.ok(d.compartmentH>=p.diameter+8);
+  assert.ok(d.compartmentH>=p.diameter+4);
   for(let i=0;i<d.centers.length-1;i++){
    const x=d.centers[i].x+.173,y=(d.centers[i].y+d.centers[i+1].y)/2+.097;
    assert.equal(material(m,x,y,d.dividerTop-2),false,'scoop is open');
