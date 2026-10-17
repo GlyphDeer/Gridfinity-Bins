@@ -20,7 +20,7 @@ These dimensions are the project's existing Molicel reference envelopes, origina
 
 ## Lid and preview
 
-**Include stackable lid** adds a flat deck with a 1.2 mm perimeter guide. The underside retains the normal bin lid's mating feet and snap beads. The guide locates another bin of the same footprint; smaller bins can rest on the deck without individual locating pockets.
+**Include stackable lid** adds a 1.2 mm-thick flat deck with a 1.2 mm perimeter guide. The lid is 7.15 mm high including its mating feet, reduced from 8.2 mm. Label recesses leave 0.8 mm of deck above the feet. The underside retains the normal bin lid's mating feet and snap beads. The guide locates another bin of the same footprint; smaller bins can rest on the deck without individual locating pockets.
 
 **Label pad above every battery** adds one 26 × 8 mm, 0.4 mm-deep recess per occupied compartment. Pads are centered by default; disable **Center labels above cells** to move them toward one end. Pads are blank for stickers or handwriting. Preview numbers are not embossed in the STL. The lid is symmetric, so match its label layout when replacing it.
 
