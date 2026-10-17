@@ -12,7 +12,7 @@ Open [the generator](http://127.0.0.1:8000/source/gridfinity_generator_4.html). 
 
 Choose a model, configure its dimensions, inspect the preview and warnings, then download STL. Verify millimetres and inspect the result in your slicer before printing. Each mode retains its own settings and available height during the page session. Only theme persists across reloads; record your parameter choices before closing the page. Blocking validation errors must be resolved before export. Export rebuilds a fresh snapshot and prepares a complete pair before requesting downloads.
 
-- [Horizontal battery boxes](docs/battery-boxes.md): 18650/21700 horizontal compartments, selectable count, and an optional lid with per-battery label pads.
+- [Universal battery drawer](docs/battery-boxes.md): one compartment size for both 18650 and 21700 cells, selectable count, and an optional lid with centered per-cell label pads.
 - [Convoy optics inserts](docs/optics-inserts.md): separate reflector/TIR, glass, and centering-gasket pockets for a 1 × 1 bin.
 - [User guide](docs/user-guide.md): three desk-organizer examples and exports.
 - [Parameter reference](docs/parameters.md): defaults, controls, and effective dimensions.
