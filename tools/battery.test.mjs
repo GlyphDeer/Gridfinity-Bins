@@ -141,12 +141,15 @@ test('shallow lid preserves normal mating feet and centers real label recesses c
  const feet=tri=>tri.filter(t=>t.some(v=>v[2]<4.75-1e-8));
  assert.deepEqual(feet(lid.tri),feet(standard));
  assert.equal(d.lidGuide,1.2);
+ assert.ok(Math.abs(d.lidTop-7.15)<1e-8,'lid height includes the thinner deck and unchanged feet/guide');
  assert.ok(d.lidTop<normalLid(d.normal).tri.flat().reduce((z,v)=>Math.max(z,v[2]),0));
  assert.deepEqual(d.pads,d.centers.map(c=>({x:c.x,y:c.y})));
  assert.ok(derive({...p,centerLabels:false}).pads.every((c,i)=>c.x<d.centers[i].x));
  for(const c of d.pads){
   assert.equal(material(lid,c.x+.173,c.y+.097,d.lidDeck-.2),false,'label is recessed');
   assert.equal(material(lid,c.x+.173,c.y+.097,d.lidDeck-.6),true,'label has a solid floor');
+  assert.equal(material(lid,c.x+.173,c.y+.097,4.75+.79),true,'label retains 0.8 mm of deck above the feet');
+  assert.equal(material(lid,c.x+.173,c.y+.097,4.75+.81),false,'label recess begins above the retained deck');
   assert.equal(material(blank,c.x+.173,c.y+.097,d.lidDeck-.2),true,'disabled labels leave a flat lid');
  }
  // At 1.2 mm engagement the upper bin's feet are inset 2.15 mm;

@@ -27,9 +27,10 @@ export function derive(p){
  const normal={...BIN_DEFAULTS,nx:cols*cellUnits,ny:gridRows,hu,wall:1.5,floorT:2,scoop:0,labelMode:'off',window:false,stackClear:p.lidClear};
  const lidZ=bodyH-.35;
  const pads=centers.map(c=>({x:p.centerLabels?c.x:c.x-length/2+15,y:c.y}));
- const lidDeck=7,lidGuide=1.2,lidTop=lidDeck+lidGuide;
+ // Keep a 0.8 mm deck below the 0.4 mm label recesses.
+ const lidThickness=1.2,lidDeck=4.75+lidThickness,lidGuide=1.2,lidTop=lidDeck+lidGuide;
  const shellSpec=rrSpec(-w/2,w/2,-h/2,h/2,[4,4,4,4],normal.seg,normal.cornerSegs),outer=rrPoints(shellSpec,0,null);
- return {pocketRadius,dividerThickness,cols,rows,gridRows,compartmentW,compartmentH,cellUnits,pitchX,w,h,centers,floor,top,bodyH,dividerTop,hu,normal,lidZ,pads,outer,shellSpec,lidDeck,lidGuide,lidTop,totalHeight:lidZ+lidTop};
+ return {pocketRadius,dividerThickness,cols,rows,gridRows,compartmentW,compartmentH,cellUnits,pitchX,w,h,centers,floor,top,bodyH,dividerTop,hu,normal,lidZ,pads,outer,shellSpec,lidThickness,lidDeck,lidGuide,lidTop,totalHeight:lidZ+lidTop};
 }
 function builder(){const tri=[];return {tri,
  face(rings,z,up){const v=rings.flat(),holes=[];let n=rings[0].length;for(const r of rings.slice(1)){holes.push(n);n+=r.length;}const ids=earcut(v.flat(),holes);for(let i=0;i<ids.length;i+=3){const t=ids.slice(i,i+3).map(j=>[...v[j],z]),[a,b,c]=t;if((((b[0]-a[0])*(c[1]-a[1])-(b[1]-a[1])*(c[0]-a[0]))>0)!==up)t.reverse();

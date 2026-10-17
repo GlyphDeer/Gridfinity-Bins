@@ -1,5 +1,12 @@
 # Universal battery drawer verification
 
+
+## 2026-10-17: thinner battery lid
+
+The flat deck is reduced from 2.25 to 1.2 mm above the mating feet. The 0.4 mm label recess leaves a 0.8 mm deck; the 1.2 mm stacking guide is retained. Total lid height decreases from 8.2 to 7.15 mm and the closed default drawer from 42.85 to 41.8 mm. The box, mating feet, snap beads and lid seating height are unchanged.
+
+All eight battery tests pass, including actual material checks beneath the recessed labels. Independent comparisons of 1/4/5/24-cell layouts confirm unchanged box triangles and lid mating triangles. Their labeled and blank lids pass the STL topology/facet checks at the new height. Browser checks confirm the thinner preview, closed height and actual labeled/blank lid downloads. Refreshed four-cell/five-cell lid exports are available locally. Documentation and whitespace checks pass. Physical stiffness under load and printed snap feel remain unverified.
+
 ## 2026-10-17: single clear-tray-style drawer
 
 The approved design replaces separate battery sizes, rocker floors and divider scoops with one fixed compartment envelope for both 18650 and 21700 reference cells. The body has flat floors, 1.2 mm straight dividers, 14 mm divider height and 1.2 mm internal corner radii. The default five compartments occupy a 2 × 3 grid. Normal feet, full stacking rim, shallow lid guide and centered label recesses are preserved.
